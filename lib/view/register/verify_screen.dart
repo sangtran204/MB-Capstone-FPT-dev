@@ -68,7 +68,7 @@ class VerifyScreen extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 20),
               child: Column(
                 children: [
-                  ButtonField(path: '/inputPassword', text: 'Xác nhận')
+                  // ButtonField(path: '/inputPassword', text: 'Xác nhận')
                 ],
               ),
             )

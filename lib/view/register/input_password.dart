@@ -41,13 +41,13 @@ class InputPasswordScreen extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    PasswordInputField(hintText: 'Mật khẩu'),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    PasswordInputField(
-                      hintText: 'Nhập lại mật khẩu',
-                    )
+                    // PasswordInputField(hintText: 'Mật khẩu'),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
+                    // PasswordInputField(
+                      // hintText: 'Nhập lại mật khẩu',
+                    // )
                   ],
                 ),
               ),
@@ -55,10 +55,10 @@ class InputPasswordScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 50),
                 child: Column(
                   children: [
-                    ButtonField(
-                      text: 'Xác nhận',
-                      path: '/info',
-                    ),
+                    // ButtonField(
+                    //   text: 'Xác nhận',
+                    //   path: '/info',
+                    // ),
                   ],
                 ),
               )
