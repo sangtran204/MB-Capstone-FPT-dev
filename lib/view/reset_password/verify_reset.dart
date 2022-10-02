@@ -68,7 +68,7 @@ class VerifyResetScreen extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 20),
               child: Column(
                 children: [
-                  ButtonField(path: '/passwordReset', text: 'Xác nhận')
+                  // ButtonField(path: '/passwordReset', text: 'Xác nhận')
                 ],
               ),
             )

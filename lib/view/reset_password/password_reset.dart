@@ -41,13 +41,13 @@ class InputPasswordResetScreen extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    PasswordInputField(hintText: 'Mật khẩu mới'),
+                    // PasswordInputField(hintText: 'Mật khẩu mới'),
                     SizedBox(
                       height: 20,
                     ),
-                    PasswordInputField(
-                      hintText: 'Nhập lại mật khẩu mới',
-                    )
+                    // PasswordInputField(
+                      // hintText: 'Nhập lại mật khẩu mới',
+                    // )
                   ],
                 ),
               ),
@@ -55,10 +55,10 @@ class InputPasswordResetScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 50),
                 child: Column(
                   children: [
-                    ButtonField(
-                      text: 'Xác nhận',
-                      path: '/login',
-                    ),
+                    // ButtonField(
+                    //   text: 'Xác nhận',
+                    //   path: '/login',
+                    // ),
                   ],
                 ),
               )

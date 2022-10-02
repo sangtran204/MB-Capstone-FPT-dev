@@ -47,7 +47,7 @@ class ResetPasswordByPhone extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  PhoneInputField(),
+                  // PhoneInputField(),
                 ],
               ),
             ),
@@ -55,10 +55,10 @@ class ResetPasswordByPhone extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 20),
               child: Column(
                 children: [
-                  ButtonField(
-                    text: 'Tiếp tục',
-                    path: '/verifyReset',
-                  ),
+                  // ButtonField(
+                  //   text: 'Tiếp tục',
+                  //   path: '/verifyReset',
+                  // ),
                 ],
               ),
             )

@@ -45,7 +45,7 @@ class RegisterByPhoneScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  PhoneInputField(),
+                  // PhoneInputField(),
                 ],
               ),
             ),
@@ -53,10 +53,10 @@ class RegisterByPhoneScreen extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 20),
               child: Column(
                 children: [
-                  ButtonField(
-                    text: 'Đăng ký',
-                    path: '/verify',
-                  ),
+                  // ButtonField(
+                  //   text: 'Đăng ký',
+                  //   path: '/verify',
+                  // ),
                 ],
               ),
             )

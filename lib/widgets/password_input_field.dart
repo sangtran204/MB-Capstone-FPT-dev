@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:mobile_capstone_fpt/constants.dart';
+import 'package:mobile_capstone_fpt/widgets/phone_input_field.dart';
+
+// typedef StringVoidFunction2 = void Function(String);
 
 class PasswordInputField extends StatelessWidget {
-  const PasswordInputField({Key? key, required this.hintText})
+  const PasswordInputField(
+      {Key? key, required this.hintText, required this.password})
       : super(key: key);
   final String hintText;
+  final StringVoidFunction password;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +32,9 @@ class PasswordInputField extends StatelessWidget {
           ],
         ),
         child: TextField(
+          onChanged: (value) {
+            password(value);
+          },
           obscureText: true,
           style: TextStyle(color: Colors.black87, fontSize: 16),
           decoration: InputDecoration(
@@ -35,23 +43,5 @@ class PasswordInputField extends StatelessWidget {
               hintText: hintText,
               hintStyle: TextStyle(color: Colors.grey.shade500)),
         ));
-    // return TextFieldContainer(
-    //   child: TextFormField(
-    //     obscureText: true,
-    //     cursorColor: kPrimaryColor,
-    //     decoration: const InputDecoration(
-    //         icon: Icon(
-    //           Icons.lock,
-    //           color: kPrimaryColor,
-    //         ),
-    //         hintText: "Password",
-    //         hintStyle: TextStyle(fontFamily: 'OpenSans'),
-    //         suffixIcon: Icon(
-    //           Icons.visibility,
-    //           color: kPrimaryColor,
-    //         ),
-    //         border: InputBorder.none),
-    //   ),
-    // );
   }
 }

@@ -58,10 +58,10 @@ class InputInfoScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 50),
                 child: Column(
                   children: [
-                    ButtonField(
-                      text: 'Hoàn tất',
-                      path: '/login',
-                    ),
+                    // ButtonField(
+                    //   text: 'Hoàn tất',
+                    //   path: '/login',
+                    // ),
                   ],
                 ),
               )

@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 // import 'package:mobile_capstone_fpt/constants.dart';
 
 class ButtonField extends StatelessWidget {
-  const ButtonField(
-      {Key? key, required this.path, this.press, required this.text})
+  const ButtonField({Key? key, required this.voidCallback, required this.text})
       : super(key: key);
   final String text;
-  final String path;
-  final Function()? press;
+  // String path;
+  final Function voidCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,8 @@ class ButtonField extends StatelessWidget {
         style: TextStyle(color: Colors.black87, fontSize: 17),
       ),
       onPressed: () {
-        Navigator.pushNamed(context, path);
+        voidCallback();
+        // Navigator.pushNamed(context, path);
       },
       style: ElevatedButton.styleFrom(
           primary: Colors.white,

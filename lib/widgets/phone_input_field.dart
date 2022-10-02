@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
+typedef StringVoidFunction = void Function(String);
+
 class PhoneInputField extends StatelessWidget {
-  const PhoneInputField({Key? key}) : super(key: key);
+  PhoneInputField({Key? key, required this.input}) : super(key: key);
+  StringVoidFunction input;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class PhoneInputField extends StatelessWidget {
         children: [
           InternationalPhoneNumberInput(
             onInputChanged: (PhoneNumber number) {
-              print(number.phoneNumber);
+              input(number.phoneNumber!);
             },
             onInputValidated: (bool value) {
               print(value);
@@ -40,7 +45,9 @@ class PhoneInputField extends StatelessWidget {
             ),
             countrySelectorScrollControlled: false,
             countries: ['VN'],
+            initialValue: PhoneNumber(isoCode: 'VN', dialCode: ''),
             ignoreBlank: false,
+            locale: '',
             autoValidateMode: AutovalidateMode.disabled,
             selectorTextStyle: TextStyle(color: Colors.black),
             formatInput: false,
@@ -50,7 +57,9 @@ class PhoneInputField extends StatelessWidget {
               border: InputBorder.none,
               hintText: 'Số điện thoại',
               hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
+              // errorText: 'Số không hợp lệ!'
             ),
+            errorMessage: 'Số không hợp lệ!',
           ),
           Positioned(
             left: 90,
