@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:mobile_capstone_fpt/constants.dart';
+import 'package:mobile_capstone_fpt/constants/app_color.dart';
 
 class Upside extends StatelessWidget {
   const Upside({Key? key, required this.imgUrl}) : super(key: key);
@@ -17,7 +18,7 @@ class Upside extends StatelessWidget {
             width: size.width,
             height: size.height / 2,
             decoration: BoxDecoration(
-                color: Colors.grey.shade200,
+                color: aBackgroundColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(50),
                   bottomRight: Radius.circular(50),

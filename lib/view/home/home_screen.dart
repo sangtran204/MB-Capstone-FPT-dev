@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
+import 'package:mobile_capstone_fpt/models/packages/package_respone_model.dart';
 import 'package:mobile_capstone_fpt/view/home/drawer.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    PackageProvider packageProvider = Provider.of<PackageProvider>(context);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
@@ -60,101 +64,128 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 //---------------
       endDrawer: NavigationDrawer(),
-      body: Container(
-        height: size.height,
-        width: size.width,
-        color: Colors.white70,
-        child: SingleChildScrollView(
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              Container(
-                width: size.width,
-                height: 210,
-                decoration: BoxDecoration(
-                    color: Color(0xffffcc33),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30))),
-                child: Column(
+      body: packageProvider.packageActive.result == null
+          ? CircularProgressIndicator()
+          : Container(
+              height: size.height,
+              width: size.width,
+              color: Colors.white70,
+              child: SingleChildScrollView(
+                child: Stack(
+                  alignment: Alignment.topCenter,
                   children: [
-                    // SizedBox(
-                    //   height: 10,
-                    // ),
                     Container(
-                      margin: EdgeInsets.all(10),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                          children: const <Widget>[
-                            Text(
-                              'Chào, MinhT',
-                              style: TextStyle(
-                                fontSize: 30,
+                      width: size.width,
+                      height: 210,
+                      decoration: BoxDecoration(
+                          color: Color(0xffffcc33),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30))),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Column(
+                                children: const <Widget>[
+                                  Text(
+                                    'Chào, MinhT',
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    'Bạn muốn ăn gì?',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(
-                              height: 10,
+                          ),
+                          Container(
+                            height: 100,
+                            child: ListView.builder(
+                              physics: ClampingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: 5,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  width: 80,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    boxShadow: null,
+                                  ),
+                                  child: CategoryItem(),
+                                );
+                              },
                             ),
-                            Text(
-                              'Bạn muốn ăn gì?',
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ),
+                          )
+                        ],
                       ),
                     ),
                     Container(
-                      height: 100,
-                      child: ListView.builder(
-                        physics: ClampingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemCount: 5,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            width: 80,
-                            height: 120,
-                            decoration: BoxDecoration(
-                              boxShadow: null,
-                            ),
-                            child: CategoryItem(),
-                          );
-                        },
+                      margin: EdgeInsets.only(top: 230),
+                      child: Column(
+                        children: [
+                          for (int i = 0;
+                              i < packageProvider.packageActive.result!.length;
+                              i++)
+                            // Text(packageProvider
+                            //     .packageActive.result![i].name),
+                            // PackageItem(
+                            //     packageProvider
+                            //         .packageActive.result![i].image,
+                            //     packageProvider
+                            //         .packageActive.result![i].name,
+                            //     packageProvider.packageActive
+                            //         .result![i].description),
+                            PackageItem(
+                                packageProvider.packageActive.result![i])
+                          // ListView.builder(
+                          //   physics: ClampingScrollPhysics(),
+                          //   scrollDirection: Axis.vertical,
+                          //   shrinkWrap: true,
+                          //   itemCount:
+                          //       packageProvider.packageActive.result!.length,
+                          //   itemBuilder: (BuildContext context, int index) {
+                          //     return Container(
+                          //       height: size.height / 2.5,
+                          //       child: Column(
+                          //         children: [
+                          //           for (int i = 0;
+                          //               i <
+                          //                   packageProvider
+                          //                       .packageActive.result!.length;
+                          //               i++)
+                          //             Text(packageProvider
+                          //                 .packageActive.result![i].name),
+                          //             // PackageItem(
+                          //             //     packageProvider
+                          //             //         .packageActive.result![i].image,
+                          //             //     packageProvider
+                          //             //         .packageActive.result![i].name,
+                          //             //     packageProvider.packageActive
+                          //             //         .result![i].description),
+                          //         ],
+                          //       ), //),
+                          //     );
+                          //   },
+                          // ),
+                        ],
                       ),
                     )
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 230),
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      physics: ClampingScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: 5,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          height: size.height / 2.5,
-                          child: Column(
-                            children: [
-                              PackageItem(),
-                            ],
-                          ), //),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+            ),
     ));
   }
 }
@@ -177,80 +208,83 @@ Widget CategoryItem() => Card(
       ],
     ));
 
-Widget PackageItem() => Card(
+Widget PackageItem(Result dto) => Card(
       shape: RoundedRectangleBorder(
         side: const BorderSide(color: Colors.white10, width: 1),
         borderRadius: BorderRadius.circular(10),
       ),
       clipBehavior: Clip.none,
       elevation: 20,
-      child: Container(
-        height: 250.0,
-        width: 380.0,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-                height: 160,
-                width: 380,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/packageitem.jpg',
+      child: GestureDetector(
+        onTap: () {
+          // Navigator.pushNamed(context, routeName)
+          print('Detail');
+        },
+        child: Container(
+          height: 250.0,
+          width: 380.0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                  height: 160,
+                  width: 380,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                          image: NetworkImage(dto.image), fit: BoxFit.fill)),
+                  child: Padding(
+                      padding: EdgeInsets.only(
+                          left: 230, top: 110, right: 10, bottom: 10),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xffffcc33),
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          '  ' + dto.price + 'đ',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
-                        fit: BoxFit.fill)),
-                child: Padding(
-                    padding: EdgeInsets.only(
-                        left: 230, top: 110, right: 10, bottom: 10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xffffcc33),
-                          borderRadius: BorderRadius.circular(10)),
-                      padding: EdgeInsets.all(5),
-                      child: Text(
-                        '  200.000' + 'đ',
-                        style: TextStyle(
-                          fontSize: 24,
+                      ))),
+              Padding(
+                padding: EdgeInsets.only(left: 10, top: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          dto.name,
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      dto.timeFrame.name,
+                      style: TextStyle(
+                          fontSize: 14,
                           fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ))),
-            Padding(
-              padding: EdgeInsets.only(left: 10, top: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Gói chay',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    'Sáng - Trưa',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.grey.shade600),
-                  ),
-                  Text(
-                    'Phù hợp cho người ăn chay!',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.grey.shade600),
-                  ),
-                ],
-              ),
-            )
-          ],
+                          color: Colors.grey.shade600),
+                    ),
+                    Text(
+                      dto.description,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey.shade600),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
       color: Colors.white,

@@ -1,25 +1,29 @@
+// To parse this JSON data, do
+//
+//     final packageDetailResponeModel = packageDetailResponeModelFromJson(jsonString);
+
 import 'dart:convert';
 
-PackageResponeModel packageResponeModelFromJson(String str) => PackageResponeModel.fromJson(json.decode(str));
+PackageDetailResponeModel packageDetailResponeModelFromJson(String str) => PackageDetailResponeModel.fromJson(json.decode(str));
 
-String packageResponeModelToJson(PackageResponeModel data) => json.encode(data.toJson());
+String packageDetailResponeModelToJson(PackageDetailResponeModel data) => json.encode(data.toJson());
 
-class PackageResponeModel {
-    PackageResponeModel({
+class PackageDetailResponeModel {
+    PackageDetailResponeModel({
         this.result,
         this.statusCode,
     });
 
-    List<Result>? result;
+    Result? result;
     int? statusCode;
 
-    factory PackageResponeModel.fromJson(Map<String, dynamic> json) => PackageResponeModel(
-        result: List<Result>.from(json["result"].map((x) => Result.fromJson(x))),
+    factory PackageDetailResponeModel.fromJson(Map<String, dynamic> json) => PackageDetailResponeModel(
+        result: Result.fromJson(json["result"]),
         statusCode: json["statusCode"],
     );
 
     Map<String, dynamic> toJson() => {
-        "result": List<dynamic>.from(result!.map((x) => x.toJson())),
+        "result": result!.toJson(),
         "statusCode": statusCode,
     };
 }
@@ -127,4 +131,3 @@ class TimeFrame {
         "dateFilter": dateFilter,
     };
 }
-
