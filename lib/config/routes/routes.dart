@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/view/home/home_screen.dart';
-import 'package:mobile_capstone_fpt/view/login/login2.dart';
+import 'package:mobile_capstone_fpt/view/home/package_detail_screen.dart';
 import 'package:mobile_capstone_fpt/view/login/login_screen.dart';
-import 'package:mobile_capstone_fpt/view/protect/protect_routing.dart';
 import 'package:mobile_capstone_fpt/view/register/input_info_screen.dart';
 import 'package:mobile_capstone_fpt/view/register/input_password.dart';
 import 'package:mobile_capstone_fpt/view/register/register_byphone.dart';
 import 'package:mobile_capstone_fpt/view/register/verify.dart';
-import 'package:mobile_capstone_fpt/view/reset_password/reset_byPhone.dart';
 import 'package:mobile_capstone_fpt/view/reset_password/screens_reset.dart';
 
 class Routes {
@@ -16,6 +14,7 @@ class Routes {
     // "/": (context) => const ProtectRouting(),
     '/': (context) => LoginScreen(),
     '/home': (context) => HomeScreen(),
+    '/packageDetail': (context) => PackageDetailScreen(),
     '/login': (context) => LoginScreen(),
     '/register': (context) => RegisterByPhoneScreen(),
     '/verify': (context) => VerifyScreen(),

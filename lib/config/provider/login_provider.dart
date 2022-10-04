@@ -29,7 +29,6 @@ class LoginProvider with ChangeNotifier {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const ButtonBar();
       }));
-      log(_password + " : " + _phone);
       await Navigator.pushReplacementNamed(context, '/home');
     }).onError((error, stackTrace) {
       Navigator.pushReplacementNamed(context, '/');
