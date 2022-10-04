@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
-import 'package:mobile_capstone_fpt/widgets/button_field.dart';
 
 class PackageDetailScreen extends StatefulWidget {
   const PackageDetailScreen({Key? key}) : super(key: key);
