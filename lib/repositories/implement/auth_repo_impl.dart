@@ -22,8 +22,6 @@ class AuthRepoImpl implements AuthRepo {
       if (e.response?.data["message"] == 'Account invalid') {
         showToastFail("Số điện thoại hoặc mật khẩu không đúng!");
       }
-      // showToastFail(e.response?.data["message"]);
-      // showToastFail();
     }
     return result;
   }

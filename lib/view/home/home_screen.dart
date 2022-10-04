@@ -138,47 +138,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           for (int i = 0;
                               i < packageProvider.packageActive.result!.length;
                               i++)
-                            // Text(packageProvider
-                            //     .packageActive.result![i].name),
-                            // PackageItem(
-                            //     packageProvider
-                            //         .packageActive.result![i].image,
-                            //     packageProvider
-                            //         .packageActive.result![i].name,
-                            //     packageProvider.packageActive
-                            //         .result![i].description),
-                            PackageItem(
-                                packageProvider.packageActive.result![i])
-                          // ListView.builder(
-                          //   physics: ClampingScrollPhysics(),
-                          //   scrollDirection: Axis.vertical,
-                          //   shrinkWrap: true,
-                          //   itemCount:
-                          //       packageProvider.packageActive.result!.length,
-                          //   itemBuilder: (BuildContext context, int index) {
-                          //     return Container(
-                          //       height: size.height / 2.5,
-                          //       child: Column(
-                          //         children: [
-                          //           for (int i = 0;
-                          //               i <
-                          //                   packageProvider
-                          //                       .packageActive.result!.length;
-                          //               i++)
-                          //             Text(packageProvider
-                          //                 .packageActive.result![i].name),
-                          //             // PackageItem(
-                          //             //     packageProvider
-                          //             //         .packageActive.result![i].image,
-                          //             //     packageProvider
-                          //             //         .packageActive.result![i].name,
-                          //             //     packageProvider.packageActive
-                          //             //         .result![i].description),
-                          //         ],
-                          //       ), //),
-                          //     );
-                          //   },
-                          // ),
+                            GestureDetector(
+                              onTap: () {
+                                packageProvider.getPackageDetail(context, packageProvider.packageActive.result![i].id);
+                                Navigator.pushReplacementNamed(context, '/packageDetail');
+                              },
+                              child: PackageItem(
+                                  packageProvider.packageActive.result![i]),
+                            )
                         ],
                       ),
                     )
@@ -188,38 +155,33 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
     ));
   }
-}
 
-Widget CategoryItem() => Card(
-    shape: RoundedRectangleBorder(
-      side: const BorderSide(color: Colors.white60, width: 2),
-      borderRadius: BorderRadius.circular(20),
-    ),
-    elevation: 20,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.card_giftcard),
-        Text(
-          'Category hihi',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-        )
-      ],
-    ));
-
-Widget PackageItem(Result dto) => Card(
+  Widget CategoryItem() => Card(
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.white10, width: 1),
-        borderRadius: BorderRadius.circular(10),
+        side: const BorderSide(color: Colors.white60, width: 2),
+        borderRadius: BorderRadius.circular(20),
       ),
-      clipBehavior: Clip.none,
       elevation: 20,
-      child: GestureDetector(
-        onTap: () {
-          // Navigator.pushNamed(context, routeName)
-          print('Detail');
-        },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.card_giftcard),
+          Text(
+            'Category hihi',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          )
+        ],
+      ));
+
+  Widget PackageItem(Result dto) => Card(
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.white10, width: 1),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        clipBehavior: Clip.none,
+        elevation: 20,
+        // child: GestureDetector(
         child: Container(
           height: 250.0,
           width: 380.0,
@@ -286,6 +248,6 @@ Widget PackageItem(Result dto) => Card(
             ],
           ),
         ),
-      ),
-      color: Colors.white,
-    );
+        color: Colors.white,
+      );
+}

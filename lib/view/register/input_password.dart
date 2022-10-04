@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_capstone_fpt/widgets/button_field.dart';
-import 'package:mobile_capstone_fpt/widgets/text_input.dart';
-import 'package:mobile_capstone_fpt/widgets/widgets.dart';
+import 'package:mobile_capstone_fpt/constants/app_color.dart';
 
 class InputPasswordScreen extends StatelessWidget {
   const InputPasswordScreen({Key? key}) : super(key: key);
@@ -11,7 +9,7 @@ class InputPasswordScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffffcc33),
+        backgroundColor: kBackgroundColor,
       ),
       body: Container(
         width: size.width,
@@ -46,7 +44,7 @@ class InputPasswordScreen extends StatelessWidget {
                     //   height: 20,
                     // ),
                     // PasswordInputField(
-                      // hintText: 'Nhập lại mật khẩu',
+                    // hintText: 'Nhập lại mật khẩu',
                     // )
                   ],
                 ),
