@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
-import 'package:mobile_capstone_fpt/models/packages/package_respone_model.dart';
-import 'package:mobile_capstone_fpt/view/home/drawer.dart';
+import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.dart';
+import 'package:mobile_capstone_fpt/view/drawer.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {

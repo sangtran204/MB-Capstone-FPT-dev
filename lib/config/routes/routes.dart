@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_capstone_fpt/view/home/home_screen.dart';
-import 'package:mobile_capstone_fpt/view/home/package_detail_screen.dart';
-import 'package:mobile_capstone_fpt/view/login/login_screen.dart';
-import 'package:mobile_capstone_fpt/view/register/input_info_screen.dart';
-import 'package:mobile_capstone_fpt/view/register/input_password.dart';
-import 'package:mobile_capstone_fpt/view/register/register_byphone.dart';
-import 'package:mobile_capstone_fpt/view/register/verify.dart';
-import 'package:mobile_capstone_fpt/view/reset_password/screens_reset.dart';
+import 'package:mobile_capstone_fpt/view/screens.dart';
 
 class Routes {
   static final Map<String, Widget Function(BuildContext)> routes = {
