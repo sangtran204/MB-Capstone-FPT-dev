@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
-import 'package:mobile_capstone_fpt/models/auths/login_request_model.dart';
+import 'package:mobile_capstone_fpt/repositories/request/login_request_model.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/auth_repo_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/package_repo_impl.dart';
 import 'package:provider/provider.dart';

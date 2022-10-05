@@ -5,7 +5,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mobile_capstone_fpt/components/components.dart';
 import 'package:mobile_capstone_fpt/config/provider/login_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
-import 'package:mobile_capstone_fpt/models/auths/login_request_model.dart';
+import 'package:mobile_capstone_fpt/repositories/request/login_request_model.dart';
 import 'package:mobile_capstone_fpt/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
   //     checkPhone = phoneNumber.replaceAll('+84', '');
   //   }
   //   return checkPhone;
-    
+
   // }
 
   @override
@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
               alignment: Alignment.topCenter,
               children: [
                 const Upside(
-                  imgUrl: 'assets/images/fakelogo.png',
+                  imgUrl: 'assets/images/logo6.png',
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 220.0),
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 280),
+                  padding: const EdgeInsets.only(top: 300),
                   child: Container(
                     child: Column(
                       children: [
@@ -104,12 +104,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-
                             ButtonField(
                                 text: 'Đăng Nhập',
                                 voidCallback: () {
                                   loginProvider.submitData(
-                                      context, phoneNumber.replaceAll('+84', ''), password);
+                                      context,
+                                      phoneNumber.replaceAll('+84', ''),
+                                      password);
                                 }),
                             const SizedBox(
                               height: 25,

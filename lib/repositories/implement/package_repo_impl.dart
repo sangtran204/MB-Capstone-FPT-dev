@@ -3,8 +3,8 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/packages/package_detail_respone_model.dart';
-import 'package:mobile_capstone_fpt/models/packages/package_respone_model.dart';
+import 'package:mobile_capstone_fpt/repositories/response/package_detail_respone_model.dart';
+import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.dart';
 import 'package:mobile_capstone_fpt/repositories/package_repo.dart';
 
 class PackageRepoImpl implements PackageRepo {

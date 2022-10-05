@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/components/components.dart';
-import 'package:mobile_capstone_fpt/widgets/button_field.dart';
+import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/widgets/pin_input_field.dart';
-// import 'package:flutter/src/foundation/key.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-import 'package:pinput/pinput.dart';
 
 class VerifyResetScreen extends StatelessWidget {
   const VerifyResetScreen({Key? key}) : super(key: key);
@@ -14,7 +11,7 @@ class VerifyResetScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xfffffcc33),
+        backgroundColor: kBackgroundColor,
       ),
       body: Container(
         width: size.width,

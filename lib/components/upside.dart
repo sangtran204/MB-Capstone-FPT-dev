@@ -24,13 +24,13 @@ class Upside extends StatelessWidget {
                   bottomRight: Radius.circular(50),
                 )),
             child: Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 20),
               child: Image.asset(
                 imgUrl,
                 alignment: Alignment.topCenter,
                 scale: 2,
-                height: 200,
-                width: 200,
+                height: 400,
+                width: 400,
               ),
             )),
       ],
