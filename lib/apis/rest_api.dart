@@ -4,5 +4,7 @@ class RestApi {
   static const String signInPath = '${serverPath}/auths/login/customer';
   static const String getActivePackage = '${serverPath}/packages/active';
   static const String getDetailPackage = '${serverPath}/packages/find-by-id';
+  static const String getCategoryPackage =
+      '${serverPath}/package-categories/hasPackage';
   //something
 }

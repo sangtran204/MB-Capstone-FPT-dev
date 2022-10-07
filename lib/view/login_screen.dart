@@ -20,8 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
   String phoneNumber = "";
   String password = "";
   void input(String a) {
-    print('-----------');
-    print(a);
     setState(() {
       phoneNumber = a;
     });
@@ -31,8 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       password = p;
     });
-    print('--------------');
-    print(p);
   }
 
   void buttomFuction() {

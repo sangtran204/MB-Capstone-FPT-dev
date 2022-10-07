@@ -19,9 +19,14 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
         child: Scaffold(
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/home');
+          },
+        ),
       ),
       body: packageProvider.packageDetail.result == null
-          ? CircularProgressIndicator()
+          ? Center(child: CircularProgressIndicator())
           : Container(
               height: size.height,
               width: size.width,
@@ -43,9 +48,15 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                 width: size.width,
                                 child: Stack(
                                   children: [
-                                    Image(
-                                      image: NetworkImage(packageProvider
-                                          .packageDetail.result!.image),
+                                    // Image(
+                                    // image: NetworkImage(packageProvider
+                                    //     .packageDetail.result!.image),
+
+                                    // fit: BoxFit.fill,
+                                    // ),
+                                    Image.network(
+                                      packageProvider
+                                          .packageDetail.result!.image,
                                       fit: BoxFit.fill,
                                     ),
                                     Positioned(

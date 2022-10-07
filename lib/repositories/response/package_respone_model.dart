@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final packageResponeModel = packageResponeModelFromJson(jsonString);
+
 import 'dart:convert';
 
 PackageResponeModel packageResponeModelFromJson(String str) => PackageResponeModel.fromJson(json.decode(str));
@@ -109,7 +113,7 @@ class TimeFrame {
     DateTime createdAt;
     DateTime updatedAt;
     String name;
-    int dateFilter;
+    String dateFilter;
 
     factory TimeFrame.fromJson(Map<String, dynamic> json) => TimeFrame(
         id: json["id"],
@@ -127,4 +131,3 @@ class TimeFrame {
         "dateFilter": dateFilter,
     };
 }
-

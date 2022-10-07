@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
+import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/repositories/request/login_request_model.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/auth_repo_impl.dart';
@@ -17,6 +18,8 @@ class LoginProvider with ChangeNotifier {
   void submitData(BuildContext context, _phone, _password) {
     PackageProvider packageProvider =
         Provider.of<PackageProvider>(context, listen: false);
+    PackageCategoryProvider packageCategoryProvider =
+        Provider.of<PackageCategoryProvider>(context, listen: false);
     log(_phone + ' : ' + _password);
     AuthRepoImpl()
         .postLogIn(RestApi.signInPath,
@@ -26,6 +29,7 @@ class LoginProvider with ChangeNotifier {
       await storage.write(key: 'token', value: value.result!.accessToken);
       await storage.write(key: 'ftoken', value: value.result!.refreshToken);
       packageProvider.getPackageCustomer(context);
+      packageCategoryProvider.getPackageCategory(context);
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const ButtonBar();
       }));
