@@ -113,7 +113,7 @@ class TimeFrame {
     DateTime createdAt;
     DateTime updatedAt;
     String name;
-    int dateFilter;
+    String dateFilter;
 
     factory TimeFrame.fromJson(Map<String, dynamic> json) => TimeFrame(
         id: json["id"],

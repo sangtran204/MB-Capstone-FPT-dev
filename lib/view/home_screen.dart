@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
+import 'package:mobile_capstone_fpt/constants/app_color.dart';
+import 'package:mobile_capstone_fpt/repositories/response/package_categories_res_model.dart';
 import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.dart';
 import 'package:mobile_capstone_fpt/view/drawer.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
+    PackageCategoryProvider packageCategoryProvider =
+        Provider.of<PackageCategoryProvider>(context);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
@@ -64,24 +69,28 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 //---------------
       endDrawer: NavigationDrawer(),
-      body: packageProvider.packageActive.result == null
-          ? CircularProgressIndicator()
+      body: packageProvider.packageActive.result == null ||
+              packageCategoryProvider.packageCategory.result == null
+          ? Center(child: CircularProgressIndicator())
           : Container(
               height: size.height,
               width: size.width,
-              color: Colors.white70,
+              // color: Colors.white70,
+              color: kBackgroundColor,
+
               child: SingleChildScrollView(
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: [
                     Container(
                       width: size.width,
-                      height: 210,
+                      height: 200,
                       decoration: BoxDecoration(
-                          color: Color(0xffffcc33),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(30),
-                              bottomRight: Radius.circular(30))),
+                          // color: Colors.white,
+                          // borderRadius: BorderRadius.only(
+                          //     bottomLeft: Radius.circular(30),
+                          //     bottomRight: Radius.circular(30))
+                          ),
                       child: Column(
                         children: [
                           Container(
@@ -109,21 +118,37 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+                          // for (int j = 0;
+                          //     j <
+                          //         packageCategoryProvider
+                          //             .packageCategory.result!.length;
+                          //     j++)
                           Container(
-                            height: 100,
+                            height: 112,
                             child: ListView.builder(
-                              physics: ClampingScrollPhysics(),
+                              // physics: ClampingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
-                              itemCount: 5,
+                              itemCount: 1,
                               itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  width: 80,
-                                  height: 120,
-                                  decoration: BoxDecoration(
-                                    boxShadow: null,
-                                  ),
-                                  child: CategoryItem(),
+                                return Row(
+                                  children: [
+                                    for (int j = 0;
+                                        j <
+                                            packageCategoryProvider
+                                                .packageCategory.result!.length;
+                                        j++)
+                                      Container(
+                                        width: 90,
+                                        // height: 120,
+                                        decoration: BoxDecoration(
+                                          boxShadow: null,
+                                        ),
+                                        child: CategoryItem(
+                                            packageCategoryProvider
+                                                .packageCategory.result![j]),
+                                      ),
+                                  ],
                                 );
                               },
                             ),
@@ -132,20 +157,46 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 230),
+                      // color: Colors.green,
+                      width: size.width,
+                      margin: EdgeInsets.only(top: 210),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(30),
+                              topLeft: Radius.circular(30))),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          Text(
+                            'Gói ăn ',
+                            textAlign: TextAlign.left,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
                           for (int i = 0;
                               i < packageProvider.packageActive.result!.length;
                               i++)
                             GestureDetector(
                               onTap: () {
-                                packageProvider.getPackageDetail(context, packageProvider.packageActive.result![i].id);
-                                Navigator.pushReplacementNamed(context, '/packageDetail');
+                                packageProvider.getPackageDetail(
+                                    context,
+                                    packageProvider
+                                        .packageActive.result![i].id);
+                                Navigator.pushReplacementNamed(
+                                    context, '/packageDetail');
                               },
-                              child: PackageItem(
-                                  packageProvider.packageActive.result![i]),
-                            )
+                              child: Column(
+                                children: [
+                                  PackageItem(
+                                      packageProvider.packageActive.result![i]),
+                                  SizedBox(
+                                    height: 15,
+                                  )
+                                ],
+                              ),
+                            ),
                         ],
                       ),
                     )
@@ -156,20 +207,31 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
-  Widget CategoryItem() => Card(
+  Widget CategoryItem(CategoryResult cate) => Card(
       shape: RoundedRectangleBorder(
         side: const BorderSide(color: Colors.white60, width: 2),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(30),
       ),
-      elevation: 20,
+      // elevation: 20,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.card_giftcard),
+          // Icon(Icons.card_giftcard),
+          // Image.network('src'),
+          Container(
+            height: 65,
+            width: 70,
+            // child: Image.asset(
+            //   'assets/images/tapluyencate.png',
+            //   fit: BoxFit.fill,
+            // ),
+            child: Image.network(cate.image),
+          ),
           Text(
-            'Category hihi',
+            // 'Category hihi',
+            cate.name,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           )
         ],
       ));
@@ -184,13 +246,15 @@ class _HomeScreenState extends State<HomeScreen> {
         // child: GestureDetector(
         child: Container(
           height: 250.0,
-          width: 380.0,
+          width: 360.0,
+          // margin: EdgeInsets.only(top:20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                   height: 160,
-                  width: 380,
+                  // width: 360,
+
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
@@ -204,10 +268,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(10)),
                         padding: EdgeInsets.all(5),
                         child: Text(
-                          '  ' + dto.price + 'đ',
+                          ' ' + dto.price + ' đ',
                           style: TextStyle(
                             fontSize: 24,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ))),

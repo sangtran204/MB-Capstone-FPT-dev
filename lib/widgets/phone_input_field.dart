@@ -35,9 +35,9 @@ class PhoneInputField extends StatelessWidget {
             onInputChanged: (PhoneNumber number) {
               input(number.phoneNumber!);
             },
-            onInputValidated: (bool value) {
-              print(value);
-            },
+            // onInputValidated: (bool value) {
+            //   print(value);
+            // },
             selectorConfig: SelectorConfig(
               selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
               showFlags: true,
