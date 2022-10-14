@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/models/foods/foodDTO.dart';
 import 'package:mobile_capstone_fpt/widgets/button_field.dart';
 
@@ -22,7 +23,14 @@ class _SelectFoodScreenState extends State<SelectFoodScreen> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: kBackgroundColor,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/order');
+          },
+        ),
+      ),
       body: Container(
         height: size.height,
         width: size.width,
@@ -35,7 +43,7 @@ class _SelectFoodScreenState extends State<SelectFoodScreen> {
                 width: size.width,
                 // color: Colors.greenAccent,
                 child: ListView.builder(
-                  physics: ClampingScrollPhysics(),
+                  // physics: ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: 6,
@@ -43,9 +51,6 @@ class _SelectFoodScreenState extends State<SelectFoodScreen> {
                     return Container(
                       width: 90,
                       height: 120,
-                      decoration: BoxDecoration(
-                        boxShadow: null,
-                      ),
                       child: CategoryFoodItem(),
                     );
                   },
@@ -68,7 +73,7 @@ class _SelectFoodScreenState extends State<SelectFoodScreen> {
                   ),
                 ),
                 onPressed: () {
-                  print('save');
+                  Navigator.pushNamed(context, '/order');
                 },
               ),
             ),
@@ -79,6 +84,8 @@ class _SelectFoodScreenState extends State<SelectFoodScreen> {
               // Viết cái gì đó vô đây
               padding: EdgeInsets.only(left: 10, right: 10),
               child: Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ...foods.map(FoodItems).toList(),
                 ],
@@ -99,7 +106,7 @@ class _SelectFoodScreenState extends State<SelectFoodScreen> {
         ),
         child: SizedBox(
           height: 90,
-          width: 380,
+          width: 360,
           // color: Colors.purple,
 
           child: Row(
@@ -119,7 +126,7 @@ class _SelectFoodScreenState extends State<SelectFoodScreen> {
               ),
               Container(
                   height: 100,
-                  width: 200,
+                  width: 170,
                   padding: EdgeInsets.only(top: 25),
                   child: Text(
                     food.name,
@@ -150,7 +157,7 @@ Widget CategoryFoodItem() => Card(
       side: const BorderSide(color: Colors.white60, width: 2),
       borderRadius: BorderRadius.circular(20),
     ),
-    elevation: 20,
+    // elevation: 20,
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

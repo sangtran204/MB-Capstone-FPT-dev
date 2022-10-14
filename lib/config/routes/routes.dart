@@ -3,11 +3,13 @@ import 'package:mobile_capstone_fpt/view/screens.dart';
 
 class Routes {
   static final Map<String, Widget Function(BuildContext)> routes = {
-    // "/SignInPage" : (context) => const SignInPage()
-    // "/": (context) => HomeScreen(),
+    // "/" : (context) => const ScheduleScreen(),
+    // '/': (context) => SelectFoodScreen(),
     '/': (context) => LoginScreen(),
     '/home': (context) => HomeScreen(),
+    '/order': (context) => ScheduleScreen(),
     '/packageDetail': (context) => PackageDetailScreen(),
+    '/selectFood': (context) => SelectFoodScreen(),
     '/login': (context) => LoginScreen(),
     '/register': (context) => RegisterByPhoneScreen(),
     '/verify': (context) => VerifyScreen(),

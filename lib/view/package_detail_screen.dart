@@ -146,7 +146,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                             Padding(
                               padding: EdgeInsets.all(10),
                               child: Text(
-                                'Món ăn trong gói',
+                                'Món ăn có thể mua',
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
@@ -220,7 +220,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                               height: 60,
                               child: RaisedButton(
                                 onPressed: () {
-                                  print('Chọn gói');
+                                  Navigator.pushNamed(context, '/order');
                                 },
                                 color: Color(0xffffcc33),
                                 child: Text(
