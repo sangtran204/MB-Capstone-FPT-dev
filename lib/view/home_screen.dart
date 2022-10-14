@@ -253,8 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Container(
                   height: 160,
-                  // width: 360,
-
+                  width: 360,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
@@ -268,9 +267,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(10)),
                         padding: EdgeInsets.all(5),
                         child: Text(
-                          ' ' + dto.price + ' đ',
+                          '${dto.price.toString()} đ',
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -293,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     Text(
-                      dto.timeFrame.name,
+                      dto.timeFrame!.name,
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,

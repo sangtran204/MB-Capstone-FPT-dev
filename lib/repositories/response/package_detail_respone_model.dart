@@ -54,7 +54,7 @@ class Result {
     DateTime endSale;
     String name;
     String description;
-    String price;
+    int price;
     String image;
     int totalDate;
     int totalFood;
