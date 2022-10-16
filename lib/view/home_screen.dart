@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
+import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
 import 'package:mobile_capstone_fpt/repositories/response/package_categories_res_model.dart';
 import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.dart';
 import 'package:mobile_capstone_fpt/view/drawer.dart';
@@ -23,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    PackageProvider packageProvider = Provider.of<PackageProvider>(context);
+    // PackageProvider packageProvider = Provider.of<PackageProvider>(context);
     PackageCategoryProvider packageCategoryProvider =
         Provider.of<PackageCategoryProvider>(context);
     Size size = MediaQuery.of(context).size;
@@ -69,8 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 //---------------
       endDrawer: NavigationDrawer(),
-      body: packageProvider.packageActive.result == null ||
-              packageCategoryProvider.packageCategory.result == null
+      body:
+      // packageProvider.packageActive.result == null ||
+      packageCategoryProvider.packageCategory.result == null
           ? Center(child: CircularProgressIndicator())
           : Container(
               height: size.height,
@@ -130,13 +134,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
                               itemCount: 1,
-                              itemBuilder: (BuildContext context, int index) {
+                              itemBuilder:
+                                  (BuildContext context, int index) {
                                 return Row(
                                   children: [
                                     for (int j = 0;
                                         j <
                                             packageCategoryProvider
-                                                .packageCategory.result!.length;
+                                                .packageCategory
+                                                .result!
+                                                .length;
                                         j++)
                                       Container(
                                         width: 90,
@@ -146,7 +153,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         child: CategoryItem(
                                             packageCategoryProvider
-                                                .packageCategory.result![j]),
+                                                .packageCategory
+                                                .result![j]),
                                       ),
                                   ],
                                 );
@@ -156,50 +164,50 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    Container(
-                      // color: Colors.green,
-                      width: size.width,
-                      margin: EdgeInsets.only(top: 210),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(30),
-                              topLeft: Radius.circular(30))),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Gói ăn ',
-                            textAlign: TextAlign.left,
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          for (int i = 0;
-                              i < packageProvider.packageActive.result!.length;
-                              i++)
-                            GestureDetector(
-                              onTap: () {
-                                packageProvider.getPackageDetail(
-                                    context,
-                                    packageProvider
-                                        .packageActive.result![i].id);
-                                Navigator.pushReplacementNamed(
-                                    context, '/packageDetail');
-                              },
-                              child: Column(
-                                children: [
-                                  PackageItem(
-                                      packageProvider.packageActive.result![i]),
-                                  SizedBox(
-                                    height: 15,
-                                  )
-                                ],
-                              ),
-                            ),
-                        ],
-                      ),
-                    )
+                    // Container(
+                    //   // color: Colors.green,
+                    //   width: size.width,
+                    //   margin: EdgeInsets.only(top: 210),
+                    //   decoration: BoxDecoration(
+                    //       color: Colors.white,
+                    //       borderRadius: BorderRadius.only(
+                    //           topRight: Radius.circular(30),
+                    //           topLeft: Radius.circular(30))),
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.start,
+                    //     children: [
+                    //       Text(
+                    //         'Gói ăn ',
+                    //         textAlign: TextAlign.left,
+                    //       ),
+                    //       SizedBox(
+                    //         height: 20,
+                    //       ),
+                    //       for (int i = 0;
+                    //           i < packageProvider.packageActive.result!.length;
+                    //           i++)
+                    //         GestureDetector(
+                    //           onTap: () {
+                    //             packageProvider.getPackageDetail(
+                    //                 context,
+                    //                 packageProvider
+                    //                     .packageActive.result![i].id);
+                    //             Navigator.pushReplacementNamed(
+                    //                 context, '/packageDetail');
+                    //           },
+                    //           child: Column(
+                    //             children: [
+                    //               PackageItem(
+                    //                   packageProvider.packageActive.result![i]),
+                    //               SizedBox(
+                    //                 height: 15,
+                    //               )
+                    //             ],
+                    //           ),
+                    //         ),
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
               ),
@@ -207,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
-  Widget CategoryItem(CategoryResult cate) => Card(
+  Widget CategoryItem(PackageCategory cate) => Card(
       shape: RoundedRectangleBorder(
         side: const BorderSide(color: Colors.white60, width: 2),
         borderRadius: BorderRadius.circular(30),
@@ -236,81 +244,81 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ));
 
-  Widget PackageItem(Result dto) => Card(
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Colors.white10, width: 1),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        clipBehavior: Clip.none,
-        elevation: 20,
-        // child: GestureDetector(
-        child: Container(
-          height: 250.0,
-          width: 360.0,
-          // margin: EdgeInsets.only(top:20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                  height: 160,
-                  width: 360,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: NetworkImage(dto.image), fit: BoxFit.fill)),
-                  child: Padding(
-                      padding: EdgeInsets.only(
-                          left: 230, top: 110, right: 10, bottom: 10),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xffffcc33),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: EdgeInsets.all(5),
-                        child: Text(
-                          '${dto.price.toString()} đ',
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ))),
-              Padding(
-                padding: EdgeInsets.only(left: 10, top: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          dto.name,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      dto.timeFrame!.name,
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey.shade600),
-                    ),
-                    Text(
-                      dto.description,
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey.shade600),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-        color: Colors.white,
-      );
+  // Widget PackageItem(Result dto) => Card(
+  //       shape: RoundedRectangleBorder(
+  //         side: const BorderSide(color: Colors.white10, width: 1),
+  //         borderRadius: BorderRadius.circular(10),
+  //       ),
+  //       clipBehavior: Clip.none,
+  //       elevation: 20,
+  //       // child: GestureDetector(
+  //       child: Container(
+  //         height: 250.0,
+  //         width: 360.0,
+  //         // margin: EdgeInsets.only(top:20),
+  //         child: Column(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             Container(
+  //                 height: 160,
+  //                 width: 360,
+  //                 decoration: BoxDecoration(
+  //                     borderRadius: BorderRadius.circular(10),
+  //                     image: DecorationImage(
+  //                         image: NetworkImage(dto.image), fit: BoxFit.fill)),
+  //                 child: Padding(
+  //                     padding: EdgeInsets.only(
+  //                         left: 230, top: 110, right: 10, bottom: 10),
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           color: Color(0xffffcc33),
+  //                           borderRadius: BorderRadius.circular(10)),
+  //                       padding: EdgeInsets.all(5),
+  //                       child: Text(
+  //                         '${dto.price.toString()} đ',
+  //                         style: TextStyle(
+  //                           fontSize: 22,
+  //                           fontWeight: FontWeight.bold,
+  //                         ),
+  //                       ),
+  //                     ))),
+  //             Padding(
+  //               padding: EdgeInsets.only(left: 10, top: 10),
+  //               child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Row(
+  //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                     children: [
+  //                       Text(
+  //                         dto.name,
+  //                         style: TextStyle(
+  //                           fontSize: 24,
+  //                           fontWeight: FontWeight.w600,
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                   Text(
+  //                     dto.timeFrame!.name,
+  //                     style: TextStyle(
+  //                         fontSize: 14,
+  //                         fontWeight: FontWeight.w400,
+  //                         color: Colors.grey.shade600),
+  //                   ),
+  //                   Text(
+  //                     dto.description,
+  //                     style: TextStyle(
+  //                         fontSize: 14,
+  //                         fontWeight: FontWeight.w400,
+  //                         color: Colors.grey.shade600),
+  //                   ),
+  //                 ],
+  //               ),
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //       color: Colors.white,
+  //     );
 }

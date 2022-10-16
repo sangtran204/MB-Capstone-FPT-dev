@@ -1,28 +1,20 @@
-// To parse this JSON data, do
-//
-//     final packageCategoryResponeModel = packageCategoryResponeModelFromJson(jsonString);
-
 import 'dart:convert';
 
-PackageCategoryResponeModel packageCategoryResponeModelFromJson(String str) =>
-    PackageCategoryResponeModel.fromJson(json.decode(str));
+import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
 
-String packageCategoryResponeModelToJson(PackageCategoryResponeModel data) =>
-    json.encode(data.toJson());
-
-class PackageCategoryResponeModel {
-  PackageCategoryResponeModel({
+class PackageCategoryRes {
+  PackageCategoryRes({
     this.result,
     this.statusCode,
   });
 
-  List<CategoryResult>? result;
+  List<PackageCategory>? result;
   int? statusCode;
 
-  factory PackageCategoryResponeModel.fromJson(Map<String, dynamic> json) =>
-      PackageCategoryResponeModel(
-        result:
-            List<CategoryResult>.from(json["result"].map((x) => CategoryResult.fromJson(x))),
+  factory PackageCategoryRes.fromJson(Map<String, dynamic> json) =>
+      PackageCategoryRes(
+        result: List<PackageCategory>.from(
+            json["result"].map((x) => PackageCategory.fromJson(x))),
         statusCode: json["statusCode"],
       );
 
@@ -30,28 +22,9 @@ class PackageCategoryResponeModel {
         "result": List<dynamic>.from(result!.map((x) => x.toJson())),
         "statusCode": statusCode,
       };
-}
+  static PackageCategoryRes packageCategoryResponeModelFromJson(String str) =>
+      PackageCategoryRes.fromJson(json.decode(str));
 
-class CategoryResult {
-  CategoryResult({
-    required this.image,
-    required this.name,
-    required this.id,
-  });
-
-  String image;
-  String name;
-  String id;
-
-  factory CategoryResult.fromJson(Map<String, dynamic> json) => CategoryResult(
-        image: json["image"],
-        name: json["name"],
-        id: json["id"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "image": image,
-        "name": name,
-        "id": id,
-      };
+  String packageCategoryResponeModelToJson(PackageCategoryRes data) =>
+      json.encode(data.toJson());
 }
