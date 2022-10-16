@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
+import 'package:mobile_capstone_fpt/models/entity/package.dart';
+import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
 import 'package:mobile_capstone_fpt/repositories/response/package_categories_res_model.dart';
 import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.dart';
 import 'package:mobile_capstone_fpt/view/drawer.dart';
@@ -68,10 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
 //---------------
-      endDrawer: NavigationDrawer(),
+      endDrawer: const NavigationDrawer(),
       body: packageProvider.packageActive.result == null ||
               packageCategoryProvider.packageCategory.result == null
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Container(
               height: size.height,
               width: size.width,
@@ -85,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       width: size.width,
                       height: 200,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           // color: Colors.white,
                           // borderRadius: BorderRadius.only(
                           //     bottomLeft: Radius.circular(30),
@@ -207,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
-  Widget CategoryItem(CategoryResult cate) => Card(
+  Widget CategoryItem(PackageCategory cate) => Card(
       shape: RoundedRectangleBorder(
         side: const BorderSide(color: Colors.white60, width: 2),
         borderRadius: BorderRadius.circular(30),
@@ -236,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ));
 
-  Widget PackageItem(Result dto) => Card(
+  Widget PackageItem(Package dto) => Card(
         shape: RoundedRectangleBorder(
           side: const BorderSide(color: Colors.white10, width: 1),
           borderRadius: BorderRadius.circular(10),

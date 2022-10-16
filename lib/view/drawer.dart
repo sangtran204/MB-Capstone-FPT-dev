@@ -34,7 +34,7 @@ class NavigationDrawer extends StatelessWidget {
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.work_history),
+              leading: const Icon(Icons.history),
               title: Text('Lịch sử'),
               onTap: () {},
             ),

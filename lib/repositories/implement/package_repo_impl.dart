@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
@@ -9,11 +9,14 @@ import 'package:mobile_capstone_fpt/repositories/package_repo.dart';
 
 class PackageRepoImpl implements PackageRepo {
   @override
-  Future<PackageResponeModel> getActivePackage(String url) async {
-    var result = PackageResponeModel();
+  Future<PackageRes> getActivePackage(String url, String token) async {
+    var result = PackageRes();
     try {
-      Response response = await Dio().get(url);
-      result = packageResponeModelFromJson(jsonEncode(response.data));
+      Response response = await Dio().get(url,
+          options: Options(
+              headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
+      result =
+          PackageRes.packageResponeModelFromJson(jsonEncode(response.data));
     } on DioError catch (e) {
       showToastFail(e.response?.data["message"]);
     }
@@ -21,8 +24,7 @@ class PackageRepoImpl implements PackageRepo {
   }
 
   @override
-  Future<PackageDetailResponeModel> getPackageDetail(
-      String url) async {
+  Future<PackageDetailResponeModel> getPackageDetail(String url) async {
     var result = PackageDetailResponeModel();
     try {
       Response response = await Dio().get(url);
