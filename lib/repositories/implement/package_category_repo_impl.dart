@@ -8,13 +8,15 @@ import 'package:mobile_capstone_fpt/repositories/response/package_categories_res
 
 class PackageCategoryRepoImpl implements PackageCategoryRepo {
   @override
-  Future<PackageCategoryRes> getPackageCategory(String url) async {
+  Future<PackageCategoryRes> getPackageCategory(
+      String url, String token) async {
     var result = PackageCategoryRes();
     try {
-      Response response = await Dio().get(url);
+      Response response = await Dio().get(url,
+          options: Options(
+              headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result = PackageCategoryRes.packageCategoryResponeModelFromJson(
           jsonEncode(response.data));
-      print(response.data);
     } on DioError catch (e) {
       showToastFail(e.response?.data["message"]);
     }

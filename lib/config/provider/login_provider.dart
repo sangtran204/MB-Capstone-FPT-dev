@@ -30,7 +30,6 @@ class LoginProvider with ChangeNotifier {
         .postLogIn(RestApi.signInPath,
             LoginRequestModel(phone: _phone, password: _password))
         .then((value) async {
-      // const storage = FlutterSecureStorage();
       await secureStorage.writeSecureData('token', value.result!.accessToken);
       await secureStorage.writeSecureData(
           'customer', value.result!.refreshToken);
@@ -42,8 +41,9 @@ class LoginProvider with ChangeNotifier {
       //     .then((value) => log(value.toString()));
       // await UsersMeRepImpl()
       //     .getUsersMe(UrlApi.usersMePath, value.result!.accessToken);
+      packageProvider.getPackageCustomer(context);
       packageCategoryProvider.getPackageCategory(context);
-      // packageProvider.getPackageCustomer(context);
+      
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const ButtonBar();
       }));

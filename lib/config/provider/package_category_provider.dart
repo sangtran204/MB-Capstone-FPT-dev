@@ -7,24 +7,14 @@ import 'package:mobile_capstone_fpt/repositories/response/package_categories_res
 class PackageCategoryProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
   PackageCategoryRes packageCategory = PackageCategoryRes();
-  void getPackageCategory(BuildContext context)  async {
-    // String accessToken = await secureStorage.readSecureData("token");
+  void getPackageCategory(BuildContext context) async {
+    String accessToken = await secureStorage.readSecureData("token");
     PackageCategoryRepoImpl()
-        // .getPackageCategory(RestApi.getCategoryPackage, accessToken)
-        .getPackageCategory(RestApi.getCategoryPackage)
+        .getPackageCategory(RestApi.getCategoryPackage, accessToken)
         .then((value) {
       packageCategory = value;
+      notifyListeners();
     });
-    notifyListeners();
   }
 }
-
-  // PackageCategoryResponeModel packageCategory = PackageCategoryResponeModel();
-  // void getPackageCategory(BuildContext context) {
-  //   PackageCategoryRepoImpl()
-  //       .getPackageCategory(RestApi.getCategoryPackage)
-  //       .then((value) {
-  //     packageCategory = value;
-  //     notifyListeners();
-  //   });
 
