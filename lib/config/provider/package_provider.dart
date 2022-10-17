@@ -19,11 +19,11 @@ class PackageProvider with ChangeNotifier {
     });
   }
 
-  PackageDetailResponeModel packageDetail = PackageDetailResponeModel();
+  PackageDetailRes packageDetail = PackageDetailRes();
   void getPackageDetail(BuildContext context, String id) async {
-    // String accessToken = await secureStorage.readSecureData("token");
+    String accessToken = await secureStorage.readSecureData("token");
     PackageRepoImpl()
-        .getPackageDetail('${RestApi.getDetailPackage}/$id')
+        .getPackageDetail('${RestApi.getDetailPackage}/$id', accessToken)
         .then((value) {
       packageDetail = value;
       notifyListeners();

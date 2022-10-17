@@ -24,12 +24,14 @@ class PackageRepoImpl implements PackageRepo {
   }
 
   @override
-  Future<PackageDetailResponeModel> getPackageDetail(String url) async {
-    var result = PackageDetailResponeModel();
+  Future<PackageDetailRes> getPackageDetail(String url, String token) async {
+    var result = PackageDetailRes();
     try {
-      Response response = await Dio().get(url);
-      result = packageDetailResponeModelFromJson(jsonEncode(response.data));
-      print(response);
+      Response response = await Dio().get(url,
+          options: Options(
+              headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
+      result = PackageDetailRes.packageDetailResponeModelFromJson(
+          jsonEncode(response.data));
     } on DioError catch (e) {
       if (e.response?.data["message"] == "Dont't have resource") {
         showToastFail("Không tìm thấy gói ăn!");

@@ -26,7 +26,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
         ),
       ),
       body: packageProvider.packageDetail.result == null
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Container(
               height: size.height,
               width: size.width,
@@ -105,7 +105,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                     Container(
                                       // height: 20,
                                       width: size.width,
-                                      child: Text(
+                                      child: const Text(
                                         'Chi tiết gói ăn:',
                                         // packageProvider.packageDetail.result!.description,
                                         style: TextStyle(
@@ -114,22 +114,32 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(10),
+                                      padding: const EdgeInsets.all(10),
                                       child: Column(
                                         // mainAxisAlignment: MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          textInfo('Gói 2 bữa Sáng - Trưa'),
-                                          SizedBox(
+                                          // textInfo('Gói 2 bữa Sáng - Trưa'),
+                                          textInfo(packageProvider
+                                              .packageDetail.result!.name),
+                                          const SizedBox(
                                             height: 5,
                                           ),
-                                          textInfo("Ngày giao: Thứ 2 - Thứ 6"),
-                                          SizedBox(
+                                          textInfo('Thời gian bán: Từ ' +
+                                              packageProvider.packageDetail
+                                                  .result!.startSale
+                                                  .toString()
+                                                  .substring(0, 10) +
+                                              ' đến ' +
+                                              packageProvider
+                                                  .packageDetail.result!.endSale
+                                                  .toString()
+                                                  .substring(0, 10)),
+                                          const SizedBox(
                                             height: 5,
                                           ),
-                                          textInfo('Món ăn: ' +
-                                              '${packageProvider.packageDetail.result!.totalFood}'),
+                                          textInfo('Món ăn: ${packageProvider.packageDetail.result!.totalFood}'),
                                           SizedBox(
                                             height: 5,
                                           ),
@@ -188,11 +198,11 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                               height: 60,
                               // color: Colors.white,
                               child: Padding(
-                                padding: EdgeInsets.only(left: 25, top: 15),
+                                padding: const EdgeInsets.only(left: 25, top: 15),
                                 child: Text(
                                   '${packageProvider.packageDetail.result!.price}' +
                                       ' Đ',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 26,
                                       fontWeight: FontWeight.w500),
                                   // textAlign: TextAlignVertical.center,
@@ -211,7 +221,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                     ),
                                   ],
                                   color: Colors.white,
-                                  border: Border(
+                                  border: const Border(
                                       right: BorderSide(
                                           color: Colors.black, width: 3))),
                             ),
@@ -222,8 +232,8 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                 onPressed: () {
                                   Navigator.pushNamed(context, '/order');
                                 },
-                                color: Color(0xffffcc33),
-                                child: Text(
+                                color: const Color(0xffffcc33),
+                                child: const Text(
                                   'Chọn gói',
                                   style: TextStyle(
                                       fontSize: 26,
