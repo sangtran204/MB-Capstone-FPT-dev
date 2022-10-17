@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
-import 'package:mobile_capstone_fpt/models/foods/foodDTO.dart';
+// import 'package:mobile_capstone_fpt/models/foods/foodDTO.dart';
 import 'package:mobile_capstone_fpt/widgets/button_field.dart';
 
 class SelectFoodScreen extends StatefulWidget {
@@ -11,12 +11,12 @@ class SelectFoodScreen extends StatefulWidget {
 }
 
 class _SelectFoodScreenState extends State<SelectFoodScreen> {
-  final foods = [
-    FoodDTO(name: "Cơm gà "),
-    FoodDTO(name: "Mì xào"),
-    FoodDTO(name: "Cháo dinh dưỡng"),
-    FoodDTO(name: "Một món gì đó mà cái tên nó dài hơn")
-  ];
+  // final foods = [
+  //   FoodDTO(name: "Cơm gà "),
+  //   FoodDTO(name: "Mì xào"),
+  //   FoodDTO(name: "Cháo dinh dưỡng"),
+  //   FoodDTO(name: "Một món gì đó mà cái tên nó dài hơn")
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -78,78 +78,78 @@ class _SelectFoodScreenState extends State<SelectFoodScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 190),
-            child: SingleChildScrollView(
-              // Viết cái gì đó vô đây
-              padding: EdgeInsets.only(left: 10, right: 10),
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ...foods.map(FoodItems).toList(),
-                ],
-              ),
-            ),
-          )
+          // Padding(
+          //   padding: EdgeInsets.only(top: 190),
+          //   child: SingleChildScrollView(
+          //     // Viết cái gì đó vô đây
+          //     padding: EdgeInsets.only(left: 10, right: 10),
+          //     child: Column(
+          //       // mainAxisAlignment: MainAxisAlignment.center,
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       children: [
+          //         ...foods.map(FoodItems).toList(),
+          //       ],
+          //     ),
+          //   ),
+          // )
         ]),
       ),
     ));
   }
 
-  Widget FoodItems(FoodDTO food) => Card(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-        ),
-        child: SizedBox(
-          height: 90,
-          width: 360,
-          // color: Colors.purple,
+  // Widget FoodItems(FoodDTO food) => Card(
+  //       shape: RoundedRectangleBorder(
+  //         side: BorderSide(
+  //           color: Theme.of(context).colorScheme.outline,
+  //         ),
+  //         borderRadius: const BorderRadius.all(Radius.circular(12)),
+  //       ),
+  //       child: SizedBox(
+  //         height: 90,
+  //         width: 360,
+  //         // color: Colors.purple,
 
-          child: Row(
-            children: [
-              Container(
-                height: 100,
-                width: 130,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        bottomLeft: Radius.circular(12)),
-                    image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/salad1.jpg',
-                        ),
-                        fit: BoxFit.cover)),
-              ),
-              Container(
-                  height: 100,
-                  width: 170,
-                  padding: EdgeInsets.only(top: 25),
-                  child: Text(
-                    food.name,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-                    textAlign: TextAlign.center,
-                  )),
-              Container(
-                height: 100,
-                width: 50,
-                child: Checkbox(
-                    checkColor: Colors.white,
-                    value: food.value,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        final newVal = !food.value;
-                        food.value = newVal;
-                      });
-                    }),
-              )
-            ],
-          ),
-        ),
-      );
+  //         child: Row(
+  //           children: [
+  //             Container(
+  //               height: 100,
+  //               width: 130,
+  //               decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.only(
+  //                       topLeft: Radius.circular(12),
+  //                       bottomLeft: Radius.circular(12)),
+  //                   image: DecorationImage(
+  //                       image: AssetImage(
+  //                         'assets/images/salad1.jpg',
+  //                       ),
+  //                       fit: BoxFit.cover)),
+  //             ),
+  //             Container(
+  //                 height: 100,
+  //                 width: 170,
+  //                 padding: EdgeInsets.only(top: 25),
+  //                 child: Text(
+  //                   food.name,
+  //                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+  //                   textAlign: TextAlign.center,
+  //                 )),
+  //             Container(
+  //               height: 100,
+  //               width: 50,
+  //               child: Checkbox(
+  //                   checkColor: Colors.white,
+  //                   value: food.value,
+  //                   onChanged: (bool? value) {
+  //                     setState(() {
+  //                       final newVal = !food.value;
+  //                       food.value = newVal;
+  //                     });
+  //                   }),
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //     );
 }
 
 Widget CategoryFoodItem() => Card(
