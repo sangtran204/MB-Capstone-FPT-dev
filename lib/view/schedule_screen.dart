@@ -137,13 +137,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 child: TextButton(
                   style: TextButton.styleFrom(primary: Colors.black),
                   onPressed: () {
-                    print(dateFilter);
-                    print(date);
-                    // print(newString);
+                    // print(dateFilter);
+                    // print(date);
+                    // // print(newString);
 
-                    date.forEach((item) {
-                      print(item);
-                    });
+                    // date.forEach((item) {
+                    //   print(item);
+                    // });
+                    Navigator.pushNamed(context, '/confirm');
                   },
                   child: Text(
                     'Xác Nhận',

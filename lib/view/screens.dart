@@ -10,3 +10,4 @@ export 'select_food_screen.dart';
 export 'verify_reset_screen.dart';
 export 'verify_screen_screen.dart';
 export 'schedule_screen.dart';
+export 'confirm_order.dart';

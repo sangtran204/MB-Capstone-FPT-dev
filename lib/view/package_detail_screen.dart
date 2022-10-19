@@ -139,7 +139,8 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                           const SizedBox(
                                             height: 5,
                                           ),
-                                          textInfo('Món ăn: ${packageProvider.packageDetail.result!.totalFood}'),
+                                          textInfo(
+                                              'Món ăn: ${packageProvider.packageDetail.result!.totalFood}'),
                                           SizedBox(
                                             height: 5,
                                           ),
@@ -198,7 +199,8 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                               height: 60,
                               // color: Colors.white,
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 25, top: 15),
+                                padding:
+                                    const EdgeInsets.only(left: 25, top: 15),
                                 child: Text(
                                   '${packageProvider.packageDetail.result!.price}' +
                                       ' Đ',
