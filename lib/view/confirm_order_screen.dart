@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/constants.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/icons/app_icons_icons.dart';
@@ -329,7 +330,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
               child: TextButton(
                 style: TextButton.styleFrom(primary: Colors.black),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/confirm');
+                  // Navigator.pushNamed(context, '/confirm');
                 },
                 child: Text(
                   'Thanh Toán',

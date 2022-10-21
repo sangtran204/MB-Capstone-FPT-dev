@@ -4,4 +4,5 @@ import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.
 abstract class PackageRepo {
   Future<PackageRes> getActivePackage(String url, String token);
   Future<PackageDetailRes> getPackageDetail(String url, String token);
+  Future<PackageRes> getPackageByCategory(String url, String token);
 }
