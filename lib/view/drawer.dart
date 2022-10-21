@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:mobile_capstone_fpt/constants/app_color.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -28,6 +29,18 @@ class NavigationDrawer extends StatelessWidget {
         child: Wrap(
           runSpacing: 16,
           children: [
+            InkWell(
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: kBackgroundColor),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, '/profile');
+              },
+            ),
             ListTile(
               leading: const Icon(Icons.home),
               title: Text('Trang chủ'),
