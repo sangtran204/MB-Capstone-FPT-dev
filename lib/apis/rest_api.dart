@@ -7,5 +7,7 @@ class RestApi {
   static const String getCategoryPackage = '$serverPath/package-categories';
   static const String pushNotify = '$serverPath/accounts/deviceToken';
   static const String profileMyPath = '$serverPath/profiles/my';
+  static const String getPackageItemById = '$serverPath/package-item';
+  static const String getFoodGroupDetail = '$serverPath/food-groups/find';
   //something
 }

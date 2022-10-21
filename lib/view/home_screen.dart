@@ -1,13 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/models/entity/package.dart';
 import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
-import 'package:mobile_capstone_fpt/repositories/response/package_categories_res_model.dart';
-import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.dart';
 import 'package:mobile_capstone_fpt/view/drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -35,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
       //-----AppBar----
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Color(0xffffcc33),
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: const Color(0xffffcc33),
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -45,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.black,
               size: 24,
             ),
-            SizedBox(width: 20),
+             const SizedBox(width: 20),
             DropdownButton<String>(
               value: _value,
               icon: const Icon(
@@ -98,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: Column(
@@ -145,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Container(
                                         width: 90,
                                         // height: 120,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           boxShadow: null,
                                         ),
                                         child: CategoryItem(
@@ -163,8 +159,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       // color: Colors.green,
                       width: size.width,
-                      margin: EdgeInsets.only(top: 210),
-                      decoration: BoxDecoration(
+                      margin: const EdgeInsets.only(top: 210),
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(30),

@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/repositories/response/login_respone_model.dart';
 import 'package:mobile_capstone_fpt/repositories/request/login_request_model.dart';
-import 'package:mobile_capstone_fpt/repositories/auth_repo.dart';
+import 'package:mobile_capstone_fpt/repositories/interface/auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepo {
   // AuthRepoImpl(String signInPath, LoginRequestModel loginRequestModel);
@@ -16,7 +16,6 @@ class AuthRepoImpl implements AuthRepo {
     try {
       Response response = await Dio().post(url, data: req.toJson());
       result = loginResponeModelFromJson(jsonEncode(response.data));
-      print(response);
     } on DioError catch (e) {
       log(e.toString());
       if (e.response?.data["message"] == 'Account invalid') {

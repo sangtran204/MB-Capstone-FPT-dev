@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/repositories/package_category_repo.dart';
+import 'package:mobile_capstone_fpt/repositories/interface/package_category_repo.dart';
 import 'package:mobile_capstone_fpt/repositories/response/package_categories_res_model.dart';
 
 class PackageCategoryRepoImpl implements PackageCategoryRepo {
