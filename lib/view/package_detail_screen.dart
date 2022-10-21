@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/components/custom_button.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ class PackageDetailScreen extends StatefulWidget {
 class _PackageDetailScreenState extends State<PackageDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -23,6 +25,50 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
           onPressed: () {
             Navigator.pushNamed(context, '/home');
           },
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(color: kwhiteColor, boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF000000).withOpacity(0.1),
+            blurRadius: 2,
+            offset: const Offset(0, -2),
+          )
+        ]),
+        child: Row(
+          children: [
+            Expanded(
+                child: CustomButton(
+              child: Text(
+                '${packageProvider.packageDetail.result!.price} VNĐ',
+                style: textTheme.headline6!.copyWith(
+                  color: kblackColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              borderColor: kblackColor,
+              onTap: () {
+                // handlePopScreen(context);
+              },
+            )),
+            Expanded(
+              child: CustomButton(
+                child: Text(
+                  "Chọn gói",
+                  style: textTheme.headline6!.copyWith(
+                    color: kblackColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  packageProvider.getPackageDetail(
+                      context, packageProvider.packageDetail.result!.id);
+                  Navigator.pushNamed(context, '/order');
+                },
+                backGroundColor: kBackgroundColor,
+              ),
+            )
+          ],
         ),
       ),
       body: packageProvider.packageDetail.result == null
@@ -186,80 +232,6 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                           ],
                         )),
                       )),
-                  Positioned(
-                      top: size.height * 0.8,
-                      bottom: 0,
-                      child: Container(
-                        height: 60,
-                        width: size.width,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: size.width * 0.5,
-                              height: 60,
-                              // color: Colors.white,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 25, top: 15),
-                                child: Text(
-                                  '${packageProvider.packageDetail.result!.price}' +
-                                      ' Đ',
-                                  style: const TextStyle(
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.w500),
-                                  // textAlign: TextAlignVertical.center,
-                                ),
-                              ),
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.shade200,
-                                      offset: const Offset(
-                                        0.0,
-                                        5.0,
-                                      ),
-                                      blurRadius: 10.0,
-                                      spreadRadius: 2.0,
-                                    ),
-                                  ],
-                                  color: Colors.white,
-                                  border: const Border(
-                                      right: BorderSide(
-                                          color: Colors.black, width: 3))),
-                            ),
-                            Container(
-                              width: size.width * 0.5,
-                              height: 60,
-                              child: RaisedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/order');
-                                },
-                                color: const Color(0xffffcc33),
-                                child: const Text(
-                                  'Chọn gói',
-                                  style: TextStyle(
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.shade200,
-                                    offset: const Offset(
-                                      0.0,
-                                      5.0,
-                                    ),
-                                    blurRadius: 10.0,
-                                    spreadRadius: 2.0,
-                                  ),
-                                ],
-                                color: Color(0xffffcc33),
-                              ),
-                            )
-                          ],
-                        ),
-                      ))
                 ],
               ),
             ),

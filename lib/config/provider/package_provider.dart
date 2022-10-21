@@ -30,7 +30,7 @@ class PackageProvider with ChangeNotifier {
         .then((value) {
       packageDetail = value;
       notifyListeners();
-      Navigator.pushReplacementNamed(context, '/packageDetail');
+      // Navigator.pushReplacementNamed(context, '/packageDetail');
     });
   }
 

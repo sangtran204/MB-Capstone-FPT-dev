@@ -1,8 +1,9 @@
 import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
+import 'package:mobile_capstone_fpt/models/entity/package_item.dart';
 import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.dart';
 
-class Package {
-  Package({
+class PackageDetail {
+  PackageDetail({
     required this.id,
     required this.createdAt,
     required this.updatedAt,
@@ -19,6 +20,7 @@ class Package {
     required this.status,
     this.timeFrame,
     this.packageCategory,
+    required this.packageItem,
   });
 
   String id;
@@ -37,8 +39,9 @@ class Package {
   String status;
   TimeFrame? timeFrame;
   PackageCategory? packageCategory;
+  List<PackageItem> packageItem;
 
-  factory Package.fromJson(Map<String, dynamic> json) => Package(
+  factory PackageDetail.fromJson(Map<String, dynamic> json) => PackageDetail(
         id: json["id"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
@@ -59,6 +62,8 @@ class Package {
         packageCategory: json["packageCategory"] != null
             ? PackageCategory.fromJson(json["packageCategory"])
             : json["packageCategory"],
+        packageItem: List<PackageItem>.from(
+            json["packageItem"].map((x) => PackageItem.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -77,8 +82,8 @@ class Package {
         "totalFood": totalFood,
         "totalMeal": totalMeal,
         "totalStation": totalStation,
-        "status": status,
         "timeFrame": timeFrame!.toJson(),
         "packageCategory": packageCategory!.toJson(),
+        "packageItem": List<dynamic>.from(packageItem.map((x) => x.toJson())),
       };
 }
