@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/models/entity/package.dart';
 import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
-import 'package:mobile_capstone_fpt/repositories/response/package_categories_res_model.dart';
 import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.dart';
 import 'package:mobile_capstone_fpt/view/drawer.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _value = 'Đại Học FPT';
+  // List<Package>? listPackage = [];
   @override
   void initState() {
     super.initState();
@@ -30,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
     PackageCategoryProvider packageCategoryProvider =
         Provider.of<PackageCategoryProvider>(context);
+    // listPackage = packageProvider.packageActive.result?.cast();
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
@@ -73,14 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 //---------------
       endDrawer: const NavigationDrawer(),
-      body: packageProvider.packageActive.result == null ||
+      body: packageProvider.listPackge == null ||
               packageCategoryProvider.packageCategory.result == null
           ? const Center(child: CircularProgressIndicator())
           : Container(
               height: size.height,
               width: size.width,
               // color: Colors.white70,
-              color: kBackgroundColor,
+              color: Colors.white,
 
               child: SingleChildScrollView(
                 child: Stack(
@@ -88,13 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Container(
                       width: size.width,
-                      height: 200,
-                      decoration: const BoxDecoration(
-                          // color: Colors.white,
-                          // borderRadius: BorderRadius.only(
-                          //     bottomLeft: Radius.circular(30),
-                          //     bottomRight: Radius.circular(30))
-                          ),
+                      height: size.height * 0.5,
+                      color: kBackgroundColor,
+                      // decoration: const BoxDecoration(
+                      //     // color: Colors.white,
+                      //     // borderRadius: BorderRadius.only(
+                      //     //     bottomLeft: Radius.circular(30),
+                      //     //     bottomRight: Radius.circular(30))
+                      //     ),
                       child: Column(
                         children: [
                           Container(
@@ -122,15 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                          // for (int j = 0;
-                          //     j <
-                          //         packageCategoryProvider
-                          //             .packageCategory.result!.length;
-                          //     j++)
                           Container(
                             height: 112,
                             child: ListView.builder(
-                              // physics: ClampingScrollPhysics(),
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
                               itemCount: 1,
@@ -148,9 +142,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                         decoration: BoxDecoration(
                                           boxShadow: null,
                                         ),
-                                        child: CategoryItem(
-                                            packageCategoryProvider
-                                                .packageCategory.result![j]),
+                                        child: GestureDetector(
+                                          onTap: () async {
+                                            packageProvider
+                                                .getPackageByCategory(
+                                                    context,
+                                                    packageCategoryProvider
+                                                        .packageCategory
+                                                        .result![j]
+                                                        .id);
+                                            setState(() {
+                                              // packageProvider.listPackge =
+                                              //     packageCategoryProvider
+                                              //         .packageCategory.result;
+                                            });
+                                          },
+                                          child: CategoryItem(
+                                              packageCategoryProvider
+                                                  .packageCategory.result![j]),
+                                        ),
                                       ),
                                   ],
                                 );
@@ -163,6 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       // color: Colors.green,
                       width: size.width,
+                      // height: size.height,
                       margin: EdgeInsets.only(top: 210),
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -180,21 +191,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 20,
                           ),
                           for (int i = 0;
-                              i < packageProvider.packageActive.result!.length;
+                              i < packageProvider.listPackge!.length;
                               i++)
                             GestureDetector(
                               onTap: () {
                                 packageProvider.getPackageDetail(
-                                    context,
-                                    packageProvider
-                                        .packageActive.result![i].id);
+                                    context, packageProvider.listPackge![i].id);
                                 Navigator.pushReplacementNamed(
                                     context, '/packageDetail');
                               },
                               child: Column(
                                 children: [
-                                  PackageItem(
-                                      packageProvider.packageActive.result![i]),
+                                  PackageItem(packageProvider.listPackge![i]),
                                   SizedBox(
                                     height: 15,
                                   )
@@ -217,6 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
         borderRadius: BorderRadius.circular(30),
       ),
       // elevation: 20,
+
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -225,14 +234,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             height: 65,
             width: 70,
-            // child: Image.asset(
-            //   'assets/images/tapluyencate.png',
-            //   fit: BoxFit.fill,
-            // ),
             child: Image.network(cate.image),
           ),
           Text(
-            // 'Category hihi',
             cate.name,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
