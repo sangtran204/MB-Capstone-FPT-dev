@@ -6,6 +6,7 @@ class Routes {
     // '/': (context) => ConfirmOrderScreen(),
     
     '/': (context) => LoginScreen(),
+    '/history': (context) => HistoryScreen(),
     '/profile': (context) => ProfileScreen(),
     '/home': (context) => HomeScreen(),
     '/order': (context) => ScheduleScreen(),

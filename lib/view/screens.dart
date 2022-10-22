@@ -12,3 +12,4 @@ export 'verify_screen_screen.dart';
 export 'schedule_screen.dart';
 export 'confirm_order_screen.dart';
 export 'profile_screen.dart';
+export 'history_screen.dart';
