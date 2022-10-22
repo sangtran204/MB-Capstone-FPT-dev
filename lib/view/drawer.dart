@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -44,12 +42,16 @@ class NavigationDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.home),
               title: Text('Trang chủ'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/home');
+              },
             ),
             ListTile(
               leading: const Icon(Icons.history),
               title: Text('Lịch sử'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/history');
+              },
             ),
             ListTile(
               leading: const Icon(Icons.notifications),

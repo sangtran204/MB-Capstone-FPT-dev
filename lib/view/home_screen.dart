@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.black,
               size: 24,
             ),
-             const SizedBox(width: 20),
+            const SizedBox(width: 20),
             DropdownButton<String>(
               value: _value,
               icon: const Icon(

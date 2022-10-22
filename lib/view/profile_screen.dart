@@ -27,6 +27,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
+      appBar: AppBar(
+        backgroundColor: kBackgroundColor,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Thông tin',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white),
+            ),
+            GestureDetector(
+              child: Icon(
+                Icons.check,
+                size: 30,
+              ),
+              onTap: () {
+                print('Save infomation');
+              },
+            ),
+          ],
+        ),
+        centerTitle: true,
+      ),
       body: Container(
         height: size.height,
         width: size.width,
@@ -35,6 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             // Positioned(
             Container(
+              padding: EdgeInsets.only(top: 5, left: size.width - 50),
               height: 150,
               width: size.width,
               color: kBackgroundColor,
@@ -82,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             Positioned(
-                top: size.height - 100,
+                top: size.height - 150,
                 child: Container(
                   height: 100,
                   width: size.width,
