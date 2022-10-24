@@ -213,7 +213,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                   width: 1,
                                                   color: Colors.grey))),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                        padding: const EdgeInsets.only(top: 8),
                                         child: Column(
                                           children: [
                                             const Align(
@@ -226,65 +226,110 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                               ),
                                               alignment: Alignment.topCenter,
                                             ),
-                                            SizedBox(
-                                              height: 110,
-                                              child: Row(
+                                            Container(
+                                              child: Column(
+                                                // height: 120,
+                                                // width: 150,
+                                                // color: Colors.amberAccent,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.end,
                                                 children: [
-                                                  // Align(
-                                                  //   alignment: Alignment
-                                                  //       .bottomRight,
-                                                  //   child: Container(
-                                                  //     height: 30,
-                                                  //     width: 30,
-                                                  //     color: Colors.amber,
-                                                  //     child: IconButton(
-                                                  //       onPressed: () {
-                                                  //         print('edit');
-                                                  //       },
-                                                  //       icon: Icon(Icons
-                                                  //           .edit_note_outlined),
-                                                  //       color: Colors.black,
-                                                  //       iconSize: 15,
-                                                  //     ),
-                                                  //   ),
-                                                  // ),
-                                                  // SizedBox(
-                                                  //   width: 8,
-                                                  // ),
-                                                  // for (int itemID = 0;
-                                                  //     itemID <
-                                                  //         listIdFG.length;
-                                                  //     itemID++)
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.bottomRight,
-                                                    child: Container(
-                                                      height: 30,
-                                                      width: 30,
-                                                      color: Colors.amber,
-                                                      child: IconButton(
-                                                        onPressed: () {
-                                                          foodGroupProvider
-                                                              .getFoodGroupDetail(
-                                                                  context,
-                                                                  listIdFG[
-                                                                      item]);
-                                                          Navigator
-                                                              .pushReplacementNamed(
-                                                                  context,
-                                                                  '/selectFood');
-                                                        },
-                                                        icon: Icon(Icons.add),
-                                                        color: Colors.black,
-                                                        iconSize: 15,
-                                                      ),
+                                                  Container(
+                                                      height: 90,
+                                                      padding: EdgeInsets.only(
+                                                          right: 8, left: 8),
+                                                      child: Column(
+                                                        children: [
+                                                          SizedBox(
+                                                            height: 5,
+                                                          ),
+                                                          Container(
+                                                              child: Image(
+                                                            fit: BoxFit.cover,
+                                                            height: 45,
+                                                            width: 45,
+                                                            image: AssetImage(
+                                                                'assets/images/salad1.jpg'),
+                                                          )),
+                                                          Text(
+                                                            'Tên món này dài lắm đó nha ',
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.grey,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      )),
+                                                  Container(
+                                                    // height: 45,
+                                                    // width: 100,
+                                                    padding: EdgeInsets.only(
+                                                        left: 8, right: 8),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        Align(
+                                                          alignment: Alignment
+                                                              .bottomRight,
+                                                          child: Container(
+                                                            height: 30,
+                                                            width: 30,
+                                                            color: Colors.amber,
+                                                            child: IconButton(
+                                                              onPressed: () {
+                                                                print('edit');
+                                                              },
+                                                              icon: Icon(Icons
+                                                                  .edit_note_outlined),
+                                                              color:
+                                                                  Colors.black,
+                                                              iconSize: 15,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Align(
+                                                          alignment: Alignment
+                                                              .bottomRight,
+                                                          child: Container(
+                                                            height: 30,
+                                                            width: 30,
+                                                            color: Colors.amber,
+                                                            child: IconButton(
+                                                              onPressed: () {
+                                                                foodGroupProvider
+                                                                    .getFoodGroupDetail(
+                                                                        context,
+                                                                        listIdFG[
+                                                                            item]);
+                                                                Navigator
+                                                                    .pushReplacementNamed(
+                                                                        context,
+                                                                        '/selectFood');
+                                                              },
+                                                              icon: Icon(
+                                                                  Icons.add),
+                                                              color:
+                                                                  Colors.black,
+                                                              iconSize: 15,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ),
+                                                  )
                                                 ],
                                               ),
-                                            ),
+                                            )
                                           ],
                                         ),
                                       ),

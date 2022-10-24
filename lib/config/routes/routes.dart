@@ -4,7 +4,7 @@ import 'package:mobile_capstone_fpt/view/screens.dart';
 class Routes {
   static final Map<String, Widget Function(BuildContext)> routes = {
     // '/': (context) => ConfirmOrderScreen(),
-    
+    // '/': (context) => ScheduleScreen(),
     '/': (context) => LoginScreen(),
     '/history': (context) => HistoryScreen(),
     '/profile': (context) => ProfileScreen(),
