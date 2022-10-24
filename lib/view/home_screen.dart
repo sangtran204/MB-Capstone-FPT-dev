@@ -190,18 +190,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 20,
                           ),
                           for (int i = 0;
-                              i < packageProvider.listPackge!.length;
+                              i < packageProvider.listPackge.length;
                               i++)
                             GestureDetector(
                               onTap: () {
                                 packageProvider.getPackageDetail(
-                                    context, packageProvider.listPackge![i].id);
+                                    context, packageProvider.listPackge[i].id);
                                 Navigator.pushReplacementNamed(
                                     context, '/packageDetail');
                               },
                               child: Column(
                                 children: [
-                                  PackageItem(packageProvider.listPackge![i]),
+                                  PackageItem(packageProvider.listPackge[i]),
                                   SizedBox(
                                     height: 15,
                                   )
