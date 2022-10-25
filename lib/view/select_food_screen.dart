@@ -101,7 +101,12 @@ class _SelectFoodScreenState extends State<SelectFoodScreen> {
                       children: [
                         for (int item = 0; item < listFood.length; item++)
                           // ...foods.map(FoodItems).toList(),
-                          FoodItems(listFood[item])
+                          GestureDetector(
+                            child: FoodItems(listFood[item]),
+                            onTap: () {
+                              print('Chọn MinT đi');
+                            },
+                          )
                       ],
                     ),
                   ),
