@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 
 class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
+  NavigationDrawer({Key? key, required this.name, required this.avatar})
+      : super(key: key);
+  String name;
+  String avatar;
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -28,12 +31,33 @@ class NavigationDrawer extends StatelessWidget {
           runSpacing: 16,
           children: [
             InkWell(
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: kBackgroundColor),
+              child: Row(
+                children: [
+                  Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        // color: kBackgroundColor
+                        image: DecorationImage(
+                          image: NetworkImage(avatar),
+                          fit: BoxFit.fill,
+                        )),
+                    // child: Image(
+                    //   image: AssetImage('assets/images/salad1.jpg'),
+                    //   height: 50,
+                    //   width: 50,
+                    //   fit: BoxFit.fill,
+                    // ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    name,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  )
+                ],
               ),
               onTap: () {
                 Navigator.pushNamed(context, '/profile');

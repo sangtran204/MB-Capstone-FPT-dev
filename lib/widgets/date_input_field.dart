@@ -1,38 +1,9 @@
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class DateInputField extends StatefulWidget {
-  const DateInputField({Key? key}) : super(key: key);
-
-  @override
-  State<DateInputField> createState() => _DateInputFieldState();
-}
-
-class _DateInputFieldState extends State<DateInputField> {
-  TextEditingController? _controller1;
-  String _valueChanged1 = '';
-  String _valueToValidate1 = '';
-  String _valueSaved1 = '';
-  String _initialValue = '';
-
-  @override
-  void initState() {
-    // Intl.defaultLocale = 'pt_BR';
-    _initialValue = '2 - 01 - 2000';
-    _controller1 = TextEditingController(text: DateTime.now().toString());
-  }
-
-  Future<void> _getValue() async {
-    await Future.delayed(const Duration(seconds: 3), () {
-      setState(() {
-        _initialValue = '2000-10-22';
-        _controller1!.text = '2000-09-20';
-      });
-    });
-  }
+class DateInputField extends StatelessWidget {
+  DateInputField({Key? key, required this.date}) : super(key: key);
+  String? date;
 
   @override
   Widget build(BuildContext context) {
@@ -45,31 +16,23 @@ class _DateInputFieldState extends State<DateInputField> {
         border: Border.all(color: Colors.black.withOpacity(0.13)),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(13.0),
+        padding: const EdgeInsets.only(top: 5, left: 15),
         child: DateTimePicker(
           type: DateTimePickerType.date,
-          dateMask: 'dd - MM - yyyy',
-          controller: _controller1,
-          // initialValue: _initialValue,
+          dateMask: 'dd-MM-yyyy',
           firstDate: DateTime(1980),
           lastDate: DateTime(2080),
-          icon: Icon(Icons.event),
-
-          // dateLabelText: 'Date',
-          //use24HourFormat: false,
-          // locale: const Locale('pt', 'BR'),
+          decoration: InputDecoration(
+            hintText: date,
+            border: InputBorder.none,
+            icon: Icon(Icons.event),
+          ),
           selectableDayPredicate: (date) {
             if (date.weekday == 6 || date.weekday == 7) {
               return false;
             }
             return true;
           },
-          onChanged: (val) => setState(() => _valueChanged1 = val),
-          validator: (val) {
-            setState(() => _valueToValidate1 = val ?? '');
-            return null;
-          },
-          onSaved: (val) => setState(() => _valueSaved1 = val ?? ''),
         ),
       ),
     );

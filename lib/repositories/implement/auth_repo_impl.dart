@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
@@ -23,5 +24,12 @@ class AuthRepoImpl implements AuthRepo {
       }
     }
     return result;
+  }
+
+  @override
+  Future logout(String url, String token) async {
+    await Dio().post(url,
+        options: Options(
+            headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
   }
 }

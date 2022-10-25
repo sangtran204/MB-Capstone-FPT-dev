@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
+import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/models/request/push_notify_req.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/push_notify.impl.dart';
@@ -22,6 +23,8 @@ class LoginProvider with ChangeNotifier {
         Provider.of<PackageProvider>(context, listen: false);
     PackageCategoryProvider packageCategoryProvider =
         Provider.of<PackageCategoryProvider>(context, listen: false);
+    ProfileProvider profileProvider =
+        Provider.of<ProfileProvider>(context, listen: false);
     log(_phone + ' : ' + _password);
     AuthRepoImpl()
         .postLogIn(RestApi.signInPath,
@@ -40,7 +43,8 @@ class LoginProvider with ChangeNotifier {
       //     .getUsersMe(UrlApi.usersMePath, value.result!.accessToken);
       packageProvider.getPackageCustomer(context);
       packageCategoryProvider.getPackageCategory(context);
-      
+      profileProvider.getProfile(context);
+
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const ButtonBar();
       }));
@@ -50,5 +54,11 @@ class LoginProvider with ChangeNotifier {
       log(error.toString());
       notifyListeners();
     });
+  }
+
+  void logout(BuildContext context) async {
+    String accessToken = await secureStorage.readSecureData("token");
+    AuthRepoImpl().logout(RestApi.logout, accessToken);
+    notifyListeners();
   }
 }

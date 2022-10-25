@@ -1,16 +1,15 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 typedef StringVoidFunction = void Function(String);
 
 class PhoneInputField extends StatelessWidget {
-  PhoneInputField({Key? key, required this.input}) : super(key: key);
+  PhoneInputField({Key? key, required this.input, required this.hintText})
+      : super(key: key);
   StringVoidFunction input;
+  String hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,7 @@ class PhoneInputField extends StatelessWidget {
             inputDecoration: InputDecoration(
               contentPadding: EdgeInsets.only(bottom: 15, left: 0),
               border: InputBorder.none,
-              hintText: 'Số điện thoại',
+              hintText: hintText,
               hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),
               // errorText: 'Số không hợp lệ!'
             ),
