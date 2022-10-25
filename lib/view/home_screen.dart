@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
+import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/models/entity/package.dart';
 import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
@@ -27,7 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
     PackageCategoryProvider packageCategoryProvider =
         Provider.of<PackageCategoryProvider>(context);
-    // listPackage = packageProvider.packageActive.result?.cast();
+    ProfileProvider profileProvider = Provider.of<ProfileProvider>(context);
+
+    // String name = profileProvider.profile.result!.fullName;
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
@@ -70,9 +74,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
 //---------------
-      endDrawer: const NavigationDrawer(),
+      endDrawer: NavigationDrawer(
+        name: profileProvider.info.result!.profile.fullName,
+        avatar: profileProvider.info.result!.profile.avatar,
+      ),
       body: packageProvider.listPackge == null ||
-              packageCategoryProvider.packageCategory.result == null
+              packageCategoryProvider.packageCategory.result == null ||
+              profileProvider.info.result == null
           ? const Center(child: CircularProgressIndicator())
           : Container(
               height: size.height,
@@ -88,12 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: size.width,
                       height: size.height * 0.5,
                       color: kBackgroundColor,
-                      // decoration: const BoxDecoration(
-                      //     // color: Colors.white,
-                      //     // borderRadius: BorderRadius.only(
-                      //     //     bottomLeft: Radius.circular(30),
-                      //     //     bottomRight: Radius.circular(30))
-                      //     ),
                       child: Column(
                         children: [
                           Container(
@@ -101,12 +103,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: Column(
-                                children: const <Widget>[
+                                children: [
                                   Text(
-                                    'Chào, MinhT',
+                                    'Chào, ' +
+                                        profileProvider
+                                            .info.result!.profile.fullName,
                                     style: TextStyle(
-                                      fontSize: 30,
-                                    ),
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(
                                     height: 10,

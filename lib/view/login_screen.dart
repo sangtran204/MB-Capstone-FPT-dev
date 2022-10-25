@@ -1,15 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mobile_capstone_fpt/components/components.dart';
 import 'package:mobile_capstone_fpt/config/provider/login_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
-import 'package:mobile_capstone_fpt/repositories/request/login_request_model.dart';
 import 'package:mobile_capstone_fpt/widgets/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:snippet_coder_utils/FormHelper.dart';
-import 'package:snippet_coder_utils/ProgressHUD.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -34,15 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void buttomFuction() {
     print('+++++++');
   }
-
-  // String checkPhone(String phoneNumber) {
-  //   String checkPhone = '';
-  //   if (phoneNumber.startsWith('+84')) {
-  //     checkPhone = phoneNumber.replaceAll('+84', '');
-  //   }
-  //   return checkPhone;
-
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +76,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            PhoneInputField(input: input),
+                            PhoneInputField(
+                              input: input,
+                              hintText: 'Số điện thoại',
+                            ),
                             const SizedBox(
                               height: 15,
                             ),

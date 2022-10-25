@@ -3,4 +3,5 @@ import 'package:mobile_capstone_fpt/repositories/response/login_respone_model.da
 
 abstract class AuthRepo {
   Future<LoginResponeModel> postLogIn(String url, LoginRequestModel req);
+  Future logout(String url, String token);
 }
