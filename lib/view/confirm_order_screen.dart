@@ -330,7 +330,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
               child: TextButton(
                 style: TextButton.styleFrom(primary: Colors.black),
                 onPressed: () {
-                  // Navigator.pushNamed(context, '/confirm');
+                  Navigator.pushNamed(context, '/history');
                 },
                 child: Text(
                   'Thanh Toán',

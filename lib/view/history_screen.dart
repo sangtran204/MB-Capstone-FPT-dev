@@ -18,6 +18,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
       backgroundColor: kPrimaryLightColor,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/home');
+          },
+        ),
         title: Text(
           'Lịch sử',
           style: TextStyle(
