@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:mobile_capstone_fpt/components/components.dart';
 import 'package:mobile_capstone_fpt/config/provider/login_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
+import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/constants.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/widgets/date_input_field.dart';
@@ -11,16 +13,30 @@ import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
-
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  void input(String a) {
-    String phoneNumber = "";
+  String fullName = "";
+  String email = "";
+  DateTime? dob;
+  void inputFullName(String a) {
     setState(() {
-      phoneNumber = a;
+      fullName = a;
+    });
+  }
+
+  void inputEmail(String b) {
+    setState(() {
+      email = b;
+    });
+  }
+
+  void inputDob(String c) {
+    setState(() {
+      DateTime date = DateTime.parse(c);
+      dob = date;
     });
   }
 
@@ -49,7 +65,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 size: 30,
               ),
               onTap: () {
-                print('Save infomation');
+                if (fullName.isEmpty && dob == null && email.isEmpty) {
+                  showToastFail('Không có thông tin mới');
+                } else {
+                  if (fullName.isEmpty) {
+                    fullName = profileProvider.info.result!.profile.fullName;
+                  }
+                  if (dob == null) {
+                    dob = DateTime.parse(
+                        profileProvider.info.result!.profile.dob);
+                  }
+                  if (email.isEmpty) {
+                    email = profileProvider.info.result!.profile.email;
+                  }
+                  profileProvider.updateProfile(context, fullName, dob, email);
+                  profileProvider.getProfile(context);
+                }
               },
             ),
           ],
@@ -98,6 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 15,
                       ),
                       TextInput(
+                          textValue: inputFullName,
                           hintText:
                               profileProvider.info.result!.profile.fullName,
                           textCapitalization: TextCapitalization.words),
@@ -120,6 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 15,
                       ),
                       DateInputField(
+                        input: inputDob,
                         date: profileProvider.info.result!.profile.dob,
                       ),
                       // DateInputField(),
@@ -127,19 +160,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 15,
                       ),
                       TextInput(
+                          textValue: inputEmail,
                           hintText: profileProvider.info.result!.profile.email,
                           textCapitalization: TextCapitalization.words),
+                      SizedBox(
+                        height: 35,
+                      ),
+                      // UnderPart(title: 'Đổi mật khẩu', navigatorText: navigatorText, onTap: onTap)
                     ],
                   ),
                 ),
               ),
               Positioned(
-                  top: size.height - 150,
+                  top: size.height - 200,
                   child: Container(
                     height: 100,
                     width: size.width,
                     child: Column(
                       children: [
+                        UnderPart(
+                            title: '',
+                            navigatorText: 'Đổi mật khẩu',
+                            onTap: () {
+                              Navigator.pushNamed(context, '/changePassword');
+                            }),
+                        SizedBox(
+                          height: 20,
+                        ),
                         InkWell(
                           child: Text(
                             'Đăng Xuất',
@@ -201,7 +248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             InternationalPhoneNumberInput(
               onInputChanged: (PhoneNumber number) {
-                input(number.phoneNumber!);
+                // input(number.phoneNumber!);
               },
               countries: ['VN'],
               initialValue: PhoneNumber(isoCode: 'VN', dialCode: ''),

@@ -48,7 +48,7 @@ class VerifyResetScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  PinPut(),
+                  // PinPut(),
                   SizedBox(
                     height: 20,
                   ),

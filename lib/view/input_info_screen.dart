@@ -41,16 +41,17 @@ class InputInfoScreen extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
-                    TextInput(
-                        hintText: 'Họ và Tên',
-                        textCapitalization: TextCapitalization.words),
+                    // TextInput(
+
+                    //     hintText: 'Họ và Tên',
+                    //     textCapitalization: TextCapitalization.words),
                     SizedBox(
                       height: 20,
                     ),
-                    TextInput(
-                      hintText: 'Địa chỉ',
-                      textCapitalization: TextCapitalization.sentences,
-                    ),
+                    // TextInput(
+                    //   hintText: 'Địa chỉ',
+                    //   textCapitalization: TextCapitalization.sentences,
+                    // ),
                   ],
                 ),
               ),

@@ -6,8 +6,21 @@ import 'package:mobile_capstone_fpt/widgets/pin_input_field.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 import 'package:pinput/pinput.dart';
 
-class VerifyScreen extends StatelessWidget {
+class VerifyScreen extends StatefulWidget {
   const VerifyScreen({Key? key}) : super(key: key);
+
+  @override
+  State<VerifyScreen> createState() => _VerifyScreenState();
+}
+
+class _VerifyScreenState extends State<VerifyScreen> {
+  String pin = "";
+
+  void inputPin(String p) {
+    setState(() {
+      pin = p;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +64,7 @@ class VerifyScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  PinPut(),
+                  PinPut(input: inputPin,),
                   SizedBox(
                     height: 20,
                   ),
@@ -59,7 +72,7 @@ class VerifyScreen extends StatelessWidget {
                       title: 'Chưa nhận được OTP?   ',
                       navigatorText: 'Gửi lại',
                       onTap: () {
-                        print('hi OTP');
+                        print(pin);
                       })
                 ],
               ),
@@ -68,7 +81,8 @@ class VerifyScreen extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 20),
               child: Column(
                 children: [
-                  // ButtonField(path: '/inputPassword', text: 'Xác nhận')
+                  // mở comment button ở đây rồi để function vô
+                  // ButtonField(voidCallback: voidCallback, text: 'Xác nhận')
                 ],
               ),
             )
