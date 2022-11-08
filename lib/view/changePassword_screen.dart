@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
+import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/widgets/button_field.dart';
 import 'package:mobile_capstone_fpt/widgets/password_input_field.dart';
+import 'package:provider/provider.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);
@@ -35,6 +38,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ProfileProvider profileProvider = Provider.of<ProfileProvider>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -78,6 +82,19 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               PasswordInputField(
                   hintText: 'Nhập lại mật khẩu',
                   password: inputConfirmPassword),
+              SizedBox(
+                height: 30,
+              ),
+              ButtonField(
+                voidCallback: () {
+                  if (newPassword != confirmPassword)
+                    showToastFail('Không khớp mật khẩu');
+                  if (newPassword == confirmPassword)
+                    profileProvider.changePassword(
+                        context, oldPassword, newPassword);
+                },
+                text: 'Đổi mật khẩu',
+              )
             ],
           ),
         )),

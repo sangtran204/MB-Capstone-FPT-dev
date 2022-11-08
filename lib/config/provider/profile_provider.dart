@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/profile_repo_impl.dart';
+import 'package:mobile_capstone_fpt/repositories/request/changePass_request.dart';
 import 'package:mobile_capstone_fpt/repositories/request/update_profile_request.dart';
 import 'package:mobile_capstone_fpt/repositories/response/message_respone.dart';
 import 'package:mobile_capstone_fpt/repositories/response/profile_respone.dart';
@@ -33,6 +34,21 @@ class ProfileProvider with ChangeNotifier {
             accessToken)
         .then((value) {
       msg = value;
+    });
+    notifyListeners();
+  }
+
+  void changePassword(BuildContext context, _oldPassword, _newPassword) async {
+    String accessToken = await secureStorage.readSecureData('token');
+    ProfileRepoImpl()
+        .changePassword(
+            RestApi.changePassword,
+            ChangePasswordReqModel(
+                oldPassword: _oldPassword, newPassword: _newPassword),
+            accessToken)
+        .then((value) {
+      msg = value;
+      Navigator.pushReplacementNamed(context, '/profile');
     });
     notifyListeners();
   }

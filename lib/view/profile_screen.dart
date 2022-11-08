@@ -7,7 +7,6 @@ import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/constants.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/widgets/date_input_field.dart';
-import 'package:mobile_capstone_fpt/widgets/phone_input_field.dart';
 import 'package:mobile_capstone_fpt/widgets/text_input.dart';
 import 'package:provider/provider.dart';
 
@@ -79,7 +78,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     email = profileProvider.info.result!.profile.email;
                   }
                   profileProvider.updateProfile(context, fullName, dob, email);
-                  profileProvider.getProfile(context);
                 }
               },
             ),
