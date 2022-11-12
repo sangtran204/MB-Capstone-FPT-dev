@@ -20,7 +20,6 @@ class ProfileRepoImpl implements ProfileRepo {
               headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result = ProfileResponeModel.profileResponeModelFromJson(
           jsonEncode(response.data));
-      log(result.toString());
     } on DioError catch (e) {
       showToastFail(e.response?.data["message"]);
     }
