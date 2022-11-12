@@ -14,5 +14,7 @@ class RestApi {
   static const String getFoodGroupDetail = '$serverPath/food-groups/find';
   static const String logout = '$serverPath/auths/logout';
   static const String changePassword = '$serverPath/accounts/changePassword';
+  static const String getSubByStatus =
+      '$serverPath/subscriptions/customer/getSubscription?status=';
   //something
 }

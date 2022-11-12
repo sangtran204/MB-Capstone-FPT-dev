@@ -20,7 +20,7 @@ class ProfileProvider with ChangeNotifier {
         .getProfile(RestApi.profileMyPath, accessToken)
         .then((value) {
       info = value;
-      log(info.toJson().toString());
+      // log(info.toJson().toString());
     });
     notifyListeners();
   }
