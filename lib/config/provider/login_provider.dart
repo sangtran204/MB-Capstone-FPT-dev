@@ -5,9 +5,10 @@ import 'package:mobile_capstone_fpt/config/provider/package_category_provider.da
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
-import 'package:mobile_capstone_fpt/models/request/push_notify_req.dart';
+import 'package:mobile_capstone_fpt/config/toast.dart';
+import 'package:mobile_capstone_fpt/models/response/push_notify_req.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/push_notify.impl.dart';
-import 'package:mobile_capstone_fpt/repositories/request/login_request_model.dart';
+import 'package:mobile_capstone_fpt/models/request/login_request_model.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/auth_repo_impl.dart';
 import 'package:provider/provider.dart';
 
@@ -25,10 +26,10 @@ class LoginProvider with ChangeNotifier {
         Provider.of<PackageCategoryProvider>(context, listen: false);
     ProfileProvider profileProvider =
         Provider.of<ProfileProvider>(context, listen: false);
-    log(_phone + ' : ' + _password);
     AuthRepoImpl()
         .postLogIn(RestApi.signInPath,
-            LoginRequestModel(phone: _phone, password: _password))
+            // LoginRequestModel(phone: _phone, password: _password))
+             LoginRequestModel(phone: _phone, password: _password))
         .then((value) async {
       await secureStorage.writeSecureData('token', value.result!.accessToken);
       await secureStorage.writeSecureData(
@@ -41,17 +42,13 @@ class LoginProvider with ChangeNotifier {
           .then((value) => log(value.toString()));
       // await UsersMeRepImpl()
       //     .getUsersMe(UrlApi.usersMePath, value.result!.accessToken);
-      packageProvider.getPackageCustomer(context);
-      packageCategoryProvider.getPackageCategory(context);
       profileProvider.getProfile(context);
-
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return const ButtonBar();
-      }));
-      await Navigator.pushReplacementNamed(context, '/home');
+      packageCategoryProvider.getPackageCategory(context);
+      packageProvider.getPackageCustomer(context);
+      showToastSuccess("Chào mừng đến với Mesup");
+      Navigator.pushReplacementNamed(context, '/HomePage');
     }).onError((error, stackTrace) {
       Navigator.pushReplacementNamed(context, '/');
-      log(error.toString());
       notifyListeners();
     });
   }

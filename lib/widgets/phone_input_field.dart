@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -15,12 +15,12 @@ class PhoneInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 350,
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.black.withOpacity(0.13)),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 10,
@@ -37,22 +37,22 @@ class PhoneInputField extends StatelessWidget {
             // onInputValidated: (bool value) {
             //   print(value);
             // },
-            selectorConfig: SelectorConfig(
+            selectorConfig: const SelectorConfig(
               selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
               showFlags: true,
               setSelectorButtonAsPrefixIcon: false,
             ),
             countrySelectorScrollControlled: false,
-            countries: ['VN'],
+            countries: const ['VN'],
             initialValue: PhoneNumber(isoCode: 'VN', dialCode: ''),
             ignoreBlank: false,
             locale: '',
             autoValidateMode: AutovalidateMode.disabled,
-            selectorTextStyle: TextStyle(color: Colors.black),
+            selectorTextStyle: const TextStyle(color: Colors.black),
             formatInput: false,
             maxLength: 10,
             inputDecoration: InputDecoration(
-              contentPadding: EdgeInsets.only(bottom: 15, left: 0),
+              contentPadding: const EdgeInsets.only(bottom: 15, left: 0),
               border: InputBorder.none,
               hintText: hintText,
               hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 16),

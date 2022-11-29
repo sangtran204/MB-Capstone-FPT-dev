@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_capstone_fpt/apis/rest_api.dart';
-import 'package:mobile_capstone_fpt/constants.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/icons/app_icons_icons.dart';
 
@@ -14,7 +12,7 @@ class ConfirmOrderScreen extends StatefulWidget {
 enum SingingCharacter { lafayette, jefferson }
 
 class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
-  SingingCharacter? _character = SingingCharacter.lafayette;
+  // SingingCharacter? _character = SingingCharacter.lafayette;
   int _value = 0;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
       backgroundColor: kPrimaryLightColor,
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
-        title: Text('Xác nhận thông tin'),
+        title: const Text('Xác nhận thông tin'),
         leading: BackButton(
           onPressed: () {
             Navigator.pushNamed(context, '/order');
@@ -34,7 +32,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
 //Thông tin người nhận
@@ -50,12 +48,12 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   children: [
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           AppIcons.user_check,
                           color: Colors.black87,
                           size: 20,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 13,
                         ),
                         TitlePart('Thông tin người nhận')
@@ -202,43 +200,43 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        GestureDetector(
-                          onTap: () => setState(() => _value = 0),
-                          child: Container(
-                            width: size.width * 0.4,
-                            padding: const EdgeInsets.only(
-                                top: 8, left: 15, bottom: 8),
-                            color: _value == 0
-                                ? kBackgroundColor
-                                : Colors.transparent,
-                            child: Row(
-                              children: <Widget>[
-                                Container(
-                                  height: 35,
-                                  width: 35,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                            'assets/images/momologo.png',
-                                          ),
-                                          fit: BoxFit.cover)),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  'Momo ',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () => setState(() => _value = 0),
+                        //   child: Container(
+                        //     width: size.width * 0.4,
+                        //     padding: const EdgeInsets.only(
+                        //         top: 8, left: 15, bottom: 8),
+                        //     color: _value == 0
+                        //         ? kBackgroundColor
+                        //         : Colors.transparent,
+                        //     child: Row(
+                        //       children: <Widget>[
+                        //         Container(
+                        //           height: 35,
+                        //           width: 35,
+                        //           decoration: BoxDecoration(
+                        //               borderRadius:
+                        //                   BorderRadius.all(Radius.circular(15)),
+                        //               image: DecorationImage(
+                        //                   image: AssetImage(
+                        //                     'assets/images/momologo.png',
+                        //                   ),
+                        //                   fit: BoxFit.cover)),
+                        //         ),
+                        //         SizedBox(
+                        //           width: 20,
+                        //         ),
+                        //         Text(
+                        //           'Momo ',
+                        //           style: TextStyle(
+                        //               fontSize: 18,
+                        //               fontWeight: FontWeight.bold,
+                        //               color: Colors.black87),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                         GestureDetector(
                           onTap: () => setState(() => _value = 1),
                           child: Container(
@@ -253,7 +251,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                 Container(
                                   height: 35,
                                   width: 35,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(15)),
                                       image: DecorationImage(
@@ -321,18 +319,18 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
             ),
             Container(
               // color: Colors.amber,
-              margin: EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(bottom: 10),
               height: 60,
               width: MediaQuery.of(context).size.width * 0.7,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.amber,
                   borderRadius: BorderRadius.all(Radius.circular(30))),
               child: TextButton(
                 style: TextButton.styleFrom(primary: Colors.black),
                 onPressed: () {
-                  // Navigator.pushNamed(context, '/confirm');
+                  Navigator.pushNamed(context, '/history');
                 },
-                child: Text(
+                child: const Text(
                   'Thanh Toán',
                   style: TextStyle(fontSize: 25),
                 ),

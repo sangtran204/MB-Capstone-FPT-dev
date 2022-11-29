@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/profile_repo.dart';
-import 'package:mobile_capstone_fpt/repositories/response/profile_respone.dart';
+import 'package:mobile_capstone_fpt/models/response/profile_respone.dart';
 
 class ProfileRepoImpl implements ProfileRepo {
   @override
@@ -17,7 +16,6 @@ class ProfileRepoImpl implements ProfileRepo {
               headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result = ProfileResponeModel.profileResponeModelFromJson(
           jsonEncode(response.data));
-      log(result.toString());
     } on DioError catch (e) {
       showToastFail(e.response?.data["message"]);
     }

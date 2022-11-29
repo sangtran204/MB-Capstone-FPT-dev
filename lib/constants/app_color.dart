@@ -10,4 +10,6 @@ const greenToast = Color(0xff1D741B);
 const redToast = Color(0xffff0000);
 const kwhiteColor = Color(0xFFFFFFFF);
 const kblackColor = Color(0xFF333333);
+const kPrimaryLightColor = Color(0xfffeeee4);
 const kTitleColor = Color(0xFF22215B);
+const yellowColor = Color(0xffffcc33);

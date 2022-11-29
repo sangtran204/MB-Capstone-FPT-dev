@@ -1,6 +1,6 @@
 import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
 import 'package:mobile_capstone_fpt/models/entity/package_item.dart';
-import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.dart';
+import 'package:mobile_capstone_fpt/models/response/package_respone_model.dart';
 
 class PackageDetail {
   PackageDetail({

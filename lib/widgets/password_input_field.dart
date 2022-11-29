@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:mobile_capstone_fpt/constants.dart';
 import 'package:mobile_capstone_fpt/widgets/phone_input_field.dart';
 
 // typedef StringVoidFunction2 = void Function(String);

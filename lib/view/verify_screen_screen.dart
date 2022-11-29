@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/components/components.dart';
-import 'package:mobile_capstone_fpt/widgets/button_field.dart';
+// import 'package:mobile_capstone_fpt/widgets/button_field.dart';
 import 'package:mobile_capstone_fpt/widgets/pin_input_field.dart';
 // import 'package:flutter/src/foundation/key.dart';
 // import 'package:flutter/src/widgets/framework.dart';
-import 'package:pinput/pinput.dart';
+// import 'package:pinput/pinput.dart';
 
 class VerifyScreen extends StatelessWidget {
   const VerifyScreen({Key? key}) : super(key: key);

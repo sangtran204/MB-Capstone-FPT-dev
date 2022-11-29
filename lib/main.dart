@@ -3,8 +3,8 @@ import 'package:mobile_capstone_fpt/config/provider/main_provider/main_provider.
 import 'package:mobile_capstone_fpt/config/routes/routes.dart';
 import 'package:provider/provider.dart';
 
-// Widget _defaultHome = const LoginScreen();
-void main() async {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -19,22 +19,8 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
-          // home: LoginScreen(),
           initialRoute: '/',
           routes: Routes.routes,
-          // routes: {
-          // '/': (context) => PackageDetailScreen(),
-          // '/': (context) => LoginScreen(),
-          // // '/': (context) => SelectFoodScreen(),
-          // '/login': (context) => LoginScreen(),
-          // '/register': (context) => RegisterByPhoneScreen(),
-          // '/verify': (context) => VerifyScreen(),
-          // '/inputPassword': (context) => InputPasswordScreen(),
-          // '/info': (context) => InputInfoScreen(),
-          // '/resetPassword': (context) => ResetPasswordByPhone(),
-          // '/verifyReset': (context) => VerifyResetScreen(),
-          // '/passwordReset': (context) => InputPasswordResetScreen()
-          // },
         ));
   }
 }

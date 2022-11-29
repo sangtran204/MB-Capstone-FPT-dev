@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/package_item.repo.dart';
-import 'package:mobile_capstone_fpt/repositories/response/package_item.res.dart';
+import 'package:mobile_capstone_fpt/models/response/package_item.res.dart';
 
 class PackageItemRepoImpl implements PackageItemRepo {
   @override

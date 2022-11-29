@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:mobile_capstone_fpt/constants.dart';
+// import 'package:flutter/src/foundation/key.dart';
+// import 'package:flutter/src/widgets/framework.dart';
+// import 'package:mobile_capstone_fpt/constants.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 
 class Upside extends StatelessWidget {
@@ -17,7 +17,7 @@ class Upside extends StatelessWidget {
         Container(
             width: size.width,
             height: size.height / 2,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: aBackgroundColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(50),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_capstone_fpt/widgets/button_field.dart';
+// import 'package:mobile_capstone_fpt/widgets/button_field.dart';
 import 'package:mobile_capstone_fpt/widgets/text_input.dart';
-import 'package:mobile_capstone_fpt/widgets/widgets.dart';
+// import 'package:mobile_capstone_fpt/widgets/widgets.dart';
 
 class InputInfoScreen extends StatelessWidget {
   const InputInfoScreen({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class InputInfoScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffffcc33),
+        backgroundColor: const Color(0xffffcc33),
       ),
       body: Container(
         width: size.width,

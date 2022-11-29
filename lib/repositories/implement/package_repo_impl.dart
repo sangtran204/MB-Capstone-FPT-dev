@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/repositories/response/package_detail_respone_model.dart';
-import 'package:mobile_capstone_fpt/repositories/response/package_respone_model.dart';
+import 'package:mobile_capstone_fpt/models/response/package_detail_respone_model.dart';
+import 'package:mobile_capstone_fpt/models/response/package_respone_model.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/package_repo.dart';
 
 class PackageRepoImpl implements PackageRepo {
@@ -50,7 +49,6 @@ class PackageRepoImpl implements PackageRepo {
               headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result =
           PackageRes.packageResponeModelFromJson(jsonEncode(response.data));
-      log(result.toString());
     } on DioError catch (e) {
       showToastFail(e.response?.data["message"]);
     }

@@ -22,10 +22,9 @@ class _ProtectRoutingState extends State<ProtectRouting> {
     const storage = FlutterSecureStorage();
     String? token = await storage.read(key: "token");
     if (token == null) {
-      Navigator.pushReplacementNamed(context, "/SignInPage");
+      Navigator.pushReplacementNamed(context, "/LoginPage");
     } else {
-      Navigator.pushReplacementNamed(context, "/BottomTabBar");
-      // TODO Navigate to Home Screen
+      Navigator.pushReplacementNamed(context, "/HomePage");
     }
   }
 

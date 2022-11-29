@@ -4,7 +4,7 @@ import 'package:mobile_capstone_fpt/config/shared/shared_preferences.dart';
 class DioClient {
   Dio configDio() {
     var options = BaseOptions(
-      baseUrl: 'http://192.168.1.64:2204/',
+      baseUrl: 'http://14.225.205.162:2004',
       connectTimeout: 5000,
     );
     final dio = Dio(options);
