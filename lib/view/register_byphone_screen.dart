@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+
+import '../widgets/phone_input_field.dart';
 // import 'package:mobile_capstone_fpt/widgets/widgets.dart';
 
-class RegisterByPhoneScreen extends StatelessWidget {
+class RegisterByPhoneScreen extends StatefulWidget {
   const RegisterByPhoneScreen({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterByPhoneScreen> createState() => _RegisterByPhoneScreenState();
+}
+
+class _RegisterByPhoneScreenState extends State<RegisterByPhoneScreen> {
+  String phone = "";
+  void inputPhone(String a) {
+    setState(() {
+      phone = a;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +59,8 @@ class RegisterByPhoneScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  // PhoneInputField(),
+                  PhoneInputField(
+                      input: inputPhone, hintText: 'Nhập số điện thoại')
                 ],
               ),
             ),
@@ -53,10 +68,8 @@ class RegisterByPhoneScreen extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 20),
               child: Column(
                 children: [
-                  // ButtonField(
-                  //   text: 'Đăng ký',
-                  //   path: '/verify',
-                  // ),
+                  // Cái nút button nó nằm ở đây
+                  // ButtonField(voidCallback: , text: 'Xác nhận')
                 ],
               ),
             )

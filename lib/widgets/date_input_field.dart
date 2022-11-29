@@ -1,10 +1,12 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/widgets/phone_input_field.dart';
 
 class DateInputField extends StatelessWidget {
-  DateInputField({Key? key, required this.date}) : super(key: key);
+  DateInputField({Key? key, required this.date, required this.input})
+      : super(key: key);
   String? date;
-
+  StringVoidFunction input;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,6 +34,9 @@ class DateInputField extends StatelessWidget {
               return false;
             }
             return true;
+          },
+          onChanged: (val) {
+            input(val);
           },
         ),
       ),

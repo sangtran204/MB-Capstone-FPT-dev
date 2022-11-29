@@ -17,6 +17,7 @@ class AuthRepoImpl implements AuthRepo {
       Response response = await Dio().post(url, data: req.toJson());
       result = loginResponeModelFromJson(jsonEncode(response.data));
     } on DioError catch (e) {
+      // log(e.toString());
       if (e.response?.data["message"] == 'Account invalid') {
         showToastFail("Số điện thoại hoặc mật khẩu không đúng!");
       }

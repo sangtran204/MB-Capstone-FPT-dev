@@ -32,7 +32,10 @@ class MainProviders {
         create: (context) => StationProvider()),
     ChangeNotifierProvider<SubscriptionProvider>(
         create: (context) => SubscriptionProvider()),
-    ChangeNotifierProvider<OrderProvider>(
-        create: (context) => OrderProvider()),
+    ChangeNotifierProvider<OrderProvider>(create: (context) => OrderProvider()),
+    ChangeNotifierProvider<ProfileProvider>(
+        create: (context) => ProfileProvider()),
+    // ChangeNotifierProvider<SubProvider>(
+    // create: (context) => SubProvider())
   ];
 }

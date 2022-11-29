@@ -27,4 +27,42 @@ class SubscriptionProvider with ChangeNotifier {
       log(error.toString());
     });
   }
+
+  //  SubscriptionResponeModel subRes = SubscriptionResponeModel();
+  // List<Subscription> list = [];
+
+  // void getSubByInprogess(BuildContext context) async {
+  //   String accessToken = await secureStorage.readSecureData("token");
+  //   SubscriptionImpl()
+  //       .getSubByStatus('${RestApi.getSubByStatus}inProgress', accessToken)
+  //       .then((value) async {
+  //     list = value.result!;
+  //     // log(subRes.toJson().toString());
+  //     await Navigator.pushReplacementNamed(context, '/history');
+  //   });
+  //   notifyListeners();
+  // }
+
+  // void getSubByStatus(BuildContext context, String status) async {
+  //   String accessToken = await secureStorage.readSecureData("token");
+  //   SubscriptionImpl()
+  //       .getSubByStatus('${RestApi.getSubByStatus}$status', accessToken)
+  //       .then((value) {
+  //     // subRes = value;
+  //     list = value.result!;
+  //     // log(value.toJson().toString());
+  //     notifyListeners();
+  //   });
+  // }
+
+  // void getSubByUnConfirm(BuildContext context) async {
+  //   String accessToken = await secureStorage.readSecureData("token");
+  //   SubscriptionImpl()
+  //       .getSubByStatus('${RestApi.getSubByStatus}unConfirmed', accessToken)
+  //       .then((value) {
+  //     list = value.result!;
+  //     // log(value.toJson().toString());
+  //   });
+  //   notifyListeners();
+  // }
 }
