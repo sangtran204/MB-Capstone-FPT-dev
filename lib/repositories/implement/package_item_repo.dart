@@ -16,9 +16,9 @@ class PackageItemRepoImpl implements PackageItemRepo {
               headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result = PackageItemRes.packageItemResponeModelFromJson(
           jsonEncode(response.data));
-    } on DioError catch (e) {
+    } catch (e) {
       // if (e.response?.data["message"] == "Dont't have resource") {
-        showToastFail("Không tìm thấy gói ăn!");
+      showToastFail("Không tìm thấy gói ăn!");
       // }
     }
     return result;

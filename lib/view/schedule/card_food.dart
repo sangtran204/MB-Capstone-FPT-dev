@@ -28,27 +28,26 @@ class _CardFoodState extends State<CardFood> {
 
         child: Row(
           children: [
-            Container(
-              height: 100,
-              width: 130,
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      bottomLeft: Radius.circular(12)),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                        widget.food!.image,
-                      ),
-                      fit: BoxFit.cover)),
-            ),
+            // Container(
+            //   height: 100,
+            //   width: 130,
+            //   decoration: BoxDecoration(
+            //       borderRadius: const BorderRadius.only(
+            //           topLeft: Radius.circular(12),
+            //           bottomLeft: Radius.circular(12)),
+            //       image: DecorationImage(
+            //           image: NetworkImage(
+            //             widget.food!.image,
+            //           ),
+            //           fit: BoxFit.cover)),
+            // ),
             Container(
                 height: 100,
                 width: 170,
                 padding: const EdgeInsets.only(top: 25),
                 child: Text(
                   widget.food!.name,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w400),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                   textAlign: TextAlign.center,
                 )),
             // SizedBox(

@@ -17,7 +17,7 @@ class Routes {
     // '/order': (context) => const ScheduleScreen(),
     '/SchedulePage': (context) => const ScheduleScreen(),
     // '/selectFood': (context) => const SelectFoodScreen(),
-    '/SelectFood': (context) => const SelectFoodScreen(),
+    // '/SelectFood': (context) => const SelectFoodScreen(),
     // '/confirm': (context) => const ConfirmOrderScreen(),
     '/ConfirmOrder': (context) => const ConfirmOrderScreen(),
     // '/register': (context) => const RegisterByPhoneScreen(),

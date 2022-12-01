@@ -219,8 +219,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
               Container(
                 height: 100,
                 width: 100,
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(12),
                         bottomLeft: Radius.circular(12)),
                     image: DecorationImage(
@@ -233,7 +233,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   padding: const EdgeInsets.only(top: 10, left: 3, bottom: 5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
+                    children: const [
                       Text(
                         'Tên gói ăn',
                         style: TextStyle(

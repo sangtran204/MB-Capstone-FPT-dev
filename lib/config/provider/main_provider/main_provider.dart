@@ -1,6 +1,6 @@
 import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/login_provider.dart';
-import 'package:mobile_capstone_fpt/config/provider/order_provider.dart';
+// import 'package:mobile_capstone_fpt/config/provider/order_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_item.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
@@ -32,9 +32,7 @@ class MainProviders {
         create: (context) => StationProvider()),
     ChangeNotifierProvider<SubscriptionProvider>(
         create: (context) => SubscriptionProvider()),
-    ChangeNotifierProvider<OrderProvider>(create: (context) => OrderProvider()),
-    ChangeNotifierProvider<ProfileProvider>(
-        create: (context) => ProfileProvider()),
+    // ChangeNotifierProvider<OrderProvider>(create: (context) => OrderProvider()),
     // ChangeNotifierProvider<SubProvider>(
     // create: (context) => SubProvider())
   ];

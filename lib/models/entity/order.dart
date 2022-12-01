@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class CreateOrderReq {
-  CreateOrderReq({
+class Order {
+  Order({
     this.deliveryDate,
     this.priceFood,
     this.nameFood,
@@ -10,7 +10,6 @@ class CreateOrderReq {
     this.foodId,
     this.stationId,
     this.timeSlotId,
-    this.itemCode,
   });
 
   DateTime? deliveryDate;
@@ -21,9 +20,8 @@ class CreateOrderReq {
   String? foodId;
   String? stationId;
   String? timeSlotId;
-  int? itemCode;
 
-  factory CreateOrderReq.fromJson(Map<String, dynamic> json) => CreateOrderReq(
+  factory Order.fromJson(Map<String, dynamic> json) => Order(
         deliveryDate: DateTime.parse(json["deliveryDate"]),
         priceFood: json["priceFood"],
         nameFood: json["nameFood"],
@@ -35,7 +33,6 @@ class CreateOrderReq {
       );
 
   Map<String, dynamic> toJson() => {
-        // "deliveryDate": deliveryDate,
         "deliveryDate":
             "${deliveryDate!.year.toString().padLeft(4, '0')}-${deliveryDate!.month.toString().padLeft(2, '0')}-${deliveryDate!.day.toString().padLeft(2, '0')}",
         "priceFood": priceFood,
@@ -46,8 +43,9 @@ class CreateOrderReq {
         "stationID": stationId,
         "timeSlotID": timeSlotId,
       };
-  static CreateOrderReq createSubResFromJson(String str) =>
-      CreateOrderReq.fromJson(json.decode(str));
+  static Order orderFromJson(String str) =>
+      Order.fromJson(json.decode(str));
 
-  String createSubResToJson(CreateOrderReq data) => json.encode(data.toJson());
+  String orderToJson(Order data) =>
+      json.encode(data.toJson());
 }

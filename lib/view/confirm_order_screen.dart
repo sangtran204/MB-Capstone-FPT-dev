@@ -56,14 +56,14 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                         const SizedBox(
                           width: 13,
                         ),
-                        TitlePart('Thông tin người nhận')
+                        titlePart('Thông tin người nhận')
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8, left: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                        children: const [
                           Text(
                             'Nhi PT',
                             style:
@@ -84,7 +84,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
 //Thông tin đơn hàng
@@ -98,25 +98,25 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   children: [
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.description_outlined,
                           color: Colors.black87,
                           size: 26,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
-                        TitlePart('Thông tin đơn hàng')
+                        titlePart('Thông tin đơn hàng')
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8, left: 15),
-                      child: Container(
+                      child: SizedBox(
                         child: Row(children: [
                           Container(
                             height: 70,
                             width: 100,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(12)),
                                 image: DecorationImage(
@@ -125,13 +125,13 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                     ),
                                     fit: BoxFit.cover)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
-                          TitlePart('Gói ăn nhanh'),
+                          titlePart('Gói ăn nhanh'),
                           Padding(
-                            padding: EdgeInsets.only(top: 70, left: 30),
-                            child: TitlePart('500.000' + ' đ'),
+                            padding: const EdgeInsets.only(top: 70, left: 30),
+                            child: titlePart('500.000 đ'),
                           )
                         ]),
                       ),
@@ -140,7 +140,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
 //Tổng thanh toán
@@ -151,7 +151,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                     top: 8, left: 15, bottom: 8, right: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Text(
                       'Tổng thanh toán: ',
                       style: TextStyle(
@@ -160,7 +160,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                           color: Colors.black87),
                     ),
                     Text(
-                      '500.000' + ' đ',
+                      '500.000 đ',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -170,7 +170,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
 
@@ -183,18 +183,18 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                   children: [
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.payment_outlined,
                           color: Colors.black87,
                           size: 26,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
-                        TitlePart('Hình thức thanh toán')
+                        titlePart('Hình thức thanh toán')
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -260,10 +260,10 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                                           ),
                                           fit: BoxFit.cover)),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 30,
                                 ),
-                                Text(
+                                const Text(
                                   'VN Pay',
                                   style: TextStyle(
                                       fontSize: 18,
@@ -280,7 +280,7 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
 //Ghi chú
@@ -291,20 +291,20 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 child: Column(
                   children: [
                     Row(children: [
-                      Icon(
+                      const Icon(
                         AppIcons.note,
                         color: Colors.black87,
                         size: 20,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
-                      TitlePart('Ghi chú'),
+                      titlePart('Ghi chú'),
                     ]),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    TextField(
+                    const TextField(
                       maxLines: 4,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -314,37 +314,38 @@ class _ConfirmOrderScreenState extends State<ConfirmOrderScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            Container(
-              // color: Colors.amber,
-              margin: const EdgeInsets.only(bottom: 10),
-              height: 60,
-              width: MediaQuery.of(context).size.width * 0.7,
-              decoration: const BoxDecoration(
-                  color: Colors.amber,
-                  borderRadius: BorderRadius.all(Radius.circular(30))),
-              child: TextButton(
-                style: TextButton.styleFrom(primary: Colors.black),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/history');
-                },
-                child: const Text(
-                  'Thanh Toán',
-                  style: TextStyle(fontSize: 25),
-                ),
-              ),
-            ),
+            // Container(
+            //   // color: Colors.amber,
+            //   margin: const EdgeInsets.only(bottom: 10),
+            //   height: 60,
+            //   width: MediaQuery.of(context).size.width * 0.7,
+            //   decoration: const BoxDecoration(
+            //       color: Colors.amber,
+            //       borderRadius: BorderRadius.all(Radius.circular(30))),
+            //   child:
+            //   TextButton(
+            //     style: TextButton.styleFrom(primary: Colors.black),
+            //     onPressed: () {
+            //       Navigator.pushNamed(context, '/history');
+            //     },
+            //     child: const Text(
+            //       'Thanh Toán',
+            //       style: TextStyle(fontSize: 25),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
     ));
   }
 
-  Widget TitlePart(String title) => Text(
+  Widget titlePart(String title) => Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.black87, fontSize: 18, fontStyle: FontStyle.italic),
       );
 }

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:mobile_capstone_fpt/config/shared/shared_preferences.dart';
+// import 'package:mobile_capstone_fpt/config/shared/shared_preferences.dart';
 
 class DioClient {
   Dio configDio() {
@@ -8,7 +8,7 @@ class DioClient {
       connectTimeout: 5000,
     );
     final dio = Dio(options);
-    AppPreference appPreferences = AppPreference();
+    // AppPreference appPreferences = AppPreference();
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (options, handler) async {
       // String token = await appPreferences.getToken();

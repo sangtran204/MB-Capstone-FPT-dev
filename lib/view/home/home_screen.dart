@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.arrow_forward_ios_rounded,
                 size: 18,
               ),
-              items: const <DropdownMenuItem<String>>[
+              items: <DropdownMenuItem<String>>[
                 DropdownMenuItem(
                   child: Text('Đại Học FPT'),
                   value: 'Đại Học FPT',

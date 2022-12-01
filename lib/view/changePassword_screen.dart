@@ -66,17 +66,17 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               PasswordInputField(
                   hintText: 'Mật khẩu cũ', password: inputOldPassword),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               PasswordInputField(
                   hintText: 'Mật khẩu mới', password: inputNewPassword),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               PasswordInputField(

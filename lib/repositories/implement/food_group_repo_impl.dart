@@ -17,7 +17,7 @@ class FoodGroupRepoImpl implements FoodGroupRepo {
               headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result = FoodGroupDetailRes.foodGroupDetailResponeModelFromJson(
           jsonEncode(response.data));
-    } on DioError catch (e) {
+    } on DioError {
       showToastFail("Không tìm thấy!");
     }
     return result;

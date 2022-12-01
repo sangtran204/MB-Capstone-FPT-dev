@@ -27,8 +27,9 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
         leading: BackButton(
-          onPressed: () {
+          onPressed: () async {
             // Navigator.pop(context);
+            await packageProvider.clearBackPackage();
             Navigator.pushNamedAndRemoveUntil(
                 context, '/HomePage', (route) => false);
           },

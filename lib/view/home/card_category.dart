@@ -29,10 +29,10 @@ class _CardCategoryItemState extends State<CardCategoryItem> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 65, width: 70,
-                child: Image.network(widget.packageCategory!.image),
-              ),
+              // SizedBox(
+              //   height: 65, width: 70,
+              //   child: Image.network(widget.packageCategory!.image),
+              // ),
               Text(
                 widget.packageCategory!.name,
                 textAlign: TextAlign.center,

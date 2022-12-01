@@ -27,7 +27,7 @@ class _CardPackageState extends State<CardPackage> {
       margin: const EdgeInsets.only(top: 32, left: 36, right: 36),
       child: InkWell(
         onTap: () async {
-          packageProvider.getPackageDetail(context, widget.package!.id);
+          await packageProvider.getPackageDetail(context, widget.package!.id);
           // await Navigator.pushReplacementNamed(context, '/PackageDetail');
           // Navigator.push(context, MaterialPageRoute(builder: (context) {
           //   return PackageDetailScreen(

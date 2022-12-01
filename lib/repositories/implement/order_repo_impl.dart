@@ -1,0 +1,29 @@
+// import 'dart:convert';
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
+import 'package:mobile_capstone_fpt/config/toast.dart';
+import 'package:mobile_capstone_fpt/models/entity/order.dart';
+// import 'package:mobile_capstone_fpt/models/request/create_order_req.dart';
+import 'package:mobile_capstone_fpt/repositories/interface/order_repo.dart';
+
+class OrderRepImpl implements OrderRepo {
+  @override
+  Future<String> postOrder(String url, Order req, String accessToken) async {
+    try {
+      // Response response =
+      await Dio().post(url,
+          data: req.toJson(),
+          options: Options(headers: {
+            HttpHeaders.authorizationHeader: 'Bearer $accessToken'
+          }));
+      // result = Order.orderFromJson(jsonEncode(response.data));
+      // log("Tạo ok");
+    } catch (e) {
+      showToastFail("Vui lòng nhập đủ thông tin");
+    }
+    return "Tạo Order thành công";
+  }
+}
