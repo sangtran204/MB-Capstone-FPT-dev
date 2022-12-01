@@ -9,8 +9,8 @@ import 'package:mobile_capstone_fpt/repositories/implement/subscription_impl.dar
 
 class SubscriptionProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
-  void submitDataSub(
-      int totalPrice, DateTime startDelivery, String packageId) async {
+  void submitDataSub(BuildContext context, int totalPrice,
+      DateTime startDelivery, String packageId) async {
     final data = CreateSubReq(
         totalPrice: totalPrice,
         startDelivery: startDelivery,
@@ -21,12 +21,14 @@ class SubscriptionProvider with ChangeNotifier {
         .then((value) async {
       log(value.result!.id);
       secureStorage.writeSecureData("idSubscription", value.result!.id);
-      showToastSuccess("Tạo Sub thành công");
+      showToastSuccess("Đã chọn gói");
+      await Navigator.pushReplacementNamed(context, '/SchedulePage');
     }).onError((error, stackTrace) {
-      showToastFail("Tạo Fail");
-      log(error.toString());
+      showToastFail("Chọn gói thất bại");
     });
   }
+
+  
 
   //  SubscriptionResponeModel subRes = SubscriptionResponeModel();
   // List<Subscription> list = [];

@@ -71,11 +71,12 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                 ),
                 onTap: () async {
                   subscriptionProvider.submitDataSub(
+                      context,
                       packageProvider.packageDetail!.price,
                       DateTime.now(),
                       packageProvider.packageDetail!.id);
-                  await Navigator.pushReplacementNamed(
-                      context, '/SchedulePage');
+                  // await Navigator.pushReplacementNamed(
+                  //     context, '/SchedulePage');
                 },
               ),
             )

@@ -93,12 +93,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           ButtonField(
                               text: 'Đăng Nhập',
                               voidCallback: () {
-                                // loginProvider.submitData(
-                                //     context,
-                                //     phoneNumber.replaceAll('+84', ''),
-                                //     password);
                                 loginProvider.submitData(
-                                    context, '0123456784', '123456');
+                                    context,
+                                    phoneNumber.replaceAll('+84', ''),
+                                    password);
+                                // loginProvider.submitData(
+                                //     context, '0392317266', '123456');
                               }),
                           const SizedBox(
                             height: 25,

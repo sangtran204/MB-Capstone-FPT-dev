@@ -1,6 +1,5 @@
 import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
@@ -12,6 +11,7 @@ import 'package:mobile_capstone_fpt/models/entity/package_item.dart';
 import 'package:mobile_capstone_fpt/models/request/create_order_req.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/order_repo_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/package_repo_impl.dart';
+import 'package:mobile_capstone_fpt/view/payment/payment.dart';
 
 class PackageProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
@@ -158,10 +158,21 @@ class PackageProvider with ChangeNotifier {
       try {
         await OrderRepImpl()
             .postOrder(RestApi.createOrder, dataCreateOrder, accessToken);
+        // final url = await OrderRepImpl().getPaymentUrl(
+        //     subId, '43b02def-bf0f-4956-9b05-9f60253a5646', accessToken);
+        // Navigator.push(context,
+        //     PageRouteBuilder(pageBuilder: (_, animation, __) {
+        //   return FadeTransition(
+        //     opacity: animation,
+        //     child: PaymentPage(url: url.result!),
+        //   );
+        // }));
       } catch (e) {
         log(e.toString());
       }
     }
+    //  MaterialPageRoute(builder: (context) => PaymentPage(url: url));
+    notifyListeners();
     // await Navigator.pushReplacementNamed(context, '/ConfirmOrder');
   }
 }

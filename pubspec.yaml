@@ -49,6 +49,7 @@ dependencies:
   date_time_picker: ^2.1.0
   intl: ^0.17.0
   jiffy: ^5.0.0
+  webview_flutter: ^3.0.4
   # cached_network_image: ^2.5.1
 dev_dependencies:
   flutter_test:

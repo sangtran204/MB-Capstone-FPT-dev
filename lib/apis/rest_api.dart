@@ -20,8 +20,10 @@ class RestApi {
   static const String getStationActive =
       '$serverPath/stations/byStatus?status=active';
   static const String createOrder = '$serverPath/orders';
+  // Get list Bank
+  static const String getListBank = '$serverPath/banks';
   //Post Order ====================================================
-
+  static const String getSubPaymentUrl = '$serverPath/subscriptions';
   //
   static const String logout = '$serverPath/auths/logout';
   static const String changePassword = '$serverPath/accounts/changePassword';

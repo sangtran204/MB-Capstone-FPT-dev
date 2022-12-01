@@ -6,7 +6,6 @@ export 'detailPackage/package_detail_screen.dart';
 export 'password_reset.dart';
 export 'register_byphone_screen.dart';
 export 'reset_byPhone_screen.dart';
-export 'schedule/select_food_screen.dart';
 export 'verify_reset_screen.dart';
 export 'verify_screen_screen.dart';
 export 'schedule/schedule_screen.dart';

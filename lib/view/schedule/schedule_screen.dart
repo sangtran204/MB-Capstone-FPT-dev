@@ -284,7 +284,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         itemBuilder: (context, index) {
                           return Container(
                             padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(color: Colors.grey, blurRadius: 4)
@@ -354,37 +354,21 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                         //         width: 45,
                                                         //         image: AssetImage('assets/images/salad1.jpg'),
                                                         //       ))
-                                                        // Text(
-                                                        //   'Tên món ăn',
-                                                        //   textAlign:
-                                                        //       TextAlign
-                                                        //           .center,
-                                                        //   style: TextStyle(
-                                                        //     fontSize: 16,
-                                                        //     fontWeight:
-                                                        //         FontWeight
-                                                        //             .bold,
-                                                        //     color:
-                                                        //         Colors.grey,
-                                                        //   ),
-                                                        // )
                                                         // :
-                                                        // SizedBox(
-                                                        //     child:
-                                                        //         Image(
-                                                        //     fit: BoxFit
-                                                        //         .cover,
-                                                        //     height: 45,
-                                                        //     width: 45,
-                                                        //     image: AssetImage(
-                                                        //         'assets/images/salad1.jpg'),
-                                                        //   )),
+                                                        const SizedBox(
+                                                            child: Image(
+                                                          fit: BoxFit.cover,
+                                                          height: 45,
+                                                          width: 45,
+                                                          image: AssetImage(
+                                                              'assets/images/salad1.jpg'),
+                                                        )),
                                                         Text(
                                                           packageProvider
                                                                   .orderRequest[
                                                                       index]
                                                                   .nameFood ??
-                                                              '',
+                                                              'Hãy chọn món',
                                                           textAlign:
                                                               TextAlign.center,
                                                           style:
@@ -447,11 +431,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                                       packageProvider
                                                                               .listIdFG[
                                                                           index]);
-
-                                                              // await _showMaterialDialog(
-                                                              //     packageProvider
-                                                              //             .listIdFG[
-                                                              //         index]);
                                                               await _showMaterialDialog(
                                                                   size,
                                                                   packageProvider

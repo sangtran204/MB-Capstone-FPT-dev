@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/view/payment/payment.dart';
 import 'package:mobile_capstone_fpt/view/protect/protect_routing.dart';
 import 'package:mobile_capstone_fpt/view/screens.dart';
 
@@ -16,9 +17,9 @@ class Routes {
     '/PackageDetail': (context) => const PackageDetailScreen(),
     // '/order': (context) => const ScheduleScreen(),
     '/SchedulePage': (context) => const ScheduleScreen(),
-    // '/selectFood': (context) => const SelectFoodScreen(),
-    // '/SelectFood': (context) => const SelectFoodScreen(),
-    // '/confirm': (context) => const ConfirmOrderScreen(),
+
+    // '/PaymentPage': (context) => const PaymentPage(),
+
     '/ConfirmOrder': (context) => const ConfirmOrderScreen(),
     // '/register': (context) => const RegisterByPhoneScreen(),
     '/RegisterPage': (context) => const RegisterByPhoneScreen(),

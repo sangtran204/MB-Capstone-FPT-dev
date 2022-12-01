@@ -20,8 +20,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<PackageCategory>? listPackageCategory = [];
-  List<Package>? listPackgeActive = [];
+  List<PackageCategory> listPackageCategory = [];
+  List<Package> listPackgeActive = [];
   Result? profileResult;
 
   String _value = 'Đại Học FPT';
@@ -34,14 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
               .getPackageCategory(RestApi.getCategoryPackage, token)
               .then((value) {
             setState(() {
-              listPackageCategory = value.result;
+              listPackageCategory = value.result!;
             });
           }),
           PackageRepoImpl()
               .getActivePackage(RestApi.getActivePackage, token)
               .then((value) {
             setState(() {
-              listPackgeActive = value.result;
+              listPackgeActive = value.result!;
             });
           }),
           ProfileRepoImpl()
@@ -66,34 +66,34 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Icon(
-              Icons.location_on_outlined,
-              color: Colors.black,
-              size: 24,
-            ),
-            const SizedBox(width: 20),
-            DropdownButton<String>(
-              value: _value,
-              icon: const Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 18,
-              ),
-              items: <DropdownMenuItem<String>>[
-                DropdownMenuItem(
-                  child: Text('Đại Học FPT'),
-                  value: 'Đại Học FPT',
-                ),
-                DropdownMenuItem(
-                  child: Text('Đại Học HUTECH'),
-                  value: 'Đại Học HUTECH',
-                ),
-              ],
-              onChanged: (String? newValue) {
-                setState(() {
-                  _value = newValue!;
-                });
-              },
-            ),
+            // const Icon(
+            //   Icons.location_on_outlined,
+            //   color: Colors.black,
+            //   size: 24,
+            // ),
+            // const SizedBox(width: 20),
+            // DropdownButton<String>(
+            //   value: _value,
+            //   icon: const Icon(
+            //     Icons.arrow_forward_ios_rounded,
+            //     size: 18,
+            //   ),
+            //   items: const <DropdownMenuItem<String>>[
+            //     DropdownMenuItem(
+            //       child: Text('Đại Học FPT'),
+            //       value: 'Đại Học FPT',
+            //     ),
+            //     DropdownMenuItem(
+            //       child: Text('Đại Học HUTECH'),
+            //       value: 'Đại Học HUTECH',
+            //     ),
+            //   ],
+            //   onChanged: (String? newValue) {
+            //     setState(() {
+            //       _value = newValue!;
+            //     });
+            //   },
+            // ),
           ],
         ),
       ),
@@ -147,14 +147,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                    listPackageCategory!.isEmpty
+                    listPackageCategory.isEmpty
                         ? const Center(child: CircularProgressIndicator())
                         : SizedBox(
                             height: 112,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
-                              itemCount: listPackageCategory!.length,
+                              itemCount: listPackageCategory.length,
                               itemBuilder: (context, index) {
                                 return Row(
                                   children: [
@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         child: CardCategoryItem(
                                             packageCategory:
-                                                listPackageCategory![index])),
+                                                listPackageCategory[index])),
                                   ],
                                 );
                               },
@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              listPackgeActive!.isEmpty
+              listPackgeActive.isEmpty
                   ? const Center(child: CircularProgressIndicator())
                   : Container(
                       width: size.width,
@@ -199,10 +199,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: ListView.builder(
                                 padding: const EdgeInsets.all(8),
                                 shrinkWrap: true,
-                                itemCount: listPackgeActive!.length,
+                                itemCount: listPackgeActive.length,
                                 itemBuilder: (context, index) {
                                   return CardPackage(
-                                      package: listPackgeActive![index]);
+                                      package: listPackgeActive[index]);
                                 }),
                           )
                         ],

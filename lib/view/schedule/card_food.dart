@@ -12,8 +12,6 @@ class CardFood extends StatefulWidget {
 class _CardFoodState extends State<CardFood> {
   @override
   Widget build(BuildContext context) {
-    // PackageProvider packageProvider = Provider.of<PackageProvider>(context);
-    // Size size = MediaQuery.of(context).size;
     return Card(
       shape: RoundedRectangleBorder(
         side: BorderSide(
@@ -28,42 +26,29 @@ class _CardFoodState extends State<CardFood> {
 
         child: Row(
           children: [
-            // Container(
-            //   height: 100,
-            //   width: 130,
-            //   decoration: BoxDecoration(
-            //       borderRadius: const BorderRadius.only(
-            //           topLeft: Radius.circular(12),
-            //           bottomLeft: Radius.circular(12)),
-            //       image: DecorationImage(
-            //           image: NetworkImage(
-            //             widget.food!.image,
-            //           ),
-            //           fit: BoxFit.cover)),
-            // ),
+            Container(
+              height: 100,
+              width: 130,
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      bottomLeft: Radius.circular(12)),
+                  image: DecorationImage(
+                      image: NetworkImage(
+                        widget.food!.image,
+                      ),
+                      fit: BoxFit.cover)),
+            ),
             Container(
                 height: 100,
                 width: 170,
                 padding: const EdgeInsets.only(top: 25),
                 child: Text(
                   widget.food!.name,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w400),
                   textAlign: TextAlign.center,
                 )),
-            // SizedBox(
-            //   height: 100,
-            //   width: 50,
-            //   child:
-            //   Checkbox(
-            //       checkColor: Colors.white,
-            //       value: food!,
-            //       onChanged: (bool? value) {
-            //         setState(() {
-            //           final newVal = !food.value;
-            //           food.value = newVal;
-            //         });
-            //       }),
-            // )
           ],
         ),
       ),
