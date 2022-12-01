@@ -158,7 +158,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             onTap: () {
                               final food = foodGroupProvider.listFoodFG[index];
                               packageProvider.setFoodGroup(indexOrderRequest,
-                                  food.name, food.id, food.price);
+                                  food.name, food.id, food.price, food.image);
                               Navigator.pop(context);
                             },
                           );
@@ -266,7 +266,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         textAlign: TextAlign.center,
                       ),
                       onTap: () async {
-                        // Navigator.pushNamed(context, '/ConfirmOrder');
                         await packageProvider.submitData(context);
                       },
                       backGroundColor: kBackgroundColor,
@@ -355,14 +354,34 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                         //         image: AssetImage('assets/images/salad1.jpg'),
                                                         //       ))
                                                         // :
-                                                        const SizedBox(
-                                                            child: Image(
-                                                          fit: BoxFit.cover,
-                                                          height: 45,
-                                                          width: 45,
-                                                          image: AssetImage(
-                                                              'assets/images/salad1.jpg'),
-                                                        )),
+                                                        packageProvider
+                                                                    .orderRequest[
+                                                                        index]
+                                                                    .imageFood ==
+                                                                null
+                                                            ? const SizedBox(
+                                                                child: Image(
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                height: 45,
+                                                                width: 45,
+                                                                image: AssetImage(
+                                                                    'assets/images/salad1.jpg'),
+                                                              ))
+                                                            : SizedBox(
+                                                                child: Image(
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                height: 45,
+                                                                width: 45,
+                                                                image:
+                                                                    NetworkImage(
+                                                                  packageProvider
+                                                                      .orderRequest[
+                                                                          index]
+                                                                      .imageFood!,
+                                                                ),
+                                                              )),
                                                         Text(
                                                           packageProvider
                                                                   .orderRequest[

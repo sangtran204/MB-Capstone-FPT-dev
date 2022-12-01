@@ -21,7 +21,6 @@ class _PaymentPageState extends State<PaymentPage> {
       Completer<WebViewController>();
   @override
   Widget build(BuildContext context) {
-    print(widget.url);
     // final orderPro = ref.watch(orderProvider);
     return Scaffold(
       appBar: AppBar(
@@ -49,7 +48,6 @@ class _PaymentPageState extends State<PaymentPage> {
         onProgress: (int progress) {},
         javascriptChannels: const <JavascriptChannel>{},
         navigationDelegate: (NavigationRequest request) {
-          // log(request.url);
           if (request.url
               .startsWith('http://14.225.205.162:2004/subscriptions/payment')) {
             var uri = Uri.parse(request.url);

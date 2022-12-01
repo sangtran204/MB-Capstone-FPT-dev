@@ -16,7 +16,7 @@ import 'package:mobile_capstone_fpt/view/payment/payment.dart';
 class PackageProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
 
-  void getPackageByCategory(BuildContext context, String id) async {
+  Future<void> getPackageByCategory(BuildContext context, String id) async {
     String accessToken = await secureStorage.readSecureData("token");
     PackageRepoImpl()
         .getPackageByCategory(
@@ -119,13 +119,14 @@ class PackageProvider with ChangeNotifier {
   }
 
   setFoodGroup(String indexOrderRequest, String nameFood, String idFood,
-      int priceFood) async {
+      int priceFood, String imageFood) async {
     final listOrderRequestTmp = [...orderRequest];
     final index = listOrderRequestTmp
         .indexWhere((element) => element.packageItemId == indexOrderRequest);
     listOrderRequestTmp[index].nameFood = nameFood;
     listOrderRequestTmp[index].foodId = idFood;
     listOrderRequestTmp[index].priceFood = priceFood;
+    listOrderRequestTmp[index].imageFood = imageFood;
     notifyListeners();
   }
 

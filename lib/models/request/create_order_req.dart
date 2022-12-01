@@ -11,6 +11,7 @@ class CreateOrderReq {
     this.stationId,
     this.timeSlotId,
     this.itemCode,
+    this.imageFood,
   });
 
   DateTime? deliveryDate;
@@ -22,6 +23,7 @@ class CreateOrderReq {
   String? stationId;
   String? timeSlotId;
   int? itemCode;
+  String? imageFood;
 
   factory CreateOrderReq.fromJson(Map<String, dynamic> json) => CreateOrderReq(
         deliveryDate: DateTime.parse(json["deliveryDate"]),

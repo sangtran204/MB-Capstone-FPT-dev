@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
+import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
+import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/models/entity/package.dart';
@@ -11,6 +15,7 @@ import 'package:mobile_capstone_fpt/repositories/implement/profile_repo_impl.dar
 import 'package:mobile_capstone_fpt/view/home/drawer.dart';
 import 'package:mobile_capstone_fpt/view/home/card_package.dart';
 import 'package:mobile_capstone_fpt/view/home/card_category.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,30 +25,30 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<PackageCategory> listPackageCategory = [];
-  List<Package> listPackgeActive = [];
+  // List<PackageCategory> listPackageCategory = [];
+  // List<Package> listPackgeActive = [];
   Result? profileResult;
 
-  String _value = 'Đại Học FPT';
+  // String _value = 'Đại Học FPT';
   @override
   void initState() {
     super.initState();
     final SecureStorage secureStorage = SecureStorage();
     secureStorage.readSecureData("token").then((token) => {
-          PackageCategoryRepoImpl()
-              .getPackageCategory(RestApi.getCategoryPackage, token)
-              .then((value) {
-            setState(() {
-              listPackageCategory = value.result!;
-            });
-          }),
-          PackageRepoImpl()
-              .getActivePackage(RestApi.getActivePackage, token)
-              .then((value) {
-            setState(() {
-              listPackgeActive = value.result!;
-            });
-          }),
+          // PackageCategoryRepoImpl()
+          //     .getPackageCategory(RestApi.getCategoryPackage, token)
+          //     .then((value) {
+          //   setState(() {
+          //     listPackageCategory = value.result!;
+          //   });
+          // }),
+          // PackageRepoImpl()
+          //     .getActivePackage(RestApi.getActivePackage, token)
+          //     .then((value) {
+          //   setState(() {
+          //     listPackgeActive = value.result!;
+          //   });
+          // }),
           ProfileRepoImpl()
               .getProfile(RestApi.profileMyPath, token)
               .then((value) {
@@ -56,6 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    PackageProvider packageProvider = Provider.of<PackageProvider>(context);
+    PackageCategoryProvider packageCategoryProvider =
+        Provider.of<PackageCategoryProvider>(context);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
@@ -147,14 +155,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                    listPackageCategory.isEmpty
+                    packageCategoryProvider.listPackageCategory.isEmpty
                         ? const Center(child: CircularProgressIndicator())
                         : SizedBox(
                             height: 112,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
-                              itemCount: listPackageCategory.length,
+                              itemCount: packageCategoryProvider
+                                  .listPackageCategory.length,
                               itemBuilder: (context, index) {
                                 return Row(
                                   children: [
@@ -166,7 +175,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         child: CardCategoryItem(
                                             packageCategory:
-                                                listPackageCategory[index])),
+                                                packageCategoryProvider
+                                                        .listPackageCategory[
+                                                    index])),
                                   ],
                                 );
                               },
@@ -175,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              listPackgeActive.isEmpty
+              packageProvider.listPackgeActive.isEmpty
                   ? const Center(child: CircularProgressIndicator())
                   : Container(
                       width: size.width,
@@ -199,10 +210,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: ListView.builder(
                                 padding: const EdgeInsets.all(8),
                                 shrinkWrap: true,
-                                itemCount: listPackgeActive.length,
+                                itemCount:
+                                    packageProvider.listPackgeActive.length,
                                 itemBuilder: (context, index) {
                                   return CardPackage(
-                                      package: listPackgeActive[index]);
+                                      package: packageProvider
+                                          .listPackgeActive[index]);
                                 }),
                           )
                         ],

@@ -27,9 +27,10 @@ class LoginProvider with ChangeNotifier {
     ProfileProvider profileProvider =
         Provider.of<ProfileProvider>(context, listen: false);
     AuthRepoImpl()
-        .postLogIn(RestApi.signInPath,
+        .postLogIn(
+            RestApi.signInPath,
             // LoginRequestModel(phone: _phone, password: _password))
-             LoginRequestModel(phone: _phone, password: _password))
+            LoginRequestModel(phone: _phone, password: _password))
         .then((value) async {
       await secureStorage.writeSecureData('token', value.result!.accessToken);
       await secureStorage.writeSecureData(
@@ -53,9 +54,14 @@ class LoginProvider with ChangeNotifier {
     });
   }
 
-  void logout(BuildContext context) async {
-    String accessToken = await secureStorage.readSecureData("token");
-    AuthRepoImpl().logout(RestApi.logout, accessToken);
-    notifyListeners();
+  Future<void> logout(BuildContext context) async {
+    try {
+      String accessToken = await secureStorage.readSecureData("token");
+      AuthRepoImpl().logout(RestApi.logout, accessToken);
+      secureStorage.deleteAll();
+      notifyListeners();
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

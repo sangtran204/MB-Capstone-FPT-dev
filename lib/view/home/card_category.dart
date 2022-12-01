@@ -23,7 +23,7 @@ class _CardCategoryItemState extends State<CardCategoryItem> {
       ),
       child: InkWell(
           onTap: () async {
-            packageProvider.getPackageByCategory(
+            await packageProvider.getPackageByCategory(
                 context, widget.packageCategory!.id);
           },
           child: Column(
