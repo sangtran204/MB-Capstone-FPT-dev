@@ -158,21 +158,21 @@ class PackageProvider with ChangeNotifier {
       try {
         await OrderRepImpl()
             .postOrder(RestApi.createOrder, dataCreateOrder, accessToken);
-        // final url = await OrderRepImpl().getPaymentUrl(
-        //     subId, '43b02def-bf0f-4956-9b05-9f60253a5646', accessToken);
-        // Navigator.push(context,
-        //     PageRouteBuilder(pageBuilder: (_, animation, __) {
-        //   return FadeTransition(
-        //     opacity: animation,
-        //     child: PaymentPage(url: url.result!),
-        //   );
-        // }));
       } catch (e) {
         log(e.toString());
       }
     }
-    //  MaterialPageRoute(builder: (context) => PaymentPage(url: url));
+    if (subId.isNotEmpty) {
+      final url = await OrderRepImpl().getPaymentUrl(
+          subId, '43b02def-bf0f-4956-9b05-9f60253a5646', accessToken);
+      log(url.result!);
+      Navigator.push(context, PageRouteBuilder(pageBuilder: (_, animation, __) {
+        return FadeTransition(
+          opacity: animation,
+          child: PaymentPage(url: url.result!),
+        );
+      }));
+    }
     notifyListeners();
-    // await Navigator.pushReplacementNamed(context, '/ConfirmOrder');
   }
 }

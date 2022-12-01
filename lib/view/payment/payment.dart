@@ -9,17 +9,19 @@ class PaymentPage extends StatefulWidget {
   //     : super(key: key);
   const PaymentPage({Key? key, required this.url}) : super(key: key);
   final String url;
+  
   // final OrdersTours ordersTours;
-
   @override
   State<PaymentPage> createState() => _PaymentPageState();
 }
 
 class _PaymentPageState extends State<PaymentPage> {
+  
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   @override
   Widget build(BuildContext context) {
+    print(widget.url);
     // final orderPro = ref.watch(orderProvider);
     return Scaffold(
       appBar: AppBar(

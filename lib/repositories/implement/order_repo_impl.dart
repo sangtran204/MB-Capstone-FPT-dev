@@ -25,7 +25,6 @@ class OrderRepImpl implements OrderRepo {
     return "Tạo Order thành công";
   }
 
-  @override
   Future<BaseResponseMsg> getPaymentUrl(
       String id, String bankId, String accessToken) async {
     var data = BaseResponseMsg();
