@@ -50,7 +50,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }
@@ -92,6 +92,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       elevation: 16,
       style: const TextStyle(color: Colors.deepPurple),
       underline: Container(
+        width: 100,
+        // margin: EdgeInsets.only(left: 20, right: 20),
         height: 2,
         color: Colors.deepPurpleAccent,
       ),
@@ -102,7 +104,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       items: listStationActive.map<DropdownMenuItem<String>>((Station value) {
         return DropdownMenuItem<String>(
           value: value.id,
-          child: Text(value.name),
+          child: Container(
+            width: 50,
+            child: Text(
+              value.name,
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
         );
       }).toList(),
     );
@@ -274,9 +282,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ],
               ),
             ),
-            body: SingleChildScrollView(
-                child: SizedBox(
-                    height: size.height,
+            body:
+                //  SingleChildScrollView(
+                //     child:
+                Container(
+                    // margin: EdgeInsets.only(bottom: 150),
+                    // height: size.height,
                     width: size.width,
                     child: ListView.builder(
                         itemCount: packageProvider.orderRequest.length,
@@ -288,8 +299,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                 boxShadow: [
                                   BoxShadow(color: Colors.grey, blurRadius: 4)
                                 ]),
-                            child: SizedBox(
-                              height: 160,
+                            child: Container(
+                              height: 200,
+                              width: 200,
                               child: Row(children: <Widget>[
                                 Container(
                                   decoration: const BoxDecoration(
@@ -313,6 +325,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                 ),
                                 Expanded(
                                   child: Container(
+                                    width: 150,
                                     decoration: const BoxDecoration(
                                         border: Border(
                                             right: BorderSide(
@@ -330,7 +343,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                             ),
                                             alignment: Alignment.topCenter,
                                           ),
-                                          SizedBox(
+                                          Container(
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
@@ -401,8 +414,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                       ],
                                                     )),
                                                 Container(
-                                                  // height: 45,
-                                                  // width: 100,
+                                                  height: 45,
+                                                  width: 100,
                                                   padding:
                                                       const EdgeInsets.only(
                                                           left: 8, right: 8),
@@ -478,101 +491,110 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                Column(
-                                  children: [
-                                    const Text(
-                                      'Thời gian giao Hàng',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 16),
-                                    ),
-                                    if (listTimeSlot.isNotEmpty)
-                                      getListTimeSlot(
-                                          packageProvider.orderRequest[index]),
-                                    if (listStationActive.isNotEmpty)
-                                      getListStation(
-                                          packageProvider.orderRequest[index])
-                                    // const SizedBox(
-                                    //   height: 35,
-                                    // ),
-                                    // listStationActive.isEmpty
-                                    //     ?
-                                    // SizedBox(
-                                    //   child: const Center(child: CircularProgressIndicator()),
-                                    //   width: 20,
-                                    //   height: 20,
-                                    // ),
+                                Container(
+                                  // width: 200,
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        'Thời gian giao Hàng',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 16),
+                                      ),
+                                      if (listTimeSlot.isNotEmpty)
+                                        getListTimeSlot(packageProvider
+                                            .orderRequest[index]),
+                                      const Text(
+                                        'Địa điểm giao',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 16),
+                                      ),
+                                      if (listStationActive.isNotEmpty)
+                                        getListStation(
+                                            packageProvider.orderRequest[index])
+                                      // const SizedBox(
+                                      //   height: 35,
+                                      // ),
+                                      // listStationActive.isEmpty
+                                      //     ?
+                                      // SizedBox(
+                                      //   child: const Center(child: CircularProgressIndicator()),
+                                      //   width: 20,
+                                      //   height: 20,
+                                      // ),
 
-                                    // :
-                                    // DropdownButton<Station>(
-                                    //     items: listStationActive.map((Station station) {
-                                    //       return DropdownMenuItem<Station>(
-                                    //         child: Text(
-                                    //           station.name,
-                                    //           style: const TextStyle(color: Colors.black),
-                                    //         ),
-                                    //       );
-                                    //     }).toList(),
-                                    //     onChanged: (Station? newStation) {
-                                    //       setState(() {
-                                    //         selectedStation = newStation!;
-                                    //       });
-                                    //     })
-                                    // SizedBox(
-                                    //     child: DropdownButtonHideUnderline(child: getListStation()),
-                                    //     width: 20,
-                                    //     height: 20,
-                                    //   )
-                                    // DropdownButton<Station>(
-                                    //     // value: _value1,
-                                    //     icon: const Icon(
-                                    //         Icons.arrow_drop_down),
-                                    //     items: listStationActive
-                                    //         .map((Station? station) {
-                                    //       return DropdownMenuItem<
-                                    //           Station>(
-                                    //         child: Text(station.name),
-                                    //         value: station,
-                                    //       );
-                                    //     }),
-                                    //     onChanged: (String? newValue) {
-                                    //       setState(() {
-                                    //         _value1 = newValue!;
-                                    //       });
-                                    //     },
-                                    //   ),
-                                  ],
+                                      // :
+                                      // DropdownButton<Station>(
+                                      //     items: listStationActive.map((Station station) {
+                                      //       return DropdownMenuItem<Station>(
+                                      //         child: Text(
+                                      //           station.name,
+                                      //           style: const TextStyle(color: Colors.black),
+                                      //         ),
+                                      //       );
+                                      //     }).toList(),
+                                      //     onChanged: (Station? newStation) {
+                                      //       setState(() {
+                                      //         selectedStation = newStation!;
+                                      //       });
+                                      //     })
+                                      // SizedBox(
+                                      //     child: DropdownButtonHideUnderline(child: getListStation()),
+                                      //     width: 20,
+                                      //     height: 20,
+                                      //   )
+                                      // DropdownButton<Station>(
+                                      //     // value: _value1,
+                                      //     icon: const Icon(
+                                      //         Icons.arrow_drop_down),
+                                      //     items: listStationActive
+                                      //         .map((Station? station) {
+                                      //       return DropdownMenuItem<
+                                      //           Station>(
+                                      //         child: Text(station.name),
+                                      //         value: station,
+                                      //       );
+                                      //     }),
+                                      //     onChanged: (String? newValue) {
+                                      //       setState(() {
+                                      //         _value1 = newValue!;
+                                      //       });
+                                      //     },
+                                      //   ),
+                                    ],
+                                  ),
                                 ),
                               ]),
                             ),
                           );
                         }))
 
-                // Container(
-                //   width: double.infinity,
-                //   color: Colors.white,
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Text(
-                //         'Sơ lược:',
-                //         style: TextStyle(
-                //             fontSize: 18,
-                //             color: Colors.black,
-                //             fontWeight: FontWeight.bold),
-                //       ),
-                //       Text(
-                //         'Số món đã chọn:',
-                //         style: TextStyle(
-                //             fontSize: 18,
-                //             color: Colors.grey.shade700,
-                //             fontWeight: FontWeight.w500),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // ],
-                // ),
-                // )
-                )));
+            // Container(
+            //   width: double.infinity,
+            //   color: Colors.white,
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Text(
+            //         'Sơ lược:',
+            //         style: TextStyle(
+            //             fontSize: 18,
+            //             color: Colors.black,
+            //             fontWeight: FontWeight.bold),
+            //       ),
+            //       Text(
+            //         'Số món đã chọn:',
+            //         style: TextStyle(
+            //             fontSize: 18,
+            //             color: Colors.grey.shade700,
+            //             fontWeight: FontWeight.w500),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // ],
+            // ),
+            // )
+            // )
+            ));
   }
 }

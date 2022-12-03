@@ -15,7 +15,7 @@ class _CardPackageState extends State<CardPackage> {
   @override
   Widget build(BuildContext context) {
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
-    // Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return Card(
       shape: RoundedRectangleBorder(
         side: const BorderSide(color: Colors.white10, width: 1),
@@ -24,7 +24,7 @@ class _CardPackageState extends State<CardPackage> {
       clipBehavior: Clip.none,
       elevation: 20,
       color: Colors.white,
-      margin: const EdgeInsets.only(top: 32, left: 36, right: 36),
+      margin: const EdgeInsets.only(top: 32, left: 15, right: 15),
       child: InkWell(
         onTap: () async {
           await packageProvider.getPackageDetail(context, widget.package!.id);
@@ -35,11 +35,13 @@ class _CardPackageState extends State<CardPackage> {
           //   );
           // }));
         },
-        child: SizedBox(
+        child: Container(
+          // height: 250,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
+                  height: 150,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
@@ -47,7 +49,7 @@ class _CardPackageState extends State<CardPackage> {
                           fit: BoxFit.fill)),
                   child: Padding(
                       padding: const EdgeInsets.only(
-                          left: 270, top: 110, right: 10, bottom: 10),
+                          left: 180, top: 110, right: 10, bottom: 10),
                       child: Container(
                         decoration: BoxDecoration(
                             color: const Color(0xffffcc33),
@@ -78,6 +80,9 @@ class _CardPackageState extends State<CardPackage> {
                         ),
                       ],
                     ),
+                    const SizedBox(
+                      height: 3,
+                    ),
                     Text(
                       widget.package!.timeFrame!.name,
                       style: TextStyle(
@@ -85,12 +90,18 @@ class _CardPackageState extends State<CardPackage> {
                           fontWeight: FontWeight.w400,
                           color: Colors.grey.shade600),
                     ),
+                    const SizedBox(
+                      height: 3,
+                    ),
                     Text(
                       widget.package!.description,
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           color: Colors.grey.shade600),
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                   ],
                 ),
