@@ -1,14 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mobile_capstone_fpt/components/components.dart';
 import 'package:mobile_capstone_fpt/config/provider/login_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/widgets/date_input_field.dart';
-// import 'package:mobile_capstone_fpt/widgets/phone_input_field.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/constants/app_color.dart';
-import 'package:mobile_capstone_fpt/widgets/date_input_field.dart';
 import 'package:mobile_capstone_fpt/widgets/text_input.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +38,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       DateTime date = DateTime.parse(c);
       dob = date;
+    });
+  }
+
+  File? _image;
+  Future pickImg() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+    final imageTemporary = File(image.path);
+    setState(() {
+      _image = imageTemporary;
     });
   }
 
@@ -103,82 +113,150 @@ class _ProfileScreenState extends State<ProfileScreen> {
               // Positioned(
               Container(
                 padding: EdgeInsets.only(top: 5, left: size.width - 50),
-                height: 150,
+                height: 120,
                 width: size.width,
                 color: kBackgroundColor,
               ),
+              // Positioned(
+              //     top: 50,
+              //     left: size.width / 2 - 65,
+              //     child: Container(
+              //       height: 130,
+              //       width: 130,
+              //       decoration: BoxDecoration(
+              //           // color: Colors.greenAccent,
+              //           borderRadius: BorderRadius.circular(100),
+              //           image: DecorationImage(
+              //               // image: AssetImage('assets/images/fakelogo.png'),
+              //               image: NetworkImage(
+              //                   profileProvider.info.result!.profile.avatar),
+              //               fit: BoxFit.fill)),
+              //     )),
               Positioned(
-                  top: 100,
+                  top: 50,
                   left: size.width / 2 - 65,
-                  child: Container(
-                    height: 130,
-                    width: 130,
-                    decoration: BoxDecoration(
-                        // color: Colors.greenAccent,
-                        borderRadius: BorderRadius.circular(100),
-                        image: DecorationImage(
-                            // image: AssetImage('assets/images/fakelogo.png'),
-                            image: NetworkImage(
-                                profileProvider.info.result!.profile.avatar),
-                            fit: BoxFit.fill)),
+                  child: GestureDetector(
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) {
+                        return StatefulBuilder(
+                          builder: (context, setState) {
+                            return AlertDialog(
+                              title: Text("Thay đổi ảnh đại diện"),
+                              // content: Text(contentText),
+                              content: _image != null
+                                  ? Image.file(
+                                      _image!,
+                                      height: 130,
+                                      width: 130,
+                                    )
+                                  : SizedBox(
+                                      height: 130,
+                                      width: 130,
+                                      child: Icon(Icons.image),
+                                    ),
+                              actions: <Widget>[
+                                TextButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        pickImg();
+                                      });
+                                    },
+                                    child:
+                                        const Icon(Icons.file_upload_outlined)),
+                                TextButton(
+                                  onPressed: () {
+                                    profileProvider.updateAvatar(
+                                        context, _image!);
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("Lưu"),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text(
+                                    "Hủy",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    child: Container(
+                      height: 130,
+                      width: 130,
+                      decoration: BoxDecoration(
+                          color: Colors.greenAccent,
+                          borderRadius: BorderRadius.circular(100),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  profileProvider.info.result!.profile.avatar),
+                              fit: BoxFit.fill)),
+                    ),
                   )),
               Padding(
-                padding: const EdgeInsets.only(top: 230),
+                padding: const EdgeInsets.only(top: 200),
                 child: SizedBox(
-                  height: size.height - 330,
+                  height: size.height,
                   width: size.width,
                   // color: kPrimaryLightColor,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TextInput(
-                          textValue: inputFullName,
-                          hintText:
-                              profileProvider.info.result!.profile.fullName,
-                          textCapitalization: TextCapitalization.words),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      SizedBox(
-                        width: 350,
-                        child: Row(
-                          children: [
-                            phoneFlag(),
-                            const SizedBox(
-                              width: 17,
-                            ),
-                            phoneText(profileProvider.info.result!.phone),
-                          ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 15,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      DateInputField(
-                        input: inputDob,
-                        date: profileProvider.info.result!.profile.dob,
-                      ),
-                      // DateInputField(),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      TextInput(
-                          textValue: inputEmail,
-                          hintText: profileProvider.info.result!.profile.email,
-                          textCapitalization: TextCapitalization.words),
-                      SizedBox(
-                        height: 35,
-                      ),
-                      // UnderPart(title: 'Đổi mật khẩu', navigatorText: navigatorText, onTap: onTap)
-                    ],
+                        TextInput(
+                            textValue: inputFullName,
+                            hintText:
+                                profileProvider.info.result!.profile.fullName,
+                            textCapitalization: TextCapitalization.words),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        SizedBox(
+                          width: 350,
+                          child: Row(
+                            children: [
+                              phoneFlag(),
+                              const SizedBox(
+                                width: 17,
+                              ),
+                              phoneText(profileProvider.info.result!.phone),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        DateInputField(
+                          input: inputDob,
+                          date: profileProvider.info.result!.profile.dob,
+                        ),
+                        // DateInputField(),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        TextInput(
+                            textValue: inputEmail,
+                            hintText:
+                                profileProvider.info.result!.profile.email,
+                            textCapitalization: TextCapitalization.words),
+                        SizedBox(
+                          height: 35,
+                        ),
+                        // UnderPart(title: 'Đổi mật khẩu', navigatorText: navigatorText, onTap: onTap)
+                      ],
+                    ),
                   ),
                 ),
               ),
               Positioned(
-                  top: size.height - 200,
+                  top: size.height - 220,
                   child: Container(
                     height: 100,
                     width: size.width,

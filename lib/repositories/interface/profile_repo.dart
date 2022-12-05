@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:mobile_capstone_fpt/models/response/profile_respone.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/changePass_request.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/update_profile_request.dart';
@@ -10,4 +12,6 @@ abstract class ProfileRepo {
       String url, ProfileRequestModel req, String token);
   Future<MessageResponeModel> changePassword(
       String url, ChangePasswordReqModel req, String token);
+  Future<MessageResponeModel> updateAvatar(String url, String token,
+      Map<String, dynamic> data, Map<String, File> files);
 }

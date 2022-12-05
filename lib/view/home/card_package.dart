@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/models/entity/package.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_format_money_vietnam/flutter_format_money_vietnam.dart';
 
 class CardPackage extends StatefulWidget {
   const CardPackage({Key? key, this.package}) : super(key: key);
@@ -28,7 +29,7 @@ class _CardPackageState extends State<CardPackage> {
       child: InkWell(
         onTap: () async {
           await packageProvider.getPackageDetail(context, widget.package!.id);
-          // await Navigator.pushReplacementNamed(context, '/PackageDetail');
+          await Navigator.pushReplacementNamed(context, '/PackageDetail');
           // Navigator.push(context, MaterialPageRoute(builder: (context) {
           //   return PackageDetailScreen(
           //     package: widget.package,
@@ -49,17 +50,19 @@ class _CardPackageState extends State<CardPackage> {
                           fit: BoxFit.fill)),
                   child: Padding(
                       padding: const EdgeInsets.only(
-                          left: 180, top: 110, right: 10, bottom: 10),
+                          left: 220, top: 110, right: 10, bottom: 10),
                       child: Container(
                         decoration: BoxDecoration(
                             color: const Color(0xffffcc33),
                             borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.all(5),
-                        child: Text(
-                          '${widget.package!.price.toString()} đ',
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
+                        child: Center(
+                          child: Text(
+                            '${widget.package!.price.toString().toVND()}',
+                            style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ))),

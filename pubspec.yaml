@@ -50,6 +50,8 @@ dependencies:
   intl: ^0.17.0
   jiffy: ^5.0.0
   webview_flutter: ^3.0.4
+  flutter_format_money_vietnam: ^0.0.2
+  image_picker: ^0.8.6
   # cached_network_image: ^2.5.1
 dev_dependencies:
   flutter_test:

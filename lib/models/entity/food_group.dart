@@ -3,7 +3,6 @@ class FoodGroup {
     required this.id,
     required this.name,
     required this.description,
-    required this.totalFood,
     required this.status,
     // this.foods,
   });
@@ -11,7 +10,6 @@ class FoodGroup {
   String id;
   String name;
   String description;
-  int totalFood;
   String status;
   // List<Food>? foods;
 
@@ -19,7 +17,6 @@ class FoodGroup {
         id: json["id"],
         name: json["name"],
         description: json["description"],
-        totalFood: json["totalFood"],
         status: json["status"],
         // foods: List<Food>.from(json["foods"].map((x) => Food.fromJson(x))),
       );
@@ -28,7 +25,6 @@ class FoodGroup {
         "id": id,
         "name": name,
         "description": description,
-        "totalFood": totalFood,
         "status": status,
         // "foods": List<dynamic>.from(foods!.map((x) => x.toJson())),
       };

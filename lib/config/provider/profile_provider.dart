@@ -1,12 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
+import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/profile_repo_impl.dart';
 import 'package:mobile_capstone_fpt/models/response/profile_respone.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/changePass_request.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/update_profile_request.dart';
 import 'package:mobile_capstone_fpt/repositories/response/message_respone.dart';
-
 
 class ProfileProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
@@ -20,8 +22,8 @@ class ProfileProvider with ChangeNotifier {
         .then((value) {
       info = value;
       // log(info.toJson().toString());
+      notifyListeners();
     });
-    notifyListeners();
   }
 
   void updateProfile(BuildContext context, _fullName, _dob, _email) async {
@@ -33,8 +35,8 @@ class ProfileProvider with ChangeNotifier {
             accessToken)
         .then((value) {
       msg = value;
+      notifyListeners();
     });
-    notifyListeners();
   }
 
   void changePassword(BuildContext context, _oldPassword, _newPassword) async {
@@ -47,8 +49,22 @@ class ProfileProvider with ChangeNotifier {
             accessToken)
         .then((value) {
       msg = value;
-      Navigator.pushReplacementNamed(context, '/profile');
+      Navigator.pushReplacementNamed(context, '/Profile');
+      notifyListeners();
     });
-    notifyListeners();
+  }
+
+  void updateAvatar(BuildContext context, File _img) async {
+    String accessToken = await secureStorage.readSecureData('token');
+    ProfileRepoImpl().updateAvatar(
+        RestApi.updateAvatar,
+        accessToken,
+        {'name': 'iciruit', 'des': 'description'},
+        {'avatar': _img}).then((value) async {
+      msg = value;
+      getProfile(context);
+      Navigator.pushReplacementNamed(context, '/Profile');
+      notifyListeners();
+    });
   }
 }

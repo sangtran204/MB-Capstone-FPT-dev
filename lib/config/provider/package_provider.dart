@@ -35,8 +35,8 @@ class PackageProvider with ChangeNotifier {
         .getActivePackage(RestApi.getActivePackage, accessToken)
         .then((value) {
       listPackgeActive = value.result!;
+      notifyListeners();
     });
-    notifyListeners();
   }
 
   clearBackPackage() async {
@@ -85,10 +85,10 @@ class PackageProvider with ChangeNotifier {
         orderRequest.sort(mySortComparisonItemCode);
 
         Navigator.pushReplacementNamed(context, '/PackageDetail');
+        notifyListeners();
       } else {
         showToastFail("Something when wrong ...");
       }
-      notifyListeners();
     });
   }
 
