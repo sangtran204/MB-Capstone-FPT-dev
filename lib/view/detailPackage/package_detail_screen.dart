@@ -5,6 +5,7 @@ import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/view/detailPackage/package_food.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_format_money_vietnam/flutter_format_money_vietnam.dart';
 
 class PackageDetailScreen extends StatefulWidget {
   // const PackageDetailScreen({Key? key, this.package}) : super(key: key);
@@ -47,13 +48,15 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
           children: [
             Expanded(
                 child: CustomButton(
-              child: Text(
-                '${packageProvider.packageDetail!.price} VNĐ',
-                style: textTheme.headline6!.copyWith(
-                  color: kblackColor,
-                ),
-                textAlign: TextAlign.center,
-              ),
+              child: packageProvider.packageDetail?.price == null
+                  ? const Text('0 VNĐ')
+                  : Text(
+                      '${packageProvider.packageDetail!.price.toString().toVND()}',
+                      style: textTheme.headline6!.copyWith(
+                        color: kblackColor,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
               borderColor: kblackColor,
               onTap: () {
                 // handlePopScreen(context);
@@ -90,9 +93,9 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
           children: [
             Positioned(
                 top: 0,
-                bottom: size.height * 0.08,
+                bottom: 0,
                 child: Container(
-                  height: size.height * 0.9,
+                  height: size.height,
                   width: size.width,
                   color: aBackgroundColor,
                   child: SingleChildScrollView(
@@ -101,13 +104,17 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                     children: [
                       SizedBox(
                           width: size.width,
+                          height: 200,
                           child: Stack(
                             children: [
-                              Image.network(
-                                  packageProvider.packageDetail!.image,
-                                  width: size.width,
-                                  fit: BoxFit.fill,
-                                  height: 250),
+                              packageProvider.packageDetail == null
+                                  ? Image.asset(
+                                      'assets/images/image-default.png')
+                                  : Image.network(
+                                      packageProvider.packageDetail!.image,
+                                      width: size.width,
+                                      fit: BoxFit.fill,
+                                      height: 250),
                               Positioned(
                                   bottom: 5,
                                   left: 20,
@@ -118,17 +125,23 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                               BorderRadius.circular(20)),
                                       child: Padding(
                                         padding: const EdgeInsets.all(10),
-                                        child: Text(
-                                          packageProvider.packageDetail!.name,
-                                          style: const TextStyle(
-                                              fontSize: 26,
-                                              fontWeight: FontWeight.w500),
-                                        ),
+                                        child: packageProvider.packageDetail ==
+                                                null
+                                            ? const Text('Tên gói')
+                                            : Text(
+                                                packageProvider
+                                                    .packageDetail!.name,
+                                                style: const TextStyle(
+                                                    fontSize: 26,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
                                       )))
                             ],
                           )),
                       Container(
                         width: size.width,
+                        // height: size.height * ,
                         decoration:
                             BoxDecoration(color: aBackgroundColor, boxShadow: [
                           BoxShadow(
@@ -160,38 +173,100 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(packageProvider.packageDetail!.name,
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.black87)),
-                                    Text(
-                                        'Thời gian bán: Từ ' +
-                                            packageProvider
-                                                .packageDetail!.startSale
-                                                .toString()
-                                                .substring(0, 10) +
-                                            ' đến ' +
-                                            packageProvider
-                                                .packageDetail!.endSale
-                                                .toString()
-                                                .substring(0, 10),
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.black87)),
-                                    Text(
-                                        'Món ăn: ${packageProvider.packageDetail!.totalFood}',
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.black87)),
-                                    Text(
-                                        'Mô tả: ${packageProvider.packageDetail!.description}',
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.black87)),
+                                    // packageProvider.packageDetail == null
+                                    //     ? const Text('Tên gói')
+                                    //     : Text(
+                                    //         packageProvider.packageDetail!.name,
+                                    //         style: const TextStyle(
+                                    //             fontSize: 16,
+                                    //             fontWeight: FontWeight.w300,
+                                    //             color: Colors.black87)),
+                                    packageProvider.packageDetail == null
+                                        ? const Text('00:00')
+                                        : Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text('Thời gian bán: ',
+                                                  style: const TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black87)),
+                                              Text(
+                                                  packageProvider.packageDetail!
+                                                          .startSale
+                                                          .toString()
+                                                          .substring(5, 10) +
+                                                      ' --> ' +
+                                                      packageProvider
+                                                          .packageDetail!
+                                                          .endSale
+                                                          .toString()
+                                                          .substring(5, 10),
+                                                  style: const TextStyle(
+                                                      // fontSize: 16,
+                                                      // fontWeight:
+                                                      //     FontWeight.w300,
+                                                      color: Colors.black87)),
+                                            ],
+                                          ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    packageProvider.packageDetail == null
+                                        ? const Text('0')
+                                        : Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text('Số món được mua:',
+                                                  style: const TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black87)),
+                                              Text(
+                                                  '${packageProvider.packageDetail!.totalFood}',
+                                                  style: const TextStyle(
+                                                      fontSize: 16,
+                                                      // fontWeight:
+                                                      //     FontWeight.w300,
+                                                      color: Colors.black87)),
+                                            ],
+                                          ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    packageProvider.packageDetail == null
+                                        ? const Text('Mô tả.')
+                                        : Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text('Mô tả:',
+                                                  style: const TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black87)),
+                                              Container(
+                                                width: 270,
+                                                child: Text(
+                                                    '${packageProvider.packageDetail!.description}',
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textAlign:
+                                                        TextAlign.justify,
+                                                    style: const TextStyle(
+                                                        fontSize: 16,
+                                                        // fontWeight:
+                                                        //     FontWeight.w300,
+                                                        color: Colors.black87)),
+                                              ),
+                                            ],
+                                          ),
                                   ],
                                 ),
                               )
@@ -200,18 +275,16 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                         ),
                       ),
                       const Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.only(top: 10),
                         child: Text(
-                          'Món ăn có thể mua',
+                          'Các món ăn trong gói',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                       SizedBox(
-                        height: size.height * 0.4,
+                        height: size.height * 0.35,
                         width: size.width,
-                        // color: Colors.green,
-
                         child: Padding(
                             padding: const EdgeInsets.all(16),
                             child: GridView.count(

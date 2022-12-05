@@ -13,7 +13,7 @@ class PackageCategoryProvider with ChangeNotifier {
         .getPackageCategory(RestApi.getCategoryPackage, accessToken)
         .then((value) {
       listPackageCategory = value.result!;
+      notifyListeners();
     });
-    notifyListeners();
   }
 }

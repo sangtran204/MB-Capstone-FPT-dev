@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               voidCallback: () {
                                 loginProvider.submitData(
                                     context,
-                                    phoneNumber.replaceAll('+84', ''),
+                                    phoneNumber.replaceAll('+84', '0'),
                                     password);
                                 // loginProvider.submitData(
                                 //     context, '0392317266', '123456');

@@ -9,14 +9,13 @@ class PaymentPage extends StatefulWidget {
   //     : super(key: key);
   const PaymentPage({Key? key, required this.url}) : super(key: key);
   final String url;
-  
+
   // final OrdersTours ordersTours;
   @override
   State<PaymentPage> createState() => _PaymentPageState();
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-  
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   @override
@@ -54,6 +53,7 @@ class _PaymentPageState extends State<PaymentPage> {
             var statusCode = uri.queryParameters['vnp_TransactionStatus'];
             if (statusCode == '00') {
               String queryParam = request.url.split('?')[1];
+              Navigator.pushReplacementNamed(context, '/History');
               // orderPro.updateStatusPaymentUrl(
               //     widget.ordersTours, context, queryParam);
               // Navigator.of(context).pushAndRemoveUntil(
@@ -63,6 +63,7 @@ class _PaymentPageState extends State<PaymentPage> {
               //             )),
               //     (Route<dynamic> route) => false);
             } else {
+              Navigator.pushReplacementNamed(context, '/History');
               log("Payment thất bại");
               // Navigator.of(context).pushAndRemoveUntil(
               //     MaterialPageRoute(

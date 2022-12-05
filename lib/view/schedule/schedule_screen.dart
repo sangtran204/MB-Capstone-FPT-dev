@@ -28,6 +28,7 @@ import 'package:mobile_capstone_fpt/view/schedule/card_food.dart';
 // import 'package:mobile_capstone_fpt/models/entity/package_item.dart';
 // import 'package:mobile_capstone_fpt/models/entity/time_slot.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_format_money_vietnam/flutter_format_money_vietnam.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({Key? key, this.packageDetail}) : super(key: key);
@@ -50,7 +51,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }
@@ -88,12 +89,17 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         Provider.of<PackageProvider>(context, listen: false);
     return DropdownButton<String>(
       value: req.stationId,
-      icon: const Icon(Icons.arrow_downward),
+      icon: const Icon(
+        Icons.arrow_downward,
+        size: 18,
+      ),
       elevation: 16,
       style: const TextStyle(color: Colors.deepPurple),
       underline: Container(
+        // width: 120,
+        // margin: EdgeInsets.only(left: 20, right: 20),
         height: 2,
-        color: Colors.deepPurpleAccent,
+        color: kBackgroundColor,
       ),
       onChanged: (String? value) {
         packageProvider.setTimeSlotAndStation(
@@ -102,7 +108,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       items: listStationActive.map<DropdownMenuItem<String>>((Station value) {
         return DropdownMenuItem<String>(
           value: value.id,
-          child: Text(value.name),
+          child: Container(
+            width: 80,
+            child: Text(
+              value.name,
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
         );
       }).toList(),
     );
@@ -113,12 +125,15 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         Provider.of<PackageProvider>(context, listen: false);
     return DropdownButton<String>(
       value: req.timeSlotId,
-      icon: const Icon(Icons.arrow_downward),
-      elevation: 16,
+      icon: const Icon(
+        Icons.arrow_downward,
+        size: 18,
+      ),
+      // elevation: 1,
       style: const TextStyle(color: Colors.deepPurple),
       underline: Container(
         height: 2,
-        color: Colors.deepPurpleAccent,
+        color: kBackgroundColor,
       ),
       onChanged: (String? value) {
         packageProvider.setTimeSlotAndStation(
@@ -127,7 +142,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       items: listTimeSlot.map<DropdownMenuItem<String>>((TimeSlot value) {
         return DropdownMenuItem<String>(
           value: value.id,
-          child: Text(value.startTime + '-' + value.endTime),
+          child: Container(
+            width: 80,
+            child: Text(value.startTime.substring(0, 5) +
+                '-' +
+                value.endTime.substring(0, 5)),
+          ),
         );
       }).toList(),
     );
@@ -146,7 +166,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               return AlertDialog(
                 title: const Text('Chọn 1 món'),
                 content: SizedBox(
-                    height: size.height,
+                    height: 350,
                     width: size.width,
                     child: ListView.builder(
                         shrinkWrap: true,
@@ -220,6 +240,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     }
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
               backgroundColor: kBackgroundColor,
@@ -245,7 +266,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   Expanded(
                       child: CustomButton(
                     child: Text(
-                      '${packageProvider.packageDetail!.price} VNĐ',
+                      '${packageProvider.packageDetail!.price.toString().toVND()}',
                       style: textTheme.headline6!.copyWith(
                         color: kblackColor,
                       ),
@@ -274,9 +295,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ],
               ),
             ),
-            body: SingleChildScrollView(
-                child: SizedBox(
-                    height: size.height,
+            body:
+                //  SingleChildScrollView(
+                //     child:
+                Container(
+                    // margin: EdgeInsets.only(bottom: 150),
+                    // height: size.height,
                     width: size.width,
                     child: ListView.builder(
                         itemCount: packageProvider.orderRequest.length,
@@ -288,31 +312,41 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                 boxShadow: [
                                   BoxShadow(color: Colors.grey, blurRadius: 4)
                                 ]),
-                            child: SizedBox(
-                              height: 160,
+                            child: Container(
+                              height: 155,
+                              width: 200,
                               child: Row(children: <Widget>[
                                 Container(
+                                  width: 60,
                                   decoration: const BoxDecoration(
                                       border: Border(
                                           right: BorderSide(
                                               width: 1, color: Colors.grey))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: SizedBox(
-                                      height: 150,
-                                      width: 50,
-                                      child: Text(
-                                        nameOfItem(packageProvider
-                                            .orderRequest[index].itemCode!),
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                  child: Center(
+                                    // padding: const EdgeInsets.only(top: 70),
+                                    child: Text(
+                                      nameOfItem(packageProvider
+                                          .orderRequest[index].itemCode!),
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
+                                    // child: SizedBox(
+                                    //   height: 150,
+                                    //   width: 50,
+                                    //   child: Text(
+                                    //     nameOfItem(packageProvider
+                                    //         .orderRequest[index].itemCode!),
+                                    //     style: const TextStyle(
+                                    //         fontSize: 18,
+                                    //         fontWeight: FontWeight.bold),
+                                    //   ),
+                                    // ),
                                   ),
                                 ),
                                 Expanded(
                                   child: Container(
+                                    width: 150,
                                     decoration: const BoxDecoration(
                                         border: Border(
                                             right: BorderSide(
@@ -330,7 +364,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                             ),
                                             alignment: Alignment.topCenter,
                                           ),
-                                          SizedBox(
+                                          Container(
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
@@ -343,17 +377,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                     child: Column(
                                                       children: [
                                                         const SizedBox(
-                                                          height: 5,
+                                                          height: 7,
                                                         ),
-                                                        // selectFood == null
-                                                        //     ? const SizedBox(
-                                                        //         child: Image(
-                                                        //         fit: BoxFit.cover,
-                                                        //         height: 45,
-                                                        //         width: 45,
-                                                        //         image: AssetImage('assets/images/salad1.jpg'),
-                                                        //       ))
-                                                        // :
                                                         packageProvider
                                                                     .orderRequest[
                                                                         index]
@@ -366,7 +391,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                                 height: 45,
                                                                 width: 45,
                                                                 image: AssetImage(
-                                                                    'assets/images/salad1.jpg'),
+                                                                    'assets/images/image-default.png'),
                                                               ))
                                                             : SizedBox(
                                                                 child: Image(
@@ -382,6 +407,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                                       .imageFood!,
                                                                 ),
                                                               )),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
                                                         Text(
                                                           packageProvider
                                                                   .orderRequest[
@@ -393,8 +421,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                           style:
                                                               const TextStyle(
                                                             fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.bold,
                                                             color: Colors.grey,
                                                           ),
                                                         )
@@ -405,7 +431,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                   // width: 100,
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          left: 8, right: 8),
+                                                          left: 8, right: 15),
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.end,
@@ -435,8 +461,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                       //   width: 10,
                                                       // ),
                                                       Align(
-                                                        alignment: Alignment
-                                                            .bottomRight,
+                                                        alignment:
+                                                            Alignment.center,
                                                         child: Container(
                                                           height: 30,
                                                           width: 30,
@@ -458,7 +484,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                                       .packageItemId!);
                                                             },
                                                             icon: const Icon(
-                                                                Icons.add),
+                                                              Icons.add,
+                                                            ),
                                                             color: Colors.black,
                                                             iconSize: 15,
                                                           ),
@@ -478,101 +505,119 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                Column(
-                                  children: [
-                                    const Text(
-                                      'Thời gian giao Hàng',
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 16),
-                                    ),
-                                    if (listTimeSlot.isNotEmpty)
-                                      getListTimeSlot(
-                                          packageProvider.orderRequest[index]),
-                                    if (listStationActive.isNotEmpty)
-                                      getListStation(
-                                          packageProvider.orderRequest[index])
-                                    // const SizedBox(
-                                    //   height: 35,
-                                    // ),
-                                    // listStationActive.isEmpty
-                                    //     ?
-                                    // SizedBox(
-                                    //   child: const Center(child: CircularProgressIndicator()),
-                                    //   width: 20,
-                                    //   height: 20,
-                                    // ),
+                                Container(
+                                  width: 120,
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        'Thời gian giao',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 16),
+                                      ),
+                                      // const SizedBox(
+                                      //   height: 5,
+                                      // ),
+                                      if (listTimeSlot.isNotEmpty)
+                                        getListTimeSlot(packageProvider
+                                            .orderRequest[index]),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const Text(
+                                        'Địa điểm giao',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 16),
+                                      ),
+                                      // const SizedBox(
+                                      //   height: 5,
+                                      // ),
+                                      if (listStationActive.isNotEmpty)
+                                        getListStation(
+                                            packageProvider.orderRequest[index])
+                                      // const SizedBox(
+                                      //   height: 35,
+                                      // ),
+                                      // listStationActive.isEmpty
+                                      //     ?
+                                      // SizedBox(
+                                      //   child: const Center(child: CircularProgressIndicator()),
+                                      //   width: 20,
+                                      //   height: 20,
+                                      // ),
 
-                                    // :
-                                    // DropdownButton<Station>(
-                                    //     items: listStationActive.map((Station station) {
-                                    //       return DropdownMenuItem<Station>(
-                                    //         child: Text(
-                                    //           station.name,
-                                    //           style: const TextStyle(color: Colors.black),
-                                    //         ),
-                                    //       );
-                                    //     }).toList(),
-                                    //     onChanged: (Station? newStation) {
-                                    //       setState(() {
-                                    //         selectedStation = newStation!;
-                                    //       });
-                                    //     })
-                                    // SizedBox(
-                                    //     child: DropdownButtonHideUnderline(child: getListStation()),
-                                    //     width: 20,
-                                    //     height: 20,
-                                    //   )
-                                    // DropdownButton<Station>(
-                                    //     // value: _value1,
-                                    //     icon: const Icon(
-                                    //         Icons.arrow_drop_down),
-                                    //     items: listStationActive
-                                    //         .map((Station? station) {
-                                    //       return DropdownMenuItem<
-                                    //           Station>(
-                                    //         child: Text(station.name),
-                                    //         value: station,
-                                    //       );
-                                    //     }),
-                                    //     onChanged: (String? newValue) {
-                                    //       setState(() {
-                                    //         _value1 = newValue!;
-                                    //       });
-                                    //     },
-                                    //   ),
-                                  ],
+                                      // :
+                                      // DropdownButton<Station>(
+                                      //     items: listStationActive.map((Station station) {
+                                      //       return DropdownMenuItem<Station>(
+                                      //         child: Text(
+                                      //           station.name,
+                                      //           style: const TextStyle(color: Colors.black),
+                                      //         ),
+                                      //       );
+                                      //     }).toList(),
+                                      //     onChanged: (Station? newStation) {
+                                      //       setState(() {
+                                      //         selectedStation = newStation!;
+                                      //       });
+                                      //     })
+                                      // SizedBox(
+                                      //     child: DropdownButtonHideUnderline(child: getListStation()),
+                                      //     width: 20,
+                                      //     height: 20,
+                                      //   )
+                                      // DropdownButton<Station>(
+                                      //     // value: _value1,
+                                      //     icon: const Icon(
+                                      //         Icons.arrow_drop_down),
+                                      //     items: listStationActive
+                                      //         .map((Station? station) {
+                                      //       return DropdownMenuItem<
+                                      //           Station>(
+                                      //         child: Text(station.name),
+                                      //         value: station,
+                                      //       );
+                                      //     }),
+                                      //     onChanged: (String? newValue) {
+                                      //       setState(() {
+                                      //         _value1 = newValue!;
+                                      //       });
+                                      //     },
+                                      //   ),
+                                    ],
+                                  ),
                                 ),
                               ]),
                             ),
                           );
                         }))
 
-                // Container(
-                //   width: double.infinity,
-                //   color: Colors.white,
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Text(
-                //         'Sơ lược:',
-                //         style: TextStyle(
-                //             fontSize: 18,
-                //             color: Colors.black,
-                //             fontWeight: FontWeight.bold),
-                //       ),
-                //       Text(
-                //         'Số món đã chọn:',
-                //         style: TextStyle(
-                //             fontSize: 18,
-                //             color: Colors.grey.shade700,
-                //             fontWeight: FontWeight.w500),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // ],
-                // ),
-                // )
-                )));
+            // Container(
+            //   width: double.infinity,
+            //   color: Colors.white,
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Text(
+            //         'Sơ lược:',
+            //         style: TextStyle(
+            //             fontSize: 18,
+            //             color: Colors.black,
+            //             fontWeight: FontWeight.bold),
+            //       ),
+            //       Text(
+            //         'Số món đã chọn:',
+            //         style: TextStyle(
+            //             fontSize: 18,
+            //             color: Colors.grey.shade700,
+            //             fontWeight: FontWeight.w500),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // ],
+            // ),
+            // )
+            // )
+            ));
   }
 }

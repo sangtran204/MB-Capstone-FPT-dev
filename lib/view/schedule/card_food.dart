@@ -12,6 +12,7 @@ class CardFood extends StatefulWidget {
 class _CardFoodState extends State<CardFood> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Card(
       shape: RoundedRectangleBorder(
         side: BorderSide(
@@ -20,15 +21,15 @@ class _CardFoodState extends State<CardFood> {
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
       child: SizedBox(
-        height: 90,
-        width: 360,
+        height: 70,
+        // width: size.width * 0.5,
         // color: Colors.purple,
 
         child: Row(
           children: [
             Container(
-              height: 100,
-              width: 130,
+              height: 70,
+              width: 100,
               decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12),
@@ -39,15 +40,19 @@ class _CardFoodState extends State<CardFood> {
                       ),
                       fit: BoxFit.cover)),
             ),
+            const SizedBox(
+              width: 5,
+            ),
             Container(
                 height: 100,
-                width: 170,
+                width: 150,
                 padding: const EdgeInsets.only(top: 25),
                 child: Text(
                   widget.food!.name,
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.w400),
                   textAlign: TextAlign.center,
+                  maxLines: 2,
                 )),
           ],
         ),

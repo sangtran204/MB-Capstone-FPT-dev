@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:path/path.dart';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
@@ -65,6 +66,32 @@ class ProfileRepoImpl implements ProfileRepo {
         showToastFail("Cập nhật thất bại!");
       }
     }
+    return result;
+  }
+
+  @override
+  Future<MessageResponeModel> updateAvatar(String url, String token,
+      Map<String, dynamic> data, Map<String, File> files) async {
+    var result = MessageResponeModel();
+    Map<String, MultipartFile> fileMap = {};
+    for (MapEntry fileEntry in files.entries) {
+      File file = fileEntry.value;
+      String fileName = basename(file.path);
+      fileMap[fileEntry.key] = MultipartFile(
+          file.openRead(), await file.length(),
+          filename: fileName);
+    }
+    data.addAll(fileMap);
+    var formData = FormData.fromMap(data);
+    Response response = await Dio().put(
+      url,
+      options: Options(
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+          contentType: 'multipart/form-data'),
+      data: formData,
+    );
+    result = messageResponeModelFromJson(jsonEncode(response.data));
+    showToastSuccess('Cập nhật ảnh thành công');
     return result;
   }
 }

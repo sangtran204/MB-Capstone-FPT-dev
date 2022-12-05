@@ -27,6 +27,7 @@ class RestApi {
   //
   static const String logout = '$serverPath/auths/logout';
   static const String changePassword = '$serverPath/accounts/changePassword';
+  static const String updateAvatar = '$serverPath/profiles/avatar';
   // static const String getSubByStatus =
   //     '$serverPath/subscriptions/customer/getSubscription?status=';
   //something
