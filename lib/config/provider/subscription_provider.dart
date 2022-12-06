@@ -19,7 +19,6 @@ class SubscriptionProvider with ChangeNotifier {
     SubRepImpl()
         .postSub(RestApi.createSub, data, accessToken)
         .then((value) async {
-      log(value.result!.id);
       secureStorage.writeSecureData("idSubscription", value.result!.id);
       showToastSuccess("Đã chọn gói");
       await Navigator.pushReplacementNamed(context, '/SchedulePage');

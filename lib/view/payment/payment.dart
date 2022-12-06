@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
+import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentPage extends StatefulWidget {
@@ -20,6 +22,8 @@ class _PaymentPageState extends State<PaymentPage> {
       Completer<WebViewController>();
   @override
   Widget build(BuildContext context) {
+    PackageProvider packageProvider = Provider.of<PackageProvider>(context);
+
     // final orderPro = ref.watch(orderProvider);
     return Scaffold(
       appBar: AppBar(
@@ -29,8 +33,11 @@ class _PaymentPageState extends State<PaymentPage> {
         centerTitle: true,
         leading: BackButton(
           color: kblackColor,
-          onPressed: () {
+          onPressed: () async {
             log("Cancel Payment");
+            await packageProvider.clearBackPackage();
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/HomePage', (route) => false);
             // if (!orderPro.buttonCancelPayment) {
             //   orderPro.cancelNotPayment(
             //       context, widget.ordersTours.id!, 'Non Payment');
@@ -46,14 +53,15 @@ class _PaymentPageState extends State<PaymentPage> {
         },
         onProgress: (int progress) {},
         javascriptChannels: const <JavascriptChannel>{},
-        navigationDelegate: (NavigationRequest request) {
+        navigationDelegate: (NavigationRequest request) async {
           if (request.url
               .startsWith('http://14.225.205.162:2004/subscriptions/payment')) {
             var uri = Uri.parse(request.url);
             var statusCode = uri.queryParameters['vnp_TransactionStatus'];
+            // await Navigator.pushReplacementNamed(context, '/History');
+            // showToastSuccess("Thanh toán thành công");
             if (statusCode == '00') {
               String queryParam = request.url.split('?')[1];
-              Navigator.pushReplacementNamed(context, '/History');
               // orderPro.updateStatusPaymentUrl(
               //     widget.ordersTours, context, queryParam);
               // Navigator.of(context).pushAndRemoveUntil(

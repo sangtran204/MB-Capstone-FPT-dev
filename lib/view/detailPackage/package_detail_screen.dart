@@ -8,10 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_format_money_vietnam/flutter_format_money_vietnam.dart';
 
 class PackageDetailScreen extends StatefulWidget {
-  // const PackageDetailScreen({Key? key, this.package}) : super(key: key);
   const PackageDetailScreen({Key? key}) : super(key: key);
-
-  // final Package? package;
   @override
   State<PackageDetailScreen> createState() => _PackageDetailScreenState();
 }
@@ -51,7 +48,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
               child: packageProvider.packageDetail?.price == null
                   ? const Text('0 VNĐ')
                   : Text(
-                      '${packageProvider.packageDetail!.price.toString().toVND()}',
+                      packageProvider.packageDetail!.price.toString().toVND(),
                       style: textTheme.headline6!.copyWith(
                         color: kblackColor,
                       ),
@@ -187,8 +184,8 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text('Thời gian bán: ',
-                                                  style: const TextStyle(
+                                              const Text('Thời gian bán: ',
+                                                  style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -220,8 +217,8 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text('Số món được mua:',
-                                                  style: const TextStyle(
+                                              const Text('Số món được mua:',
+                                                  style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -242,18 +239,20 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                         ? const Text('Mô tả.')
                                         : Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
-                                              Text('Mô tả:',
-                                                  style: const TextStyle(
+                                              const Text('Mô tả:',
+                                                  style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black87)),
-                                              Container(
+                                              SizedBox(
                                                 width: 270,
                                                 child: Text(
-                                                    '${packageProvider.packageDetail!.description}',
+                                                    packageProvider
+                                                        .packageDetail!
+                                                        .description,
                                                     maxLines: 2,
                                                     overflow:
                                                         TextOverflow.ellipsis,
@@ -286,18 +285,19 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                         height: size.height * 0.35,
                         width: size.width,
                         child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: GridView.count(
-                              crossAxisCount: 2,
-                              padding: const EdgeInsets.all(8),
-                              mainAxisSpacing: 20,
-                              crossAxisSpacing: 20,
-                              children: const [
-                                PackageFood(),
-                                PackageFood(),
-                                PackageFood(),
-                              ],
-                            )),
+                            padding: const EdgeInsets.only(bottom: 20, top: 4),
+                            child: GridView.builder(
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                ),
+                                itemCount:
+                                    packageProvider.listPackageFood.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return PackageFood(
+                                      food: packageProvider
+                                          .listPackageFood[index]);
+                                })),
                       ),
                     ],
                   )),

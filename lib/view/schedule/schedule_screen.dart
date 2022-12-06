@@ -5,22 +5,22 @@ import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 // import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mobile_capstone_fpt/components/custom_button.dart';
 import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
-import 'package:mobile_capstone_fpt/config/provider/order_provider.dart';
+// import 'package:mobile_capstone_fpt/config/provider/order_provider.dart';
 // import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 // import 'package:mobile_capstone_fpt/config/provider/time_slot_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
-import 'package:mobile_capstone_fpt/models/entity/food.dart';
+// import 'package:mobile_capstone_fpt/models/entity/food.dart';
 import 'package:mobile_capstone_fpt/models/entity/order.dart';
 
 import 'package:mobile_capstone_fpt/models/entity/package_detail.dart';
-import 'package:mobile_capstone_fpt/models/entity/package_item.dart';
+// import 'package:mobile_capstone_fpt/models/entity/package_item.dart';
 import 'package:mobile_capstone_fpt/models/entity/station.dart';
 import 'package:mobile_capstone_fpt/models/entity/time_slot.dart';
 import 'package:mobile_capstone_fpt/models/request/create_order_req.dart';
-import 'package:mobile_capstone_fpt/models/response/station_res.dart';
-import 'package:mobile_capstone_fpt/models/response/time_slot.res.dart';
+// import 'package:mobile_capstone_fpt/models/response/station_res.dart';
+// import 'package:mobile_capstone_fpt/models/response/time_slot.res.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/station_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/time_slot_impl.dart';
 import 'package:mobile_capstone_fpt/view/schedule/card_food.dart';
@@ -45,13 +45,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   // Station? selectedStation;
   // Food? selectFood;
 
-  // String _value = '0';
   final SecureStorage secureStorage = SecureStorage();
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }
@@ -94,7 +93,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         size: 18,
       ),
       elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
+      // style: const TextStyle(color: Colors.deepPurple),
       underline: Container(
         // width: 120,
         // margin: EdgeInsets.only(left: 20, right: 20),
@@ -112,7 +111,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             width: 80,
             child: Text(
               value.name,
-              style: TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 12),
             ),
           ),
         );
@@ -130,7 +129,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         size: 18,
       ),
       // elevation: 1,
-      style: const TextStyle(color: Colors.deepPurple),
+      style: const TextStyle(color: kblackColor),
       underline: Container(
         height: 2,
         color: kBackgroundColor,
@@ -212,7 +211,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
     FoodGroupProvider foodGroupProvider =
         Provider.of<FoodGroupProvider>(context);
-    // OrderProvider orderProvider = Provider.of<OrderProvider>(context);
 
     String nameOfItem(int itemCode) {
       if (itemCode > 18 || itemCode < 1) return "Invalid";
@@ -247,7 +245,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               leading: BackButton(
                 onPressed: () async {
                   // Navigator.pop(context);
-                  packageProvider.clearBackPackage();
+                  await packageProvider.clearBackPackage();
                   Navigator.pushNamedAndRemoveUntil(
                       context, "/HomePage", (route) => false);
                 },
@@ -266,7 +264,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   Expanded(
                       child: CustomButton(
                     child: Text(
-                      '${packageProvider.packageDetail!.price.toString().toVND()}',
+                      'Tự chọn',
+                      // packageProvider.packageDetail!.price.toString().toVND(),
                       style: textTheme.headline6!.copyWith(
                         color: kblackColor,
                       ),
@@ -331,17 +330,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    // child: SizedBox(
-                                    //   height: 150,
-                                    //   width: 50,
-                                    //   child: Text(
-                                    //     nameOfItem(packageProvider
-                                    //         .orderRequest[index].itemCode!),
-                                    //     style: const TextStyle(
-                                    //         fontSize: 18,
-                                    //         fontWeight: FontWeight.bold),
-                                    //   ),
-                                    // ),
                                   ),
                                 ),
                                 Expanded(
@@ -483,9 +471,16 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                                           index]
                                                                       .packageItemId!);
                                                             },
-                                                            icon: const Icon(
-                                                              Icons.add,
-                                                            ),
+                                                            icon: packageProvider
+                                                                        .orderRequest[
+                                                                            index]
+                                                                        .nameFood ==
+                                                                    null
+                                                                ? const Icon(
+                                                                    Icons.add,
+                                                                  )
+                                                                : const Icon(Icons
+                                                                    .edit_note_outlined),
                                                             color: Colors.black,
                                                             iconSize: 15,
                                                           ),
@@ -528,61 +523,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                         style: TextStyle(
                                             color: Colors.black, fontSize: 16),
                                       ),
-                                      // const SizedBox(
-                                      //   height: 5,
-                                      // ),
                                       if (listStationActive.isNotEmpty)
                                         getListStation(
                                             packageProvider.orderRequest[index])
-                                      // const SizedBox(
-                                      //   height: 35,
-                                      // ),
-                                      // listStationActive.isEmpty
-                                      //     ?
-                                      // SizedBox(
-                                      //   child: const Center(child: CircularProgressIndicator()),
-                                      //   width: 20,
-                                      //   height: 20,
-                                      // ),
-
-                                      // :
-                                      // DropdownButton<Station>(
-                                      //     items: listStationActive.map((Station station) {
-                                      //       return DropdownMenuItem<Station>(
-                                      //         child: Text(
-                                      //           station.name,
-                                      //           style: const TextStyle(color: Colors.black),
-                                      //         ),
-                                      //       );
-                                      //     }).toList(),
-                                      //     onChanged: (Station? newStation) {
-                                      //       setState(() {
-                                      //         selectedStation = newStation!;
-                                      //       });
-                                      //     })
-                                      // SizedBox(
-                                      //     child: DropdownButtonHideUnderline(child: getListStation()),
-                                      //     width: 20,
-                                      //     height: 20,
-                                      //   )
-                                      // DropdownButton<Station>(
-                                      //     // value: _value1,
-                                      //     icon: const Icon(
-                                      //         Icons.arrow_drop_down),
-                                      //     items: listStationActive
-                                      //         .map((Station? station) {
-                                      //       return DropdownMenuItem<
-                                      //           Station>(
-                                      //         child: Text(station.name),
-                                      //         value: station,
-                                      //       );
-                                      //     }),
-                                      //     onChanged: (String? newValue) {
-                                      //       setState(() {
-                                      //         _value1 = newValue!;
-                                      //       });
-                                      //     },
-                                      //   ),
                                     ],
                                   ),
                                 ),

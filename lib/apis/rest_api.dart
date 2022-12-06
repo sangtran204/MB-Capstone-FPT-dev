@@ -7,6 +7,8 @@ class RestApi {
   // static const String getActivePackage =
   //     '$serverPath/byStatus?statusPackage=active';
   static const String getDetailPackage = '$serverPath/packages/find';
+  static const String getPackageFood =
+      '$serverPath/foods/food-onPackage?packageId=';
   static const String getCategoryPackage =
       '$serverPath/package-categories/hasPackage';
   static const String pushNotify = '$serverPath/accounts/deviceToken';

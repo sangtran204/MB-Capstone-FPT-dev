@@ -45,7 +45,7 @@ class _CardFoodState extends State<CardFood> {
             ),
             Container(
                 height: 100,
-                width: 150,
+                // width: 150,
                 padding: const EdgeInsets.only(top: 25),
                 child: Text(
                   widget.food!.name,

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-// import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
-// import 'package:mobile_capstone_fpt/models/entity/package.dart';
-// import 'package:provider/provider.dart';
+import 'package:mobile_capstone_fpt/models/response/package_food_res.dart';
 
 class PackageFood extends StatefulWidget {
-  const PackageFood({Key? key}) : super(key: key);
-  // final Package? package;
+  const PackageFood({Key? key, this.food}) : super(key: key);
+  final Result? food;
 
   @override
   State<PackageFood> createState() => _PackageFoodState();
@@ -14,9 +12,8 @@ class PackageFood extends StatefulWidget {
 class _PackageFoodState extends State<PackageFood> {
   @override
   Widget build(BuildContext context) {
-    // PackageProvider packageProvider = Provider.of<PackageProvider>(context);
-    // Size size = MediaQuery.of(context).size;
     return Container(
+      margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white70,
         borderRadius: BorderRadius.circular(10),
@@ -33,14 +30,15 @@ class _PackageFoodState extends State<PackageFood> {
         ],
       ),
       child: Column(
-        children: const <Widget>[
+        children: <Widget>[
           Image(
-            image: AssetImage('assets/images/salad1.jpg'),
-            height: 130,
+            image: NetworkImage('${widget.food!.image}'),
+            height: 110,
+            width: 110,
           ),
           Text(
-            'Salad rau trộn',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            '${widget.food!.name}',
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           )
         ],
       ),

@@ -9,12 +9,18 @@ import 'package:mobile_capstone_fpt/models/entity/package.dart';
 import 'package:mobile_capstone_fpt/models/entity/package_detail.dart';
 import 'package:mobile_capstone_fpt/models/entity/package_item.dart';
 import 'package:mobile_capstone_fpt/models/request/create_order_req.dart';
+import 'package:mobile_capstone_fpt/models/response/package_food_res.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/order_repo_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/package_repo_impl.dart';
 import 'package:mobile_capstone_fpt/view/payment/payment.dart';
 
 class PackageProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
+  PackageDetail? packageDetail;
+  List<PackageItem> listPackageItem = [];
+  List<String> listIdFG = [];
+  List<CreateOrderReq> orderRequest = [];
+  List<Result> listPackageFood = [];
 
   Future<void> getPackageByCategory(BuildContext context, String id) async {
     String accessToken = await secureStorage.readSecureData("token");
@@ -42,13 +48,9 @@ class PackageProvider with ChangeNotifier {
   clearBackPackage() async {
     listPackageItem.clear();
     listIdFG.clear();
+    orderRequest.clear();
     notifyListeners();
   }
-
-  PackageDetail? packageDetail;
-  List<PackageItem> listPackageItem = [];
-  List<String> listIdFG = [];
-  List<CreateOrderReq> orderRequest = [];
 
   int mySortComparisonItemCode(CreateOrderReq a, CreateOrderReq b) {
     final propertyA = a.itemCode!;
@@ -64,6 +66,12 @@ class PackageProvider with ChangeNotifier {
 
   Future<void> getPackageDetail(BuildContext context, String id) async {
     String accessToken = await secureStorage.readSecureData("token");
+    PackageRepoImpl()
+        .getListFoodOfPackage('${RestApi.getPackageFood}$id', accessToken)
+        .then((value) {
+      listPackageFood = value.result!;
+      notifyListeners();
+    });
     PackageRepoImpl()
         .getPackageDetail('${RestApi.getDetailPackage}/$id', accessToken)
         .then((value) async {
@@ -146,7 +154,6 @@ class PackageProvider with ChangeNotifier {
     final accessToken = await secureStorage.readSecureData("token");
     String subId = await secureStorage.readSecureData("idSubscription");
     for (var element in orderRequest) {
-      log(element.deliveryDate.toString());
       final dataCreateOrder = Order(
           deliveryDate: element.deliveryDate,
           priceFood: element.priceFood,
@@ -166,7 +173,6 @@ class PackageProvider with ChangeNotifier {
     if (subId.isNotEmpty) {
       final url = await OrderRepImpl().getPaymentUrl(
           subId, '43b02def-bf0f-4956-9b05-9f60253a5646', accessToken);
-      log(url.result!);
       Navigator.push(context, PageRouteBuilder(pageBuilder: (_, animation, __) {
         return FadeTransition(
           opacity: animation,
