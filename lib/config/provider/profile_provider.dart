@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
-import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/profile_repo_impl.dart';
 import 'package:mobile_capstone_fpt/models/response/profile_respone.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/changePass_request.dart';
@@ -22,6 +21,9 @@ class ProfileProvider with ChangeNotifier {
         .then((value) {
       info = value;
       // log(info.toJson().toString());
+      if (value.statusCode == '401') {
+        Navigator.pushNamed(context, '/LoginScreen');
+      }
       notifyListeners();
     });
   }

@@ -50,7 +50,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }
@@ -111,7 +111,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             width: 80,
             child: Text(
               value.name,
-              style: const TextStyle(fontSize: 12),
+              maxLines: 2,
+              style: const TextStyle(
+                  fontSize: 12, overflow: TextOverflow.ellipsis),
             ),
           ),
         );
@@ -241,6 +243,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
+              title: const Text('Đăng ký món ăn'),
               backgroundColor: kBackgroundColor,
               leading: BackButton(
                 onPressed: () async {
@@ -358,7 +361,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                   MainAxisAlignment.end,
                                               children: [
                                                 Container(
-                                                    height: 90,
+                                                    // height: 90,
                                                     padding:
                                                         const EdgeInsets.only(
                                                             right: 8, left: 8),

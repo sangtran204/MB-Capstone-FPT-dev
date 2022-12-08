@@ -29,7 +29,7 @@ class _CardFoodState extends State<CardFood> {
           children: [
             Container(
               height: 70,
-              width: 100,
+              width: 90,
               decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12),
@@ -45,12 +45,14 @@ class _CardFoodState extends State<CardFood> {
             ),
             Container(
                 height: 100,
-                // width: 150,
+                width: 120,
                 padding: const EdgeInsets.only(top: 25),
                 child: Text(
                   widget.food!.name,
                   style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w400),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                      overflow: TextOverflow.ellipsis),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                 )),
