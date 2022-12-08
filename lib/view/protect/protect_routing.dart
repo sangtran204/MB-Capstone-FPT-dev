@@ -24,7 +24,7 @@ class _ProtectRoutingState extends State<ProtectRouting> {
   Future<void> _startApp() async {
     const storage = FlutterSecureStorage();
     String? token = await storage.read(key: "token");
-    if (token == null) {
+    if (token == null || token.isEmpty) {
       Timer(const Duration(seconds: 2), (() {
         Navigator.pushReplacementNamed(context, "/LoginPage");
       }));

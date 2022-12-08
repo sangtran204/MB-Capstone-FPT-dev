@@ -96,8 +96,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       elevation: 16,
       style: const TextStyle(color: Colors.deepPurple),
       underline: Container(
-        // width: 120,
-        // margin: EdgeInsets.only(left: 20, right: 20),
         height: 2,
         color: kBackgroundColor,
       ),
@@ -112,7 +110,11 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             width: 80,
             child: Text(
               value.name,
-              style: TextStyle(fontSize: 12),
+              maxLines: 2,
+              style: TextStyle(
+                fontSize: 12,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
         );
@@ -370,7 +372,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                   MainAxisAlignment.end,
                                               children: [
                                                 Container(
-                                                    height: 90,
+                                                    // height: 95,
                                                     padding:
                                                         const EdgeInsets.only(
                                                             right: 8, left: 8),
