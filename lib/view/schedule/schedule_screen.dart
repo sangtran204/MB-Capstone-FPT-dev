@@ -266,7 +266,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     child: Text(
                       // 'Tự chọn',
                       packageProvider.packageDetail!.price.toString().toVND(),
-                      style: textTheme.headline6!.copyWith(
+                      style: textTheme.bodyLarge!.copyWith(
                         color: kblackColor,
                       ),
                       textAlign: TextAlign.center,
@@ -279,8 +279,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   Expanded(
                     child: CustomButton(
                       child: Text(
-                        "Xác nhận",
-                        style: textTheme.headline6!.copyWith(
+                        "Thanh toán",
+                        style: textTheme.bodyLarge!.copyWith(
                           color: kblackColor,
                         ),
                         textAlign: TextAlign.center,

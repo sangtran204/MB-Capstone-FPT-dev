@@ -28,7 +28,10 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   List<TimeSlot> listTimeSlotC = [];
 
   List<Station> listStationActive = [];
-
+  String? sChoice;
+  String? tChoice;
+  String? cChoice;
+  String? stationChoice;
   @override
   void initState() {
     super.initState();
@@ -60,7 +63,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     PackageProvider packageProvider =
         Provider.of<PackageProvider>(context, listen: false);
     return DropdownButton<String>(
-      // value: stationChoice,
+      value: stationChoice,
       icon: const Icon(
         Icons.arrow_downward,
         size: 18,
@@ -71,9 +74,9 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         color: kBackgroundColor,
       ),
       onChanged: (String? value) {
-        // setState(() {
-        //   stationChoice = value!;
-        // });
+        setState(() {
+          stationChoice = value!;
+        });
         packageProvider.setTimeSlotAndStationRandom(value!, 'station');
       },
       items: listStationActive.map<DropdownMenuItem<String>>((Station value) {
@@ -95,7 +98,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     PackageProvider packageProvider =
         Provider.of<PackageProvider>(context, listen: false);
     return DropdownButton<String>(
-      // value: req.timeSlotId,
+      value: sChoice,
       icon: const Icon(
         Icons.arrow_downward,
         size: 18,
@@ -107,6 +110,9 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         color: kBackgroundColor,
       ),
       onChanged: (String? value) {
+        setState(() {
+          sChoice = value!;
+        });
         packageProvider.setTimeSlotAndStationRandom(value!, 'timeSlotS');
       },
       items: listTimeSlotS.map<DropdownMenuItem<String>>((TimeSlot value) {
@@ -127,7 +133,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     PackageProvider packageProvider =
         Provider.of<PackageProvider>(context, listen: false);
     return DropdownButton<String>(
-      // value: req.timeSlotId,
+      value: tChoice,
       icon: const Icon(
         Icons.arrow_downward,
         size: 18,
@@ -139,6 +145,9 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         color: kBackgroundColor,
       ),
       onChanged: (String? value) {
+        setState(() {
+          tChoice = value!;
+        });
         packageProvider.setTimeSlotAndStationRandom(value!, 'timeSlotT');
       },
       items: listTimeSlotT.map<DropdownMenuItem<String>>((TimeSlot value) {
@@ -159,7 +168,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     PackageProvider packageProvider =
         Provider.of<PackageProvider>(context, listen: false);
     return DropdownButton<String>(
-      // value: req.timeSlotId,
+      value: cChoice,
       icon: const Icon(
         Icons.arrow_downward,
         size: 18,
@@ -171,6 +180,9 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         color: kBackgroundColor,
       ),
       onChanged: (String? value) {
+        setState(() {
+          cChoice = value!;
+        });
         packageProvider.setTimeSlotAndStationRandom(value!, 'timeSlotC');
       },
       items: listTimeSlotC.map<DropdownMenuItem<String>>((TimeSlot value) {
@@ -193,8 +205,6 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     Size size = MediaQuery.of(context).size;
     PackageProvider packageProvider =
         Provider.of<PackageProvider>(context, listen: false);
-    FoodGroupProvider foodGroupProvider =
-        Provider.of<FoodGroupProvider>(context, listen: false);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
