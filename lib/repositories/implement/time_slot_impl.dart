@@ -20,4 +20,18 @@ class TimeSlotRepoImpl implements TimeSlotRepo {
     }
     return result;
   }
+
+  @override
+  Future<TimeSlotRes> getTimeSlotByFlag(String url, String token) async {
+    var result = TimeSlotRes();
+    try {
+      Response response = await Dio().get(url,
+          options: Options(
+              headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
+      result = TimeSlotRes.timeSlotFromJson(jsonEncode(response.data));
+    } on DioError catch (e) {
+      showToastFail("Không tìm thấy khung thời gian!");
+    }
+    return result;
+  }
 }// class PackageRepoImpl implements 

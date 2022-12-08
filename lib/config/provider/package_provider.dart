@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
+import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/models/entity/order.dart';
@@ -10,6 +11,7 @@ import 'package:mobile_capstone_fpt/models/entity/package_detail.dart';
 import 'package:mobile_capstone_fpt/models/entity/package_item.dart';
 import 'package:mobile_capstone_fpt/models/request/create_order_req.dart';
 import 'package:mobile_capstone_fpt/models/response/package_food_res.dart';
+import 'package:mobile_capstone_fpt/repositories/implement/food_group_repo_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/order_repo_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/package_repo_impl.dart';
 import 'package:mobile_capstone_fpt/view/payment/payment.dart';
@@ -83,6 +85,7 @@ class PackageProvider with ChangeNotifier {
         for (int index = 0; index < listPackageItem.length; index++) {
           listIdFG.add(listPackageItem[index].foodGroup!.id);
           CreateOrderReq request = CreateOrderReq(
+              foodGroupId: listPackageItem[index].foodGroup!.id,
               packageItemId: listPackageItem[index].id,
               subscriptionId: subscriptionId,
               itemCode: listPackageItem[index].itemCode,
@@ -138,6 +141,22 @@ class PackageProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  setFoodGroupRandom(String indexOrderRequest) async {
+    final listOrderRequestTmp = [...orderRequest];
+    final index = listOrderRequestTmp
+        .indexWhere((element) => element.packageItemId == indexOrderRequest);
+    String accessToken = await secureStorage.readSecureData("token");
+    final valueFood = await FoodGroupRepoImpl().getFoodGroupDetail(
+        '${RestApi.getFoodGroupDetail}/${listOrderRequestTmp[index].foodGroupId}',
+        accessToken);
+
+    listOrderRequestTmp[index].foodId = valueFood.result!.foods![0].id;
+    listOrderRequestTmp[index].nameFood = valueFood.result!.foods![0].name;
+    listOrderRequestTmp[index].imageFood = valueFood.result!.foods![0].image;
+    listOrderRequestTmp[index].priceFood = valueFood.result!.foods![0].price;
+    notifyListeners();
+  }
+
   setTimeSlotAndStation(String value, String indexOrderRequest, String key) {
     final listOrderRequestTmp = [...orderRequest];
     final index = listOrderRequestTmp
@@ -146,6 +165,48 @@ class PackageProvider with ChangeNotifier {
       listOrderRequestTmp[index].timeSlotId = value;
     } else {
       listOrderRequestTmp[index].stationId = value;
+    }
+    notifyListeners();
+  }
+
+  setTimeSlotAndStationRandom(String value, String key) {
+    log(value.toString());
+    final listOrderRequestTmp = [...orderRequest];
+    for (var i = 0; i < listOrderRequestTmp.length; i++) {
+      final itemCode = listOrderRequestTmp[i].itemCode;
+      if (key == 'timeSlotS') {
+        if (itemCode == 1 ||
+            itemCode == 4 ||
+            itemCode == 7 ||
+            itemCode == 10 ||
+            itemCode == 13 ||
+            itemCode == 16) {
+          listOrderRequestTmp[i].timeSlotId = value;
+        }
+      } else if (key == 'timeSlotT') {
+        if (itemCode == 2 ||
+            itemCode == 5 ||
+            itemCode == 8 ||
+            itemCode == 11 ||
+            itemCode == 14 ||
+            itemCode == 17) {
+          listOrderRequestTmp[i].timeSlotId = value;
+        }
+      } else if (key == 'timeSlotC') {
+        if (itemCode == 3 ||
+            itemCode == 6 ||
+            itemCode == 9 ||
+            itemCode == 12 ||
+            itemCode == 15 ||
+            itemCode == 18) {
+          listOrderRequestTmp[i].timeSlotId = value;
+        }
+      } else {
+        listOrderRequestTmp[i].stationId = value;
+      }
+    }
+    for (var i = 0; i < listOrderRequestTmp.length; i++) {
+      log(listOrderRequestTmp[i].toJson().toString());
     }
     notifyListeners();
   }

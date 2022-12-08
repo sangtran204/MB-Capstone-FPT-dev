@@ -21,13 +21,14 @@ class SubscriptionProvider with ChangeNotifier {
         .then((value) async {
       secureStorage.writeSecureData("idSubscription", value.result!.id);
       showToastSuccess("Đã chọn gói");
-      await Navigator.pushReplacementNamed(context, '/SchedulePage');
+      // await Navigator.pushReplacementNamed(context, '/SchedulePage');
+      await Navigator.pushReplacementNamed(context, '/ChoicePage');
     }).onError((error, stackTrace) {
+      log(error.toString());
       showToastFail("Chọn gói thất bại");
+      Navigator.pushNamedAndRemoveUntil(context, "/HomePage", (route) => false);
     });
   }
-
-  
 
   //  SubscriptionResponeModel subRes = SubscriptionResponeModel();
   // List<Subscription> list = [];

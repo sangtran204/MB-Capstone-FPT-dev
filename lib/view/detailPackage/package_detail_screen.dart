@@ -26,7 +26,6 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
         backgroundColor: kBackgroundColor,
         leading: BackButton(
           onPressed: () async {
-            // Navigator.pop(context);
             await packageProvider.clearBackPackage();
             Navigator.pushNamedAndRemoveUntil(
                 context, '/HomePage', (route) => false);

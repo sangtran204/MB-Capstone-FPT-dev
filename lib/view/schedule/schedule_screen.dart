@@ -39,7 +39,7 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-  List<Order> listOrderCreate = [];
+  // List<Order> listOrderCreate = [];
   List<Station> listStationActive = [];
   List<TimeSlot> listTimeSlot = [];
   // Station? selectedStation;
@@ -264,8 +264,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   Expanded(
                       child: CustomButton(
                     child: Text(
-                      'Tự chọn',
-                      // packageProvider.packageDetail!.price.toString().toVND(),
+                      // 'Tự chọn',
+                      packageProvider.packageDetail!.price.toString().toVND(),
                       style: textTheme.headline6!.copyWith(
                         color: kblackColor,
                       ),
@@ -424,30 +424,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.end,
                                                     children: [
-                                                      // Align(
-                                                      //   alignment: Alignment
-                                                      //       .bottomRight,
-                                                      //   child: Container(
-                                                      //     height: 30,
-                                                      //     width: 30,
-                                                      //     color:
-                                                      //         Colors.amber,
-                                                      //     child: IconButton(
-                                                      //       onPressed: () {
-                                                      //         print('edit');
-                                                      //       },
-                                                      //       icon: const Icon(
-                                                      //           Icons
-                                                      //               .edit_note_outlined),
-                                                      //       color: Colors
-                                                      //           .black,
-                                                      //       iconSize: 15,
-                                                      //     ),
-                                                      //   ),
-                                                      // ),
-                                                      // const SizedBox(
-                                                      //   width: 10,
-                                                      // ),
                                                       Align(
                                                         alignment:
                                                             Alignment.center,
@@ -509,9 +485,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                         style: TextStyle(
                                             color: Colors.black, fontSize: 16),
                                       ),
-                                      // const SizedBox(
-                                      //   height: 5,
-                                      // ),
                                       if (listTimeSlot.isNotEmpty)
                                         getListTimeSlot(packageProvider
                                             .orderRequest[index]),

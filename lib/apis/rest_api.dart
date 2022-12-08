@@ -19,6 +19,7 @@ class RestApi {
   //Post Sub, Order
   static const String createSub = '$serverPath/subscriptions';
   static const String getTimeSlot = '$serverPath/time-slots';
+  static const String getTimeSlotByFlag = '$serverPath/time-slots';
   static const String getStationActive =
       '$serverPath/stations/byStatus?status=active';
   static const String createOrder = '$serverPath/orders';

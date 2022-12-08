@@ -12,6 +12,7 @@ class CreateOrderReq {
     this.timeSlotId,
     this.itemCode,
     this.imageFood,
+    this.foodGroupId,
   });
 
   DateTime? deliveryDate;
@@ -24,6 +25,7 @@ class CreateOrderReq {
   String? timeSlotId;
   int? itemCode;
   String? imageFood;
+  String? foodGroupId;
 
   factory CreateOrderReq.fromJson(Map<String, dynamic> json) => CreateOrderReq(
         deliveryDate: DateTime.parse(json["deliveryDate"]),
@@ -34,6 +36,7 @@ class CreateOrderReq {
         foodId: json["foodID"],
         stationId: json["stationID"],
         timeSlotId: json["timeSlotID"],
+        foodGroupId: json["foodGroupID"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -47,6 +50,7 @@ class CreateOrderReq {
         "foodID": foodId,
         "stationID": stationId,
         "timeSlotID": timeSlotId,
+        "foodGroupID": foodGroupId,
       };
   static CreateOrderReq createSubResFromJson(String str) =>
       CreateOrderReq.fromJson(json.decode(str));

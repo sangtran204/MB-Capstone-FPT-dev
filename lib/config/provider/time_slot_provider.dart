@@ -7,6 +7,7 @@ import 'package:mobile_capstone_fpt/repositories/implement/time_slot_impl.dart';
 class TimeSlotProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
   List<TimeSlot> listTimeSlot = [];
+  List<TimeSlot> listTimeSlotByFlag = [];
   void getTimeSlot(BuildContext context) async {
     String accessToken = await secureStorage.readSecureData("token");
     TimeSlotRepoImpl()
