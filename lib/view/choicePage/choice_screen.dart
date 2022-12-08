@@ -35,7 +35,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }
@@ -209,6 +209,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
+            title: const Text('Cài đặt mặc định'),
             backgroundColor: kBackgroundColor,
             leading: BackButton(
               onPressed: () async {
@@ -231,7 +232,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                 Expanded(
                     child: CustomButton(
                   child: Text(
-                    'Hệ thống chọn món',
+                    'Tự động chọn món',
                     style: textTheme.bodyLarge!.copyWith(
                       color: kblackColor,
                     ),
@@ -253,7 +254,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   child: CustomButton(
                     backGroundColor: kBackgroundColor,
                     child: Text(
-                      "Tự chỉnh sửa",
+                      "Tự chọn món",
                       style: textTheme.bodyLarge!.copyWith(
                         color: kblackColor,
                       ),
