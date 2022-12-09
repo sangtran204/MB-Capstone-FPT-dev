@@ -20,10 +20,6 @@ class ProfileProvider with ChangeNotifier {
         .getProfile(RestApi.profileMyPath, accessToken)
         .then((value) {
       info = value;
-      // log(info.toJson().toString());
-      if (value.statusCode == '401') {
-        Navigator.pushNamed(context, '/LoginScreen');
-      }
       notifyListeners();
     });
   }

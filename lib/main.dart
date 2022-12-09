@@ -3,6 +3,7 @@ import 'package:mobile_capstone_fpt/config/provider/main_provider/main_provider.
 import 'package:mobile_capstone_fpt/config/routes/routes.dart';
 import 'package:provider/provider.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());

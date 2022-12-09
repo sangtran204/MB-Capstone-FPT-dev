@@ -32,13 +32,19 @@ class _CardCategoryItemState extends State<CardCategoryItem> {
               SizedBox(
                 height: 65,
                 width: 70,
-                child: Image.network(widget.packageCategory!.image),
+                child: Image.network(
+                  widget.packageCategory!.image,
+                  fit: BoxFit.fill,
+                ),
               ),
               Text(
                 widget.packageCategory!.name,
                 textAlign: TextAlign.center,
-                style:
-                    const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                maxLines: 2,
+                style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis),
               )
             ],
           )),
