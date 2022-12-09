@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/view/choicePage/choice_screen.dart';
-import 'package:mobile_capstone_fpt/view/payment/payment.dart';
 import 'package:mobile_capstone_fpt/view/protect/protect_routing.dart';
 import 'package:mobile_capstone_fpt/view/screens.dart';
 
@@ -31,6 +30,8 @@ class Routes {
     // '/resetPassword': (context) => const ResetPasswordByPhone(),
     // '/verifyReset': (context) => const VerifyResetScreen(),
     // '/passwordReset': (context) => const InputPasswordResetScreen(),
-    '/': (context) => const ProtectRouting(),
+    // '/SuccessPay': (context) => const SuccessPayScreen(),
+    // '/': (context) => const ProtectRouting(),
+    '/': (context) => const SuccessPayScreen(),
   };
 }

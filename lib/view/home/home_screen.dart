@@ -10,9 +10,6 @@ import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/models/entity/package.dart';
 import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
 import 'package:mobile_capstone_fpt/models/entity/profile_result.dart';
-import 'package:mobile_capstone_fpt/repositories/implement/package_category_repo_impl.dart';
-import 'package:mobile_capstone_fpt/repositories/implement/package_repo_impl.dart';
-import 'package:mobile_capstone_fpt/repositories/implement/profile_repo_impl.dart';
 import 'package:mobile_capstone_fpt/view/home/drawer.dart';
 import 'package:mobile_capstone_fpt/view/home/card_package.dart';
 import 'package:mobile_capstone_fpt/view/home/card_category.dart';
@@ -37,71 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   // PackageProvider packageProvider = Provider.of<PackageProvider>(context);
-    //   setState(() {
-    //     Provider.of<PackageCategoryProvider>(context, listen: false)
-    //         .getPackageCategory(context);
-    //     // packageProvider.getPackageCustomer(context);
-    //     // listPackgeActive = packageProvider.listPackgeActive;
-    //   });
-    // });
-
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   PackageCategoryProvider cateProvider =
-    //       Provider.of<PackageCategoryProvider>(context);
-    //   listPackageCategory = cateProvider.listPackageCategory;
-    // });
-
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
     Provider.of<ProfileProvider>(context, listen: false).getProfile(context);
     Provider.of<PackageProvider>(context, listen: false)
         .getPackageCustomer(context);
     Provider.of<PackageCategoryProvider>(context, listen: false)
         .getPackageCategory(context);
-    // });
-
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   Provider.of<PackageProvider>(context, listen: false)
-    //       .getPackageCustomer(context);
-    // });
-    // secureStorage.readSecureData("token").then((token) => {
-    // PackageCategoryRepoImpl()
-    //     .getPackageCategory(RestApi.getCategoryPackage, token)
-    //     .then((value) {
-    //   setState(() {
-    //     listPackageCategory = value.result!;
-    //   });
-    // }),
-    // PackageRepoImpl()
-    //     .getActivePackage(RestApi.getActivePackage, token)
-    //     .then((value) {
-    //   setState(() {
-    //     listPackgeActive = value.result!;
-    //   });
-    // }),
-    // ProfileRepoImpl()
-    //     .getProfile(RestApi.profileMyPath, token)
-    //     .then((value) {
-    //   setState(() {
-    //     profileResult = value.result;
-    //   });
-    // }),
-    // PackageRepoImpl()
-    //     .getActivePackage(RestApi.getActivePackage, token)
-    //     .then((value) {
-    //   setState(() {
-    //     listPackgeActive = value.result!;
-    //   });
-    // }),
-    // PackageCategoryRepoImpl()
-    //     .getPackageCategory(RestApi.getCategoryPackage, token)
-    //     .then((value) {
-    //   setState(() {
-    //     listPackageCategory = value.result!;
-    //   });
-    // })
-    // });
   }
 
   @override
@@ -116,20 +53,55 @@ class _HomeScreenState extends State<HomeScreen> {
       //-----AppBar----
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
+        shadowColor: null,
         backgroundColor: const Color(0xffffcc33),
+        toolbarHeight: 60,
         title: Row(
           mainAxisSize: MainAxisSize.min,
-          children: const <Widget>[],
+          children: [
+            Row(
+              children: [
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      // color: kBackgroundColor
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            profileProvider.info.result?.profile.avatar == null
+                                ? "Avatar"
+                                : profileProvider.info.result!.profile.avatar),
+                        fit: BoxFit.fill,
+                      )),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  profileProvider.info.result?.profile.fullName == null
+                      ? "Name"
+                      : profileProvider.info.result!.profile.fullName,
+                  style: const TextStyle(
+                      color: Colors.black87,
+                      fontSize: 24,
+                      overflow: TextOverflow.ellipsis,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            // Image.network(profileProvider.info.result!.profile.avatar)
+          ],
         ),
       ),
 //---------------
       endDrawer: NavigationDrawer(
         // ignore: prefer_if_null_operators
         name: profileProvider.info.result?.profile.fullName == null
-            ? "Null Name"
+            ? "Name"
             : profileProvider.info.result!.profile.fullName,
         avatar: profileProvider.info.result?.profile.avatar == null
-            ? "Null Avatar"
+            ? "Avatar"
             : profileProvider.info.result!.profile.avatar,
       ),
       body: Container(
@@ -153,22 +125,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: Column(
+                                // ignore: prefer_const_literals_to_create_immutables
                                 children: [
-                                  Text(
-                                    'Chào, ' +
-                                        profileProvider
-                                            .info.result!.profile.fullName,
-                                    style: const TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
+                                  // Text(
+                                  //   'Chào, ' +
+                                  //       profileProvider
+                                  //           .info.result!.profile.fullName,
+                                  //   style: const TextStyle(
+                                  //       fontSize: 24,
+                                  //       fontWeight: FontWeight.bold),
+                                  // ),
+                                  // const SizedBox(
+                                  //   height: 10,
+                                  // ),
                                   const Text(
                                     'Tuần này bạn ăn gì?',
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 22,
                                     ),
                                   ),
                                 ],
@@ -210,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? const Center(child: CircularProgressIndicator())
                   : Container(
                       width: size.width,
-                      margin: const EdgeInsets.only(top: 210),
+                      margin: const EdgeInsets.only(top: 180),
                       decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
@@ -255,13 +228,32 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // const Text(
-                          //   'Gói ăn ',
-                          //   textAlign: TextAlign.left,
-                          // ),
-                          // const SizedBox(
-                          //   height: 20,
-                          // ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                                top: 20, left: 20, right: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    const Icon(
+                                      Icons.shopping_cart,
+                                      color: kBackgroundColor,
+                                    ),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      'Đặt ngay!',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                      // textAlign: TextAlign.left,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                           for (int i = 0;
                               i < packageProvider.listPackgeActive.length;
                               i++)

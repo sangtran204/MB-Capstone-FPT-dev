@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:mobile_capstone_fpt/main.dart';
 // import 'package:mobile_capstone_fpt/config/shared/shared_preferences.dart';
 
 class DioClient {
@@ -19,6 +21,9 @@ class DioClient {
       }
       return handler.next(options);
     }, onResponse: (response, handler) {
+      if (response.data["statusCode"] == 401) {
+        Navigator.pushReplacementNamed(navigatorKey.currentContext!, '/LoginPage');
+      }
       return handler.next(response);
     }, onError: (DioError e, handler) {
       return handler.next(e);
