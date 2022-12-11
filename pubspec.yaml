@@ -52,7 +52,14 @@ dependencies:
   webview_flutter: ^3.0.4
   flutter_format_money_vietnam: ^0.0.2
   image_picker: ^0.8.6
+  flutter_launcher_icons: ^0.11.0
   # cached_network_image: ^2.5.1
+
+flutter_icons:
+  image_path: "assets/images/logo6.png"
+  android: "ic_launcher"
+  min_sdk_android: 21
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
