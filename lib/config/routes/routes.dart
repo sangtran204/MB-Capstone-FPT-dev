@@ -31,7 +31,7 @@ class Routes {
     // '/verifyReset': (context) => const VerifyResetScreen(),
     // '/passwordReset': (context) => const InputPasswordResetScreen(),
     // '/SuccessPay': (context) => const SuccessPayScreen(),
-    // '/': (context) => const ProtectRouting(),
-    '/': (context) => const SuccessPayScreen(),
+    '/': (context) => const ProtectRouting(),
+    // '/': (context) => const SuccessPayScreen(),
   };
 }
