@@ -1,3 +1,4 @@
+import 'package:mobile_capstone_fpt/config/provider/feedback_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/auth_provider.dart';
 // import 'package:mobile_capstone_fpt/config/provider/order_provider.dart';
@@ -32,6 +33,8 @@ class MainProviders {
         create: (context) => StationProvider()),
     ChangeNotifierProvider<SubscriptionProvider>(
         create: (context) => SubscriptionProvider()),
+    ChangeNotifierProvider<FeedbackProvider>(
+        create: (context) => FeedbackProvider()),
     // ChangeNotifierProvider<OrderProvider>(create: (context) => OrderProvider()),
     // ChangeNotifierProvider<SubProvider>(
     // create: (context) => SubProvider())
