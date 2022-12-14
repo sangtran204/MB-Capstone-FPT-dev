@@ -52,8 +52,8 @@ dependencies:
   webview_flutter: ^3.0.4
   flutter_format_money_vietnam: ^0.0.2
   image_picker: ^0.8.6
-  # firebase_auth: ^4.1.4
-  # firebase_core: ^2.3.0
+  firebase_auth: ^4.1.4
+  firebase_core: ^2.3.0
   flutter_launcher_icons: ^0.11.0
   flutter_rating_bar: ^4.0.1
   # cached_network_image: ^2.5.1
