@@ -9,6 +9,7 @@ class RestApi {
   static const String forgotPassword = '$serverPath/accounts/forgotPassword';
   static const String getPackageByCategory = '$serverPath/packages/byCategory';
   static const String getActivePackage = '$serverPath/packages/active';
+  static const String sendFeedback = '$serverPath/feedback';
   // static const String getActivePackage =
   //     '$serverPath/byStatus?statusPackage=active';
   static const String getDetailPackage = '$serverPath/packages/find';
@@ -36,7 +37,7 @@ class RestApi {
   static const String logout = '$serverPath/auths/logout';
   static const String changePassword = '$serverPath/accounts/changePassword';
   static const String updateAvatar = '$serverPath/profiles/avatar';
-  // static const String getSubByStatus =
-  //     '$serverPath/subscriptions/customer/getSubscription?status=';
+  static const String getSubByStatus =
+      '$serverPath/subscriptions/customer/getSubscription?status=';
   //something
 }

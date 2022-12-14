@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
+import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
+import 'package:mobile_capstone_fpt/view/feedback_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_format_money_vietnam/flutter_format_money_vietnam.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({Key? key}) : super(key: key);
@@ -11,6 +16,8 @@ class HistoryScreen extends StatefulWidget {
 class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
+    SubscriptionProvider subProvider =
+        Provider.of<SubscriptionProvider>(context);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
@@ -40,10 +47,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
             //     boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.5))]),
             // color: Colors.amberAccent,
             child: Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(
-                  width: 20,
+                  width: 10,
                 ),
                 GestureDetector(
                   child: Container(
@@ -54,15 +62,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         color: kBackgroundColor),
                     child: const Center(
                       child: Text(
-                        "Sắp tới",
+                        "Đang đặt",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 16, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                   onTap: () {
                     // Navigator.pushNamed();
+                    subProvider.getSubByStatus(context, 'inProgress');
                     print('Sắp tới');
                     // const ExpenseList().launch(context);
                   },
@@ -79,16 +88,43 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         color: kBackgroundColor),
                     child: const Center(
                       child: Text(
-                        "Đã đặt",
+                        "Đã giao",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 16, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                   onTap: () {
                     // Navigator.pushNamed();
+                    subProvider.getSubByStatus(context, 'done');
                     print('đã đặt');
+                    // const ExpenseList().launch(context);
+                  },
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                GestureDetector(
+                  child: Container(
+                    height: 40,
+                    width: 110,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
+                        color: kBackgroundColor),
+                    child: const Center(
+                      child: Text(
+                        "Chưa thanh toán",
+                        overflow: TextOverflow.visible,
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    // Navigator.pushNamed();
+                    subProvider.getSubByStatus(context, 'unConfirmed');
                     // const ExpenseList().launch(context);
                   },
                 ),
@@ -100,11 +136,33 @@ class _HistoryScreenState extends State<HistoryScreen> {
               padding: const EdgeInsets.only(
                 top: 70,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [OrderItems(), OrderItems(), OrderItemPass()],
-              ),
+              child: subProvider.sub.result == null
+                  ? Container(
+                      margin: const EdgeInsets.only(top: 50),
+                      child: const Text(
+                        'Không có đăng ký!',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        for (int i = 0; i < subProvider.sub.result!.length; i++)
+                          // OrderItems(subProvider.sub.result![i])
+                          OrderItems(
+                              subProvider.sub.result![i].id!,
+                              subProvider.sub.result![i].packageName!,
+                              subProvider.sub.result![i].packageImg!,
+                              subProvider.sub.result![i].startDelivery!,
+                              subProvider.sub.result![i].status!,
+                              subProvider.sub.result?[i].cancelDate,
+                              subProvider.sub.result![i].totalPrice!)
+                        // OrderItems(),
+                        // OrderItems(),
+                        // OrderItemPass()
+                      ],
+                    ),
             ),
           )
         ]),
@@ -112,7 +170,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
     ));
   }
 
-  Widget OrderItems() => Card(
+  // ignore: non_constant_identifier_names
+  Widget OrderItems(String id, String packageName, String img,
+          DateTime startDate, String status, String? cancelDate, int price) =>
+      Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: Theme.of(context).colorScheme.outline,
@@ -120,19 +181,20 @@ class _HistoryScreenState extends State<HistoryScreen> {
           borderRadius: const BorderRadius.all(Radius.circular(12)),
         ),
         child: SizedBox(
-          height: 90,
+          height: 120,
           width: 380,
           child: Row(
             children: [
               Container(
                 height: 100,
                 width: 100,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(12),
                         bottomLeft: Radius.circular(12)),
                     image: DecorationImage(
-                        image: AssetImage('assets/images/packageitem.jpg'),
+                        // image: AssetImage('assets/images/packageitem.jpg'),
+                        image: NetworkImage(img),
                         fit: BoxFit.cover)),
               ),
               Container(
@@ -141,25 +203,49 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   padding: const EdgeInsets.only(top: 10, left: 3, bottom: 5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
+                    children: [
                       Text(
-                        'Tên gói ăn',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w400),
+                        packageName,
+                        maxLines: 2,
+                        style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400),
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        '22-10-2022',
-                        style: TextStyle(
+                        startDate.toString().substring(0, 10),
+                        style: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w400),
                         textAlign: TextAlign.center,
                       ),
-                      Text(
-                        'Gói ăn trải nghiệm',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w400),
-                        textAlign: TextAlign.center,
-                      ),
+                      if (status == 'unConfirmed')
+                        const Text(
+                          'Chưa thanh toán',
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (status == 'inProgress')
+                        const Text(
+                          'Đang xữ lý',
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400),
+                          textAlign: TextAlign.center,
+                        ),
+                      if (status == 'done')
+                        const Text(
+                          'Đã hoàn tất',
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400),
+                          textAlign: TextAlign.center,
+                        ),
                     ],
                   )),
               Container(
@@ -167,35 +253,96 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text(
-                      '200.000 đ',
+                    Text(
+                      price.toString().toVND(),
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                    GestureDetector(
-                      child: Container(
-                        height: 30,
-                        width: 70,
-                        decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100)),
-                            color: Colors.red),
-                        child: const Center(
-                          child: Text(
-                            "Hủy",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
+                    if (status == 'inProgress')
+                      GestureDetector(
+                        child: Container(
+                          height: 30,
+                          width: 100,
+                          decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100)),
+                              color: Colors.green),
+                          child: const Center(
+                            child: Text(
+                              "Đánh giá",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      FeedbackScreen(packageId: id)));
+                          // print('đã đặt');
+                          // const ExpenseList().launch(context);
+                        },
                       ),
-                      onTap: () {
-                        // Navigator.pushNamed();
-                        // print('đã đặt');
-                        // const ExpenseList().launch(context);
-                      },
-                    ),
+                    if (status == 'unConfirmed')
+                      Column(
+                        children: [
+                          GestureDetector(
+                            child: Container(
+                              height: 30,
+                              width: 100,
+                              decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(100)),
+                                  color: Colors.green),
+                              child: const Center(
+                                child: Text(
+                                  "Thanh toán",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/Feedback');
+                              // print('đã đặt');
+                              // const ExpenseList().launch(context);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          GestureDetector(
+                            child: Container(
+                              height: 30,
+                              width: 100,
+                              decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(100)),
+                                  color: Colors.red),
+                              child: const Center(
+                                child: Text(
+                                  "Hủy",
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/Feedback');
+                              // print('đã đặt');
+                              // const ExpenseList().launch(context);
+                            },
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               )

@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
+import 'package:mobile_capstone_fpt/models/entity/subscription-history.dart';
 import 'package:mobile_capstone_fpt/models/request/create_sub_req.dart';
+import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/subscription_impl.dart';
 
 class SubscriptionProvider with ChangeNotifier {
@@ -31,7 +33,8 @@ class SubscriptionProvider with ChangeNotifier {
   }
 
   //  SubscriptionResponeModel subRes = SubscriptionResponeModel();
-  // List<Subscription> list = [];
+  // List<> list = [];
+  SubHistoryRes sub = SubHistoryRes();
 
   // void getSubByInprogess(BuildContext context) async {
   //   String accessToken = await secureStorage.readSecureData("token");
@@ -45,17 +48,16 @@ class SubscriptionProvider with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  // void getSubByStatus(BuildContext context, String status) async {
-  //   String accessToken = await secureStorage.readSecureData("token");
-  //   SubscriptionImpl()
-  //       .getSubByStatus('${RestApi.getSubByStatus}$status', accessToken)
-  //       .then((value) {
-  //     // subRes = value;
-  //     list = value.result!;
-  //     // log(value.toJson().toString());
-  //     notifyListeners();
-  //   });
-  // }
+  void getSubByStatus(BuildContext context, String status) async {
+    String accessToken = await secureStorage.readSecureData("token");
+    SubRepImpl()
+        .getSubByStatus('${RestApi.getSubByStatus}$status', accessToken)
+        .then((value) async {
+      sub = value;
+      Navigator.pushReplacementNamed(context, '/History');
+      notifyListeners();
+    });
+  }
 
   // void getSubByUnConfirm(BuildContext context) async {
   //   String accessToken = await secureStorage.readSecureData("token");
