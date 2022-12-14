@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
+import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
+import 'package:mobile_capstone_fpt/view/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -23,11 +25,12 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
+    final SecureStorage secureStorage = SecureStorage();
 
     // final orderPro = ref.watch(orderProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pay',
+        title: const Text('Thanh toán',
             style: TextStyle(color: kblackColor, fontSize: 20)),
         backgroundColor: aBackgroundColor,
         centerTitle: true,
@@ -60,16 +63,23 @@ class _PaymentPageState extends State<PaymentPage> {
             var statusCode = uri.queryParameters['vnp_TransactionStatus'];
             // await Navigator.pushReplacementNamed(context, '/History');
             // showToastSuccess("Thanh toán thành công");
+            log(statusCode.toString());
+            log("Hahaha");
             if (statusCode == '00') {
+              log("hihi");
               String queryParam = request.url.split('?')[1];
               // orderPro.updateStatusPaymentUrl(
               //     widget.ordersTours, context, queryParam);
-              // Navigator.of(context).pushAndRemoveUntil(
-              //     MaterialPageRoute(
-              //         builder: (context) => PaymentSuccess(
-              //               ordersTours: widget.ordersTours,
-              //             )),
-              //     (Route<dynamic> route) => false);
+              String subId =
+                  await secureStorage.readSecureData("idSubscription");
+              secureStorage.deleteSecureData(subId);
+              await packageProvider.clearBackPackage();
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (context) => const SuccessPayScreen(
+                          // ordersTours: widget.ordersTours,
+                          )),
+                  (Route<dynamic> route) => false);
             } else {
               Navigator.pushReplacementNamed(context, '/History');
               log("Payment thất bại");

@@ -50,7 +50,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }
@@ -309,7 +309,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         itemBuilder: (context, index) {
                           return Container(
                             padding: const EdgeInsets.all(10),
-                            decoration: const BoxDecoration(
+                            decoration:  BoxDecoration(
                                 color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(color: Colors.grey, blurRadius: 4)

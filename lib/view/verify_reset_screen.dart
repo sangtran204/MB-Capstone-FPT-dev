@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/components/components.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
@@ -47,8 +47,8 @@ class _VerifyResetScreenState extends State<VerifyResetScreen> {
     }));
   }
 
-  @override
-  void initState() => {super.initState(), _verifyPhone(), startTime()};
+  // @override
+  // void initState() => {super.initState(), _verifyPhone(), startTime()};
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +124,7 @@ class _VerifyResetScreenState extends State<VerifyResetScreen> {
                               start = 30;
                               wait = true;
                             });
-                            _verifyPhone();
+                            // _verifyPhone();
                           }),
                     ],
                   )
@@ -151,24 +151,24 @@ class _VerifyResetScreenState extends State<VerifyResetScreen> {
                   ),
                 ),
                 onPressed: () async {
-                  try {
-                    await FirebaseAuth.instance
-                        .signInWithCredential(PhoneAuthProvider.credential(
-                            verificationId: _verificationCode, smsCode: pin))
-                        .then((value) async {
-                      if (value.user != null) {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const InputPasswordResetScreen()),
-                            (route) => (false));
-                      }
-                    });
-                  } catch (e) {
-                    FocusScope.of(context).unfocus();
-                    showToastFail('OTP không hợp lệ');
-                  }
+                  // try {
+                  //   await FirebaseAuth.instance
+                  //       .signInWithCredential(PhoneAuthProvider.credential(
+                  //           verificationId: _verificationCode, smsCode: pin))
+                  //       .then((value) async {
+                  //     if (value.user != null) {
+                  //       Navigator.pushAndRemoveUntil(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) =>
+                  //                   const InputPasswordResetScreen()),
+                  //           (route) => (false));
+                  //     }
+                  //   });
+                  // } catch (e) {
+                  //   FocusScope.of(context).unfocus();
+                  //   showToastFail('OTP không hợp lệ');
+                  // }
                   // FirebaseAuth.instance.verifyPasswordResetCode(code)
                 },
               ),
@@ -180,33 +180,33 @@ class _VerifyResetScreenState extends State<VerifyResetScreen> {
     );
   }
 
-  _verifyPhone() async {
-    await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: widget.phone,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await FirebaseAuth.instance
-              .signInWithCredential(credential)
-              .then((value) async {
-            // if (value.user != null) {
-            //   Navigator.pushAndRemoveUntil(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) => const InputPasswordResetScreen()),
-            //       (route) => (false));
-            // }
-          });
-        },
-        verificationFailed: (FirebaseAuthException e) {},
-        codeSent: (String verificationID, int? resendToken) {
-          setState(() {
-            _verificationCode = verificationID;
-          });
-        },
-        codeAutoRetrievalTimeout: (String verificationID) {
-          setState(() {
-            _verificationCode = verificationID;
-          });
-        },
-        timeout: const Duration(seconds: 30));
-  }
+  // _verifyPhone() async {
+  //   await FirebaseAuth.instance.verifyPhoneNumber(
+  //       phoneNumber: widget.phone,
+  //       verificationCompleted: (PhoneAuthCredential credential) async {
+  //         await FirebaseAuth.instance
+  //             .signInWithCredential(credential)
+  //             .then((value) async {
+  //           // if (value.user != null) {
+  //           //   Navigator.pushAndRemoveUntil(
+  //           //       context,
+  //           //       MaterialPageRoute(
+  //           //           builder: (context) => const InputPasswordResetScreen()),
+  //           //       (route) => (false));
+  //           // }
+  //         });
+  //       },
+  //       verificationFailed: (FirebaseAuthException e) {},
+  //       codeSent: (String verificationID, int? resendToken) {
+  //         setState(() {
+  //           _verificationCode = verificationID;
+  //         });
+  //       },
+  //       codeAutoRetrievalTimeout: (String verificationID) {
+  //         setState(() {
+  //           _verificationCode = verificationID;
+  //         });
+  //       },
+  //       timeout: const Duration(seconds: 30));
+  // }
 }

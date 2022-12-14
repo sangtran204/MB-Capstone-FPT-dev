@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
@@ -18,7 +19,7 @@ class OrderRepImpl implements OrderRepo {
             HttpHeaders.authorizationHeader: 'Bearer $accessToken'
           }));
       // result = Order.orderFromJson(jsonEncode(response.data));
-      // log("Tạo ok");
+      log("Tạo ok");
     } catch (e) {
       showToastFail("Vui lòng nhập đủ thông tin");
     }

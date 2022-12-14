@@ -35,7 +35,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }

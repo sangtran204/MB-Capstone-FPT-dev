@@ -170,7 +170,6 @@ class PackageProvider with ChangeNotifier {
   }
 
   setTimeSlotAndStationRandom(String value, String key) {
-    log(value.toString());
     final listOrderRequestTmp = [...orderRequest];
     for (var i = 0; i < listOrderRequestTmp.length; i++) {
       final itemCode = listOrderRequestTmp[i].itemCode;
@@ -205,9 +204,9 @@ class PackageProvider with ChangeNotifier {
         listOrderRequestTmp[i].stationId = value;
       }
     }
-    for (var i = 0; i < listOrderRequestTmp.length; i++) {
-      log(listOrderRequestTmp[i].toJson().toString());
-    }
+    // for (var i = 0; i < listOrderRequestTmp.length; i++) {
+    //   log(listOrderRequestTmp[i].toJson().toString());
+    // }
     notifyListeners();
   }
 
@@ -232,6 +231,7 @@ class PackageProvider with ChangeNotifier {
       }
     }
     if (subId.isNotEmpty) {
+      log(subId.toString());
       final url = await OrderRepImpl().getPaymentUrl(
           subId, '43b02def-bf0f-4956-9b05-9f60253a5646', accessToken);
       Navigator.push(context, PageRouteBuilder(pageBuilder: (_, animation, __) {
