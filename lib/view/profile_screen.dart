@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:mobile_capstone_fpt/components/components.dart';
-import 'package:mobile_capstone_fpt/config/provider/login_provider.dart';
+import 'package:mobile_capstone_fpt/config/provider/auth_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/widgets/date_input_field.dart';
@@ -189,12 +189,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: 130,
                       width: 130,
                       decoration: BoxDecoration(
-                          color: Colors.greenAccent,
-                          borderRadius: BorderRadius.circular(100),
-                          image: DecorationImage(
+                        color: kPrimaryLightColor,
+                        borderRadius: BorderRadius.circular(100),
+                        // image: DecorationImage(
+                        //     image:
+                        //         profileProvider.info.result!.profile.avatar ==
+                        //                 null
+                        //             ? AssetImage(
+                        //                 'assets/images/default_avatar.png')
+                        //             : NetworkImage(profileProvider
+                        //                     .info.result!.profile.avatar),
+                        // image: AssetImage(
+                        //     'assets/images/default_avatar.png') :
+                        // image: NetworkImage(
+                        //     profileProvider.info.result!.profile.avatar),
+                        // image: AssetImage(
+                        //     'assets/images/default_avatar.png'),
+                        // fit: BoxFit.fill)),
+                      ),
+                      child: profileProvider.info.result!.profile.avatar == null
+                          ? const Image(
+                              image: AssetImage(
+                                  'assets/images/default_avatar.png'))
+                          : Image(
                               image: NetworkImage(
-                                  profileProvider.info.result!.profile.avatar),
-                              fit: BoxFit.fill)),
+                                  profileProvider.info.result!.profile.avatar)),
                     ),
                   )),
               Padding(

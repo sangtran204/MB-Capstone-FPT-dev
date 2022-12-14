@@ -27,25 +27,26 @@ class InputInfoScreen extends StatelessWidget {
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       'Sẵn sàng với \nMeSup',
                       style: TextStyle(
                         color: Color(0xffffcc33),
                         fontSize: 40,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     // TextInput(
 
                     //     hintText: 'Họ và Tên',
                     //     textCapitalization: TextCapitalization.words),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     // TextInput(
@@ -56,8 +57,9 @@ class InputInfoScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 50),
+                padding: const EdgeInsets.only(top: 50),
                 child: Column(
+                  // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     // ButtonField(
                     //   text: 'Hoàn tất',

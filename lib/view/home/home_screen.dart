@@ -65,15 +65,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      // color: kBackgroundColor
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            profileProvider.info.result?.profile.avatar == null
-                                ? "Avatar"
-                                : profileProvider.info.result!.profile.avatar),
-                        fit: BoxFit.fill,
-                      )),
+                    borderRadius: BorderRadius.circular(50),
+                    // color: kBackgroundColor
+                  ),
+                  child: profileProvider.info.result!.profile.avatar == null
+                      ? const Image(
+                          image: AssetImage('assets/images/default_avatar.png'))
+                      : Image(
+                          image: NetworkImage(
+                              profileProvider.info.result!.profile.avatar)),
                 ),
                 const SizedBox(
                   width: 10,
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ? "Name"
             : profileProvider.info.result!.profile.fullName,
         avatar: profileProvider.info.result?.profile.avatar == null
-            ? "Avatar"
+            ? "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/800px-Default_pfp.svg.png"
             : profileProvider.info.result!.profile.avatar,
       ),
       body: Container(
