@@ -13,6 +13,7 @@ class Routes {
     '/Profile': (context) => const ProfileScreen(),
 
     '/History': (context) => const HistoryScreen(),
+    // '/Feedback': (context) => const FeedbackScreen(),
 
     '/PackageDetail': (context) => const PackageDetailScreen(),
     // '/order': (context) => const ScheduleScreen(),

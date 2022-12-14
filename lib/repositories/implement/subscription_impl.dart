@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/models/request/create_sub_req.dart';
+import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
 import 'package:mobile_capstone_fpt/models/response/subscription_res.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/sub_repo.dart';
 
@@ -25,5 +26,19 @@ class SubRepImpl implements SubRepo {
     return result;
   }
 
-  
+  @override
+  Future<SubHistoryRes> getSubByStatus(String url, String token) async {
+    var result = SubHistoryRes();
+    try {
+      Response response = await Dio().get(url,
+          options: Options(
+              headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
+      result = subHistoryResFromJson(jsonEncode(response.data));
+    } on DioError catch (e) {
+      if (e.response?.data["message"] == 'Don not have resource Sub') {
+        showToastFail("Bạn chưa có đơn đặt hàng nào!");
+      }
+    }
+    return result;
+  }
 }
