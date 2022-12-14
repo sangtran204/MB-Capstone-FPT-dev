@@ -22,7 +22,7 @@ class UnderPart extends StatelessWidget {
           title,
           style: const TextStyle(
               fontFamily: 'OpenSans',
-              fontSize: 13,
+              fontSize: 16,
               color: Colors.grey,
               fontWeight: FontWeight.w600),
         ),
@@ -37,7 +37,7 @@ class UnderPart extends StatelessWidget {
             navigatorText,
             style: const TextStyle(
                 color: Colors.blue,
-                fontSize: 13,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'Opensans'),
           ),

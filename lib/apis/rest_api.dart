@@ -2,6 +2,11 @@ import 'package:mobile_capstone_fpt/apis/path_api.dart';
 
 class RestApi {
   static const String signInPath = '$serverPath/auths/login/customer';
+  static const String signUp = '$serverPath/auths/sign-up/customer';
+  static const String checkPhoneRegister = '$serverPath/auths/checkPhone';
+  static const String checkPhoneResetPass =
+      '$serverPath/auths/checkPhone_customer';
+  static const String forgotPassword = '$serverPath/accounts/forgotPassword';
   static const String getPackageByCategory = '$serverPath/packages/byCategory';
   static const String getActivePackage = '$serverPath/packages/active';
   // static const String getActivePackage =

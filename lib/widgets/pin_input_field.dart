@@ -34,6 +34,7 @@ class PinPut extends StatelessWidget {
       // validator: (s) {
       //   return s;
       // },
+      length: 6,
       pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
       // showCursor: true,
       onCompleted: (pin) => {input(pin)},

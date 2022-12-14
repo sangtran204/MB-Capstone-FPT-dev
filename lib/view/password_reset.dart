@@ -1,14 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/config/provider/auth_provider.dart';
+import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/widgets/button_field.dart';
-import 'package:mobile_capstone_fpt/widgets/text_input.dart';
-import 'package:mobile_capstone_fpt/widgets/widgets.dart';
+import 'package:mobile_capstone_fpt/widgets/password_input_field.dart';
+import 'package:provider/provider.dart';
 
-class InputPasswordResetScreen extends StatelessWidget {
+class InputPasswordResetScreen extends StatefulWidget {
   const InputPasswordResetScreen({Key? key}) : super(key: key);
+
+  @override
+  State<InputPasswordResetScreen> createState() =>
+      _InputPasswordResetScreenState();
+}
+
+class _InputPasswordResetScreenState extends State<InputPasswordResetScreen> {
+  String newPassword = '""';
+  String confirm = '';
+  void inputPassword(String a) {
+    setState(() {
+      newPassword = a;
+    });
+  }
+
+  void inputConfirm(String p) {
+    setState(() {
+      confirm = p;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    LoginProvider authProvider = Provider.of<LoginProvider>(context);
+    String formatPassword =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xffffcc33),
@@ -23,31 +48,35 @@ class InputPasswordResetScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       'Nhập mật khẩu',
                       style: TextStyle(
                         color: Color(0xffffcc33),
-                        fontSize: 40,
+                        fontSize: 30,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    // PasswordInputField(hintText: 'Mật khẩu mới'),
-                    SizedBox(
+                    PasswordInputField(
+                      hintText: 'Mật khẩu mới',
+                      password: inputPassword,
+                    ),
+                    const SizedBox(
                       height: 20,
                     ),
-                    // PasswordInputField(
-                      // hintText: 'Nhập lại mật khẩu mới',
-                    // )
+                    PasswordInputField(
+                      hintText: 'Nhập lại mật khẩu mới',
+                      password: inputConfirm,
+                    )
                   ],
                 ),
               ),
@@ -55,10 +84,19 @@ class InputPasswordResetScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 50),
                 child: Column(
                   children: [
-                    // ButtonField(
-                    //   text: 'Xác nhận',
-                    //   path: '/login',
-                    // ),
+                    ButtonField(
+                      text: 'Đổi mật khẩu',
+                      voidCallback: () {
+                        if (newPassword.isEmpty ||
+                            !RegExp(formatPassword).hasMatch(newPassword)) {
+                          showToastFail('Mật khẩu không hợp lệ!');
+                        } else if (confirm.isEmpty || newPassword != confirm) {
+                          showToastFail('Mật khẩu không khớp!');
+                        } else {
+                          authProvider.resetPassword(context, newPassword);
+                        }
+                      },
+                    ),
                   ],
                 ),
               )

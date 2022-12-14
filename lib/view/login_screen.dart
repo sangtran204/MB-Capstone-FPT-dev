@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/components/components.dart';
-import 'package:mobile_capstone_fpt/config/provider/login_provider.dart';
+import 'package:mobile_capstone_fpt/config/provider/auth_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/widgets/widgets.dart';
 import 'package:provider/provider.dart';
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               navigatorText: 'Đăng ký',
                               onTap: () {
                                 // print('Đăng ký');
-                                Navigator.pushNamed(context, '/register');
+                                Navigator.pushNamed(context, '/RegisterPage');
                               }),
                           const SizedBox(
                             height: 10,
@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               title: '',
                               navigatorText: 'Quên mật khẩu!',
                               onTap: () {
-                                Navigator.pushNamed(context, '/resetPassword');
+                                Navigator.pushNamed(context, '/ResetPassword');
                               }),
                           const SizedBox(
                             height: 10,

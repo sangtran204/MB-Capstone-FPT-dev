@@ -1,5 +1,5 @@
 import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
-import 'package:mobile_capstone_fpt/config/provider/login_provider.dart';
+import 'package:mobile_capstone_fpt/config/provider/auth_provider.dart';
 // import 'package:mobile_capstone_fpt/config/provider/order_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_category_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_item.dart';

@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:mobile_capstone_fpt/components/custom_button.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 
 class SuccessPayScreen extends StatefulWidget {
