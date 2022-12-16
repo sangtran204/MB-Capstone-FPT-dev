@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: 20,
+        horizontal: 10,
       ),
       child: Material(
         color: backGroundColor ?? kwhiteColor,

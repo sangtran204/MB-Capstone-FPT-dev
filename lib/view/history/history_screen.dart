@@ -72,7 +72,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   onTap: () {
                     // Navigator.pushNamed();
                     subProvider.getSubByStatus(context, 'inProgress');
-                    print('Sắp tới');
+                    // print('Sắp tới');
                     // const ExpenseList().launch(context);
                   },
                 ),
@@ -88,7 +88,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         color: kBackgroundColor),
                     child: const Center(
                       child: Text(
-                        "Đã giao",
+                        "Đã đặt",
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
@@ -98,36 +98,36 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   onTap: () {
                     // Navigator.pushNamed();
                     subProvider.getSubByStatus(context, 'done');
-                    print('đã đặt');
+                    // print('đã đặt');
                     // const ExpenseList().launch(context);
                   },
                 ),
                 const SizedBox(
                   width: 10,
                 ),
-                GestureDetector(
-                  child: Container(
-                    height: 40,
-                    width: 110,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        color: kBackgroundColor),
-                    child: const Center(
-                      child: Text(
-                        "Chưa thanh toán",
-                        overflow: TextOverflow.visible,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    // Navigator.pushNamed();
-                    subProvider.getSubByStatus(context, 'unConfirmed');
-                    // const ExpenseList().launch(context);
-                  },
-                ),
+                // GestureDetector(
+                //   child: Container(
+                //     height: 40,
+                //     width: 110,
+                //     decoration: const BoxDecoration(
+                //         borderRadius: BorderRadius.all(Radius.circular(100)),
+                //         color: kBackgroundColor),
+                //     child: const Center(
+                //       child: Text(
+                //         "Chưa thanh toán",
+                //         overflow: TextOverflow.visible,
+                //         style: TextStyle(
+                //             fontSize: 16, fontWeight: FontWeight.bold),
+                //         textAlign: TextAlign.center,
+                //       ),
+                //     ),
+                //   ),
+                //   onTap: () {
+                //     // Navigator.pushNamed();
+                //     subProvider.getSubByStatus(context, 'unConfirmed');
+                //     // const ExpenseList().launch(context);
+                //   },
+                // ),
               ],
             ),
           )),
@@ -186,8 +186,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
           child: Row(
             children: [
               Container(
-                height: 100,
-                width: 100,
+                height: 120,
+                width: 110,
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(12),
@@ -195,11 +195,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     image: DecorationImage(
                         // image: AssetImage('assets/images/packageitem.jpg'),
                         image: NetworkImage(img),
-                        fit: BoxFit.cover)),
+                        fit: BoxFit.fill)),
               ),
               Container(
                   height: 100,
-                  width: 170,
+                  width: 160,
                   padding: const EdgeInsets.only(top: 10, left: 3, bottom: 5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -255,8 +255,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   children: [
                     Text(
                       price.toString().toVND(),
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                     if (status == 'inProgress')

@@ -12,8 +12,11 @@ class PackageFood extends StatefulWidget {
 class _PackageFoodState extends State<PackageFood> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.all(8),
+      height: size.height * 0.35,
+      width: size.width,
       decoration: BoxDecoration(
         color: Colors.white70,
         borderRadius: BorderRadius.circular(10),
@@ -31,14 +34,29 @@ class _PackageFoodState extends State<PackageFood> {
       ),
       child: Column(
         children: <Widget>[
-          Image(
-            image: NetworkImage('${widget.food!.image}'),
-            height: 110,
-            width: 110,
+          Container(
+            height: 120,
+            width: size.width,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
+                image: DecorationImage(
+                    image: NetworkImage('${widget.food!.image}'),
+                    fit: BoxFit.fill)),
+            // child: Image(
+            //   fit: BoxFit.fill,
+            //   image: NetworkImage('${widget.food!.image}'),
+            // ),
           ),
-          Text(
-            '${widget.food!.name}',
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              '${widget.food!.name}',
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            ),
           )
         ],
       ),
