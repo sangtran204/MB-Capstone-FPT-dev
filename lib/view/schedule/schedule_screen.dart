@@ -50,7 +50,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }
@@ -308,18 +308,18 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         itemCount: packageProvider.orderRequest.length,
                         itemBuilder: (context, index) {
                           return Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration:  BoxDecoration(
+                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                            decoration: BoxDecoration(
                                 color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(color: Colors.grey, blurRadius: 4)
                                 ]),
                             child: Container(
                               height: 155,
-                              width: 200,
+                              // width: 200,
                               child: Row(children: <Widget>[
                                 Container(
-                                  width: 60,
+                                  width: 75,
                                   decoration: const BoxDecoration(
                                       border: Border(
                                           right: BorderSide(
@@ -329,6 +329,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                     child: Text(
                                       nameOfItem(packageProvider
                                           .orderRequest[index].itemCode!),
+                                      maxLines: 2,
+                                      textAlign: TextAlign.center,
                                       style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),

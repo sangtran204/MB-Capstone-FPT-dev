@@ -82,7 +82,7 @@ class Profile {
   String id;
   String fullName;
   dynamic dob;
-  dynamic avatar;
+  String avatar;
   String email;
 
   factory Profile.fromJson(Map<String, dynamic> json) => Profile(
