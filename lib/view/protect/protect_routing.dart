@@ -85,7 +85,7 @@ class _ProtectRoutingState extends State<ProtectRouting> {
                     // const SizedBox(
                     //   height: ,
                     // ),
-                    const SizedBox(
+                    SizedBox(
                       child: Text(
                         'Meal Subscription Plan',
                         textAlign: TextAlign.center,

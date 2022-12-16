@@ -1,15 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/components/custom_button.dart';
-import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/models/entity/station.dart';
 import 'package:mobile_capstone_fpt/models/entity/time_slot.dart';
-import 'package:mobile_capstone_fpt/models/request/create_order_req.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/station_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/time_slot_impl.dart';
 import 'package:provider/provider.dart';

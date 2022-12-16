@@ -106,7 +106,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         hintStyle: TextStyle(color: Colors.grey.shade500)),
                   ),
                 ),
-                FlatButton(
+                ElevatedButton(
                   child: Container(
                     margin: const EdgeInsets.only(top: 70),
                     width: 220,

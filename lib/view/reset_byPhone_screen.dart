@@ -75,7 +75,7 @@ class _ResetPasswordByPhoneState extends State<ResetPasswordByPhone> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
-              child: FlatButton(
+              child: ElevatedButton(
                 child: Container(
                   width: 220,
                   height: 50,

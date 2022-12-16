@@ -139,7 +139,7 @@ class _RegisterInfoScreenState extends State<RegisterInfoScreen> {
                 child: Column(
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    FlatButton(
+                    ElevatedButton(
                       child: Container(
                         width: 220,
                         height: 50,

@@ -116,7 +116,7 @@ class _SuccessPayScreenState extends State<SuccessPayScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        FlatButton(
+                        ElevatedButton(
                             onPressed: () {
                               Navigator.pushReplacementNamed(
                                   context, '/HomePage');
