@@ -41,7 +41,7 @@ class _ProtectRoutingState extends State<ProtectRouting> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-      body: Container(
+      body: SizedBox(
         height: size.height,
         width: size.width,
         child: Stack(
@@ -68,7 +68,7 @@ class _ProtectRoutingState extends State<ProtectRouting> {
                     borderRadius: BorderRadius.circular(300)),
               ),
             ),
-            Container(
+            SizedBox(
               height: size.height * 0.8,
               width: size.width,
               // color: Colors.lightBlue,
@@ -76,7 +76,7 @@ class _ProtectRoutingState extends State<ProtectRouting> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       // height: size.height * 0.4,
                       width: size.width * 0.7,
                       // color: Colors.lightGreen,
@@ -85,7 +85,7 @@ class _ProtectRoutingState extends State<ProtectRouting> {
                     // const SizedBox(
                     //   height: ,
                     // ),
-                    SizedBox(
+                    const SizedBox(
                       child: Text(
                         'Meal Subscription Plan',
                         textAlign: TextAlign.center,

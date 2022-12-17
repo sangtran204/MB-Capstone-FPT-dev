@@ -64,9 +64,7 @@ class _PaymentPageState extends State<PaymentPage> {
             // await Navigator.pushReplacementNamed(context, '/History');
             // showToastSuccess("Thanh toán thành công");
             log(statusCode.toString());
-            log("Hahaha");
             if (statusCode == '00') {
-              log("hihi");
               String queryParam = request.url.split('?')[1];
               // orderPro.updateStatusPaymentUrl(
               //     widget.ordersTours, context, queryParam);

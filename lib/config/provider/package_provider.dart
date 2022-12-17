@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
-import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/models/entity/order.dart';
@@ -51,6 +50,21 @@ class PackageProvider with ChangeNotifier {
     listPackageItem.clear();
     listIdFG.clear();
     orderRequest.clear();
+    notifyListeners();
+  }
+
+  clearBackPackageSchedule() async {
+    final listOrderRequestTmp = [...orderRequest];
+    for (var i = 0; i < orderRequest.length; i++) {
+      listOrderRequestTmp[i].timeSlotId = null;
+      listOrderRequestTmp[i].stationId = null;
+      listOrderRequestTmp[i].priceFood = null;
+      listOrderRequestTmp[i].nameFood = null;
+      listOrderRequestTmp[i].foodId = null;
+      listOrderRequestTmp[i].priceFood = null;
+    }
+    log("hihi");
+    log(orderRequest.toList().toString());
     notifyListeners();
   }
 
@@ -204,9 +218,6 @@ class PackageProvider with ChangeNotifier {
         listOrderRequestTmp[i].stationId = value;
       }
     }
-    // for (var i = 0; i < listOrderRequestTmp.length; i++) {
-    //   log(listOrderRequestTmp[i].toJson().toString());
-    // }
     notifyListeners();
   }
 

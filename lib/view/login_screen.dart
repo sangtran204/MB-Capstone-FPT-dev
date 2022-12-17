@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Upside(
                 imgUrl: 'assets/images/logo6.png',
               ),
-               Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 220.0),
                 child: Text(
                   'MeSup',

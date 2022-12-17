@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/entity/subscription-history.dart';
 import 'package:mobile_capstone_fpt/models/request/create_sub_req.dart';
 import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/subscription_impl.dart';
@@ -22,9 +21,10 @@ class SubscriptionProvider with ChangeNotifier {
         .postSub(RestApi.createSub, data, accessToken)
         .then((value) async {
       secureStorage.writeSecureData("idSubscription", value.result!.id);
+      log(value.result!.id);
       showToastSuccess("Đã chọn gói");
-      // await Navigator.pushReplacementNamed(context, '/SchedulePage');
-      await Navigator.pushReplacementNamed(context, '/ChoicePage');
+      await Navigator.pushReplacementNamed(context, '/SchedulePage');
+      // await Navigator.pushReplacementNamed(context, '/ChoicePage');
     }).onError((error, stackTrace) {
       log(error.toString());
       showToastFail("Chọn gói thất bại");
@@ -55,6 +55,15 @@ class SubscriptionProvider with ChangeNotifier {
         .then((value) async {
       sub = value;
       Navigator.pushReplacementNamed(context, '/History');
+      notifyListeners();
+    });
+  }
+
+  void deleteSub(BuildContext context, String id) async {
+    String accessToken = await secureStorage.readSecureData("token");
+    SubRepImpl()
+        .deleteSub('${RestApi.deleteSub}/$id', accessToken)
+        .then((value) async {
       notifyListeners();
     });
   }

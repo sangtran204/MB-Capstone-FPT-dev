@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:fluttericon/typicons_icons.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/components/custom_button.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
+import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/models/entity/station.dart';
@@ -20,7 +24,6 @@ class ChoiceScreen extends StatefulWidget {
 class _ChoiceScreenState extends State<ChoiceScreen> {
   List<TimeSlot> listTimeSlotS = [];
   List<TimeSlot> listTimeSlotT = [];
-
   List<TimeSlot> listTimeSlotC = [];
 
   List<Station> listStationActive = [];
@@ -28,6 +31,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   String? tChoice;
   String? cChoice;
   String? stationChoice;
+  String date = DateFormat('EEEE').format(DateTime.now());
   @override
   void initState() {
     super.initState();
@@ -78,8 +82,8 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
       items: listStationActive.map<DropdownMenuItem<String>>((Station value) {
         return DropdownMenuItem<String>(
           value: value.id,
-          child: Container(
-            width: 80,
+          child: SizedBox(
+            width: 160,
             child: Text(
               value.name,
               style: const TextStyle(fontSize: 12),
@@ -114,7 +118,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
       items: listTimeSlotS.map<DropdownMenuItem<String>>((TimeSlot value) {
         return DropdownMenuItem<String>(
           value: value.id,
-          child: Container(
+          child: SizedBox(
             width: 85,
             child: Text(value.startTime.substring(0, 5) +
                 ' - ' +
@@ -149,7 +153,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
       items: listTimeSlotT.map<DropdownMenuItem<String>>((TimeSlot value) {
         return DropdownMenuItem<String>(
           value: value.id,
-          child: Container(
+          child: SizedBox(
             width: 85,
             child: Text(value.startTime.substring(0, 5) +
                 ' - ' +
@@ -184,7 +188,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
       items: listTimeSlotC.map<DropdownMenuItem<String>>((TimeSlot value) {
         return DropdownMenuItem<String>(
           value: value.id,
-          child: Container(
+          child: SizedBox(
             width: 85,
             child: Text(value.startTime.substring(0, 5) +
                 ' - ' +
@@ -201,6 +205,8 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
     Size size = MediaQuery.of(context).size;
     PackageProvider packageProvider =
         Provider.of<PackageProvider>(context, listen: false);
+    SubscriptionProvider subscriptionProvider =
+        Provider.of<SubscriptionProvider>(context, listen: false);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -209,6 +215,12 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
             backgroundColor: kBackgroundColor,
             leading: BackButton(
               onPressed: () async {
+                String subId =
+                    await secureStorage.readSecureData("idSubscription");
+                if (subId.isNotEmpty) {
+                  subscriptionProvider.deleteSub(context, subId);
+                  secureStorage.deleteSecureData(subId);
+                }
                 await packageProvider.clearBackPackage();
                 Navigator.pushNamedAndRemoveUntil(
                     context, "/HomePage", (route) => false);
@@ -225,30 +237,39 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
             ]),
             child: Row(
               children: [
-                Expanded(
-                    child: CustomButton(
-                  child: Text(
-                    'Tự động chọn món',
-                    style: textTheme.bodyLarge!.copyWith(
-                      color: kblackColor,
+                SizedBox(
+                  width: 200,
+                  child: Expanded(
+                      child: CustomButton(
+                    backGroundColor: kBackgroundColor,
+                    child: Text(
+                      'Tự động chọn món',
+                      style: textTheme.bodyLarge!.copyWith(
+                        color: kblackColor,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  borderColor: kblackColor,
-                  onTap: () async {
-                    for (var i = 0;
-                        i < packageProvider.orderRequest.length;
-                        i++) {
-                      await packageProvider.setFoodGroupRandom(
-                          packageProvider.orderRequest[i].packageItemId!);
-                    }
-                    await Navigator.pushReplacementNamed(
-                        context, '/SchedulePage');
-                  },
-                )),
+                    borderColor: kblackColor,
+                    onTap: () async {
+                      for (var i = 0;
+                          i < packageProvider.orderRequest.length;
+                          i++) {
+                        await packageProvider.setFoodGroupRandom(
+                            packageProvider.orderRequest[i].packageItemId!);
+                      }
+                      subscriptionProvider.submitDataSub(
+                          context,
+                          packageProvider.packageDetail!.price,
+                          DateTime.now(),
+                          packageProvider.packageDetail!.id);
+                      // await Navigator.pushReplacementNamed(
+                      //     context, '/SchedulePage');
+                    },
+                  )),
+                ),
                 Expanded(
                   child: CustomButton(
-                    backGroundColor: kBackgroundColor,
+                    // backGroundColor: kBackgroundColor,
                     child: Text(
                       "Tự chọn món",
                       style: textTheme.bodyLarge!.copyWith(
@@ -256,9 +277,15 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                       ),
                       textAlign: TextAlign.center,
                     ),
+                    borderColor: kblackColor,
                     onTap: () async {
-                      await Navigator.pushReplacementNamed(
-                          context, '/SchedulePage');
+                      subscriptionProvider.submitDataSub(
+                          context,
+                          packageProvider.packageDetail!.price,
+                          DateTime.now(),
+                          packageProvider.packageDetail!.id);
+                      // await Navigator.pushReplacementNamed(
+                      //     context, '/SchedulePage');
                     },
                   ),
                 )
@@ -270,55 +297,162 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
             margin: const EdgeInsets.only(top: 16, right: 8, left: 8),
             // width: size.width,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const Text('Chọn thời gian giao',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  height: 15,
+                ),
                 SizedBox(
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Text(
-                        'Thời gian giao buổi sáng : ',
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      Row(
+                        children: const [
+                          Icon(
+                            Typicons.cloud_sun,
+                            color: kBackgroundColor,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Buổi sáng:',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ],
                       ),
                       getListTimeSlotS()
                     ],
                   ),
                 ),
                 SizedBox(
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Text(
-                        'Thời gian giao buổi trưa : ',
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      Row(
+                        children: const [
+                          Icon(
+                            Typicons.sun,
+                            color: kBackgroundColor,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Buổi trưa:',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ],
                       ),
                       getListTimeSlotT()
                     ],
                   ),
                 ),
                 SizedBox(
-                  child: Column(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Text(
-                        'Thời gian giao buổi tối : ',
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      Row(
+                        children: const [
+                          Icon(
+                            FontAwesome5.cloud_moon,
+                            color: kBackgroundColor,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Buổi chiều:',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ],
                       ),
                       getListTimeSlotC()
                     ],
                   ),
                 ),
+                const SizedBox(
+                  height: 15,
+                ),
                 SizedBox(
                   child: Column(
                     children: [
                       const Text(
-                        'Địa điểm giao mong muốn : ',
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                        'Chọn địa điểm giao: ',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
                       getListStationRandom()
                     ],
                   ),
                 ),
-                const SizedBox(
-                  child: Text(
-                    'Ghi chú: Các món ăn sẽ được hệ thống lựa chọn phù hợp cho từng bữa ăn của bạn. ',
-                    style: TextStyle(color: Colors.black, fontSize: 16),
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: const [
+                          Icon(
+                            Icons.warning,
+                            color: Colors.red,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Lưu ý: ',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              '- Ở chế độ tự động chọn món, hệ thống sẽ tự động chọn món ăn cho bạn, bạn cũng có thể sửa chúng.',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black,
+                                  fontSize: 16),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            if (!(date == 'Sunday'))
+                              const Text(
+                                '- Đăng ký này sẽ được áp dụng cho tuần sau.',
+                                // overflow: TextOverflow.clip,
+                                maxLines: 2,
+                                style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.black,
+                                    fontSize: 16),
+                              ),
+                            if (date == 'Sunday')
+                              const Text(
+                                '- Đăng ký này sẽ áp dụng cho tuần kế tiếp.',
+                                style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.black,
+                                    fontSize: 16),
+                              ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 )
               ],

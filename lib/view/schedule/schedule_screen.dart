@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 // import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mobile_capstone_fpt/components/custom_button.dart';
@@ -42,6 +43,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   // List<Order> listOrderCreate = [];
   List<Station> listStationActive = [];
   List<TimeSlot> listTimeSlot = [];
+  final inputFormat = DateFormat('dd/MM/yyyy');
   // Station? selectedStation;
   // Food? selectFood;
 
@@ -57,30 +59,16 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   _asyncMethod() async {
     final token = await secureStorage.readSecureData("token");
-    // final data = await Future.wait(
-    //     [StationRepoImpl().getStationActive(RestApi.getStationActive, token), TimeSlotRepoImpl().getTimeSlot(RestApi.getTimeSlot, token)]);
-    // setState(() {
-    //   listStationActive = (data[0] as StationRes).result!.toList();
-    //   listTimeSlot = (data[1] as TimeSlotRes).result;
-    // });
     final data1 = await StationRepoImpl()
         .getStationActive(RestApi.getStationActive, token);
     final data2 =
         await TimeSlotRepoImpl().getTimeSlot(RestApi.getTimeSlot, token);
+    //     final data2 = await TimeSlotRepoImpl()
+    // .getTimeSlotByFlag('${RestApi.getTimeSlot}/0', token);
     setState(() {
       listStationActive = data1.result!;
       listTimeSlot = data2.result!;
     });
-    // StationRepoImpl().getStationActive(RestApi.getStationActive, token).then((value) {
-    //   setState(() {
-    //     listStationActive = value.result!;
-    //   });
-    // });
-    // TimeSlotRepoImpl().getTimeSlot(RestApi.getTimeSlot, token).then((value) {
-    //   setState(() {
-    //     listTimeSlot = value.result;
-    //   });
-    // });
   }
 
   DropdownButton<String> getListStation(CreateOrderReq req) {
@@ -107,7 +95,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       items: listStationActive.map<DropdownMenuItem<String>>((Station value) {
         return DropdownMenuItem<String>(
           value: value.id,
-          child: Container(
+          child: SizedBox(
             width: 80,
             child: Text(
               value.name,
@@ -143,7 +131,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       items: listTimeSlot.map<DropdownMenuItem<String>>((TimeSlot value) {
         return DropdownMenuItem<String>(
           value: value.id,
-          child: Container(
+          child: SizedBox(
             width: 80,
             child: Text(value.startTime.substring(0, 5) +
                 '-' +
@@ -184,20 +172,20 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             },
                           );
                         }))),
-                actions: <Widget>[
-                  // TextButton(
-                  //     onPressed: () {
-                  //       Navigator.pop(context);
-                  //     },
-                  //     child: const Text('Đóng')),
-                  // TextButton(
-                  //   onPressed: () {
-                  //     print('Đã chọn món!');
-                  //     Navigator.pop(context);
-                  //   },
-                  //   child: const Text('Lưu'),
-                  // )
-                ],
+                // actions: <Widget>[
+                // TextButton(
+                //     onPressed: () {
+                //       Navigator.pop(context);
+                //     },
+                //     child: const Text('Đóng')),
+                // TextButton(
+                //   onPressed: () {
+                //     print('Đã chọn món!');
+                //     Navigator.pop(context);
+                //   },
+                //   child: const Text('Lưu'),
+                // )
+                // ],
               );
             });
       }
@@ -247,10 +235,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               backgroundColor: kBackgroundColor,
               leading: BackButton(
                 onPressed: () async {
-                  // Navigator.pop(context);
-                  await packageProvider.clearBackPackage();
+                  await packageProvider.clearBackPackageSchedule();
                   Navigator.pushNamedAndRemoveUntil(
-                      context, "/HomePage", (route) => false);
+                      context, "/ChoicePage", (route) => false);
                 },
               ),
             ),
@@ -267,7 +254,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   Expanded(
                       child: CustomButton(
                     child: Text(
-                      // 'Tự chọn',
                       packageProvider.packageDetail!.price.toString().toVND(),
                       style: textTheme.bodyLarge!.copyWith(
                         color: kblackColor,
@@ -300,7 +286,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             body:
                 //  SingleChildScrollView(
                 //     child:
-                Container(
+                SizedBox(
                     // margin: EdgeInsets.only(bottom: 150),
                     // height: size.height,
                     width: size.width,
@@ -308,32 +294,59 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         itemCount: packageProvider.orderRequest.length,
                         itemBuilder: (context, index) {
                           return Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration:  BoxDecoration(
+                            padding: const EdgeInsets.only(top: 10, bottom: 10),
+                            decoration: const BoxDecoration(
                                 color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(color: Colors.grey, blurRadius: 4)
                                 ]),
-                            child: Container(
+                            child: SizedBox(
                               height: 155,
-                              width: 200,
+                              // width: 200,
                               child: Row(children: <Widget>[
-                                Container(
-                                  width: 60,
-                                  decoration: const BoxDecoration(
-                                      border: Border(
-                                          right: BorderSide(
-                                              width: 1, color: Colors.grey))),
-                                  child: Center(
-                                    // padding: const EdgeInsets.only(top: 70),
-                                    child: Text(
-                                      nameOfItem(packageProvider
-                                          .orderRequest[index].itemCode!),
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 75,
+                                      decoration: const BoxDecoration(
+                                          border: Border(
+                                              right: BorderSide(
+                                                  width: 1,
+                                                  color: Colors.grey))),
+                                      child: Center(
+                                        // padding: const EdgeInsets.only(top: 70),
+                                        child: Text(
+                                          nameOfItem(packageProvider
+                                              .orderRequest[index].itemCode!),
+                                          maxLines: 2,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    Container(
+                                      width: 75,
+                                      decoration: const BoxDecoration(
+                                          border: Border(
+                                              right: BorderSide(
+                                                  width: 1,
+                                                  color: Colors.grey))),
+                                      child: Center(
+                                        child: Text(
+                                          inputFormat.format(packageProvider
+                                              .orderRequest[index]
+                                              .deliveryDate!),
+                                          maxLines: 2,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Expanded(
                                   child: Container(

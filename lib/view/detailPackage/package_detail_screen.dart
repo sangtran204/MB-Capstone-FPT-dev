@@ -24,6 +24,13 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
+        title: packageProvider.packageDetail == null
+            ? const Text('Tên gói')
+            : Text(
+                packageProvider.packageDetail!.name,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
         leading: BackButton(
           onPressed: () async {
             await packageProvider.clearBackPackage();
@@ -69,13 +76,12 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                   textAlign: TextAlign.center,
                 ),
                 onTap: () async {
-                  subscriptionProvider.submitDataSub(
-                      context,
-                      packageProvider.packageDetail!.price,
-                      DateTime.now(),
-                      packageProvider.packageDetail!.id);
-                  // await Navigator.pushReplacementNamed(
-                  //     context, '/SchedulePage');
+                  // subscriptionProvider.submitDataSub(
+                  //     context,
+                  //     packageProvider.packageDetail!.price,
+                  //     DateTime.now(),
+                  //     packageProvider.packageDetail!.id);
+                  await Navigator.pushReplacementNamed(context, '/ChoicePage');
                 },
               ),
             )
@@ -246,6 +252,9 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black87)),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
                                               SizedBox(
                                                 width: 270,
                                                 child: Text(

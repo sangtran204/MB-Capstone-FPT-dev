@@ -189,31 +189,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: 130,
                       width: 130,
                       decoration: BoxDecoration(
-                        color: kPrimaryLightColor,
-                        borderRadius: BorderRadius.circular(100),
-                        // image: DecorationImage(
-                        //     image:
-                        //         profileProvider.info.result!.profile.avatar ==
-                        //                 null
-                        //             ? AssetImage(
-                        //                 'assets/images/default_avatar.png')
-                        //             : NetworkImage(profileProvider
-                        //                     .info.result!.profile.avatar),
-                        // image: AssetImage(
-                        //     'assets/images/default_avatar.png') :
-                        // image: NetworkImage(
-                        //     profileProvider.info.result!.profile.avatar),
-                        // image: AssetImage(
-                        //     'assets/images/default_avatar.png'),
-                        // fit: BoxFit.fill)),
-                      ),
-                      child: profileProvider.info.result!.profile.avatar == null
-                          ? const Image(
-                              image: AssetImage(
-                                  'assets/images/default_avatar.png'))
-                          : Image(
+                          color: kPrimaryLightColor,
+                          borderRadius: BorderRadius.circular(100),
+                          image: DecorationImage(
                               image: NetworkImage(
-                                  profileProvider.info.result!.profile.avatar)),
+                                  profileProvider.info.result!.profile.avatar),
+                              fit: BoxFit.fill)),
                     ),
                   )),
               Padding(

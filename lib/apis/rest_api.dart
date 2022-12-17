@@ -39,5 +39,6 @@ class RestApi {
   static const String updateAvatar = '$serverPath/profiles/avatar';
   static const String getSubByStatus =
       '$serverPath/subscriptions/customer/getSubscription?status=';
+  static const String deleteSub = '$serverPath/subscriptions/delete';
   //something
 }
