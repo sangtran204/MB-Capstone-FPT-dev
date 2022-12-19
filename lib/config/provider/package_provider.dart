@@ -22,6 +22,7 @@ class PackageProvider with ChangeNotifier {
   List<String> listIdFG = [];
   List<CreateOrderReq> orderRequest = [];
   List<Result> listPackageFood = [];
+  List<Order> saveDataOrder = [];
 
   Future<void> getPackageByCategory(BuildContext context, String id) async {
     String accessToken = await secureStorage.readSecureData("token");
@@ -53,18 +54,20 @@ class PackageProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  clearBackPayment() async {
+    saveDataOrder.clear();
+    notifyListeners();
+  }
+
   clearBackPackageSchedule() async {
-    final listOrderRequestTmp = [...orderRequest];
     for (var i = 0; i < orderRequest.length; i++) {
-      listOrderRequestTmp[i].timeSlotId = null;
-      listOrderRequestTmp[i].stationId = null;
-      listOrderRequestTmp[i].priceFood = null;
-      listOrderRequestTmp[i].nameFood = null;
-      listOrderRequestTmp[i].foodId = null;
-      listOrderRequestTmp[i].priceFood = null;
+      orderRequest[i].imageFood = null;
+      orderRequest[i].nameFood = null;
+      orderRequest[i].foodId = null;
+      orderRequest[i].priceFood = null;
+      orderRequest[i].timeSlotId = null;
+      orderRequest[i].stationId = null;
     }
-    log("hihi");
-    log(orderRequest.toList().toString());
     notifyListeners();
   }
 
@@ -103,7 +106,8 @@ class PackageProvider with ChangeNotifier {
               packageItemId: listPackageItem[index].id,
               subscriptionId: subscriptionId,
               itemCode: listPackageItem[index].itemCode,
-              deliveryDate: findDate(listPackageItem[index].itemCode));
+              deliveryDate: findDate(listPackageItem[index].itemCode),
+              timeSlotFlag: findFlag(listPackageItem[index].itemCode));
 
           orderRequest.add(request);
         }
@@ -115,6 +119,34 @@ class PackageProvider with ChangeNotifier {
         showToastFail("Something when wrong ...");
       }
     });
+  }
+
+  int findFlag(int _itemCode) {
+    late int flag;
+    if (_itemCode == 1 ||
+        _itemCode == 4 ||
+        _itemCode == 7 ||
+        _itemCode == 10 ||
+        _itemCode == 13 ||
+        _itemCode == 16) {
+      flag = 0;
+    } else if (_itemCode == 2 ||
+        _itemCode == 5 ||
+        _itemCode == 8 ||
+        _itemCode == 11 ||
+        _itemCode == 14 ||
+        _itemCode == 17) {
+      flag = 1;
+    } else if (_itemCode == 3 ||
+        _itemCode == 6 ||
+        _itemCode == 9 ||
+        _itemCode == 12 ||
+        _itemCode == 15 ||
+        _itemCode == 18) {
+      flag = 2;
+    }
+
+    return flag;
   }
 
   DateTime findDate(int _itemCode) {
@@ -221,11 +253,48 @@ class PackageProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // submitData(BuildContext context) async {
+  //   final accessToken = await secureStorage.readSecureData("token");
+  //   String subId = await secureStorage.readSecureData("idSubscription");
+  //   for (var element in orderRequest) {
+  //     final dataCreateOrder = Order(
+  //         deliveryDate: element.deliveryDate,
+  //         priceFood: element.priceFood,
+  //         nameFood: element.nameFood,
+  //         subscriptionId: subId,
+  //         packageItemId: element.packageItemId,
+  //         foodId: element.foodId,
+  //         stationId: element.stationId,
+  //         timeSlotId: element.timeSlotId);
+  //   }
+  //    try {
+  //       if (subId.isNotEmpty) {
+  //         // rất cần cái này ===================================================
+  //         await OrderRepImpl()
+  //             .postOrder(RestApi.createOrder, dataCreateOrder, accessToken);
+  //         log(subId.toString());
+  //         final url = await OrderRepImpl().getPaymentUrl(
+  //             subId, '43b02def-bf0f-4956-9b05-9f60253a5646', accessToken);
+  //         Navigator.push(context,
+  //             PageRouteBuilder(pageBuilder: (_, animation, __) {
+  //           return FadeTransition(
+  //             opacity: animation,
+  //             child: PaymentPage(url: url.result!),
+  //           );
+  //         }));
+  //       }
+  //     } catch (e) {
+  //       log(e.toString());
+  //     }
+
+  //   notifyListeners();
+  // }
+
   submitData(BuildContext context) async {
     final accessToken = await secureStorage.readSecureData("token");
     String subId = await secureStorage.readSecureData("idSubscription");
     for (var element in orderRequest) {
-      final dataCreateOrder = Order(
+      Order dataCreateOrder = Order(
           deliveryDate: element.deliveryDate,
           priceFood: element.priceFood,
           nameFood: element.nameFood,
@@ -234,24 +303,34 @@ class PackageProvider with ChangeNotifier {
           foodId: element.foodId,
           stationId: element.stationId,
           timeSlotId: element.timeSlotId);
-      try {
-        await OrderRepImpl()
-            .postOrder(RestApi.createOrder, dataCreateOrder, accessToken);
-      } catch (e) {
-        log(e.toString());
+      saveDataOrder.add(dataCreateOrder);
+    }
+    try {
+      for (var i = 0; i < saveDataOrder.length; i++) {
+        log(saveDataOrder[i].toJson().toString());
       }
+      if (subId.isNotEmpty) {
+        // rất cần cái này ===================================================
+
+        for (var i = 0; i < saveDataOrder.length; i++) {
+          await OrderRepImpl()
+              .postOrder(RestApi.createOrder, saveDataOrder[i], accessToken);
+        }
+        log(subId.toString());
+        final url = await OrderRepImpl().getPaymentUrl(
+            subId, '43b02def-bf0f-4956-9b05-9f60253a5646', accessToken);
+        Navigator.push(context,
+            PageRouteBuilder(pageBuilder: (_, animation, __) {
+          return FadeTransition(
+            opacity: animation,
+            child: PaymentPage(url: url.result!, listOrder: saveDataOrder),
+          );
+        }));
+      }
+    } catch (e) {
+      log(e.toString());
     }
-    if (subId.isNotEmpty) {
-      log(subId.toString());
-      final url = await OrderRepImpl().getPaymentUrl(
-          subId, '43b02def-bf0f-4956-9b05-9f60253a5646', accessToken);
-      Navigator.push(context, PageRouteBuilder(pageBuilder: (_, animation, __) {
-        return FadeTransition(
-          opacity: animation,
-          child: PaymentPage(url: url.result!),
-        );
-      }));
-    }
+
     notifyListeners();
   }
 }

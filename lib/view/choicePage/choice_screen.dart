@@ -215,12 +215,12 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
             backgroundColor: kBackgroundColor,
             leading: BackButton(
               onPressed: () async {
-                String subId =
-                    await secureStorage.readSecureData("idSubscription");
-                if (subId.isNotEmpty) {
-                  subscriptionProvider.deleteSub(context, subId);
-                  secureStorage.deleteSecureData(subId);
-                }
+                // String subId =
+                //     await secureStorage.readSecureData("idSubscription");
+                // if (subId.isNotEmpty) {
+                //   subscriptionProvider.deleteSub(context, subId);
+                //   secureStorage.deleteSecureData(subId);
+                // }
                 await packageProvider.clearBackPackage();
                 Navigator.pushNamedAndRemoveUntil(
                     context, "/HomePage", (route) => false);
@@ -237,41 +237,42 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
             ]),
             child: Row(
               children: [
-                SizedBox(
-                  width: 200,
-                  child: Expanded(
-                      child: CustomButton(
-                    backGroundColor: kBackgroundColor,
-                    child: Text(
-                      'Tự động chọn món',
-                      style: textTheme.bodyLarge!.copyWith(
-                        color: kblackColor,
-                      ),
-                      textAlign: TextAlign.center,
+                // SizedBox(
+                // width: 200,
+                // child:
+                Expanded(
+                    child: CustomButton(
+                  backGroundColor: kBackgroundColor,
+                  child: Text(
+                    'Chọn ngẫu nhiên',
+                    style: textTheme.bodyLarge!.copyWith(
+                      color: kblackColor,
                     ),
-                    borderColor: kblackColor,
-                    onTap: () async {
-                      for (var i = 0;
-                          i < packageProvider.orderRequest.length;
-                          i++) {
-                        await packageProvider.setFoodGroupRandom(
-                            packageProvider.orderRequest[i].packageItemId!);
-                      }
-                      subscriptionProvider.submitDataSub(
-                          context,
-                          packageProvider.packageDetail!.price,
-                          DateTime.now(),
-                          packageProvider.packageDetail!.id);
-                      // await Navigator.pushReplacementNamed(
-                      //     context, '/SchedulePage');
-                    },
-                  )),
-                ),
+                    textAlign: TextAlign.center,
+                  ),
+                  borderColor: kblackColor,
+                  onTap: () async {
+                    for (var i = 0;
+                        i < packageProvider.orderRequest.length;
+                        i++) {
+                      await packageProvider.setFoodGroupRandom(
+                          packageProvider.orderRequest[i].packageItemId!);
+                    }
+                    subscriptionProvider.submitDataSub(
+                        context,
+                        packageProvider.packageDetail!.price,
+                        DateTime.now(),
+                        packageProvider.packageDetail!.id);
+                    // await Navigator.pushReplacementNamed(
+                    //     context, '/SchedulePage');
+                  },
+                )),
+                // ),
                 Expanded(
                   child: CustomButton(
                     // backGroundColor: kBackgroundColor,
                     child: Text(
-                      "Tự chọn món",
+                      "Tùy chọn",
                       style: textTheme.bodyLarge!.copyWith(
                         color: kblackColor,
                       ),
