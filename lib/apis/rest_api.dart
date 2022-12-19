@@ -31,6 +31,7 @@ class RestApi {
   static const String createOrder = '$serverPath/orders';
   // Get list Bank
   static const String getListBank = '$serverPath/banks';
+  static const String getSubDetail = '$serverPath/subscriptions/byCustomer/';
   //Post Order ====================================================
   static const String getSubPaymentUrl = '$serverPath/subscriptions';
   //

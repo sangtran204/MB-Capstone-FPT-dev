@@ -35,7 +35,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }
@@ -243,7 +243,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                       child: CustomButton(
                     backGroundColor: kBackgroundColor,
                     child: Text(
-                      'Tự động chọn món',
+                      'Chọn món ngẫu nhiên',
                       style: textTheme.bodyLarge!.copyWith(
                         color: kblackColor,
                       ),
@@ -271,7 +271,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   child: CustomButton(
                     // backGroundColor: kBackgroundColor,
                     child: Text(
-                      "Tự chọn món",
+                      "Chọn món",
                       style: textTheme.bodyLarge!.copyWith(
                         color: kblackColor,
                       ),

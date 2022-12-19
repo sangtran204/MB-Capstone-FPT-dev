@@ -52,7 +52,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }

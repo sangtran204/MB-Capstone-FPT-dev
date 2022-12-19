@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/models/request/create_sub_req.dart';
 import 'package:mobile_capstone_fpt/models/response/sub_delete_res.dart';
+import 'package:mobile_capstone_fpt/models/response/sub_detail_res.dart';
 import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
 import 'package:mobile_capstone_fpt/models/response/subscription_res.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/sub_repo.dart';
@@ -51,6 +52,20 @@ class SubRepImpl implements SubRepo {
           options: Options(
               headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result = DeleteSubRes.deleteSubResFromJson(jsonEncode(response.data));
+    } on DioError catch (e) {
+      showToastFail(e.response?.data["message"]);
+    }
+    return result;
+  }
+
+  @override
+  Future<SubDetailRes> getSubDetail(String url, String token) async {
+    var result = SubDetailRes();
+    try {
+      Response response = await Dio().get(url,
+          options: Options(
+              headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
+      result = SubDetailRes.subDetailResFromJson(jsonEncode(response.data));
     } on DioError catch (e) {
       showToastFail(e.response?.data["message"]);
     }
