@@ -178,7 +178,9 @@ class _SubDetailTrackingScreenState extends State<SubDetailTrackingScreen> {
                   ],
                 ),
               ),
-              if (order.status == 'progress' || order.status == 'ready')
+              if (order.status == 'progress' ||
+                  order.status == 'ready' ||
+                  order.status == 'pending')
                 SizedBox(
                   width: size.width * 0.17,
                   child: const Center(
