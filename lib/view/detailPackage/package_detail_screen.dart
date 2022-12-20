@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile_capstone_fpt/components/custom_button.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
-import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 import 'package:mobile_capstone_fpt/view/detailPackage/package_food.dart';
 import 'package:provider/provider.dart';
@@ -14,13 +14,13 @@ class PackageDetailScreen extends StatefulWidget {
 }
 
 class _PackageDetailScreenState extends State<PackageDetailScreen> {
+  final inputFormat = DateFormat('dd/MM/yyyy');
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     TextTheme textTheme = Theme.of(context).textTheme;
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
-    SubscriptionProvider subscriptionProvider =
-        Provider.of<SubscriptionProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
@@ -186,8 +186,8 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                     packageProvider.packageDetail == null
                                         ? const Text('00:00')
                                         : Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            // mainAxisAlignment:
+                                            //     MainAxisAlignment.spaceBetween,
                                             children: [
                                               const Text('Thời gian bán: ',
                                                   style: TextStyle(
@@ -196,16 +196,16 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                                           FontWeight.bold,
                                                       color: Colors.black87)),
                                               Text(
-                                                  packageProvider.packageDetail!
-                                                          .startSale
-                                                          .toString()
-                                                          .substring(5, 10) +
-                                                      ' --> ' +
-                                                      packageProvider
-                                                          .packageDetail!
-                                                          .endSale
-                                                          .toString()
-                                                          .substring(5, 10),
+                                                  "Từ " +
+                                                      inputFormat.format(
+                                                          packageProvider
+                                                              .packageDetail!
+                                                              .startSale) +
+                                                      ' đến ' +
+                                                      inputFormat.format(
+                                                          packageProvider
+                                                              .packageDetail!
+                                                              .endSale),
                                                   style: const TextStyle(
                                                       // fontSize: 16,
                                                       // fontWeight:
@@ -219,10 +219,10 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                     packageProvider.packageDetail == null
                                         ? const Text('0')
                                         : Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            // mainAxisAlignment:
+                                            //     MainAxisAlignment.,
                                             children: [
-                                              const Text('Số món được mua:',
+                                              const Text('Số món được mua: ',
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:
@@ -247,7 +247,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                                 MainAxisAlignment.start,
                                             children: [
                                               SizedBox(
-                                                width: size.width * 0.12,
+                                                width: size.width * 0.15,
                                                 child: const Text('Mô tả:',
                                                     style: TextStyle(
                                                         fontSize: 16,
@@ -259,7 +259,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                                 width: size.width * 0.03,
                                               ),
                                               SizedBox(
-                                                width: size.width * 0.73,
+                                                width: size.width * 0.7,
                                                 child: Text(
                                                     packageProvider
                                                         .packageDetail!

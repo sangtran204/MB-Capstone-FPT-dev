@@ -28,7 +28,7 @@ class ButtonField extends StatelessWidget {
     return ElevatedButton(
       child: Text(
         text,
-        style: TextStyle(color: Colors.black87, fontSize: 17),
+        style: const TextStyle(color: Colors.black87, fontSize: 17),
       ),
       onPressed: () {
         voidCallback();
@@ -37,7 +37,7 @@ class ButtonField extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           primary: Colors.white,          
           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
               letterSpacing: 1,
               // color: kBodyTextColor,
               // shadows: Shadow.lerp(a, b, t),

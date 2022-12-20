@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
@@ -7,6 +5,7 @@ import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/models/request/create_sub_req.dart';
 import 'package:mobile_capstone_fpt/models/response/sub_detail_res.dart';
 import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
+import 'package:mobile_capstone_fpt/models/response/sub_id_res.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/subscription_impl.dart';
 
 class SubscriptionProvider with ChangeNotifier {
@@ -73,6 +72,26 @@ class SubscriptionProvider with ChangeNotifier {
     String accessToken = await secureStorage.readSecureData("token");
     SubRepImpl()
         .confirmSub('${RestApi.confirmSub}/$id', accessToken)
+        .then((value) async {
+      notifyListeners();
+    });
+  }
+
+  SubIdRes subByID = SubIdRes();
+  getSubById(BuildContext context, String id) async {
+    String accessToken = await secureStorage.readSecureData("token");
+    SubRepImpl()
+        .getSubByID('${RestApi.getSubById}/$id', accessToken)
+        .then((value) async {
+      subByID = value;
+      notifyListeners();
+    });
+  }
+
+  cancelSub(BuildContext context, String id) async {
+    String accessToken = await secureStorage.readSecureData("token");
+    SubRepImpl()
+        .cancelSub('${RestApi.cancelSub}/$id', accessToken)
         .then((value) async {
       notifyListeners();
     });

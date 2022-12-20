@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/auth_provider.dart';
-import 'package:mobile_capstone_fpt/models/request/checkExistPhone_req.dart';
-import 'package:mobile_capstone_fpt/view/screens.dart';
+// import 'package:mobile_capstone_fpt/models/request/checkExistPhone_req.dart';
+// import 'package:mobile_capstone_fpt/view/screens.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/phone_input_field.dart';
@@ -104,7 +104,7 @@ class _RegisterByPhoneScreenState extends State<RegisterByPhoneScreen> {
                       //         builder: (context) =>
                       //             VerifyScreen(phone: phoneNumber)));
                       // String _phone = phoneNumber.replaceAll('+84', '0');
-                      print(phoneNumber);
+                      // print(phoneNumber);
                       authProvider.checkExitPhone(context, phoneNumber);
                     },
                   ),

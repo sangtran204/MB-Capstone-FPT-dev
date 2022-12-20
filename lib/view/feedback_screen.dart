@@ -98,7 +98,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     }),
                     minLines: 3,
                     maxLines: 5,
-                    style: TextStyle(color: Colors.black87, fontSize: 16),
+                    style:  const TextStyle(color: Colors.black87, fontSize: 16),
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         // prefixIcon: Icon(Icons.lock, color: Colors.grey.shade500),
@@ -148,7 +148,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 22, color: Colors.grey),
+            style: const TextStyle(fontSize: 22, color: Colors.grey),
           ),
           const SizedBox(
             height: 15,

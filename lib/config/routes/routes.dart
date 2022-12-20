@@ -6,7 +6,7 @@ import 'package:mobile_capstone_fpt/view/screens.dart';
 class Routes {
   static final Map<String, Widget Function(BuildContext)> routes = {
     //Login
-    '/LoginPage': (context) => LoginScreen(),
+    '/LoginPage': (context) => const LoginScreen(),
     //Home
     '/HomePage': (context) => const HomeScreen(),
 

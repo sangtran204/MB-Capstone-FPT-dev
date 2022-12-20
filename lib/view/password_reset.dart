@@ -36,7 +36,7 @@ class _InputPasswordResetScreenState extends State<InputPasswordResetScreen> {
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffffcc33),
+        backgroundColor: const Color(0xffffcc33),
       ),
       body: Container(
         width: size.width,
@@ -81,7 +81,7 @@ class _InputPasswordResetScreenState extends State<InputPasswordResetScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 50),
+                padding: const EdgeInsets.only(top: 50),
                 child: Column(
                   children: [
                     ButtonField(

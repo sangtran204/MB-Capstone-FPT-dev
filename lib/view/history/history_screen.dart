@@ -1,10 +1,10 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
-import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
-import 'package:mobile_capstone_fpt/view/feedback_screen.dart';
+// import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
+// import 'package:mobile_capstone_fpt/view/feedback_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_format_money_vietnam/flutter_format_money_vietnam.dart';
 
@@ -158,8 +158,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               //     context, '/SubTracking');
                               subProvider.getSubDetail(
                                   context, subProvider.sub.result![i].id!);
-                              print(subProvider
-                                  .subDetail.result!.orders!.last.status);
+                              // print(subProvider
+                              //     .subDetail.result!.orders!.last.status);
                             },
                             child: OrderItems(
                                 subProvider.sub.result![i].id!,
@@ -279,81 +279,81 @@ class _HistoryScreenState extends State<HistoryScreen> {
         ),
       );
 
-  Widget OrderItemPass() => Card(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-        ),
-        child: SizedBox(
-          height: 90,
-          width: 380,
-          child: Row(
-            children: [
-              Container(
-                height: 100,
-                width: 100,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        bottomLeft: Radius.circular(12)),
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/packageitem.jpg'),
-                        fit: BoxFit.cover)),
-              ),
-              Container(
-                  height: 100,
-                  width: 170,
-                  padding: const EdgeInsets.only(top: 10, left: 3, bottom: 5),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      Text(
-                        'Tên gói ăn',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w400),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        '22-10-2022',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w400),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'Gói ăn trải nghiệm',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w400),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  )),
-              Container(
-                padding: EdgeInsets.only(top: 20, left: 2),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      '200.000 đ',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      'Đã giao hàng',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      );
-  Widget miniTab() => Card();
+  // Widget OrderItemPass() => Card(
+  //       shape: RoundedRectangleBorder(
+  //         side: BorderSide(
+  //           color: Theme.of(context).colorScheme.outline,
+  //         ),
+  //         borderRadius: const BorderRadius.all(Radius.circular(12)),
+  //       ),
+  //       child: SizedBox(
+  //         height: 90,
+  //         width: 380,
+  //         child: Row(
+  //           children: [
+  //             Container(
+  //               height: 100,
+  //               width: 100,
+  //               decoration: const BoxDecoration(
+  //                   borderRadius: BorderRadius.only(
+  //                       topLeft: Radius.circular(12),
+  //                       bottomLeft: Radius.circular(12)),
+  //                   image: DecorationImage(
+  //                       image: AssetImage('assets/images/packageitem.jpg'),
+  //                       fit: BoxFit.cover)),
+  //             ),
+  //             Container(
+  //                 height: 100,
+  //                 width: 170,
+  //                 padding: const EdgeInsets.only(top: 10, left: 3, bottom: 5),
+  //                 child: Column(
+  //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                   children: const [
+  //                     Text(
+  //                       'Tên gói ăn',
+  //                       style: TextStyle(
+  //                           fontSize: 18, fontWeight: FontWeight.w400),
+  //                       textAlign: TextAlign.center,
+  //                     ),
+  //                     Text(
+  //                       '22-10-2022',
+  //                       style: TextStyle(
+  //                           fontSize: 14, fontWeight: FontWeight.w400),
+  //                       textAlign: TextAlign.center,
+  //                     ),
+  //                     Text(
+  //                       'Gói ăn trải nghiệm',
+  //                       style: TextStyle(
+  //                           fontSize: 14, fontWeight: FontWeight.w400),
+  //                       textAlign: TextAlign.center,
+  //                     ),
+  //                   ],
+  //                 )),
+  //             Container(
+  //               padding: const EdgeInsets.only(top: 20, left: 2),
+  //               child: Column(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                 children: const [
+  //                   Text(
+  //                     '200.000 đ',
+  //                     style:
+  //                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  //                     textAlign: TextAlign.center,
+  //                   ),
+  //                   Text(
+  //                     'Đã giao hàng',
+  //                     style: TextStyle(
+  //                         fontSize: 16,
+  //                         fontWeight: FontWeight.bold,
+  //                         color: Colors.green),
+  //                     textAlign: TextAlign.center,
+  //                   ),
+  //                 ],
+  //               ),
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //     );
+  // Widget miniTab() => Card();
 }

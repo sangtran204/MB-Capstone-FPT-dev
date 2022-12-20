@@ -15,7 +15,6 @@ import 'package:mobile_capstone_fpt/config/toast.dart';
 // import 'package:mobile_capstone_fpt/config/provider/time_slot_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 // import 'package:mobile_capstone_fpt/models/entity/food.dart';
-import 'package:mobile_capstone_fpt/models/entity/order.dart';
 
 import 'package:mobile_capstone_fpt/models/entity/package_detail.dart';
 // import 'package:mobile_capstone_fpt/models/entity/package_item.dart';
@@ -52,7 +51,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }

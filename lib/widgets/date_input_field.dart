@@ -27,7 +27,7 @@ class DateInputField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: date,
             border: InputBorder.none,
-            icon: Icon(Icons.event),
+            icon: const Icon(Icons.event),
           ),
           selectableDayPredicate: (date) {
             if (date.weekday == 6 || date.weekday == 7) {

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
@@ -39,7 +38,7 @@ class _PaymentPageState extends State<PaymentPage> {
         leading: BackButton(
           color: kblackColor,
           onPressed: () async {
-            log("Cancel Payment");
+            // log("Back Payment");
             await packageProvider.clearBackPayment();
             Navigator.pushNamedAndRemoveUntil(
                 context, '/SchedulePage', (route) => false);
@@ -63,26 +62,29 @@ class _PaymentPageState extends State<PaymentPage> {
               .startsWith('http://14.225.205.162:2004/subscriptions/payment')) {
             var uri = Uri.parse(request.url);
             var statusCode = uri.queryParameters['vnp_TransactionStatus'];
-            log(statusCode.toString());
+            var maDonHang = uri.queryParameters['vnp_TxnRef'];
+            // log(statusCode.toString());
             if (statusCode == '00') {
-              String queryParam = request.url.split('?')[1];
-              log(queryParam.toString());
-
-              // orderPro.updateStatusPaymentUrl(
-              //     widget.ordersTours, context, queryParam);
+              // String queryParam = request.url.split('?')[1];
               String subId =
                   await secureStorage.readSecureData("idSubscription");
               subscriptionProvider.confirmSub(context, subId);
-              // await packageProvider.clearBackPackage();
+              await subscriptionProvider.getSubById(context, subId);
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
-                      builder: (context) => const SuccessPayScreen(
-                          // ordersTours: widget.ordersTours,
+                      builder: (context) => SuccessPayScreen(
+                            // ordersTours: widget.ordersTours,
+                            maDonHang: maDonHang,
                           )),
                   (Route<dynamic> route) => false);
             } else {
-              // Navigator.pushReplacementNamed(context, '/History');
-              log("Payment thất bại");
+              String subId =
+                  await secureStorage.readSecureData("idSubscription");
+              await subscriptionProvider.cancelSub(context, subId);
+              await secureStorage.deleteSecureData(subId);
+
+              Navigator.pushReplacementNamed(context, '/HomePage');
+
               // Navigator.of(context).pushAndRemoveUntil(
               //     MaterialPageRoute(
               //         builder: (context) => PaymentFailed(
