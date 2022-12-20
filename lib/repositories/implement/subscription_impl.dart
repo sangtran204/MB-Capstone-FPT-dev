@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/models/request/create_sub_req.dart';
+import 'package:mobile_capstone_fpt/models/response/sub_confirm_res.dart';
 import 'package:mobile_capstone_fpt/models/response/sub_delete_res.dart';
 import 'package:mobile_capstone_fpt/models/response/sub_detail_res.dart';
 import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
@@ -24,6 +26,21 @@ class SubRepImpl implements SubRepo {
       result = CreateSubRes.createSubResFromJson(jsonEncode(response.data));
     } catch (e) {
       showToastFail("Lỗi xảy ra khi tạo");
+    }
+    return result;
+  }
+
+  @override
+  Future<ConfirmSubRes> confirmSub(String url, String accessToken) async {
+    var result = ConfirmSubRes();
+    try {
+      Response response = await Dio().put(url,
+          options: Options(headers: {
+            HttpHeaders.authorizationHeader: 'Bearer $accessToken'
+          }));
+      result = ConfirmSubRes.confirmSubResFromJson(jsonEncode(response.data));
+    } catch (e) {
+      showToastFail("Lỗi xảy ra khi xác nhận");
     }
     return result;
   }

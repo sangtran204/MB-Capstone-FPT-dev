@@ -9,7 +9,9 @@ import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
 // import 'package:mobile_capstone_fpt/config/provider/order_provider.dart';
 // import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
+import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
+import 'package:mobile_capstone_fpt/config/toast.dart';
 // import 'package:mobile_capstone_fpt/config/provider/time_slot_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
 // import 'package:mobile_capstone_fpt/models/entity/food.dart';
@@ -40,19 +42,17 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-  // List<Order> listOrderCreate = [];
   List<Station> listStationActive = [];
   List<TimeSlot> listTimeSlot = [];
-  final inputFormat = DateFormat('dd/MM/yyyy');
-  // Station? selectedStation;
-  // Food? selectFood;
+  final inputFormat = DateFormat('dd/MM');
+  var wasNull = false;
 
   final SecureStorage secureStorage = SecureStorage();
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       _asyncMethod();
     });
   }
@@ -201,7 +201,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
     FoodGroupProvider foodGroupProvider =
         Provider.of<FoodGroupProvider>(context);
-
+    SubscriptionProvider subscriptionProvider =
+        Provider.of<SubscriptionProvider>(context, listen: false);
     String nameOfItem(int itemCode) {
       if (itemCode > 18 || itemCode < 1) return "Invalid";
       const name = [
@@ -235,6 +236,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               backgroundColor: kBackgroundColor,
               leading: BackButton(
                 onPressed: () async {
+                  String subId =
+                      await secureStorage.readSecureData("idSubscription");
+                  if (subId.isNotEmpty) {
+                    subscriptionProvider.deleteSub(context, subId);
+                    secureStorage.deleteSecureData(subId);
+                  }
                   await packageProvider.clearBackPackageSchedule();
                   Navigator.pushNamedAndRemoveUntil(
                       context, "/ChoicePage", (route) => false);
@@ -275,7 +282,32 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         textAlign: TextAlign.center,
                       ),
                       onTap: () async {
-                        await packageProvider.submitData(context);
+                        for (var item in packageProvider.orderRequest) {
+                          if (item.foodId == null) {
+                            showMotionToastError("Món ăn",
+                                "Vui lòng không để trống món ăn", context);
+                            setState(() {
+                              wasNull = true;
+                            });
+                          } else if (item.timeSlotId == null) {
+                            showMotionToastError(
+                                "Thời gian giao",
+                                "Vui lòng không để trống thời gian giao",
+                                context);
+                            setState(() {
+                              wasNull = true;
+                            });
+                          } else if (item.stationId == null) {
+                            showMotionToastError("Điểm giao",
+                                "Vui lòng không để trống điểm giao", context);
+                            setState(() {
+                              wasNull = true;
+                            });
+                          }
+                        }
+                        if (!wasNull) {
+                          await packageProvider.submitData(context);
+                        }
                       },
                       backGroundColor: kBackgroundColor,
                     ),
@@ -304,49 +336,29 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               height: 155,
                               // width: 200,
                               child: Row(children: <Widget>[
-                                Column(
-                                  children: [
-                                    Container(
-                                      width: 75,
-                                      decoration: const BoxDecoration(
-                                          border: Border(
-                                              right: BorderSide(
-                                                  width: 1,
-                                                  color: Colors.grey))),
-                                      child: Center(
-                                        // padding: const EdgeInsets.only(top: 70),
-                                        child: Text(
-                                          nameOfItem(packageProvider
-                                              .orderRequest[index].itemCode!),
-                                          maxLines: 2,
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 75,
-                                      decoration: const BoxDecoration(
-                                          border: Border(
-                                              right: BorderSide(
-                                                  width: 1,
-                                                  color: Colors.grey))),
-                                      child: Center(
-                                        child: Text(
+                                Container(
+                                  width: 75,
+                                  decoration: const BoxDecoration(
+                                      border: Border(
+                                          right: BorderSide(
+                                              width: 1, color: Colors.grey))),
+                                  child: Center(
+                                    // padding: const EdgeInsets.only(top: 70),
+                                    child: Text(
+                                      nameOfItem(packageProvider
+                                              .orderRequest[index].itemCode!) +
+                                          " ( " +
                                           inputFormat.format(packageProvider
                                               .orderRequest[index]
-                                              .deliveryDate!),
-                                          maxLines: 2,
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
+                                              .deliveryDate!) +
+                                          " )",
+                                      maxLines: 4,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ],
+                                  ),
                                 ),
                                 Expanded(
                                   child: Container(
@@ -504,6 +516,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                       if (listTimeSlot.isNotEmpty)
                                         getListTimeSlot(packageProvider
                                             .orderRequest[index]),
+                                      // getListTimeSlot(packageProvider
+                                      //     .orderRequest[index].timeSlotFlag),
                                       const SizedBox(
                                         height: 10,
                                       ),

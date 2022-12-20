@@ -2,19 +2,20 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
+import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
+import 'package:mobile_capstone_fpt/models/entity/order.dart';
 import 'package:mobile_capstone_fpt/view/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentPage extends StatefulWidget {
-  // const PaymentPage({Key? key, required this.url, required this.ordersTours})
-  //     : super(key: key);
-  const PaymentPage({Key? key, required this.url}) : super(key: key);
+  const PaymentPage({Key? key, required this.url, required this.listOrder})
+      : super(key: key);
   final String url;
+  final List<Order> listOrder;
 
-  // final OrdersTours ordersTours;
   @override
   State<PaymentPage> createState() => _PaymentPageState();
 }
@@ -25,9 +26,10 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
-    final SecureStorage secureStorage = SecureStorage();
+    SubscriptionProvider subscriptionProvider =
+        Provider.of<SubscriptionProvider>(context);
 
-    // final orderPro = ref.watch(orderProvider);
+    final SecureStorage secureStorage = SecureStorage();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Thanh toán',
@@ -38,9 +40,9 @@ class _PaymentPageState extends State<PaymentPage> {
           color: kblackColor,
           onPressed: () async {
             log("Cancel Payment");
-            await packageProvider.clearBackPackage();
+            await packageProvider.clearBackPayment();
             Navigator.pushNamedAndRemoveUntil(
-                context, '/HomePage', (route) => false);
+                context, '/SchedulePage', (route) => false);
             // if (!orderPro.buttonCancelPayment) {
             //   orderPro.cancelNotPayment(
             //       context, widget.ordersTours.id!, 'Non Payment');
@@ -61,17 +63,17 @@ class _PaymentPageState extends State<PaymentPage> {
               .startsWith('http://14.225.205.162:2004/subscriptions/payment')) {
             var uri = Uri.parse(request.url);
             var statusCode = uri.queryParameters['vnp_TransactionStatus'];
-            // await Navigator.pushReplacementNamed(context, '/History');
-            // showToastSuccess("Thanh toán thành công");
             log(statusCode.toString());
             if (statusCode == '00') {
               String queryParam = request.url.split('?')[1];
+              log(queryParam.toString());
+
               // orderPro.updateStatusPaymentUrl(
               //     widget.ordersTours, context, queryParam);
               String subId =
                   await secureStorage.readSecureData("idSubscription");
-              secureStorage.deleteSecureData(subId);
-              await packageProvider.clearBackPackage();
+              subscriptionProvider.confirmSub(context, subId);
+              // await packageProvider.clearBackPackage();
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                       builder: (context) => const SuccessPayScreen(
@@ -79,7 +81,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           )),
                   (Route<dynamic> route) => false);
             } else {
-              Navigator.pushReplacementNamed(context, '/History');
+              // Navigator.pushReplacementNamed(context, '/History');
               log("Payment thất bại");
               // Navigator.of(context).pushAndRemoveUntil(
               //     MaterialPageRoute(

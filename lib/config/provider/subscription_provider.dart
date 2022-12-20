@@ -22,12 +22,12 @@ class SubscriptionProvider with ChangeNotifier {
         .postSub(RestApi.createSub, data, accessToken)
         .then((value) async {
       secureStorage.writeSecureData("idSubscription", value.result!.id);
-      log(value.result!.id);
-      showToastSuccess("Đã chọn gói");
+      // log(value.result!.id);
+      // showToastSuccess("Đã chọn gói");
       await Navigator.pushReplacementNamed(context, '/SchedulePage');
       // await Navigator.pushReplacementNamed(context, '/ChoicePage');
     }).onError((error, stackTrace) {
-      log(error.toString());
+      // log(error.toString());
       showToastFail("Chọn gói thất bại");
       Navigator.pushNamedAndRemoveUntil(context, "/HomePage", (route) => false);
     });
@@ -69,6 +69,15 @@ class SubscriptionProvider with ChangeNotifier {
     });
   }
 
+  void confirmSub(BuildContext context, String id) async {
+    String accessToken = await secureStorage.readSecureData("token");
+    SubRepImpl()
+        .confirmSub('${RestApi.confirmSub}/$id', accessToken)
+        .then((value) async {
+      notifyListeners();
+    });
+  }
+
   SubDetailRes subDetail = SubDetailRes();
   void getSubDetail(BuildContext context, String id) async {
     String accessToken = await secureStorage.readSecureData("token");
@@ -77,10 +86,8 @@ class SubscriptionProvider with ChangeNotifier {
         .then((value) async {
       subDetail = value;
       Navigator.pushReplacementNamed(context, '/SubTracking');
-      notifyListeners();
     });
   }
-
   // void getSubByUnConfirm(BuildContext context) async {
   //   String accessToken = await secureStorage.readSecureData("token");
   //   SubscriptionImpl()
