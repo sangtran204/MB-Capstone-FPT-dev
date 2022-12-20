@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:mobile_capstone_fpt/widgets/button_field.dart';
-import 'package:mobile_capstone_fpt/widgets/text_input.dart';
-// import 'package:mobile_capstone_fpt/widgets/widgets.dart';
 
 class InputInfoScreen extends StatelessWidget {
   const InputInfoScreen({Key? key}) : super(key: key);
@@ -23,7 +20,7 @@ class InputInfoScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,

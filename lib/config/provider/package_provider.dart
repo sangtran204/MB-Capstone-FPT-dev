@@ -306,9 +306,9 @@ class PackageProvider with ChangeNotifier {
       saveDataOrder.add(dataCreateOrder);
     }
     try {
-      for (var i = 0; i < saveDataOrder.length; i++) {
-        log(saveDataOrder[i].toJson().toString());
-      }
+      // for (var i = 0; i < saveDataOrder.length; i++) {
+      //   log(saveDataOrder[i].toJson().toString());
+      // }
       if (subId.isNotEmpty) {
         // rất cần cái này ===================================================
 
@@ -316,7 +316,7 @@ class PackageProvider with ChangeNotifier {
           await OrderRepImpl()
               .postOrder(RestApi.createOrder, saveDataOrder[i], accessToken);
         }
-        log(subId.toString());
+        // log(subId.toString());
         final url = await OrderRepImpl().getPaymentUrl(
             subId, '43b02def-bf0f-4956-9b05-9f60253a5646', accessToken);
         Navigator.push(context,

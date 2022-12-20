@@ -12,7 +12,6 @@ class CardFood extends StatefulWidget {
 class _CardFoodState extends State<CardFood> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Card(
       shape: RoundedRectangleBorder(
         side: BorderSide(

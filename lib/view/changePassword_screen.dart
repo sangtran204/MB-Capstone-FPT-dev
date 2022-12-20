@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
@@ -42,7 +44,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Đổi mật khẩu',
             style: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
@@ -82,16 +84,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               PasswordInputField(
                   hintText: 'Nhập lại mật khẩu',
                   password: inputConfirmPassword),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               ButtonField(
                 voidCallback: () {
-                  if (newPassword != confirmPassword)
+                  if (newPassword != confirmPassword) {
                     showToastFail('Không khớp mật khẩu');
-                  if (newPassword == confirmPassword)
+                  }
+                  if (newPassword == confirmPassword) {
                     profileProvider.changePassword(
                         context, oldPassword, newPassword);
+                  }
                 },
                 text: 'Đổi mật khẩu',
               )

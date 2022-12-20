@@ -15,7 +15,7 @@ class StationRepoImpl implements StationRepo {
           options: Options(
               headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result = StationRes.stationResFromJson(jsonEncode(response.data));
-    } on DioError catch (e) {
+    } on DioError {
       showToastFail("Không tìm thấy trạm!");
     }
     return result;

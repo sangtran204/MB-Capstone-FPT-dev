@@ -21,11 +21,11 @@ class InputPasswordScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     SizedBox(
                       height: 20,
                     ),
@@ -50,9 +50,9 @@ class InputPasswordScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 50),
+                padding: const EdgeInsets.only(top: 50),
                 child: Column(
-                  children: [
+                  children: const [
                     // ButtonField(
                     //   text: 'Xác nhận',
                     //   path: '/info',

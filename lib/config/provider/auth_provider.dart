@@ -99,7 +99,6 @@ class LoginProvider with ChangeNotifier {
         .checkPhoneRegister(
             RestApi.checkPhoneRegister, CheckExistPhoneReq(phone: _phone))
         .then((value) async {
-      print(value.toString());
       if (value == 'phone exist') {
         showToastFail('Số điện thoại đã tồn tại');
       }

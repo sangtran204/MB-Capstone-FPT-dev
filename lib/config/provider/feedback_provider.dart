@@ -7,8 +7,13 @@ import 'package:mobile_capstone_fpt/repositories/response/message_respone.dart';
 
 class FeedbackProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
-  Future<void> sendFeedback(BuildContext context, int _packageRate, int _foodRate,
-      int _shippingRate, String _comment, String _packageId) async {
+  Future<void> sendFeedback(
+      BuildContext context,
+      int _packageRate,
+      int _foodRate,
+      int _shippingRate,
+      String _comment,
+      String _packageId) async {
     String accessToken = await secureStorage.readSecureData("token");
     MessageResponeModel msg = MessageResponeModel();
     FeedbackImpl()

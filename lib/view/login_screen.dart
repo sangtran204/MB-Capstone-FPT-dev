@@ -6,6 +6,8 @@ import 'package:mobile_capstone_fpt/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -25,15 +27,15 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void buttomFuction() {
-    print('+++++++');
-  }
+  // void buttomFuction() {
+  //   print('+++++++');
+  // }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     LoginProvider loginProvider = Provider.of<LoginProvider>(context);
-    String check;
+    // String check;
 
     return
         // SafeArea(
@@ -51,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const Upside(
                 imgUrl: 'assets/images/logo6.png',
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 220.0),
                 child: Text(
                   'MeSup',

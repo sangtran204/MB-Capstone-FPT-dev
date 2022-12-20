@@ -29,7 +29,7 @@ class TimeSlotRepoImpl implements TimeSlotRepo {
           options: Options(
               headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result = TimeSlotRes.timeSlotFromJson(jsonEncode(response.data));
-    } on DioError catch (e) {
+    } on DioError {
       showToastFail("Không tìm thấy khung thời gian!");
     }
     return result;

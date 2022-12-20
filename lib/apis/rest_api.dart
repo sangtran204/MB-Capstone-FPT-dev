@@ -42,6 +42,8 @@ class RestApi {
       '$serverPath/subscriptions/customer/getSubscription?status=';
   static const String deleteSub = '$serverPath/subscriptions/delete';
   static const String confirmSub = '$serverPath/subscriptions/confirm';
+  static const String cancelSub = '$serverPath/subscriptions/cancel';
+  static const String getSubById = '$serverPath/subscriptions';
 
   //something
 }

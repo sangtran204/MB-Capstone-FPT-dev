@@ -18,7 +18,7 @@ class _PackageFoodState extends State<PackageFood> {
       height: size.height * 0.35,
       width: size.width,
       decoration: BoxDecoration(
-        color: Colors.white70,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -35,10 +35,10 @@ class _PackageFoodState extends State<PackageFood> {
       child: Column(
         children: <Widget>[
           Container(
-            height: 120,
+            height: 105,
             width: size.width,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10)),
                 image: DecorationImage(

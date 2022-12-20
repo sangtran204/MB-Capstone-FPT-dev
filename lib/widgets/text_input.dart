@@ -16,12 +16,12 @@ class TextInput extends StatelessWidget {
     return Container(
         width: 350,
         height: 58,
-        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: Colors.black.withOpacity(0.13)),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black12,
               blurRadius: 10,
@@ -34,7 +34,7 @@ class TextInput extends StatelessWidget {
           onChanged: (value) {
             textValue(value);
           },
-          style: TextStyle(color: Colors.black87, fontSize: 16),
+          style: const TextStyle(color: Colors.black87, fontSize: 16),
           textCapitalization: textCapitalization,
           decoration: InputDecoration(
               border: InputBorder.none,
