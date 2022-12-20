@@ -37,6 +37,13 @@
             {
               "client_id": "1083026922411-rtbjh753hc03i4i9v633ckps6m2h3lvs.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1083026922411-rggi234551pk2ajgg78o6h6bh7irqi1d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mobileCapstoneFpt"
+              }
             }
           ]
         }
@@ -74,6 +81,13 @@
             {
               "client_id": "1083026922411-rtbjh753hc03i4i9v633ckps6m2h3lvs.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1083026922411-rggi234551pk2ajgg78o6h6bh7irqi1d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mobileCapstoneFpt"
+              }
             }
           ]
         }

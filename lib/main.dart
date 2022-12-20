@@ -6,15 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mobile_capstone_fpt/config/provider/main_provider/main_provider.dart';
 import 'package:mobile_capstone_fpt/config/routes/routes.dart';
+import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/firebase_options.dart';
+import 'package:mobile_capstone_fpt/notification_service.dart';
 import 'package:provider/provider.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+      options: DefaultFirebaseOptions.currentPlatform, name: "hahahahaha");
 
   runApp(const MyApp());
 }
@@ -27,53 +29,32 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  final SecureStorage secureStorage = SecureStorage();
 
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
   @override
   void initState() {
-    getMessage(messaging);
+    getMessage(messaging, context);
+    NotificationService.abc(selectNotification);
     super.initState();
   }
 
-  void getMessage(FirebaseMessaging messaging) async {
-    // AppPreference re = AppPreference();
-    // re.setToken(Label.token,
-    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1Y2hpZXUiLCJyb2xlIjoidG91cmlzdCIsImlhdCI6MTY2Mjc3NjUwNiwiZXhwIjoxNjYyODYyOTA2fQ.jQJO4t9KIEXUjHW8zQC_GUFAni4USOBxCn9X5RjIVCI');
-    final future = messaging.getToken();
-    String? deviceToken = await future;
-    log(deviceToken.toString());
-
-    // NotificationSettings settings = await messaging.requestPermission(
-    //   alert: true,
-    //   announcement: false,
-    //   badge: true,
-    //   carPlay: false,
-    //   criticalAlert: false,
-    //   provisional: false,
-    //   sound: true,
-    // );
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails('Channel_id', 'your channel name',
-            channelDescription: 'your channel description',
-            importance: Importance.max,
-            priority: Priority.high,
-            ticker: 'ticker');
-    const NotificationDetails platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
-
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      RemoteNotification notification = message.notification!;
-      // ignore: unused_local_variable
-      AndroidNotification? android = message.notification!.android;
-      // if (message.notification != null) {
-      //   await NotificationService().flutterLocalNotificationsPlugin.show(
-      //       notification.hashCode,
-      //       notification.title,
-      //       notification.body,
-      //       platformChannelSpecifics,
-      //       payload: jsonEncode(message.data));
-      // }
-    });
+  void selectNotification(String? payload) {
+    //Handle notification tapped logic here
+    // if (payload != null) {
+    //   debugPrint('notification payload: $payload');
+    //   // Here you can check notification payload and redirect user to the respective screen
+    //   Map tmp = jsonDecode(payload);
+    //   // log('-----------${tmp.keys.first}');
+    //   if (tmp.keys.first == 'idOrder') {
+    //     ref.watch(orderProvider).getOrderTourByid(tmp[tmp.keys.first], context);
+    //   } else {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => const ProtectRouting()),
+    //     );
+    //   }
+    // }
   }
 
   @override

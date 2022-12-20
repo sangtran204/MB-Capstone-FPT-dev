@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
@@ -37,6 +38,7 @@ class OrderRepImpl implements OrderRepo {
       data = BaseResponseMsg.fromJson(response.data);
       return data;
     } catch (e) {
+      log(e.toString());
       rethrow;
     }
   }

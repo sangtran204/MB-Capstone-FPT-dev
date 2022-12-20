@@ -13,12 +13,13 @@ class PushNotifyImp implements PushNotifyRepo {
     var result = PushNotifyRes();
     try {
       // ignore: unused_local_variable
-      Response response = await Dio().put(url,
+      Response response = await Dio().post(url,
           data: req.toJson(),
           options: Options(headers: {
             HttpHeaders.authorizationHeader: 'Bearer $accessToken'
           }));
     } catch (e) {
+      log("Xui quá đi");
       log(e.toString());
     }
     return result;
