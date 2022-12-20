@@ -246,17 +246,20 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              const Text('Mô tả:',
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black87)),
-                                              const SizedBox(
-                                                width: 20,
+                                              SizedBox(
+                                                width: size.width * 0.12,
+                                                child: const Text('Mô tả:',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.black87)),
                                               ),
                                               SizedBox(
-                                                width: 270,
+                                                width: size.width * 0.03,
+                                              ),
+                                              SizedBox(
+                                                width: size.width * 0.73,
                                                 child: Text(
                                                     packageProvider
                                                         .packageDetail!

@@ -19,6 +19,8 @@ class Routes {
     // '/order': (context) => const ScheduleScreen(),
     '/ChoicePage': (context) => const ChoiceScreen(),
     '/SchedulePage': (context) => const ScheduleScreen(),
+    '/SubTracking': (context) => const SubDetailTrackingScreen(),
+    // '/': (context) => const SubDetailTrackingScreen(),
 
     // '/PaymentPage': (context) => const PaymentPage(),
 

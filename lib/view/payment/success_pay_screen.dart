@@ -114,35 +114,29 @@ class _SuccessPayScreenState extends State<SuccessPayScreen> {
                           ),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 50,
                         ),
                         ElevatedButton(
                             onPressed: () {
                               Navigator.pushReplacementNamed(
                                   context, '/HomePage');
                             },
+                            style: ElevatedButton.styleFrom(
+                                primary: kBackgroundColor),
                             child: Container(
-                              margin: EdgeInsets.only(top: 50),
-                              // ignore: prefer_const_constructors
-                              child: Center(
-                                child: const Text('Màn hình chính',
-                                    style: TextStyle(
+                              // color: kBackgroundColor,
+                              // margin: const EdgeInsets.only(top: 15, bottom: 15),
+                              height: 45,
+                              width: 150,
+                              child: const Center(
+                                child: Text(
+                                  'Màn hình chính',
+                                  style: TextStyle(
                                       fontSize: 20,
-                                    )),
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
-                              height: 50,
-                              width: 220,
-                              decoration: BoxDecoration(
-                                  color: kBackgroundColor,
-                                  border: Border.all(width: 2),
-                                  borderRadius: BorderRadius.circular(15)),
-                            ))
-                        // CustomButton(
-                        //     child: Text('Màn hình chính'),
-                        //     onTap: () {
-                        //       Navigator.pushReplacementNamed(
-                        //           context, '/HomePage');
-                        //     })
+                            )),
                       ],
                     ),
                   )),

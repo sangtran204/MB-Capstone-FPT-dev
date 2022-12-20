@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mobile_capstone_fpt/config/provider/feedback_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
-import 'package:mobile_capstone_fpt/models/request/feedback_req.dart';
 import 'package:provider/provider.dart';
 
 class FeedbackScreen extends StatefulWidget {
@@ -26,7 +25,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     FeedbackProvider feedbackProvider = Provider.of<FeedbackProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Feedback'),
+        title: const Text('Feedback'),
         backgroundColor: kBackgroundColor,
       ),
       body: SafeArea(
@@ -42,7 +41,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
                 _textField('Đánh giá gói ăn'),
                 RatingBar.builder(
-                  itemBuilder: (context, _) => Icon(
+                  itemBuilder: (context, _) => const Icon(
                     Icons.star,
                     color: Colors.amber,
                   ),
@@ -53,7 +52,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
                 _textField('Đánh giá món ăn'),
                 RatingBar.builder(
-                  itemBuilder: (context, _) => Icon(
+                  itemBuilder: (context, _) => const Icon(
                     Icons.star,
                     color: Colors.amber,
                   ),
@@ -64,7 +63,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
                 _textField('Đánh giá giao hàng'),
                 RatingBar.builder(
-                  itemBuilder: (context, _) => Icon(
+                  itemBuilder: (context, _) => const Icon(
                     Icons.star,
                     color: Colors.amber,
                   ),
@@ -79,12 +78,13 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 Container(
                   width: 350,
                   height: 100,
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: Colors.black.withOpacity(0.13)),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black12,
                         blurRadius: 10,
@@ -106,19 +106,19 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         hintStyle: TextStyle(color: Colors.grey.shade500)),
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: kBackgroundColor),
                   child: Container(
-                    margin: const EdgeInsets.only(top: 70),
                     width: 220,
                     height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.white),
                     child: const Center(
                       child: Text(
                         'Gửi đánh giá',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

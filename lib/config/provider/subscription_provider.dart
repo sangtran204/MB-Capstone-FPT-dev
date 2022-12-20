@@ -5,6 +5,7 @@ import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/models/request/create_sub_req.dart';
+import 'package:mobile_capstone_fpt/models/response/sub_detail_res.dart';
 import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/subscription_impl.dart';
 
@@ -77,6 +78,16 @@ class SubscriptionProvider with ChangeNotifier {
     });
   }
 
+  SubDetailRes subDetail = SubDetailRes();
+  void getSubDetail(BuildContext context, String id) async {
+    String accessToken = await secureStorage.readSecureData("token");
+    SubRepImpl()
+        .getSubDetail('${RestApi.getSubDetail}$id', accessToken)
+        .then((value) async {
+      subDetail = value;
+      Navigator.pushReplacementNamed(context, '/SubTracking');
+    });
+  }
   // void getSubByUnConfirm(BuildContext context) async {
   //   String accessToken = await secureStorage.readSecureData("token");
   //   SubscriptionImpl()

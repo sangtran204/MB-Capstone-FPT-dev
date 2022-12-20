@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
@@ -150,14 +152,24 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       children: [
                         for (int i = 0; i < subProvider.sub.result!.length; i++)
                           // OrderItems(subProvider.sub.result![i])
-                          OrderItems(
-                              subProvider.sub.result![i].id!,
-                              subProvider.sub.result![i].packageName!,
-                              subProvider.sub.result![i].packageImg!,
-                              subProvider.sub.result![i].startDelivery!,
-                              subProvider.sub.result![i].status!,
-                              subProvider.sub.result?[i].cancelDate,
-                              subProvider.sub.result![i].totalPrice!)
+                          GestureDetector(
+                            onTap: () {
+                              // Navigator.pushReplacementNamed(
+                              //     context, '/SubTracking');
+                              subProvider.getSubDetail(
+                                  context, subProvider.sub.result![i].id!);
+                              print(subProvider
+                                  .subDetail.result!.orders!.last.status);
+                            },
+                            child: OrderItems(
+                                subProvider.sub.result![i].id!,
+                                subProvider.sub.result![i].packageName!,
+                                subProvider.sub.result![i].packageImg!,
+                                subProvider.sub.result![i].startDelivery!,
+                                subProvider.sub.result![i].status!,
+                                subProvider.sub.result?[i].cancelDate,
+                                subProvider.sub.result![i].totalPrice!),
+                          )
                         // OrderItems(),
                         // OrderItems(),
                         // OrderItemPass()
@@ -259,90 +271,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           fontSize: 18, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                    if (status == 'inProgress')
-                      GestureDetector(
-                        child: Container(
-                          height: 30,
-                          width: 100,
-                          decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(100)),
-                              color: Colors.green),
-                          child: const Center(
-                            child: Text(
-                              "Đánh giá",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      FeedbackScreen(packageId: id)));
-                          // print('đã đặt');
-                          // const ExpenseList().launch(context);
-                        },
-                      ),
-                    if (status == 'unConfirmed')
-                      Column(
-                        children: [
-                          GestureDetector(
-                            child: Container(
-                              height: 30,
-                              width: 100,
-                              decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(100)),
-                                  color: Colors.green),
-                              child: const Center(
-                                child: Text(
-                                  "Thanh toán",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.pushNamed(context, '/Feedback');
-                              // print('đã đặt');
-                              // const ExpenseList().launch(context);
-                            },
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          GestureDetector(
-                            child: Container(
-                              height: 30,
-                              width: 100,
-                              decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(100)),
-                                  color: Colors.red),
-                              child: const Center(
-                                child: Text(
-                                  "Hủy",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.pushNamed(context, '/Feedback');
-                              // print('đã đặt');
-                              // const ExpenseList().launch(context);
-                            },
-                          ),
-                        ],
-                      ),
                   ],
                 ),
               )
