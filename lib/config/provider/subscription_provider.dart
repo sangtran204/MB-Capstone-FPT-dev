@@ -88,7 +88,7 @@ class SubscriptionProvider with ChangeNotifier {
     });
   }
 
-  cancelSub(BuildContext context, String id) async {
+  void cancelSub(BuildContext context, String id) async {
     String accessToken = await secureStorage.readSecureData("token");
     SubRepImpl()
         .cancelSub('${RestApi.cancelSub}/$id', accessToken)

@@ -187,19 +187,42 @@ class PackageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  setFoodGroupRandom(String indexOrderRequest) async {
+  setFoodGroupRandom(String indexOrderRequest, int number) async {
     final listOrderRequestTmp = [...orderRequest];
     final index = listOrderRequestTmp
         .indexWhere((element) => element.packageItemId == indexOrderRequest);
     String accessToken = await secureStorage.readSecureData("token");
     final valueFood = await FoodGroupRepoImpl().getFoodGroupDetail(
         '${RestApi.getFoodGroupDetail}/${listOrderRequestTmp[index].foodGroupId}',
+        // '${RestApi.getFoodGroupDetail}/${listIdFG[number]}',
         accessToken);
+    if (index == 0) {
+      listOrderRequestTmp[index].foodId = valueFood.result!.foods![1].id;
+      listOrderRequestTmp[index].nameFood = valueFood.result!.foods![1].name;
+      listOrderRequestTmp[index].imageFood = valueFood.result!.foods![1].image;
+      listOrderRequestTmp[index].priceFood = valueFood.result!.foods![1].price;
+    } else if (index == 1) {
+      listOrderRequestTmp[index].foodId = valueFood.result!.foods![2].id;
+      listOrderRequestTmp[index].nameFood = valueFood.result!.foods![2].name;
+      listOrderRequestTmp[index].imageFood = valueFood.result!.foods![2].image;
+      listOrderRequestTmp[index].priceFood = valueFood.result!.foods![2].price;
+    } else if (index == 2) {
+      listOrderRequestTmp[index].foodId = valueFood.result!.foods![3].id;
+      listOrderRequestTmp[index].nameFood = valueFood.result!.foods![3].name;
+      listOrderRequestTmp[index].imageFood = valueFood.result!.foods![3].image;
+      listOrderRequestTmp[index].priceFood = valueFood.result!.foods![3].price;
+    } else if (index == 3) {
+      listOrderRequestTmp[index].foodId = valueFood.result!.foods![2].id;
+      listOrderRequestTmp[index].nameFood = valueFood.result!.foods![2].name;
+      listOrderRequestTmp[index].imageFood = valueFood.result!.foods![2].image;
+      listOrderRequestTmp[index].priceFood = valueFood.result!.foods![2].price;
+    } else {
+      listOrderRequestTmp[index].foodId = valueFood.result!.foods![0].id;
+      listOrderRequestTmp[index].nameFood = valueFood.result!.foods![0].name;
+      listOrderRequestTmp[index].imageFood = valueFood.result!.foods![0].image;
+      listOrderRequestTmp[index].priceFood = valueFood.result!.foods![0].price;
+    }
 
-    listOrderRequestTmp[index].foodId = valueFood.result!.foods![0].id;
-    listOrderRequestTmp[index].nameFood = valueFood.result!.foods![0].name;
-    listOrderRequestTmp[index].imageFood = valueFood.result!.foods![0].image;
-    listOrderRequestTmp[index].priceFood = valueFood.result!.foods![0].price;
     notifyListeners();
   }
 
@@ -316,7 +339,7 @@ class PackageProvider with ChangeNotifier {
           await OrderRepImpl()
               .postOrder(RestApi.createOrder, saveDataOrder[i], accessToken);
         }
-        // log(subId.toString());
+        log(subId.toString());
         final url = await OrderRepImpl().getPaymentUrl(
             subId, '29a6991e-9ee1-4e5e-9960-4502f8340e43', accessToken);
         Navigator.push(context,

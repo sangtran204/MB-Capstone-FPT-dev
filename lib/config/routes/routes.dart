@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/view/changePassword_screen.dart';
 import 'package:mobile_capstone_fpt/view/choicePage/choice_screen.dart';
 import 'package:mobile_capstone_fpt/view/protect/protect_routing.dart';
 import 'package:mobile_capstone_fpt/view/screens.dart';
@@ -21,7 +22,7 @@ class Routes {
     '/SchedulePage': (context) => const ScheduleScreen(),
     '/SubTracking': (context) => const SubDetailTrackingScreen(),
     // '/': (context) => const SubDetailTrackingScreen(),
-
+    // '/ChangePassword': (context) => const ChangePasswordScreen(),
     // '/PaymentPage': (context) => const PaymentPage(),
 
     '/ConfirmOrder': (context) => const ConfirmOrderScreen(),

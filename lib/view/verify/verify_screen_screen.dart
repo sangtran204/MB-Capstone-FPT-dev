@@ -140,7 +140,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 children: [
                   // mở comment button ở đây rồi để function vô
                   // ButtonField(voidCallback: voidCallback, text: 'Xác nhận')
-                  ElevatedButton(
+                  FlatButton(
                     child: Container(
                       width: 220,
                       height: 50,

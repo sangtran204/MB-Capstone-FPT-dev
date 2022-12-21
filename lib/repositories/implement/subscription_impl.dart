@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -41,7 +42,8 @@ class SubRepImpl implements SubRepo {
           }));
       result = ConfirmSubRes.confirmSubResFromJson(jsonEncode(response.data));
     } catch (e) {
-      showToastFail("Lỗi xảy ra khi xác nhận");
+      // showToastFail("Lỗi xảy ra khi xác nhận");
+      log(e.toString());
     }
     return result;
   }
@@ -55,8 +57,10 @@ class SubRepImpl implements SubRepo {
             HttpHeaders.authorizationHeader: 'Bearer $accessToken'
           }));
       result = CancelSubRes.cancelSubResFromJson(jsonEncode(response.data));
+      log("Hehe");
     } catch (e) {
-      showToastFail("Lỗi xảy ra khi xác nhận");
+      log(e.toString());
+      // showToastFail("Lỗi xảy ra khi xác nhận");
     }
     return result;
   }

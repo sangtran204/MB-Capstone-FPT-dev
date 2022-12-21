@@ -40,11 +40,13 @@ class LoginProvider with ChangeNotifier {
       await secureStorage.writeSecureData('token', value.result!.accessToken);
       await secureStorage.writeSecureData(
           'customer', value.result!.refreshToken);
-      final deviceToken = await secureStorage.readSecureData("deviceToken");
+      final deviceTokenRes = await secureStorage.readSecureData("deviceToken");
       final token = await secureStorage.readSecureData("token");
+      log("Hihi");
+      log(deviceTokenRes.toString());
       await PushNotifyImp()
           .pushNotify(
-              RestApi.pushNotify, token, PushNotifyReq(token: deviceToken))
+              RestApi.pushNotify, token, PushNotifyReq(deviceToken: deviceTokenRes))
           .then((value) => log(value.toString()));
       // await UsersMeRepImpl()
       //     .getUsersMe(UrlApi.usersMePath, value.result!.accessToken);

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
@@ -80,10 +81,16 @@ class _PaymentPageState extends State<PaymentPage> {
             } else {
               String subId =
                   await secureStorage.readSecureData("idSubscription");
-              await subscriptionProvider.cancelSub(context, subId);
-              await secureStorage.deleteSecureData(subId);
+              if (subId.isNotEmpty) {
+                log(subId.toString());
+                subscriptionProvider.cancelSub(context, subId);
+                secureStorage.deleteSecureData(subId);
+              }
 
-              Navigator.pushReplacementNamed(context, '/HomePage');
+              packageProvider.clearBackPackage();
+              packageProvider.clearBackPayment();
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/HomePage', (route) => false);
 
               // Navigator.of(context).pushAndRemoveUntil(
               //     MaterialPageRoute(

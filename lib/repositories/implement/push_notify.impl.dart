@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/models/response/push_notify_req.dart';
 import 'package:mobile_capstone_fpt/models/response/push_notify.res.dart';
@@ -19,7 +18,6 @@ class PushNotifyImp implements PushNotifyRepo {
             HttpHeaders.authorizationHeader: 'Bearer $accessToken'
           }));
     } catch (e) {
-      log("Xui quá đi");
       log(e.toString());
     }
     return result;

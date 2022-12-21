@@ -78,7 +78,7 @@ class _RegisterByPhoneScreenState extends State<RegisterByPhoneScreen> {
                 children: [
                   // Cái nút button nó nằm ở đây
                   // ButtonField(voidCallback: , text: 'Xác nhận')
-                  ElevatedButton(
+                  FlatButton(
                     child: Container(
                       width: 220,
                       height: 50,

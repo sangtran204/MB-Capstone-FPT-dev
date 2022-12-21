@@ -35,7 +35,7 @@ class ButtonField extends StatelessWidget {
         // Navigator.pushNamed(context, path);
       },
       style: ElevatedButton.styleFrom(
-          primary: Colors.white,          
+          primary: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
           textStyle: const TextStyle(
               letterSpacing: 1,

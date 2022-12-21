@@ -133,7 +133,7 @@ class _VerifyResetScreenState extends State<VerifyResetScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
-              child: ElevatedButton(
+              child: FlatButton(
                 child: Container(
                   width: 220,
                   height: 50,

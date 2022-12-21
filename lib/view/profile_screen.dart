@@ -7,6 +7,7 @@ import 'package:mobile_capstone_fpt/components/components.dart';
 import 'package:mobile_capstone_fpt/config/provider/auth_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
+import 'package:mobile_capstone_fpt/view/changePassword_screen.dart';
 import 'package:mobile_capstone_fpt/widgets/date_input_field.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/widgets/text_input.dart';
@@ -265,8 +266,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         UnderPart(
                             title: '',
                             navigatorText: 'Đổi mật khẩu',
-                            onTap: () {
-                              Navigator.pushNamed(context, '/changePassword');
+                            onTap: () async {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ChangePasswordScreen()));
+                              // Navigator.pushNamed(context, "/ChangePassword");
                             }),
                         SizedBox(
                           height: 20,

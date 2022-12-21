@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:fluttericon/typicons_icons.dart';
@@ -252,11 +254,13 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   ),
                   borderColor: kblackColor,
                   onTap: () async {
+                    Random random = Random();
+                    int randomNumber = random.nextInt(3);
                     for (var i = 0;
                         i < packageProvider.orderRequest.length;
                         i++) {
                       await packageProvider.setFoodGroupRandom(
-                          packageProvider.orderRequest[i].packageItemId!);
+                          packageProvider.orderRequest[i].packageItemId!, randomNumber);
                     }
                     subscriptionProvider.submitDataSub(
                         context,
@@ -423,7 +427,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              '- Ở chế độ tự động chọn món, hệ thống sẽ tự động chọn món ăn cho bạn, bạn cũng có thể sửa chúng.',
+                              '- Ở chế độ chọn ngẫu nhiên, hệ thống sẽ tự động chọn món ăn cho bạn, bạn cũng có thể sửa chúng.',
                               style: TextStyle(
                                   fontStyle: FontStyle.italic,
                                   color: Colors.black,

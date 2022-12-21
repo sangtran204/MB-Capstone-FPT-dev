@@ -6,17 +6,17 @@ import 'dart:convert';
 
 class PushNotifyReq {
   PushNotifyReq({
-    this.token,
+    this.deviceToken,
   });
 
-  String? token;
+  String? deviceToken;
 
   factory PushNotifyReq.fromJson(Map<String, dynamic> json) => PushNotifyReq(
-        token: json["token"],
+        deviceToken: json["deviceToken"],
       );
 
   Map<String, dynamic> toJson() => {
-        "token": token,
+        "deviceToken": deviceToken,
       };
   static PushNotifyReq pushNotifyReqFromJson(String str) =>
       PushNotifyReq.fromJson(json.decode(str));

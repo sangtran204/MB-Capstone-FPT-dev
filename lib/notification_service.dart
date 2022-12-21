@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 
 typedef StringVoidFunc = void Function(String?);
 
@@ -41,12 +42,14 @@ class NotificationService {
 }
 
 void getMessage(FirebaseMessaging messaging, BuildContext context) async {
+  final SecureStorage secureStorage = SecureStorage();
+
   // AppPreference re = AppPreference();
   // re.setToken(Label.token,
   //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1Y2hpZXUiLCJyb2xlIjoidG91cmlzdCIsImlhdCI6MTY2Mjc3NjUwNiwiZXhwIjoxNjYyODYyOTA2fQ.jQJO4t9KIEXUjHW8zQC_GUFAni4USOBxCn9X5RjIVCI');
   final future = messaging.getToken();
   String? deviceToken = await future;
-  log(deviceToken.toString());
+  await secureStorage.writeSecureData('deviceToken', deviceToken!);
   // AccountsDeviceTokenReq req = AccountsDeviceTokenReq(deviceToken: deviceToken);
   // AccountRepository().postAccountDeviceToken(req).catchError((error, stackTrace) {
   //   AwesomeDialog(

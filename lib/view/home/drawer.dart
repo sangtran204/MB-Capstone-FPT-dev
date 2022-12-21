@@ -83,11 +83,11 @@ class NavigationDrawer extends StatelessWidget {
               subProvider.getSubByStatus(context, 'inProgress');
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.notifications),
-            title: const Text('Thông báo'),
-            onTap: () {},
-          )
+          // ListTile(
+          //   leading: const Icon(Icons.notifications),
+          //   title: const Text('Thông báo'),
+          //   onTap: () {},
+          // )
         ],
       ),
     );
