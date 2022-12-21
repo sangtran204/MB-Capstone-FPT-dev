@@ -242,7 +242,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ),
                       if (status == 'inProgress')
                         const Text(
-                          'Đang xữ lý',
+                          'Đang xử lý',
                           style: TextStyle(
                               color: Colors.green,
                               fontSize: 16,
