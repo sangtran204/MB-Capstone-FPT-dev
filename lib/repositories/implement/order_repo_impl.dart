@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/entity/order.dart';
-import 'package:mobile_capstone_fpt/models/response/base_res.dart';
+import 'package:mobile_capstone_fpt/models/Order/entity/order.dart';
+import 'package:mobile_capstone_fpt/models/Base/base_res.dart';
 // import 'package:mobile_capstone_fpt/models/request/create_order_req.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/order_repo.dart';
 

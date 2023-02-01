@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/request/feedback_req.dart';
+import 'package:mobile_capstone_fpt/models/FeedBack/request/feedback_req.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/feedback_repo.dart';
-import 'package:mobile_capstone_fpt/repositories/response/message_respone.dart';
+import 'package:mobile_capstone_fpt/models/Notification/response/message_respone.dart';
 
 class FeedbackImpl implements FeedbackRepo {
   @override

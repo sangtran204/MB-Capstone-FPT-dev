@@ -6,14 +6,14 @@ import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/request/checkExistPhone_req.dart';
-import 'package:mobile_capstone_fpt/models/request/forgot_password_req.dart';
-import 'package:mobile_capstone_fpt/models/request/register_info_req.dart';
-import 'package:mobile_capstone_fpt/models/response/push_notify_req.dart';
+import 'package:mobile_capstone_fpt/models/Account/request/checkExistPhone_req.dart';
+import 'package:mobile_capstone_fpt/models/Account/request/forgot_password_req.dart';
+import 'package:mobile_capstone_fpt/models/Account/request/register_info_req.dart';
+import 'package:mobile_capstone_fpt/models/Notification/request/push_notify_req.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/push_notify.impl.dart';
-import 'package:mobile_capstone_fpt/models/request/login_request_model.dart';
+import 'package:mobile_capstone_fpt/models/Account/request/login_request_model.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/auth_repo_impl.dart';
-import 'package:mobile_capstone_fpt/repositories/response/message_respone.dart';
+import 'package:mobile_capstone_fpt/models/Notification/response/message_respone.dart';
 import 'package:mobile_capstone_fpt/view/screens.dart';
 import 'package:provider/provider.dart';
 
@@ -42,11 +42,11 @@ class LoginProvider with ChangeNotifier {
           'customer', value.result!.refreshToken);
       final deviceTokenRes = await secureStorage.readSecureData("deviceToken");
       final token = await secureStorage.readSecureData("token");
-      log("Hihi");
+      log("Device Token :");
       log(deviceTokenRes.toString());
       await PushNotifyImp()
-          .pushNotify(
-              RestApi.pushNotify, token, PushNotifyReq(deviceToken: deviceTokenRes))
+          .pushNotify(RestApi.pushNotify, token,
+              PushNotifyReq(deviceToken: deviceTokenRes))
           .then((value) => log(value.toString()));
       // await UsersMeRepImpl()
       //     .getUsersMe(UrlApi.usersMePath, value.result!.accessToken);

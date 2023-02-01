@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
-import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
+import 'package:mobile_capstone_fpt/models/PackageCategory/entity/package_category.dart';
+// import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
 import 'package:provider/provider.dart';
 
 class CardCategoryItem extends StatefulWidget {

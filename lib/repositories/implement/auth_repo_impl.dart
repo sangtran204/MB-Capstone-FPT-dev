@@ -3,18 +3,16 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/request/checkExistPhone_req.dart';
-import 'package:mobile_capstone_fpt/models/request/forgot_password_req.dart';
-import 'package:mobile_capstone_fpt/models/request/register_info_req.dart';
-import 'package:mobile_capstone_fpt/models/response/login_respone_model.dart';
-import 'package:mobile_capstone_fpt/models/request/login_request_model.dart';
-import 'package:mobile_capstone_fpt/models/response/register_info_res.dart';
+import 'package:mobile_capstone_fpt/models/Account/request/checkExistPhone_req.dart';
+import 'package:mobile_capstone_fpt/models/Account/request/forgot_password_req.dart';
+import 'package:mobile_capstone_fpt/models/Account/request/register_info_req.dart';
+import 'package:mobile_capstone_fpt/models/Account/response/login_respone_model.dart';
+import 'package:mobile_capstone_fpt/models/Account/request/login_request_model.dart';
+import 'package:mobile_capstone_fpt/models/Account/response/register_info_res.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/auth_repo.dart';
-import 'package:mobile_capstone_fpt/repositories/response/message_respone.dart';
+import 'package:mobile_capstone_fpt/models/Notification/response/message_respone.dart';
 
 class AuthRepoImpl implements AuthRepo {
-  // AuthRepoImpl(String signInPath, LoginRequestModel loginRequestModel);
-
   @override
   Future<LoginResponeModel> postLogIn(String url, LoginRequestModel req) async {
     var result = LoginResponeModel();
@@ -22,7 +20,6 @@ class AuthRepoImpl implements AuthRepo {
       Response response = await Dio().post(url, data: req.toJson());
       result = loginResponeModelFromJson(jsonEncode(response.data));
     } on DioError catch (e) {
-      // log(e.toString());
       if (e.response?.data["message"] == 'Account invalid') {
         showToastFail("Số điện thoại hoặc mật khẩu không đúng!");
       }

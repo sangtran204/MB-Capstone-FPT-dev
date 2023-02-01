@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mobile_capstone_fpt/config/provider/main_provider/main_provider.dart';
 import 'package:mobile_capstone_fpt/config/routes/routes.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';

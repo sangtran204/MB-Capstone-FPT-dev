@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/package_item.repo.dart';
-import 'package:mobile_capstone_fpt/models/response/package_item.res.dart';
+import 'package:mobile_capstone_fpt/models/PackageItem/response/package_item.res.dart';
 
 class PackageItemRepoImpl implements PackageItemRepo {
   @override
@@ -18,7 +18,7 @@ class PackageItemRepoImpl implements PackageItemRepo {
           jsonEncode(response.data));
     } catch (e) {
       // if (e.response?.data["message"] == "Dont't have resource") {
-      showToastFail("Không tìm thấy gói ăn!");
+      showToastFail("Không tìm thấy chi tiết bữa ăn!");
       // }
     }
     return result;

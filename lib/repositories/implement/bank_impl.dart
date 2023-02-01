@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/response/bank_res.dart';
+import 'package:mobile_capstone_fpt/models/Bank/response/bank_res.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/bank_repo.dart';
 
 class BankRepImpl implements BankRepo {
