@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/profile_repo_impl.dart';
-import 'package:mobile_capstone_fpt/models/response/profile_respone.dart';
-import 'package:mobile_capstone_fpt/repositories/interface/changePass_request.dart';
-import 'package:mobile_capstone_fpt/repositories/interface/update_profile_request.dart';
-import 'package:mobile_capstone_fpt/repositories/response/message_respone.dart';
+import 'package:mobile_capstone_fpt/models/Profile/response/profile_respone.dart';
+import 'package:mobile_capstone_fpt/models/Profile/request/changePass_request.dart';
+import 'package:mobile_capstone_fpt/models/Profile/request/update_profile_request.dart';
+import 'package:mobile_capstone_fpt/models/Notification/response/message_respone.dart';
 
 class ProfileProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();

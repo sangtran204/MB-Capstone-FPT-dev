@@ -1,19 +1,21 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:jiffy/jiffy.dart';
+// import 'package:jiffy/jiffy.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/entity/order.dart';
-import 'package:mobile_capstone_fpt/models/entity/package.dart';
-import 'package:mobile_capstone_fpt/models/entity/package_detail.dart';
-import 'package:mobile_capstone_fpt/models/entity/package_item.dart';
-import 'package:mobile_capstone_fpt/models/request/create_order_req.dart';
-import 'package:mobile_capstone_fpt/models/response/package_food_res.dart';
+import 'package:mobile_capstone_fpt/models/Order/entity/order.dart';
+import 'package:mobile_capstone_fpt/models/Package/entity/package.dart';
+// import 'package:mobile_capstone_fpt/models/entity/package.dart';
+import 'package:mobile_capstone_fpt/models/Package/entity/package_detail.dart';
+import 'package:mobile_capstone_fpt/models/Order/request/create_order_req.dart';
+import 'package:mobile_capstone_fpt/models/Package/response/package_food_res.dart';
+import 'package:mobile_capstone_fpt/models/PackageItem/entity/package_item_detail.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/food_group_repo_impl.dart';
+// import 'package:mobile_capstone_fpt/repositories/implement/food_group_repo_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/order_repo_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/package_repo_impl.dart';
-import 'package:mobile_capstone_fpt/view/payment/payment.dart';
+import 'package:mobile_capstone_fpt/view/Payment%20Management/payment.dart';
 
 class PackageProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
@@ -61,26 +63,32 @@ class PackageProvider with ChangeNotifier {
 
   clearBackPackageSchedule() async {
     for (var i = 0; i < orderRequest.length; i++) {
-      orderRequest[i].imageFood = null;
-      orderRequest[i].nameFood = null;
-      orderRequest[i].foodId = null;
-      orderRequest[i].priceFood = null;
+      // orderRequest[i].imageFood = null;
+      // orderRequest[i].nameFood = null;
+      // orderRequest[i].foodId = null;
+      // orderRequest[i].priceFood = null;
       orderRequest[i].timeSlotId = null;
       orderRequest[i].stationId = null;
     }
     notifyListeners();
   }
 
-  int mySortComparisonItemCode(CreateOrderReq a, CreateOrderReq b) {
-    final propertyA = a.itemCode!;
-    final propertyB = b.itemCode!;
-    if (propertyA < propertyB) {
-      return -1;
-    } else if (propertyA > propertyB) {
-      return 1;
-    } else {
-      return 0;
-    }
+  // int mySortComparisonItemCode(CreateOrderReq a, CreateOrderReq b) {
+  //   final propertyA = a.itemCode!;
+  //   final propertyB = b.itemCode!;
+  //   if (propertyA < propertyB) {
+  //     return -1;
+  //   } else if (propertyA > propertyB) {
+  //     return 1;
+  //   } else {
+  //     return 0;
+  //   }
+  // }
+
+  int sortDate(CreateOrderReq a, CreateOrderReq b) {
+    final propertyA = a.deliveryDate!;
+    final propertyB = b.deliveryDate!;
+    return -propertyB.compareTo(propertyA);
   }
 
   Future<void> getPackageDetail(BuildContext context, String id) async {
@@ -100,18 +108,19 @@ class PackageProvider with ChangeNotifier {
         final subscriptionId =
             await secureStorage.readSecureData("idSubscription");
         for (int index = 0; index < listPackageItem.length; index++) {
-          listIdFG.add(listPackageItem[index].foodGroup!.id);
+          listIdFG.add(listPackageItem[index].foodGroup!.id!);
           CreateOrderReq request = CreateOrderReq(
-              foodGroupId: listPackageItem[index].foodGroup!.id,
-              packageItemId: listPackageItem[index].id,
-              subscriptionId: subscriptionId,
-              itemCode: listPackageItem[index].itemCode,
-              deliveryDate: findDate(listPackageItem[index].itemCode),
-              timeSlotFlag: findFlag(listPackageItem[index].itemCode));
+            foodGroupId: listPackageItem[index].foodGroup!.id,
+            packageItemId: listPackageItem[index].id,
+            subscriptionId: subscriptionId,
+            itemCode: listPackageItem[index].itemCode,
+            deliveryDate: listPackageItem[index].deliveryDate,
+          );
 
           orderRequest.add(request);
         }
-        orderRequest.sort(mySortComparisonItemCode);
+        // orderRequest.sort(mySortComparisonItemCode);
+        orderRequest.sort(sortDate);
 
         Navigator.pushReplacementNamed(context, '/PackageDetail');
         notifyListeners();
@@ -121,73 +130,58 @@ class PackageProvider with ChangeNotifier {
     });
   }
 
-  int findFlag(int _itemCode) {
-    late int flag;
-    if (_itemCode == 1 ||
-        _itemCode == 4 ||
-        _itemCode == 7 ||
-        _itemCode == 10 ||
-        _itemCode == 13 ||
-        _itemCode == 16) {
-      flag = 0;
-    } else if (_itemCode == 2 ||
-        _itemCode == 5 ||
-        _itemCode == 8 ||
-        _itemCode == 11 ||
-        _itemCode == 14 ||
-        _itemCode == 17) {
-      flag = 1;
-    } else if (_itemCode == 3 ||
-        _itemCode == 6 ||
-        _itemCode == 9 ||
-        _itemCode == 12 ||
-        _itemCode == 15 ||
-        _itemCode == 18) {
-      flag = 2;
-    }
+  // setFoodGroup(String indexOrderRequest, String nameFood, String idFood,
+  // int priceFood, String imageFood) async {
+  // final listOrderRequestTmp = [...orderRequest];
+  // final index = listOrderRequestTmp
+  // .indexWhere((element) => element.packageItemId == indexOrderRequest);
+  // listOrderRequestTmp[index].nameFood = nameFood;
+  // listOrderRequestTmp[index].foodId = idFood;
+  // listOrderRequestTmp[index].priceFood = priceFood;
+  // listOrderRequestTmp[index].imageFood = imageFood;
+  // notifyListeners();
+  // }
 
-    return flag;
-  }
+  // setFoodGroupRandom(String indexOrderRequest, int number) async {
+  //   final listOrderRequestTmp = [...orderRequest];
+  //   final index = listOrderRequestTmp
+  //       .indexWhere((element) => element.packageItemId == indexOrderRequest);
+  //   String accessToken = await secureStorage.readSecureData("token");
+  //   final valueFood = await FoodGroupRepoImpl().getFoodGroupDetail(
+  //       '${RestApi.getFoodGroupDetail}/${listOrderRequestTmp[index].foodGroupId}',
+  //       // '${RestApi.getFoodGroupDetail}/${listIdFG[number]}',
+  //       accessToken);
+  //   if (index == 0) {
+  //     listOrderRequestTmp[index].foodId = valueFood.result!.foods![1].id;
+  //     listOrderRequestTmp[index].nameFood = valueFood.result!.foods![1].name;
+  //     listOrderRequestTmp[index].imageFood = valueFood.result!.foods![1].image;
+  //     listOrderRequestTmp[index].priceFood = valueFood.result!.foods![1].price;
+  //   } else if (index == 1) {
+  //     listOrderRequestTmp[index].foodId = valueFood.result!.foods![2].id;
+  //     listOrderRequestTmp[index].nameFood = valueFood.result!.foods![2].name;
+  //     listOrderRequestTmp[index].imageFood = valueFood.result!.foods![2].image;
+  //     listOrderRequestTmp[index].priceFood = valueFood.result!.foods![2].price;
+  //   } else if (index == 2) {
+  //     listOrderRequestTmp[index].foodId = valueFood.result!.foods![3].id;
+  //     listOrderRequestTmp[index].nameFood = valueFood.result!.foods![3].name;
+  //     listOrderRequestTmp[index].imageFood = valueFood.result!.foods![3].image;
+  //     listOrderRequestTmp[index].priceFood = valueFood.result!.foods![3].price;
+  //   } else if (index == 3) {
+  //     listOrderRequestTmp[index].foodId = valueFood.result!.foods![2].id;
+  //     listOrderRequestTmp[index].nameFood = valueFood.result!.foods![2].name;
+  //     listOrderRequestTmp[index].imageFood = valueFood.result!.foods![2].image;
+  //     listOrderRequestTmp[index].priceFood = valueFood.result!.foods![2].price;
+  //   } else {
+  //     listOrderRequestTmp[index].foodId = valueFood.result!.foods![0].id;
+  //     listOrderRequestTmp[index].nameFood = valueFood.result!.foods![0].name;
+  //     listOrderRequestTmp[index].imageFood = valueFood.result!.foods![0].image;
+  //     listOrderRequestTmp[index].priceFood = valueFood.result!.foods![0].price;
+  //   }
 
-  DateTime findDate(int _itemCode) {
-    late int _dayOfWeek;
-    if (_itemCode == 1 || _itemCode == 2 || _itemCode == 3) {
-      _dayOfWeek = 1;
-    } else if (_itemCode == 4 || _itemCode == 5 || _itemCode == 6) {
-      _dayOfWeek = 2;
-    } else if (_itemCode == 7 || _itemCode == 8 || _itemCode == 9) {
-      _dayOfWeek = 3;
-    } else if (_itemCode == 10 || _itemCode == 11 || _itemCode == 12) {
-      _dayOfWeek = 4;
-    } else if (_itemCode == 13 || _itemCode == 14 || _itemCode == 15) {
-      _dayOfWeek = 5;
-    } else if (_itemCode == 16 || _itemCode == 17 || _itemCode == 18) {
-      _dayOfWeek = 6;
-    }
-    DateTime date = DateTime.now();
-    int dateOfYear = Jiffy((DateTime.now())).dayOfYear;
-    int findDateOfYear = dateOfYear + 7 - (date.weekday - _dayOfWeek);
-    DateTime fDate = DateTime(date.year, 1, 1);
-    fDate.millisecondsSinceEpoch;
-    DateTime expectedDate = DateTime.fromMillisecondsSinceEpoch(
-        fDate.millisecondsSinceEpoch +
-            (1000 * 60 * 60 * 24 * (findDateOfYear - 1)));
-    return expectedDate;
-  }
+  //   notifyListeners();
+  // }
 
-  setFoodGroup(String indexOrderRequest, String nameFood, String idFood,
-      int priceFood, String imageFood) async {
-    final listOrderRequestTmp = [...orderRequest];
-    final index = listOrderRequestTmp
-        .indexWhere((element) => element.packageItemId == indexOrderRequest);
-    listOrderRequestTmp[index].nameFood = nameFood;
-    listOrderRequestTmp[index].foodId = idFood;
-    listOrderRequestTmp[index].priceFood = priceFood;
-    listOrderRequestTmp[index].imageFood = imageFood;
-    notifyListeners();
-  }
-
-  setFoodGroupRandom(String indexOrderRequest, int number) async {
+  setFoodGroupRandom(String indexOrderRequest) async {
     final listOrderRequestTmp = [...orderRequest];
     final index = listOrderRequestTmp
         .indexWhere((element) => element.packageItemId == indexOrderRequest);
@@ -196,32 +190,11 @@ class PackageProvider with ChangeNotifier {
         '${RestApi.getFoodGroupDetail}/${listOrderRequestTmp[index].foodGroupId}',
         // '${RestApi.getFoodGroupDetail}/${listIdFG[number]}',
         accessToken);
-    if (index == 0) {
-      listOrderRequestTmp[index].foodId = valueFood.result!.foods![1].id;
-      listOrderRequestTmp[index].nameFood = valueFood.result!.foods![1].name;
-      listOrderRequestTmp[index].imageFood = valueFood.result!.foods![1].image;
-      listOrderRequestTmp[index].priceFood = valueFood.result!.foods![1].price;
-    } else if (index == 1) {
-      listOrderRequestTmp[index].foodId = valueFood.result!.foods![2].id;
-      listOrderRequestTmp[index].nameFood = valueFood.result!.foods![2].name;
-      listOrderRequestTmp[index].imageFood = valueFood.result!.foods![2].image;
-      listOrderRequestTmp[index].priceFood = valueFood.result!.foods![2].price;
-    } else if (index == 2) {
-      listOrderRequestTmp[index].foodId = valueFood.result!.foods![3].id;
-      listOrderRequestTmp[index].nameFood = valueFood.result!.foods![3].name;
-      listOrderRequestTmp[index].imageFood = valueFood.result!.foods![3].image;
-      listOrderRequestTmp[index].priceFood = valueFood.result!.foods![3].price;
-    } else if (index == 3) {
-      listOrderRequestTmp[index].foodId = valueFood.result!.foods![2].id;
-      listOrderRequestTmp[index].nameFood = valueFood.result!.foods![2].name;
-      listOrderRequestTmp[index].imageFood = valueFood.result!.foods![2].image;
-      listOrderRequestTmp[index].priceFood = valueFood.result!.foods![2].price;
-    } else {
-      listOrderRequestTmp[index].foodId = valueFood.result!.foods![0].id;
-      listOrderRequestTmp[index].nameFood = valueFood.result!.foods![0].name;
-      listOrderRequestTmp[index].imageFood = valueFood.result!.foods![0].image;
-      listOrderRequestTmp[index].priceFood = valueFood.result!.foods![0].price;
-    }
+
+    // listOrderRequestTmp[index].foodId = valueFood.result!.foods![1].id;
+    listOrderRequestTmp[index].nameFood = valueFood.result!.foods![0].name;
+    listOrderRequestTmp[index].imageFood = valueFood.result!.foods![0].image;
+    listOrderRequestTmp[index].priceFood = valueFood.result!.foods![0].price;
 
     notifyListeners();
   }
@@ -243,30 +216,15 @@ class PackageProvider with ChangeNotifier {
     for (var i = 0; i < listOrderRequestTmp.length; i++) {
       final itemCode = listOrderRequestTmp[i].itemCode;
       if (key == 'timeSlotS') {
-        if (itemCode == 1 ||
-            itemCode == 4 ||
-            itemCode == 7 ||
-            itemCode == 10 ||
-            itemCode == 13 ||
-            itemCode == 16) {
+        if (itemCode == 0) {
           listOrderRequestTmp[i].timeSlotId = value;
         }
       } else if (key == 'timeSlotT') {
-        if (itemCode == 2 ||
-            itemCode == 5 ||
-            itemCode == 8 ||
-            itemCode == 11 ||
-            itemCode == 14 ||
-            itemCode == 17) {
+        if (itemCode == 1) {
           listOrderRequestTmp[i].timeSlotId = value;
         }
       } else if (key == 'timeSlotC') {
-        if (itemCode == 3 ||
-            itemCode == 6 ||
-            itemCode == 9 ||
-            itemCode == 12 ||
-            itemCode == 15 ||
-            itemCode == 18) {
+        if (itemCode == 2) {
           listOrderRequestTmp[i].timeSlotId = value;
         }
       } else {
@@ -275,6 +233,44 @@ class PackageProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  // setTimeSlotAndStationRandom(String value, String key) {
+  //   final listOrderRequestTmp = [...orderRequest];
+  //   for (var i = 0; i < listOrderRequestTmp.length; i++) {
+  //     final itemCode = listOrderRequestTmp[i].itemCode;
+  //     if (key == 'timeSlotS') {
+  //       if (itemCode == 1 ||
+  //           itemCode == 4 ||
+  //           itemCode == 7 ||
+  //           itemCode == 10 ||
+  //           itemCode == 13 ||
+  //           itemCode == 16) {
+  //         listOrderRequestTmp[i].timeSlotId = value;
+  //       }
+  //     } else if (key == 'timeSlotT') {
+  //       if (itemCode == 2 ||
+  //           itemCode == 5 ||
+  //           itemCode == 8 ||
+  //           itemCode == 11 ||
+  //           itemCode == 14 ||
+  //           itemCode == 17) {
+  //         listOrderRequestTmp[i].timeSlotId = value;
+  //       }
+  //     } else if (key == 'timeSlotC') {
+  //       if (itemCode == 3 ||
+  //           itemCode == 6 ||
+  //           itemCode == 9 ||
+  //           itemCode == 12 ||
+  //           itemCode == 15 ||
+  //           itemCode == 18) {
+  //         listOrderRequestTmp[i].timeSlotId = value;
+  //       }
+  //     } else {
+  //       listOrderRequestTmp[i].stationId = value;
+  //     }
+  //   }
+  //   notifyListeners();
+  // }
 
   // submitData(BuildContext context) async {
   //   final accessToken = await secureStorage.readSecureData("token");
@@ -318,20 +314,17 @@ class PackageProvider with ChangeNotifier {
     String subId = await secureStorage.readSecureData("idSubscription");
     for (var element in orderRequest) {
       Order dataCreateOrder = Order(
-          deliveryDate: element.deliveryDate,
-          priceFood: element.priceFood,
-          nameFood: element.nameFood,
-          subscriptionId: subId,
-          packageItemId: element.packageItemId,
-          foodId: element.foodId,
-          stationId: element.stationId,
-          timeSlotId: element.timeSlotId);
+          subscriptionID: subId,
+          packageItemID: element.packageItemId,
+          stationID: element.stationId,
+          timeSlotID: element.timeSlotId);
       saveDataOrder.add(dataCreateOrder);
     }
     try {
-      // for (var i = 0; i < saveDataOrder.length; i++) {
-      //   log(saveDataOrder[i].toJson().toString());
-      // }
+      for (var i = 0; i < saveDataOrder.length; i++) {
+        log("vl");
+        log(saveDataOrder[i].toJson().toString());
+      }
       if (subId.isNotEmpty) {
         // rất cần cái này ===================================================
 
@@ -341,7 +334,7 @@ class PackageProvider with ChangeNotifier {
         }
         log(subId.toString());
         final url = await OrderRepImpl().getPaymentUrl(
-            subId, '29a6991e-9ee1-4e5e-9960-4502f8340e43', accessToken);
+            subId, 'a63b58b1-5f03-4312-8002-610ca05dfa79', accessToken);
         Navigator.push(context,
             PageRouteBuilder(pageBuilder: (_, animation, __) {
           return FadeTransition(

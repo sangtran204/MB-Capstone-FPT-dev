@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/response/station_res.dart';
+import 'package:mobile_capstone_fpt/models/Station/response/station_res.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/station_repo.dart';
 
 class StationRepoImpl implements StationRepo {

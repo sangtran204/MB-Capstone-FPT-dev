@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:mobile_capstone_fpt/models/response/push_notify_req.dart';
-import 'package:mobile_capstone_fpt/models/response/push_notify.res.dart';
+import 'package:mobile_capstone_fpt/models/Notification/request/push_notify_req.dart';
+import 'package:mobile_capstone_fpt/models/Notification/response/push_notify.res.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/push_notify_rep.dart';
 
 class PushNotifyImp implements PushNotifyRepo {

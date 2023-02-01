@@ -5,6 +5,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 typedef StringVoidFunction = void Function(String);
 
+// ignore: must_be_immutable
 class PhoneInputField extends StatelessWidget {
   PhoneInputField({Key? key, required this.input, required this.hintText})
       : super(key: key);

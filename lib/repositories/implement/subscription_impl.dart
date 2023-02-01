@@ -4,14 +4,16 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/request/create_sub_req.dart';
-import 'package:mobile_capstone_fpt/models/response/sub_cancel_res.dart';
-import 'package:mobile_capstone_fpt/models/response/sub_confirm_res.dart';
-import 'package:mobile_capstone_fpt/models/response/sub_delete_res.dart';
-import 'package:mobile_capstone_fpt/models/response/sub_detail_res.dart';
-import 'package:mobile_capstone_fpt/models/response/sub_history_res.dart';
-import 'package:mobile_capstone_fpt/models/response/sub_id_res.dart';
-import 'package:mobile_capstone_fpt/models/response/subscription_res.dart';
+import 'package:mobile_capstone_fpt/models/Subscription/request/create_sub_req.dart';
+import 'package:mobile_capstone_fpt/models/Subscription/response/sub_cancel_res.dart';
+import 'package:mobile_capstone_fpt/models/Subscription/response/sub_detail_res.dart';
+
+import 'package:mobile_capstone_fpt/models/Subscription/response/sub_confirm_res.dart';
+import 'package:mobile_capstone_fpt/models/Subscription/response/sub_delete_res.dart';
+
+import 'package:mobile_capstone_fpt/models/Subscription/response/sub_history_res.dart';
+import 'package:mobile_capstone_fpt/models/Subscription/response/sub_id_res.dart';
+import 'package:mobile_capstone_fpt/models/Subscription/response/subscription_res.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/sub_repo.dart';
 
 class SubRepImpl implements SubRepo {
@@ -27,7 +29,8 @@ class SubRepImpl implements SubRepo {
           }));
       result = CreateSubRes.createSubResFromJson(jsonEncode(response.data));
     } catch (e) {
-      showToastFail("Lỗi xảy ra khi tạo");
+      log(e.toString());
+      showToastFail("Lỗi xảy ra khi tạo Sub");
     }
     return result;
   }

@@ -4,9 +4,12 @@ import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/profile_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
-import 'package:mobile_capstone_fpt/models/entity/package.dart';
-import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
-import 'package:mobile_capstone_fpt/models/entity/profile_result.dart';
+import 'package:mobile_capstone_fpt/models/Package/entity/package.dart';
+import 'package:mobile_capstone_fpt/models/PackageCategory/entity/package_category.dart';
+import 'package:mobile_capstone_fpt/models/Profile/entity/profile_result.dart';
+// import 'package:mobile_capstone_fpt/models/entity/package.dart';
+// import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
+// import 'package:mobile_capstone_fpt/models/entity/Profile/profile_result.dart';
 import 'package:mobile_capstone_fpt/view/home/drawer.dart';
 import 'package:mobile_capstone_fpt/view/home/card_package.dart';
 import 'package:mobile_capstone_fpt/view/home/card_category.dart';
@@ -23,9 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
   List<PackageCategory> listPackageCategory = [];
   List<Package> listPackgeActive = [];
   Result? profileResult;
-  // List<Package> listPackgeActive = [];
-  // List<PackageCategory> listPackageCategory = [];
-  // String _value = 'Đại Học FPT';
 
   final SecureStorage secureStorage = SecureStorage();
   @override

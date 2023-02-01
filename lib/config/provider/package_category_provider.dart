@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
-import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
+import 'package:mobile_capstone_fpt/models/PackageCategory/entity/package_category.dart';
+// import 'package:mobile_capstone_fpt/models/entity/package_category.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/package_category_repo_impl.dart';
 
 class PackageCategoryProvider with ChangeNotifier {

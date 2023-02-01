@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_capstone_fpt/models/Package/entity/package.dart';
 // import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
-import 'package:mobile_capstone_fpt/models/entity/package.dart';
+// import 'package:mobile_capstone_fpt/models/entity/package.dart';
 // import 'package:provider/provider.dart';
 import 'package:flutter_format_money_vietnam/flutter_format_money_vietnam.dart';
 
@@ -60,7 +61,7 @@ class _CardPackageState extends State<CardPackage> {
                           child: Text(
                             widget.package!.price.toString().toVND(),
                             style: const TextStyle(
-                              fontSize: 22,
+                              fontSize: 19,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -87,7 +88,7 @@ class _CardPackageState extends State<CardPackage> {
                       height: 3,
                     ),
                     Text(
-                      widget.package!.timeFrame!.name,
+                      'Gói TRƯA từ thứ 2 đến thứ 6',
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,

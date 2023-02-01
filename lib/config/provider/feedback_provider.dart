@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
-import 'package:mobile_capstone_fpt/models/request/feedback_req.dart';
+import 'package:mobile_capstone_fpt/models/FeedBack/request/feedback_req.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/feedback_repo_impl.dart';
-import 'package:mobile_capstone_fpt/repositories/response/message_respone.dart';
+// import 'package:mobile_capstone_fpt/models/Notification/response/message_respone.dart';
 import 'package:provider/provider.dart';
 
 class FeedbackProvider with ChangeNotifier {
@@ -19,7 +19,7 @@ class FeedbackProvider with ChangeNotifier {
     SubscriptionProvider subProvider =
         Provider.of<SubscriptionProvider>(context);
     String accessToken = await secureStorage.readSecureData("token");
-    MessageResponeModel msg = MessageResponeModel();
+    // MessageResponeModel msg = MessageResponeModel();
     FeedbackImpl()
         .sendFeedback(
             RestApi.sendFeedback,
@@ -31,7 +31,7 @@ class FeedbackProvider with ChangeNotifier {
                 comment: _comment,
                 packageId: _packageId))
         .then((value) async {
-      msg = value;
+      // msg = value;
       subProvider.getSubByStatus(context, 'done');
       await Navigator.pushReplacementNamed(context, '/History');
       notifyListeners();

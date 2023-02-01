@@ -3,9 +3,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
-import 'package:mobile_capstone_fpt/models/response/package_detail_respone_model.dart';
-import 'package:mobile_capstone_fpt/models/response/package_food_res.dart';
-import 'package:mobile_capstone_fpt/models/response/package_respone_model.dart';
+import 'package:mobile_capstone_fpt/models/Package/response/package_detail_respone_model.dart';
+// import 'package:mobile_capstone_fpt/models/response/package_detail_respone_model.dart';
+import 'package:mobile_capstone_fpt/models/Package/response/package_food_res.dart';
+import 'package:mobile_capstone_fpt/models/Package/response/package_respone_model.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/package_repo.dart';
 
 class PackageRepoImpl implements PackageRepo {
@@ -50,9 +51,7 @@ class PackageRepoImpl implements PackageRepo {
               headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result = PackageFoodRes.packageFoodResFromJson(jsonEncode(response.data));
     } on DioError catch (e) {
-      // if (e.response?.data["message"] == "Dont't have resource") {
-      showToastFail("Không tìm thấy gói ăn!");
-      // }
+      showToastFail("Không tìm thấy thức ăn trong gói!");
     }
     return result;
   }

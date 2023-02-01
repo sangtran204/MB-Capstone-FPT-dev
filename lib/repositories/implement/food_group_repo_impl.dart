@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/food_group_repo.dart';
-import 'package:mobile_capstone_fpt/models/response/food_group.res.dart';
+import 'package:mobile_capstone_fpt/models/FoodGroup/response/food_group.res.dart';
 
 class FoodGroupRepoImpl implements FoodGroupRepo {
   @override

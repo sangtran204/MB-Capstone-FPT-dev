@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/repositories/interface/time_slot_repo.dart';
-import 'package:mobile_capstone_fpt/models/response/time_slot.res.dart';
+import 'package:mobile_capstone_fpt/models/TimeSlot/response/time_slot.res.dart';
 
 class TimeSlotRepoImpl implements TimeSlotRepo {
   @override
