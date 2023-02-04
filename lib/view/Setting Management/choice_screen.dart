@@ -320,7 +320,7 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text('Chọn thời gian giao',
+                const Text('Chọn thời gian giao:',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 18,
@@ -328,7 +328,6 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                // for (var i = 0; i < packageProvider.orderRequest.length; i++)
                 if (packageProvider.orderRequest
                     .where((element) => element.itemCode == 0)
                     .isNotEmpty)
@@ -455,14 +454,13 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // const Text(
-                            //   '- Ở chế độ chọn ngẫu nhiên, hệ thống sẽ tự động chọn món ăn cho bạn, bạn cũng có thể sửa chúng.',
-                            //   style: TextStyle(
-                            //       fontStyle: FontStyle.italic,
-                            //       color: Colors.black,
-                            //       fontSize: 16),
-                            // ),
-
+                            const Text(
+                              '- Người dùng chỉ có thể chọn địa điểm giao là những trạm thuộc hệ thống MeSup.',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.black,
+                                  fontSize: 16),
+                            ),
                             const SizedBox(
                               height: 5,
                             ),

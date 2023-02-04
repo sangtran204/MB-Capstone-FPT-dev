@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
@@ -10,7 +12,8 @@ class FoodGroupProvider with ChangeNotifier {
 
   Future<void> getFoodGroupDetail(BuildContext context, String id) async {
     String accessToken = await secureStorage.readSecureData("token");
-    final value = await FoodGroupRepoImpl().getFoodGroupDetail('${RestApi.getFoodGroupDetail}/$id', accessToken);
+    final value = await FoodGroupRepoImpl()
+        .getFoodGroupDetail('${RestApi.getFoodGroupDetail}/$id', accessToken);
     listFoodFG = value.result!.foods!;
     notifyListeners();
   }

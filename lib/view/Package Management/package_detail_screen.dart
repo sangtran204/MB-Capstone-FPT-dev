@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_capstone_fpt/components/custom_button.dart';
+import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
 import 'package:mobile_capstone_fpt/config/provider/package_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
+import 'package:mobile_capstone_fpt/models/PackageItem/entity/package_item_detail.dart';
 import 'package:mobile_capstone_fpt/view/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_format_money_vietnam/flutter_format_money_vietnam.dart';
+import 'package:intl/intl.dart';
 
 class PackageDetailScreen extends StatefulWidget {
   const PackageDetailScreen({Key? key}) : super(key: key);
@@ -15,12 +20,100 @@ class PackageDetailScreen extends StatefulWidget {
 
 class _PackageDetailScreenState extends State<PackageDetailScreen> {
   final inputFormat = DateFormat('dd/MM/yyyy');
+  final inputFormat2 = DateFormat('dd/MM');
+
+  int sortDate(PackageItem a, PackageItem b) {
+    final propertyA = a.deliveryDate!;
+    final propertyB = b.deliveryDate!;
+    return -propertyB.compareTo(propertyA);
+  }
+
+  String getMonthString(month) {
+    switch (month) {
+      case 'Monday':
+        return '2';
+      case 'Tuesday':
+        return '3';
+      case 'Wednesday':
+        return '4';
+      case 'Thursday':
+        return '5';
+      case 'Friday':
+        return '6';
+      case 'Saturday':
+        return '7';
+      case 'Sunday':
+        return '8';
+
+      default:
+        return '0';
+    }
+  }
+
+  String nameOfPa(int itemCode) {
+    var name = '';
+    if (itemCode == 0) {
+      name = 'Sáng ';
+    } else if (itemCode == 1) {
+      name = 'Trưa ';
+    } else {
+      name = 'Chiều ';
+    }
+    return name;
+  }
+
+  Future _showDialoghihi(size, String indexOrderRequest) async {
+    FoodGroupProvider foodGroupProvider =
+        Provider.of<FoodGroupProvider>(context, listen: false);
+    // PackageProvider packageProvider =
+    //     Provider.of<PackageProvider>(context, listen: false);
+    try {
+      if (foodGroupProvider.listFoodFG.isNotEmpty) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Món ăn'),
+                content: SizedBox(
+                    height: 100,
+                    width: size.width,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: foodGroupProvider.listFoodFG.length,
+                        itemBuilder: ((context, index) {
+                          return CardFood(
+                              food: foodGroupProvider.listFoodFG[index]);
+                        }))),
+                actions: <Widget>[
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Đóng')),
+                  // TextButton(
+                  //   onPressed: () {
+                  //     print('Đã chọn món!');
+                  //     Navigator.pop(context);
+                  //   },
+                  //   child: const Text('Lưu'),
+                  // )
+                ],
+              );
+            });
+      }
+    } catch (e) {
+      log("Failed to load food");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     TextTheme textTheme = Theme.of(context).textTheme;
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
+    packageProvider.packageDetail!.packageItem.sort(sortDate);
+    FoodGroupProvider foodGroupProvider =
+        Provider.of<FoodGroupProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kBackgroundColor,
@@ -76,12 +169,6 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                   textAlign: TextAlign.center,
                 ),
                 onTap: () async {
-                  // subscriptionProvider.submitDataSub(
-                  //     context,
-                  //     packageProvider.packageDetail!.price,
-                  //     DateTime.now(),
-                  //     packageProvider.packageDetail!.id);
-                  // log(packageProvider.packageDetail!.toJson().toString());
                   await Navigator.pushReplacementNamed(context, '/ChoicePage');
                 },
               ),
@@ -278,9 +365,6 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                                             FontWeight.bold,
                                                         color: Colors.black87)),
                                               ),
-                                              // SizedBox(
-                                              //   width: size.width * 0.03,
-                                              // ),
                                               SizedBox(
                                                 width: size.width * 0.7,
                                                 child: Text(
@@ -310,29 +394,115 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                       const Padding(
                         padding: EdgeInsets.only(top: 10),
                         child: Text(
-                          'Các món ăn trong gói',
+                          // 'Các món ăn trong gói',
+                          'Thực đơn',
+
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(
-                        height: size.height * 0.35,
-                        width: size.width,
-                        child: Padding(
-                            padding: const EdgeInsets.only(bottom: 20, top: 4),
-                            child: GridView.builder(
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
+
+                      DataTable(showCheckboxColumn: false, columns: const [
+                        DataColumn(
+                            label: Center(
+                          child: Text(
+                            'Ngày',
+                            textAlign: TextAlign.center,
+                          ),
+                        )),
+                        DataColumn(
+                            label: Center(
+                          child: Text(
+                            'Nhóm món ăn',
+                            textAlign: TextAlign.center,
+                          ),
+                        ))
+                      ], rows: [
+                        for (var i = 0;
+                            i <
+                                packageProvider
+                                    .packageDetail!.packageItem.length;
+                            i++)
+                          DataRow(cells: [
+                            DataCell(Text(
+                                    nameOfPa(packageProvider.packageDetail!
+                                            .packageItem[i].itemCode!) +
+                                        inputFormat2.format(packageProvider
+                                            .packageDetail!
+                                            .packageItem[i]
+                                            .deliveryDate!),
+                                    style:
+                                        const TextStyle(color: Colors.black87))
+                                //   Column(
+                                //   children: [
+                                //     const SizedBox(
+                                //       height: 6,
+                                //     ),
+                                //     Text(
+                                //         nameOfPa(packageProvider.packageDetail!
+                                //                 .packageItem[i].itemCode!) +
+                                //             getMonthString(DateFormat('EEEE')
+                                //                 .format(packageProvider
+                                //                     .packageDetail!
+                                //                     .packageItem[i]
+                                //                     .deliveryDate!)),
+                                //         style:
+                                //             const TextStyle(color: Colors.black87)),
+                                //     const SizedBox(
+                                //       height: 6,
+                                //     ),
+                                //     Text(
+                                //         inputFormat2.format(packageProvider
+                                //             .packageDetail!
+                                //             .packageItem[i]
+                                //             .deliveryDate!),
+                                //         style:
+                                //             const TextStyle(color: Colors.black87))
+                                //   ],
+                                // )
                                 ),
-                                itemCount:
-                                    packageProvider.listPackageFood.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return PackageFood(
-                                      food: packageProvider
-                                          .listPackageFood[index]);
-                                })),
-                      ),
+                            DataCell(Row(
+                              children: [
+                                Text(packageProvider.packageDetail!
+                                    .packageItem[i].foodGroup!.name!),
+                                IconButton(
+                                    onPressed: () async {
+                                      await foodGroupProvider
+                                          .getFoodGroupDetail(
+                                              context,
+                                              packageProvider
+                                                  .packageDetail!
+                                                  .packageItem[i]
+                                                  .foodGroup!
+                                                  .id!);
+                                      await _showDialoghihi(
+                                          size,
+                                          packageProvider
+                                              .orderRequest[i].packageItemId!);
+                                    },
+                                    icon: const Icon(Icons.remove_red_eye))
+                              ],
+                            ))
+                          ]),
+                      ])
+                      // SizedBox(
+                      //   height: size.height * 0.35,
+                      //   width: size.width,
+                      //   child: Padding(
+                      //       padding: const EdgeInsets.only(bottom: 20, top: 4),
+                      //       child: GridView.builder(
+                      //           gridDelegate:
+                      //               const SliverGridDelegateWithFixedCrossAxisCount(
+                      //             crossAxisCount: 2,
+                      //           ),
+                      //           itemCount:
+                      //               packageProvider.listPackageFood.length,
+                      //           itemBuilder: (BuildContext context, int index) {
+                      //             return PackageFood(
+                      //                 food: packageProvider
+                      //                     .listPackageFood[index]);
+                      //           })),
+                      // ),
                     ],
                   )),
                 )),

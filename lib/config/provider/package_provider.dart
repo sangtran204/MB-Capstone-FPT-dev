@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 // import 'package:jiffy/jiffy.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
+import 'package:mobile_capstone_fpt/config/provider/food_group_provider.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
 import 'package:mobile_capstone_fpt/config/toast.dart';
 import 'package:mobile_capstone_fpt/models/Order/entity/order.dart';
@@ -16,6 +17,7 @@ import 'package:mobile_capstone_fpt/repositories/implement/food_group_repo_impl.
 import 'package:mobile_capstone_fpt/repositories/implement/order_repo_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/package_repo_impl.dart';
 import 'package:mobile_capstone_fpt/view/Payment%20Management/payment.dart';
+import 'package:provider/provider.dart';
 
 class PackageProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
