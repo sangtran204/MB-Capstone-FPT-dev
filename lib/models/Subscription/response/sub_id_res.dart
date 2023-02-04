@@ -32,8 +32,7 @@ class Result {
   Result({
     this.id,
     this.totalPrice,
-    this.startDelivery,
-    this.cancelDate,
+    this.subscriptionDate,
     this.status,
     this.packages,
     this.orders,
@@ -41,8 +40,7 @@ class Result {
 
   String? id;
   int? totalPrice;
-  DateTime? startDelivery;
-  dynamic cancelDate;
+  DateTime? subscriptionDate;
   String? status;
   Packages? packages;
   List<Order>? orders;
@@ -50,8 +48,7 @@ class Result {
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
         totalPrice: json["totalPrice"],
-        startDelivery: DateTime.parse(json["startDelivery"]),
-        cancelDate: json["cancelDate"],
+        subscriptionDate: DateTime.parse(json["subscriptionDate"]),
         status: json["status"],
         packages: Packages.fromJson(json["packages"]),
         orders: List<Order>.from(json["orders"].map((x) => Order.fromJson(x))),
@@ -60,9 +57,8 @@ class Result {
   Map<String, dynamic> toJson() => {
         "id": id,
         "totalPrice": totalPrice,
-        "startDelivery":
-            "${startDelivery!.year.toString().padLeft(4, '0')}-${startDelivery!.month.toString().padLeft(2, '0')}-${startDelivery!.day.toString().padLeft(2, '0')}",
-        "cancelDate": cancelDate,
+        "subscriptionDate":
+            "${subscriptionDate!.year.toString().padLeft(4, '0')}-${subscriptionDate!.month.toString().padLeft(2, '0')}-${subscriptionDate!.day.toString().padLeft(2, '0')}",
         "status": status,
         "packages": packages!.toJson(),
         "orders": List<dynamic>.from(orders!.map((x) => x.toJson())),
@@ -72,32 +68,19 @@ class Result {
 class Order {
   Order({
     this.id,
-    this.deliveryDate,
-    this.priceFood,
-    this.nameFood,
     this.status,
   });
 
   String? id;
-  DateTime? deliveryDate;
-  int? priceFood;
-  String? nameFood;
   String? status;
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
         id: json["id"],
-        deliveryDate: DateTime.parse(json["deliveryDate"]),
-        priceFood: json["priceFood"],
-        nameFood: json["nameFood"],
         status: json["status"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "deliveryDate":
-            "${deliveryDate!.year.toString().padLeft(4, '0')}-${deliveryDate!.month.toString().padLeft(2, '0')}-${deliveryDate!.day.toString().padLeft(2, '0')}",
-        "priceFood": priceFood,
-        "nameFood": nameFood,
         "status": status,
       };
 }
@@ -113,8 +96,6 @@ class Packages {
     this.image,
     this.totalDate,
     this.totalMeal,
-    this.totalFood,
-    this.totalStation,
     this.status,
   });
 
@@ -127,8 +108,6 @@ class Packages {
   String? image;
   int? totalDate;
   int? totalMeal;
-  int? totalFood;
-  int? totalStation;
   String? status;
 
   factory Packages.fromJson(Map<String, dynamic> json) => Packages(
@@ -141,8 +120,6 @@ class Packages {
         image: json["image"],
         totalDate: json["totalDate"],
         totalMeal: json["totalMeal"],
-        totalFood: json["totalFood"],
-        totalStation: json["totalStation"],
         status: json["status"],
       );
 
@@ -156,8 +133,6 @@ class Packages {
         "image": image,
         "totalDate": totalDate,
         "totalMeal": totalMeal,
-        "totalFood": totalFood,
-        "totalStation": totalStation,
         "status": status,
       };
 }

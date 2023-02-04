@@ -42,8 +42,6 @@ class LoginProvider with ChangeNotifier {
           'customer', value.result!.refreshToken);
       final deviceTokenRes = await secureStorage.readSecureData("deviceToken");
       final token = await secureStorage.readSecureData("token");
-      log("Device Token :");
-      log(deviceTokenRes.toString());
       await PushNotifyImp()
           .pushNotify(RestApi.pushNotify, token,
               PushNotifyReq(deviceToken: deviceTokenRes))

@@ -218,12 +218,6 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
             backgroundColor: kBackgroundColor,
             leading: BackButton(
               onPressed: () async {
-                // String subId =
-                //     await secureStorage.readSecureData("idSubscription");
-                // if (subId.isNotEmpty) {
-                //   subscriptionProvider.deleteSub(context, subId);
-                //   secureStorage.deleteSecureData(subId);
-                // }
                 await packageProvider.clearBackPackage();
                 Navigator.pushNamedAndRemoveUntil(
                     context, "/HomePage", (route) => false);
@@ -335,75 +329,87 @@ class _ChoiceScreenState extends State<ChoiceScreen> {
                   height: 15,
                 ),
                 // for (var i = 0; i < packageProvider.orderRequest.length; i++)
-                SizedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        children: const [
-                          Icon(
-                            Typicons.cloud_sun,
-                            color: kBackgroundColor,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Buổi sáng:',
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      getListTimeSlotS()
-                    ],
+                if (packageProvider.orderRequest
+                    .where((element) => element.itemCode == 0)
+                    .isNotEmpty)
+                  SizedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          children: const [
+                            Icon(
+                              Typicons.cloud_sun,
+                              color: kBackgroundColor,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Buổi sáng:',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 16),
+                            ),
+                          ],
+                        ),
+                        getListTimeSlotS()
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        children: const [
-                          Icon(
-                            Typicons.sun,
-                            color: kBackgroundColor,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Buổi trưa:',
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      getListTimeSlotT()
-                    ],
+                if (packageProvider.orderRequest
+                    .where((element) => element.itemCode == 1)
+                    .isNotEmpty)
+                  SizedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          children: const [
+                            Icon(
+                              Typicons.sun,
+                              color: kBackgroundColor,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Buổi trưa:',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 16),
+                            ),
+                          ],
+                        ),
+                        getListTimeSlotT()
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        children: const [
-                          Icon(
-                            FontAwesome5.cloud_moon,
-                            color: kBackgroundColor,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Buổi chiều:',
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      getListTimeSlotC()
-                    ],
+                if (packageProvider.orderRequest
+                    .where((element) => element.itemCode == 2)
+                    .isNotEmpty)
+                  SizedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          children: const [
+                            Icon(
+                              FontAwesome5.cloud_moon,
+                              color: kBackgroundColor,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'Buổi chiều:',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 16),
+                            ),
+                          ],
+                        ),
+                        getListTimeSlotC()
+                      ],
+                    ),
                   ),
-                ),
                 const SizedBox(
                   height: 15,
                 ),

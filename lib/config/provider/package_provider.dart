@@ -321,10 +321,10 @@ class PackageProvider with ChangeNotifier {
       saveDataOrder.add(dataCreateOrder);
     }
     try {
-      for (var i = 0; i < saveDataOrder.length; i++) {
-        log("vl");
-        log(saveDataOrder[i].toJson().toString());
-      }
+      // for (var i = 0; i < saveDataOrder.length; i++) {
+      //   log("vl");
+      //   log(saveDataOrder[i].toJson().toString());
+      // }
       if (subId.isNotEmpty) {
         // rất cần cái này ===================================================
 
@@ -332,7 +332,7 @@ class PackageProvider with ChangeNotifier {
           await OrderRepImpl()
               .postOrder(RestApi.createOrder, saveDataOrder[i], accessToken);
         }
-        log(subId.toString());
+        // log(subId.toString());
         final url = await OrderRepImpl().getPaymentUrl(
             subId, 'a63b58b1-5f03-4312-8002-610ca05dfa79', accessToken);
         Navigator.push(context,
