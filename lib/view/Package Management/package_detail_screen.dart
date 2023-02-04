@@ -402,21 +402,23 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                         ),
                       ),
 
-                      DataTable(showCheckboxColumn: false, columns: const [
+                      DataTable(showCheckboxColumn: false, columns: [
                         DataColumn(
-                            label: Center(
-                          child: Text(
+                            label: Container(
+                          margin: const EdgeInsets.only(left: 10),
+                          child: const Text(
                             'Ngày',
                             textAlign: TextAlign.center,
                           ),
                         )),
                         DataColumn(
-                            label: Center(
-                          child: Text(
+                            label: Container(
+                          margin: const EdgeInsets.only(left: 10),
+                          child: const Text(
                             'Nhóm món ăn',
                             textAlign: TextAlign.center,
                           ),
-                        ))
+                        )),
                       ], rows: [
                         for (var i = 0;
                             i <
