@@ -69,7 +69,7 @@ class _PaymentPageState extends State<PaymentPage> {
               String subId =
                   await secureStorage.readSecureData("idSubscription");
               subscriptionProvider.confirmSub(context, subId);
-              // await subscriptionProvider.getSubById(context, subId);
+              await subscriptionProvider.getSubById(context, subId);
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                       builder: (context) => SuccessPayScreen(

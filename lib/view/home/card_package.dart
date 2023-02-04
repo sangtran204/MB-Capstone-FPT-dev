@@ -76,7 +76,7 @@ class _CardPackageState extends State<CardPackage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.package!.name,
+                          "Gói " + widget.package!.name,
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w600,
@@ -87,12 +87,58 @@ class _CardPackageState extends State<CardPackage> {
                     const SizedBox(
                       height: 3,
                     ),
-                    Text(
-                      'Gói TRƯA từ thứ 2 đến thứ 6',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey.shade600),
+                    Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Gói ",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey.shade600),
+                        ),
+                        Text(
+                          widget.package!.packageItem!
+                                  .where((element) => element.itemCode == 0)
+                                  .isNotEmpty
+                              ? 'SÁNG '
+                              : "",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey.shade600),
+                        ),
+                        Text(
+                          widget.package!.packageItem!
+                                  .where((element) => element.itemCode == 1)
+                                  .isNotEmpty
+                              ? 'TRƯA '
+                              : "",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey.shade600),
+                        ),
+
+                        Text(
+                          widget.package!.packageItem!
+                                  .where((element) => element.itemCode == 2)
+                                  .isNotEmpty
+                              ? 'CHIỀU'
+                              : "",
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey.shade600),
+                        ),
+                        // Text(
+                        //   ' từ thứ 2 đến thứ 6',
+                        //   style: TextStyle(
+                        //       fontSize: 14,
+                        //       fontWeight: FontWeight.w400,
+                        //       color: Colors.grey.shade600),
+                        // ),
+                      ],
                     ),
                     const SizedBox(
                       height: 3,

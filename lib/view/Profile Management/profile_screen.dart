@@ -143,7 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         return StatefulBuilder(
                           builder: (context, setState) {
                             return AlertDialog(
-                              title: Text("Thay đổi ảnh đại diện"),
+                              title: const Text("Thay đổi ảnh đại diện"),
                               // content: Text(contentText),
                               content: _image != null
                                   ? Image.file(
@@ -151,7 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       height: 130,
                                       width: 130,
                                     )
-                                  : SizedBox(
+                                  : const SizedBox(
                                       height: 130,
                                       width: 130,
                                       child: Icon(Icons.image),
@@ -247,7 +247,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             hintText:
                                 profileProvider.info.result!.profile.email,
                             textCapitalization: TextCapitalization.words),
-                        SizedBox(
+                        const SizedBox(
                           height: 35,
                         ),
                         // UnderPart(title: 'Đổi mật khẩu', navigatorText: navigatorText, onTap: onTap)
@@ -258,6 +258,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Positioned(
                   top: size.height - 220,
+                  // ignore: sized_box_for_whitespace
                   child: Container(
                     height: 100,
                     width: size.width,
@@ -274,7 +275,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           const ChangePasswordScreen()));
                               // Navigator.pushNamed(context, "/ChangePassword");
                             }),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         InkWell(

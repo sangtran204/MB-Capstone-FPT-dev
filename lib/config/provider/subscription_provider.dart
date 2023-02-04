@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:mobile_capstone_fpt/apis/rest_api.dart';
 import 'package:mobile_capstone_fpt/config/services/secure_storage.dart';
@@ -18,8 +16,8 @@ class SubscriptionProvider with ChangeNotifier {
         totalPrice: totalPrice,
         subscriptionDate: subscriptionDate,
         packageId: packageId);
-    log("hihi");
-    log(data.toJson().toString());
+    // log("hihi");
+    // log(data.toJson().toString());
     final accessToken = await secureStorage.readSecureData("token");
     SubRepImpl()
         .postSub(RestApi.createSub, data, accessToken)

@@ -60,7 +60,6 @@ class SubRepImpl implements SubRepo {
             HttpHeaders.authorizationHeader: 'Bearer $accessToken'
           }));
       result = CancelSubRes.cancelSubResFromJson(jsonEncode(response.data));
-      log("Hehe");
     } catch (e) {
       log(e.toString());
       // showToastFail("Lỗi xảy ra khi xác nhận");

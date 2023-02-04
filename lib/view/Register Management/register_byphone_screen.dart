@@ -2,12 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/auth_provider.dart';
-// import 'package:mobile_capstone_fpt/models/request/checkExistPhone_req.dart';
-// import 'package:mobile_capstone_fpt/view/screens.dart';
 import 'package:provider/provider.dart';
-
 import '../../widgets/phone_input_field.dart';
-// import 'package:mobile_capstone_fpt/widgets/widgets.dart';
 
 class RegisterByPhoneScreen extends StatefulWidget {
   const RegisterByPhoneScreen({Key? key}) : super(key: key);

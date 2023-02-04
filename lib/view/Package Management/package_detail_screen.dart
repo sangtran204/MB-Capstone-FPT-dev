@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_capstone_fpt/components/custom_button.dart';
@@ -83,7 +81,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                   //     packageProvider.packageDetail!.price,
                   //     DateTime.now(),
                   //     packageProvider.packageDetail!.id);
-                  log(packageProvider.packageDetail!.toJson().toString());
+                  // log(packageProvider.packageDetail!.toJson().toString());
                   await Navigator.pushReplacementNamed(context, '/ChoicePage');
                 },
               ),
@@ -134,8 +132,9 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                                 null
                                             ? const Text('Tên gói')
                                             : Text(
-                                                packageProvider
-                                                    .packageDetail!.name,
+                                                "Gói " +
+                                                    packageProvider
+                                                        .packageDetail!.name,
                                                 style: const TextStyle(
                                                     fontSize: 26,
                                                     fontWeight:
@@ -178,14 +177,59 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // packageProvider.packageDetail == null
-                                    //     ? const Text('Tên gói')
-                                    //     : Text(
-                                    //         packageProvider.packageDetail!.name,
-                                    //         style: const TextStyle(
-                                    //             fontSize: 16,
-                                    //             fontWeight: FontWeight.w300,
-                                    //             color: Colors.black87)),
+                                    Row(
+                                      children: [
+                                        const Text(
+                                          "Gói bao gồm bữa: ",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87),
+                                        ),
+                                        Text(
+                                          packageProvider
+                                                  .packageDetail!.packageItem
+                                                  .where((element) =>
+                                                      element.itemCode == 0)
+                                                  .isNotEmpty
+                                              ? 'SÁNG '
+                                              : "",
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black87),
+                                        ),
+                                        Text(
+                                          packageProvider
+                                                  .packageDetail!.packageItem
+                                                  .where((element) =>
+                                                      element.itemCode == 1)
+                                                  .isNotEmpty
+                                              ? 'TRƯA '
+                                              : "",
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black87),
+                                        ),
+                                        Text(
+                                          packageProvider
+                                                  .packageDetail!.packageItem
+                                                  .where((element) =>
+                                                      element.itemCode == 2)
+                                                  .isNotEmpty
+                                              ? 'CHIỀU'
+                                              : "",
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black87),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
                                     packageProvider.packageDetail == null
                                         ? const Text('00:00')
                                         : Row(
@@ -219,30 +263,6 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    // packageProvider.packageDetail == null
-                                    //     ? const Text('0')
-                                    //     : Row(
-                                    //         // mainAxisAlignment:
-                                    //         //     MainAxisAlignment.,
-                                    //         children: [
-                                    //           const Text('Số món được mua: ',
-                                    //               style: TextStyle(
-                                    //                   fontSize: 16,
-                                    //                   fontWeight:
-                                    //                       FontWeight.bold,
-                                    //                   color: Colors.black87)),
-                                    //           Text(
-                                    //               '${packageProvider.packageDetail!.totalFood}',
-                                    //               style: const TextStyle(
-                                    //                   fontSize: 16,
-                                    //                   // fontWeight:
-                                    //                   //     FontWeight.w300,
-                                    //                   color: Colors.black87)),
-                                    //         ],
-                                    //       ),
-                                    // const SizedBox(
-                                    //   height: 5,
-                                    // ),
                                     packageProvider.packageDetail == null
                                         ? const Text('Mô tả.')
                                         : Row(

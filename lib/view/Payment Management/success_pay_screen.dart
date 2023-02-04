@@ -17,8 +17,8 @@ class SuccessPayScreen extends StatefulWidget {
 class _SuccessPayScreenState extends State<SuccessPayScreen> {
   @override
   Widget build(BuildContext context) {
-    // SubscriptionProvider subscriptionProvider =
-    //     Provider.of<SubscriptionProvider>(context);
+    SubscriptionProvider subscriptionProvider =
+        Provider.of<SubscriptionProvider>(context);
     PackageProvider packageProvider = Provider.of<PackageProvider>(context);
     final SecureStorage secureStorage = SecureStorage();
     DateTime timeNow = DateTime.now();
@@ -53,13 +53,13 @@ class _SuccessPayScreenState extends State<SuccessPayScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        // Text(
-                        //   subscriptionProvider.subByID.result!.totalPrice
-                        //       .toString()
-                        //       .toVND(),
-                        //   style: const TextStyle(
-                        //       fontSize: 24, fontWeight: FontWeight.bold),
-                        // ),
+                        Text(
+                          subscriptionProvider.subByID.result!.totalPrice
+                              .toString()
+                              .toVND(),
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
                         Container(
                           padding: const EdgeInsets.all(15),
                           child: Column(
@@ -74,12 +74,12 @@ class _SuccessPayScreenState extends State<SuccessPayScreen> {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  // Text(
-                                  //     subscriptionProvider
-                                  //         .subByID.result!.packages!.name
-                                  //         .toString(),
-                                  //     style: const TextStyle(
-                                  //         fontSize: 18, color: Colors.grey))
+                                  Text(
+                                      subscriptionProvider
+                                          .subByID.result!.packages!.name
+                                          .toString(),
+                                      style: const TextStyle(
+                                          fontSize: 18, color: Colors.grey))
                                 ],
                               ),
                               const SizedBox(
