@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_capstone_fpt/config/provider/subscription_provider.dart';
 import 'package:mobile_capstone_fpt/constants/app_color.dart';
@@ -109,6 +111,9 @@ class _SubDetailTrackingScreenState extends State<SubDetailTrackingScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // for (var i = 0;
+              //     i < order.packageItem!.foodGroup!.foods!.length;
+              //     i++)
               Container(
                 height: 115,
                 width: size.width * 0.3,
@@ -116,10 +121,12 @@ class _SubDetailTrackingScreenState extends State<SubDetailTrackingScreen> {
                     // borderRadius: const BorderRadius.all(Radius.circular(15)),
                     image: DecorationImage(
                         // image: AssetImage('assets/images/packageitem.jpg'),
-                        image: NetworkImage('${order.food!.image}'),
+                        image: NetworkImage(
+                            '${order.packageItem!.foodGroup!.foods![0].image}'),
                         fit: BoxFit.fill)),
               ),
               Container(
+                margin: const EdgeInsets.only(top: 6),
                 padding: EdgeInsets.only(
                     left: size.width * 0.02, right: size.width * 0.02),
                 width: size.width * 0.53,
@@ -127,14 +134,14 @@ class _SubDetailTrackingScreenState extends State<SubDetailTrackingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Món ăn: ${order.nameFood}',
+                      'Món ăn: ${order.packageItem!.foodGroup!.foods![0].name}',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontSize: 16, fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      '${order.food?.description}',
+                      '- ${order.packageItem!.foodGroup!.foods![0].description}',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -145,7 +152,7 @@ class _SubDetailTrackingScreenState extends State<SubDetailTrackingScreen> {
                           fontWeight: FontWeight.w400),
                     ),
                     Text(
-                      'Ngày nhận: ${order.deliveryDate!.toIso8601String().substring(0, 10)}',
+                      '- Ngày nhận: ${order.packageItem!.deliveryDate!.toIso8601String().substring(0, 10)}',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -154,27 +161,27 @@ class _SubDetailTrackingScreenState extends State<SubDetailTrackingScreen> {
                           fontSize: 14,
                           fontWeight: FontWeight.w400),
                     ),
-                    Text(
-                      'Điểm nhận: ${order.station?.name}',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          // color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    Text(
-                      'Thời gian nhận: ${order.timeSlot?.startTime.toString().substring(0, 5)} - ${order.timeSlot?.endTime.toString().substring(0, 5)}',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          // color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
-                    ),
+                    // Text(
+                    //   'Điểm nhận: ${order.station?.name}',
+                    //   maxLines: 2,
+                    //   overflow: TextOverflow.ellipsis,
+                    //   style: const TextStyle(
+                    //       // color: Colors.white,
+                    //       fontStyle: FontStyle.italic,
+                    //       fontSize: 14,
+                    //       fontWeight: FontWeight.w400),
+                    // ),
+                    // Text(
+                    //   'Thời gian nhận: ${order.timeSlot?.startTime.toString().substring(0, 5)} - ${order.timeSlot?.endTime.toString().substring(0, 5)}',
+                    //   maxLines: 2,
+                    //   overflow: TextOverflow.ellipsis,
+                    //   style: const TextStyle(
+                    //       overflow: TextOverflow.ellipsis,
+                    //       // color: Colors.white,
+                    //       fontStyle: FontStyle.italic,
+                    //       fontSize: 14,
+                    //       fontWeight: FontWeight.w400),
+                    // ),
                   ],
                 ),
               ),

@@ -105,6 +105,7 @@ class SubRepImpl implements SubRepo {
           options: Options(
               headers: {HttpHeaders.authorizationHeader: 'Bearer $token'}));
       result = SubDetailRes.subDetailResFromJson(jsonEncode(response.data));
+      log(result.result.toString());
     } on DioError catch (e) {
       showToastFail(e.response?.data["message"]);
     }

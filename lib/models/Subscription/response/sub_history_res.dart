@@ -34,8 +34,8 @@ class Result {
   Result({
     this.id,
     this.totalPrice,
-    this.startDelivery,
-    this.cancelDate,
+    this.subscriptionDate,
+    // this.cancelDate,
     this.status,
     this.packageName,
     this.packageImg,
@@ -43,8 +43,8 @@ class Result {
 
   String? id;
   int? totalPrice;
-  DateTime? startDelivery;
-  dynamic cancelDate;
+  DateTime? subscriptionDate;
+  // dynamic cancelDate;
   String? status;
   String? packageName;
   String? packageImg;
@@ -52,8 +52,8 @@ class Result {
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
         totalPrice: json["totalPrice"],
-        startDelivery: DateTime.parse(json["startDelivery"]),
-        cancelDate: json["cancelDate"],
+        subscriptionDate: DateTime.parse(json["subscriptionDate"]),
+        // cancelDate: json["cancelDate"],
         status: json["status"],
         packageName: json["packageName"],
         packageImg: json["packageImg"],
@@ -62,8 +62,8 @@ class Result {
   Map<String, dynamic> toJson() => {
         "id": id,
         "totalPrice": totalPrice,
-        "startDelivery": startDelivery!.toIso8601String(),
-        "cancelDate": cancelDate,
+        "subscriptionDate": subscriptionDate!.toIso8601String(),
+        // "cancelDate": cancelDate,
         "status": status,
         "packageName": packageName,
         "packageImg": packageImg,

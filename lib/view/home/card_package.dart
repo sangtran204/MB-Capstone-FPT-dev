@@ -76,7 +76,7 @@ class _CardPackageState extends State<CardPackage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Gói " + widget.package!.name,
+                          widget.package!.name,
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w600,
@@ -101,7 +101,7 @@ class _CardPackageState extends State<CardPackage> {
                           widget.package!.packageItem!
                                   .where((element) => element.itemCode == 0)
                                   .isNotEmpty
-                              ? 'SÁNG '
+                              ? 'Sáng '
                               : "",
                           style: TextStyle(
                               fontSize: 14,
@@ -112,7 +112,7 @@ class _CardPackageState extends State<CardPackage> {
                           widget.package!.packageItem!
                                   .where((element) => element.itemCode == 1)
                                   .isNotEmpty
-                              ? 'TRƯA '
+                              ? 'Trưa '
                               : "",
                           style: TextStyle(
                               fontSize: 14,
@@ -124,7 +124,7 @@ class _CardPackageState extends State<CardPackage> {
                           widget.package!.packageItem!
                                   .where((element) => element.itemCode == 2)
                                   .isNotEmpty
-                              ? 'CHIỀU'
+                              ? 'Chiều'
                               : "",
                           style: TextStyle(
                               fontSize: 14,

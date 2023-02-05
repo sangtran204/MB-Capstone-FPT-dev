@@ -393,6 +393,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         ),
                         textAlign: TextAlign.center,
                       ),
+                      borderColor: kblackColor,
                       onTap: () async {
                         for (var item in packageProvider.orderRequest) {
                           if (item.timeSlotId == null) {
@@ -508,17 +509,29 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                                 'assets/images/image-default.png'),
                                                           ))
                                                         : SizedBox(
-                                                            child: Image(
-                                                            fit: BoxFit.cover,
-                                                            height: 45,
-                                                            width: 45,
-                                                            image: NetworkImage(
-                                                              packageProvider
-                                                                  .orderRequest[
-                                                                      index]
-                                                                  .imageFood!,
+                                                            height: 50,
+                                                            width: 50,
+                                                            child: CircleAvatar(
+                                                              radius:
+                                                                  40, // Image radius
+                                                              backgroundImage: NetworkImage(
+                                                                  packageProvider
+                                                                      .orderRequest[
+                                                                          index]
+                                                                      .imageFood!),
+                                                            )
+                                                            //   Image(
+                                                            //   fit: BoxFit.cover,
+                                                            //   height: 45,
+                                                            //   width: 45,
+                                                            //   image: NetworkImage(
+                                                            //     packageProvider
+                                                            //         .orderRequest[
+                                                            //             index]
+                                                            //         .imageFood!,
+                                                            //   ),
+                                                            // )
                                                             ),
-                                                          )),
                                                     const SizedBox(
                                                       height: 5,
                                                     ),
@@ -537,56 +550,56 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                                     )
                                                   ],
                                                 )),
-                                            Container(
-                                              // height: 45,
-                                              // width: 100,
-                                              padding: const EdgeInsets.only(
-                                                  left: 8, right: 15),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  // Align(
-                                                  //   alignment:
-                                                  //       Alignment.center,
-                                                  //   child: Container(
-                                                  //     height: 30,
-                                                  //     width: 30,
-                                                  //     color: Colors.amber,
-                                                  //     child: IconButton(
-                                                  //       onPressed:
-                                                  //           () async {
-                                                  //         await foodGroupProvider
-                                                  //             .getFoodGroupDetail(
-                                                  //                 context,
-                                                  //                 packageProvider
-                                                  //                         .listIdFG[
-                                                  //                     index]);
-                                                  //         await _showMaterialDialog(
-                                                  //             size,
-                                                  //             packageProvider
-                                                  //                 .orderRequest[
-                                                  //                     index]
-                                                  //                 .packageItemId!);
-                                                  //       },
-                                                  //       icon: packageProvider
-                                                  //                   .orderRequest[
-                                                  //                       index]
-                                                  //                   .nameFood ==
-                                                  //               null
-                                                  //           ? const Icon(
-                                                  //               Icons.add,
-                                                  //             )
-                                                  //           : const Icon(Icons
-                                                  //               .edit_note_outlined),
-                                                  //       color: Colors.black,
-                                                  //       iconSize: 15,
-                                                  //     ),
-                                                  //   ),
-                                                  // ),
-                                                ],
-                                              ),
-                                            )
+                                            // Container(
+                                            //   // height: 45,
+                                            //   // width: 100,
+                                            //   padding: const EdgeInsets.only(
+                                            //       left: 8, right: 15),
+                                            //   child: Row(
+                                            //     mainAxisAlignment:
+                                            //         MainAxisAlignment.end,
+                                            //     children: [
+                                            // Align(
+                                            //   alignment:
+                                            //       Alignment.center,
+                                            //   child: Container(
+                                            //     height: 30,
+                                            //     width: 30,
+                                            //     color: Colors.amber,
+                                            //     child: IconButton(
+                                            //       onPressed:
+                                            //           () async {
+                                            //         await foodGroupProvider
+                                            //             .getFoodGroupDetail(
+                                            //                 context,
+                                            //                 packageProvider
+                                            //                         .listIdFG[
+                                            //                     index]);
+                                            //         await _showMaterialDialog(
+                                            //             size,
+                                            //             packageProvider
+                                            //                 .orderRequest[
+                                            //                     index]
+                                            //                 .packageItemId!);
+                                            //       },
+                                            //       icon: packageProvider
+                                            //                   .orderRequest[
+                                            //                       index]
+                                            //                   .nameFood ==
+                                            //               null
+                                            //           ? const Icon(
+                                            //               Icons.add,
+                                            //             )
+                                            //           : const Icon(Icons
+                                            //               .edit_note_outlined),
+                                            //       color: Colors.black,
+                                            //       iconSize: 15,
+                                            //     ),
+                                            //   ),
+                                            // ),
+                                            // ],
+                                            // ),
+                                            // )
                                           ],
                                         ),
                                       )

@@ -17,7 +17,6 @@ import 'package:mobile_capstone_fpt/repositories/implement/food_group_repo_impl.
 import 'package:mobile_capstone_fpt/repositories/implement/order_repo_impl.dart';
 import 'package:mobile_capstone_fpt/repositories/implement/package_repo_impl.dart';
 import 'package:mobile_capstone_fpt/view/Payment%20Management/payment.dart';
-import 'package:provider/provider.dart';
 
 class PackageProvider with ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
@@ -65,8 +64,8 @@ class PackageProvider with ChangeNotifier {
 
   clearBackPackageSchedule() async {
     for (var i = 0; i < orderRequest.length; i++) {
-      // orderRequest[i].imageFood = null;
-      // orderRequest[i].nameFood = null;
+      orderRequest[i].imageFood = null;
+      orderRequest[i].nameFood = null;
       // orderRequest[i].foodId = null;
       // orderRequest[i].priceFood = null;
       orderRequest[i].timeSlotId = null;
@@ -74,18 +73,6 @@ class PackageProvider with ChangeNotifier {
     }
     notifyListeners();
   }
-
-  // int mySortComparisonItemCode(CreateOrderReq a, CreateOrderReq b) {
-  //   final propertyA = a.itemCode!;
-  //   final propertyB = b.itemCode!;
-  //   if (propertyA < propertyB) {
-  //     return -1;
-  //   } else if (propertyA > propertyB) {
-  //     return 1;
-  //   } else {
-  //     return 0;
-  //   }
-  // }
 
   int sortDate(CreateOrderReq a, CreateOrderReq b) {
     final propertyA = a.deliveryDate!;
@@ -196,7 +183,7 @@ class PackageProvider with ChangeNotifier {
     // listOrderRequestTmp[index].foodId = valueFood.result!.foods![1].id;
     listOrderRequestTmp[index].nameFood = valueFood.result!.foods![0].name;
     listOrderRequestTmp[index].imageFood = valueFood.result!.foods![0].image;
-    listOrderRequestTmp[index].priceFood = valueFood.result!.foods![0].price;
+    // listOrderRequestTmp[index].priceFood = valueFood.result!.foods![0].price;
 
     notifyListeners();
   }

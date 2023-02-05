@@ -71,11 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : profileProvider.info.result!.profile.avatar),
                         fit: BoxFit.fill,
                       )),
-                  // child: profileProvider.info.result!.profile.avatar == null
-                  //     ? 'avata'
-                  //     : Image(
-                  //         image: NetworkImage(
-                  //             profileProvider.info.result!.profile.avatar)),
                 ),
                 const SizedBox(
                   width: 10,
@@ -124,45 +119,39 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? const Center(child: CircularProgressIndicator())
                         : Container(
                             margin: const EdgeInsets.only(
-                                top: 10, bottom: 10, left: 6, right: 32),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 14.0),
-                              child: Text(
-                                "KẾ HOẠCH BỮA ĂN HÀNG TUẦN CỦA BẠN LÀ GÌ?",
-                                style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 24,
-                                    // overflow: TextOverflow.ellipsis,
-                                    fontWeight: FontWeight.bold),
+                                top: 10, bottom: 10, left: 20, right: 50),
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Column(
+                                // ignore: prefer_const_literals_to_create_immutables
+                                children: [
+                                  // Text(
+                                  //   'Chào, ' +
+                                  //       profileProvider
+                                  //           .info.result!.profile.fullName,
+                                  //   style: const TextStyle(
+                                  //       fontSize: 22,
+                                  //       fontWeight: FontWeight.bold),
+                                  // ),
+                                  // const SizedBox(
+                                  //   height: 5,
+                                  // ),
+                                  // const Padding(
+                                  //   padding:
+                                  //       EdgeInsets.symmetric(horizontal: 14.0),
+                                  //   child:
+                                  const Text(
+                                    "Kế hoạch bữa ăn hàng tuần của bạn là gì?",
+                                    style: TextStyle(
+                                      color: Colors.black87,
+                                      fontSize: 24,
+                                    ),
+                                  ),
+                                  // )
+                                ],
                               ),
-                            )
-                            // Align(
-                            //   alignment: Alignment.topLeft,
-                            //   child:
-                            //   Column(
-                            //     // ignore: prefer_const_literals_to_create_immutables
-                            //     children: [
-                            //       // Text(
-                            //       //   'Chào, ' +
-                            //       //       profileProvider
-                            //       //           .info.result!.profile.fullName,
-                            //       //   style: const TextStyle(
-                            //       //       fontSize: 22,
-                            //       //       fontWeight: FontWeight.bold),
-                            //       // ),
-                            //       // const SizedBox(
-                            //       //   height: 5,
-                            //       // ),
-                            //       const Text(
-                            //         'KẾ HOẠCH BỮA ĂN HÀNG TUẦN CỦA BẠN LÀ GÌ ?',
-                            //         style: TextStyle(
-                            //           fontSize: 22,
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
                             ),
+                          ),
                     packageCategoryProvider.listPackageCategory.isEmpty
                         ? const Center(child: CircularProgressIndicator())
                         : SizedBox(

@@ -3,7 +3,7 @@
 class CreateOrderReq {
   CreateOrderReq({
     this.deliveryDate,
-    this.priceFood,
+    // this.priceFood,
     this.nameFood,
     this.subscriptionId,
     this.packageItemId,
@@ -13,10 +13,11 @@ class CreateOrderReq {
     this.itemCode,
     this.imageFood,
     this.foodGroupId,
+
   });
 
   DateTime? deliveryDate;
-  int? priceFood;
+  // int? priceFood;
   String? nameFood;
   String? subscriptionId;
   String? packageItemId;

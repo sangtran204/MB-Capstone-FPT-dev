@@ -161,9 +161,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 subProvider.sub.result![i].id!,
                                 subProvider.sub.result![i].packageName!,
                                 subProvider.sub.result![i].packageImg!,
-                                subProvider.sub.result![i].startDelivery!,
+                                subProvider.sub.result![i].subscriptionDate!,
                                 subProvider.sub.result![i].status!,
-                                subProvider.sub.result?[i].cancelDate,
+                                // subProvider.sub.result?[i].cancelDate,
                                 subProvider.sub.result![i].totalPrice!),
                           )
                         // OrderItems(),
@@ -180,7 +180,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   // ignore: non_constant_identifier_names
   Widget OrderItems(String id, String packageName, String img,
-          DateTime startDate, String status, String? cancelDate, int price) =>
+          DateTime startDate, String status, int price) =>
       Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(
@@ -207,7 +207,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
               ),
               Container(
                   height: 100,
-                  width: 160,
+                  width: 210,
                   padding: const EdgeInsets.only(top: 10, left: 3, bottom: 5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -223,6 +223,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       ),
                       Text(
                         startDate.toString().substring(0, 10),
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w400),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        'Giá ' + price.toString().toVND(),
                         style: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w400),
                         textAlign: TextAlign.center,
@@ -256,20 +262,20 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ),
                     ],
                   )),
-              Container(
-                padding: const EdgeInsets.only(top: 20, left: 5),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      price.toString().toVND(),
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              )
+              // Container(
+              //   padding: const EdgeInsets.only(top: 20, left: 5),
+              //   child: Column(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: [
+              //       Text(
+              //         price.toString().toVND(),
+              //         style: const TextStyle(
+              //             fontSize: 18, fontWeight: FontWeight.bold),
+              //         textAlign: TextAlign.center,
+              //       ),
+              //     ],
+              //   ),
+              // )
             ],
           ),
         ),

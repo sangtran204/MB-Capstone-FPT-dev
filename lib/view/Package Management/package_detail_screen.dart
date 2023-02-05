@@ -10,7 +10,6 @@ import 'package:mobile_capstone_fpt/models/PackageItem/entity/package_item_detai
 import 'package:mobile_capstone_fpt/view/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_format_money_vietnam/flutter_format_money_vietnam.dart';
-import 'package:intl/intl.dart';
 
 class PackageDetailScreen extends StatefulWidget {
   const PackageDetailScreen({Key? key}) : super(key: key);
@@ -75,7 +74,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
               return AlertDialog(
                 title: const Text('Món ăn'),
                 content: SizedBox(
-                    height: 100,
+                    height: 170,
                     width: size.width,
                     child: ListView.builder(
                         shrinkWrap: true,
@@ -168,6 +167,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                   ),
                   textAlign: TextAlign.center,
                 ),
+                borderColor: kblackColor,
                 onTap: () async {
                   await Navigator.pushReplacementNamed(context, '/ChoicePage');
                 },
@@ -279,7 +279,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                                   .where((element) =>
                                                       element.itemCode == 0)
                                                   .isNotEmpty
-                                              ? 'SÁNG '
+                                              ? 'Sáng '
                                               : "",
                                           style: const TextStyle(
                                               fontSize: 16,
@@ -292,7 +292,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                                   .where((element) =>
                                                       element.itemCode == 1)
                                                   .isNotEmpty
-                                              ? 'TRƯA '
+                                              ? 'Trưa '
                                               : "",
                                           style: const TextStyle(
                                               fontSize: 16,
@@ -305,7 +305,7 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                                                   .where((element) =>
                                                       element.itemCode == 2)
                                                   .isNotEmpty
-                                              ? 'CHIỀU'
+                                              ? 'Chiều'
                                               : "",
                                           style: const TextStyle(
                                               fontSize: 16,
@@ -402,91 +402,73 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
                         ),
                       ),
 
-                      DataTable(showCheckboxColumn: false, columns: [
-                        DataColumn(
-                            label: Container(
-                          margin: const EdgeInsets.only(left: 10),
-                          child: const Text(
-                            'Ngày',
-                            textAlign: TextAlign.center,
-                          ),
-                        )),
-                        DataColumn(
-                            label: Container(
-                          margin: const EdgeInsets.only(left: 10),
-                          child: const Text(
-                            'Nhóm món ăn',
-                            textAlign: TextAlign.center,
-                          ),
-                        )),
-                      ], rows: [
-                        for (var i = 0;
-                            i <
-                                packageProvider
-                                    .packageDetail!.packageItem.length;
-                            i++)
-                          DataRow(cells: [
-                            DataCell(Text(
+                      SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(columns: [
+                            DataColumn(
+                                label: Container(
+                              margin: const EdgeInsets.only(left: 10),
+                              child: const Text(
+                                'Ngày',
+                                textAlign: TextAlign.center,
+                              ),
+                            )),
+                            DataColumn(
+                                label: Container(
+                              margin: const EdgeInsets.only(left: 50),
+                              child: const Text(
+                                'Tên món ăn',
+                                textAlign: TextAlign.center,
+                              ),
+                            )),
+                          ], rows: [
+                            for (var i = 0;
+                                i <
+                                    packageProvider
+                                        .packageDetail!.packageItem.length;
+                                i++)
+                              DataRow(cells: [
+                                DataCell(Text(
                                     nameOfPa(packageProvider.packageDetail!
                                             .packageItem[i].itemCode!) +
                                         inputFormat2.format(packageProvider
                                             .packageDetail!
                                             .packageItem[i]
                                             .deliveryDate!),
-                                    style:
-                                        const TextStyle(color: Colors.black87))
-                                //   Column(
-                                //   children: [
-                                //     const SizedBox(
-                                //       height: 6,
-                                //     ),
-                                //     Text(
-                                //         nameOfPa(packageProvider.packageDetail!
-                                //                 .packageItem[i].itemCode!) +
-                                //             getMonthString(DateFormat('EEEE')
-                                //                 .format(packageProvider
-                                //                     .packageDetail!
-                                //                     .packageItem[i]
-                                //                     .deliveryDate!)),
-                                //         style:
-                                //             const TextStyle(color: Colors.black87)),
-                                //     const SizedBox(
-                                //       height: 6,
-                                //     ),
-                                //     Text(
-                                //         inputFormat2.format(packageProvider
-                                //             .packageDetail!
-                                //             .packageItem[i]
-                                //             .deliveryDate!),
-                                //         style:
-                                //             const TextStyle(color: Colors.black87))
-                                //   ],
-                                // )
-                                ),
-                            DataCell(Row(
-                              children: [
-                                Text(packageProvider.packageDetail!
-                                    .packageItem[i].foodGroup!.name!),
-                                IconButton(
-                                    onPressed: () async {
-                                      await foodGroupProvider
-                                          .getFoodGroupDetail(
-                                              context,
-                                              packageProvider
-                                                  .packageDetail!
-                                                  .packageItem[i]
-                                                  .foodGroup!
-                                                  .id!);
-                                      await _showDialoghihi(
-                                          size,
-                                          packageProvider
-                                              .orderRequest[i].packageItemId!);
-                                    },
-                                    icon: const Icon(Icons.remove_red_eye))
-                              ],
-                            ))
-                          ]),
-                      ])
+                                    style: const TextStyle(
+                                        color: Colors.black87))),
+                                DataCell(Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(packageProvider
+                                        .packageDetail!
+                                        .packageItem[i]
+                                        .foodGroup!
+                                        .description!),
+                                    IconButton(
+                                        onPressed: () async {
+                                          await foodGroupProvider
+                                              .getFoodGroupDetail(
+                                                  context,
+                                                  packageProvider
+                                                      .packageDetail!
+                                                      .packageItem[i]
+                                                      .foodGroup!
+                                                      .id!);
+                                          await _showDialoghihi(
+                                              size,
+                                              packageProvider.orderRequest[i]
+                                                  .packageItemId!);
+                                        },
+                                        icon: const Icon(
+                                          Icons.remove_red_eye,
+                                          size: 16,
+                                        ))
+                                  ],
+                                ))
+                              ]),
+                          ]))
                       // SizedBox(
                       //   height: size.height * 0.35,
                       //   width: size.width,

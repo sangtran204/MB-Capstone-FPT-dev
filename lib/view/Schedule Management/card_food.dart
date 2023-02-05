@@ -28,7 +28,7 @@ class _CardFoodState extends State<CardFood> {
           children: [
             Container(
               height: 90,
-              width: 110,
+              width: 120,
               decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12),
@@ -43,8 +43,8 @@ class _CardFoodState extends State<CardFood> {
               width: 5,
             ),
             Container(
-                height: 90,
-                width: 100,
+                height: 80,
+                width: 90,
                 padding: const EdgeInsets.only(top: 25),
                 child: Text(
                   widget.food!.name,
